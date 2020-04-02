@@ -120,7 +120,7 @@
             <v-container class="container-agreement">
                <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title><input type="checkbox" id="checkbox-terms" @click="checkAllArticles" /> 모든 항목에 체크하기</v-list-item-title>
+                  <v-list-item-title><input type="checkbox" id="checkbox-terms" :checked="agreeTerms[0]" @click="checkAllArticles" /> 모든 항목에 체크하기</v-list-item-title>
                   <v-container>
                     <v-list-item-subtitle>전체 동의는 필수 및 선택 정보에 대한 동의도 포함되어 있으며, 개별적으로도 동의를 선택하실 수 있습니다. 선택항목에 대한 동의를 거부하시는 경우에도 서비스는 이용이 가능합니다.</v-list-item-subtitle>
                   </v-container>
@@ -129,15 +129,35 @@
                 <hr>
               <v-list-item two-line>
                 <v-list-item-content>
-                  <v-list-item-subtitle><input type="checkbox" disabled id="checkbox-terms" @click="checkOneArticles" /> 만 14세 이상입니다.</v-list-item-subtitle>
-                  <v-list-item-subtitle><input type="checkbox" id="checkbox-terms" @click="checkOneArticles" /> [필수] 개인 정보의 수집 및 이용에 대한 동의 <router-link to="/terms">자세히 보기</router-link></v-list-item-subtitle>
-                  <v-list-item-subtitle><input type="checkbox" id="checkbox-terms" @click="checkOneArticles" /> [선택] 공지사항 / 이벤트 알림</v-list-item-subtitle>
-                  <v-list-item-subtitle>고객님께 전달해야 할 소식이 있는 경우 최대 월 1회에 한해 발송됩니다.</v-list-item-subtitle>
+                  <v-list-item-subtitle>
+                    <input type="checkbox" disabled :checked="overFourteen" id="checkbox-terms" @click="checkOneArticles" /> 
+                    <span>만 14세 이상입니다.</span>
+                    </v-list-item-subtitle>
+
+                  <v-list-item-subtitle>
+                    <input type="checkbox" id="checkbox-terms" @click="checkOneArticles" />
+                    <span>[필수] 개인 정보의 수집 및 이용에 대한 동의</span>
+                    <router-link to="/terms">자세히 보기</router-link>
+                  </v-list-item-subtitle>
+
+                  <v-list-item-subtitle>
+                    <input type="checkbox" id="checkbox-terms" @click="checkOneArticles" />
+                    <span>[선택] 공지사항 / 이벤트 알림</span>
+                  </v-list-item-subtitle>
+
+                  <v-list-item-subtitle>
+                    <span>고객님께 전달해야 할 소식이 있는 경우 최대 월 1회에 한해 발송됩니다.</span>
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
               <v-container>
-                <v-btn>추천 코드 입력 <span id="red">* 추천 코드를 입력하면 2,000포인트 즉시 지급!</span></v-btn>
+                <v-btn>
+                  추천 코드 입력
+                  <span id="red">
+                    *추천 코드를 입력하면 2,000포인트 즉시 지급!
+                  </span>
+                </v-btn>
               </v-container>
               <v-container>
                 <v-btn>멤버십 가입하기</v-btn>
@@ -159,32 +179,32 @@ export default {
       selectedGender: '',
       selectedBirthYear: '',
       agreeTerms:[],
-      checkAll: [],
     };
   },
   methods: {
     checkAllArticles() {
-      console.log(this.checkAll)
-      
       for(let i=0; i<this.checkAll.length; i++) {
+        if(i === 1) continue;
         this.checkAll[i].checked = this.checkAll[0].checked;
       }
-      // this.checkAll[1].checked = true;
     },
     checkOneArticles(e) {
       console.log(e);
     }
   },
+  computed: {
+    overFourteen() {
+      const currentYear = new Date().getFullYear();
+      return this.selectedBirthYear > currentYear - 14 ? false : true;
+    },
+  },
   created() {
     const yearArr = [];
     for(let i=2020; i>=1920; i--) { yearArr.push(i); }
     this.years = yearArr;
-
-    /* ------------------------------------------------ */
   },
   mounted() {
     this.checkAll = document.querySelectorAll('#checkbox-terms');
-
   }
 }
 </script>
