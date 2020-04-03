@@ -120,7 +120,10 @@
             <v-container class="container-agreement">
                <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title><input type="checkbox" id="checkbox-terms" :checked="agreeTerms[0]" @click="checkAllArticles" /> 모든 항목에 체크하기</v-list-item-title>
+                  <v-list-item-title>
+                    <input type="checkbox" id="checkbox-terms" :checked="agreeTerms[0]" @click="checkAllArticles" />
+                    <span>모든 항목에 체크하기</span>
+                    </v-list-item-title>
                   <v-container>
                     <v-list-item-subtitle>전체 동의는 필수 및 선택 정보에 대한 동의도 포함되어 있으며, 개별적으로도 동의를 선택하실 수 있습니다. 선택항목에 대한 동의를 거부하시는 경우에도 서비스는 이용이 가능합니다.</v-list-item-subtitle>
                   </v-container>
@@ -178,7 +181,10 @@ export default {
       years:[],
       selectedGender: '',
       selectedBirthYear: '',
+      /* refs 속성을 이용해서 DOM에 접근하는 방법으로 수정하기 */
       agreeTerms:[],
+      checkAll:''
+      /* ---------------------------------------------- */
     };
   },
   methods: {
@@ -189,7 +195,14 @@ export default {
       }
     },
     checkOneArticles(e) {
-      console.log(e);
+      // console.dir(e);
+      if(!e.explicitOriginalTarget.checked) {
+        this.checkAll[0].checked = false;
+      } else {
+        if(this.checkAll[2].checked === this.checkAll[3].checked) {
+          this.checkAll[0].checked = true;
+        }
+      }
     }
   },
   computed: {
