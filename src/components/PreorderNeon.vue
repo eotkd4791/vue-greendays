@@ -84,11 +84,11 @@ export default {
   }
 
   @font-face {
-    font-family: 'Monoton-Regular';
+    font-family: 'Monoton';
     src: url('../assets/fonts/Monoton-Regular.ttf');
   } 
   .letters-neon {
-    font-family: 'Monoton-Regular';
+    font-family: 'Monoton';
     font-size: 100px;
   }
  #letters-neon-space {
