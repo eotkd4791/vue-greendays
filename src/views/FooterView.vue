@@ -3,7 +3,7 @@
     <quick-menu></quick-menu>     
     <contact-info></contact-info>
     <about-view></about-view>
-    <img id="channel-talk" src="../assets/green-present.png" width="70px" height="70px" />
+    <img id="channel-talk" src="../assets/img/green-present.png" width="70px" height="70px" />
   </div>
 </template>
 

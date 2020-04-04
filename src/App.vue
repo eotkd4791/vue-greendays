@@ -1,32 +1,37 @@
 <template>
-  <div>
+  <main>
     <toolbar-view></toolbar-view>
     <router-view></router-view>
     <footer-view></footer-view>
-  </div>
+  </main>
 </template>
 
 <script>
 import ToolbarView from './views/ToolbarView.vue';
 import FooterView from './views/FooterView.vue';
-// import { router } from './routes/index.js';
+
 export default { 
   components: {
     ToolbarView,
     FooterView,
   },
-  // router,
 }
 </script>
 
 <style>
 /*---------------------------
-        > color table <
+      > color table <
 
     green:          #42b883
     gray:           #f8f8f8
     midgray:        #757575
     darkgray:       #8b8b8b
+
+    mint:           #9AECDB
+
+    neon-off:       #7C7C7C
+    neon-on:        #8bc34a
+    neon-shadow:    #4dcf34
 -----------------------------*/
 
   @import "./plugins/reset.css";

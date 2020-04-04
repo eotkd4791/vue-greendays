@@ -122,30 +122,30 @@
                 <v-list-item-content>
                   <v-list-item-title>
                     <input type="checkbox" id="checkbox-terms" :checked="agreeTerms[0]" @click="checkAllArticles" />
-                    <span>모든 항목에 체크하기</span>
+                    <span> 모든 항목에 체크하기</span>
                     </v-list-item-title>
                   <v-container>
-                    <v-list-item-subtitle>전체 동의는 필수 및 선택 정보에 대한 동의도 포함되어 있으며, 개별적으로도 동의를 선택하실 수 있습니다. 선택항목에 대한 동의를 거부하시는 경우에도 서비스는 이용이 가능합니다.</v-list-item-subtitle>
+                    <v-list-item-subtitle class="check-all">전체 동의는 필수 및 선택 정보에 대한 동의도 포함되어 있으며, 개별적으로도 동의를 선택하실 수 있습니다. 선택항목에 대한 동의를 거부하시는 경우에도 서비스는 이용이 가능합니다.</v-list-item-subtitle>
                   </v-container>
                 </v-list-item-content>
               </v-list-item>
-                <hr>
+                
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-subtitle>
-                    <input type="checkbox" disabled :checked="overFourteen" id="checkbox-terms" @click="checkOneArticles" /> 
-                    <span>만 14세 이상입니다.</span>
+                    <input type="checkbox" required disabled :checked="overFourteen" id="checkbox-terms" @click="checkOneArticles" /> 
+                    <span> 만 14세 이상입니다.</span>
                     </v-list-item-subtitle>
 
                   <v-list-item-subtitle>
-                    <input type="checkbox" id="checkbox-terms" @click="checkOneArticles" />
-                    <span>[필수] 개인 정보의 수집 및 이용에 대한 동의</span>
-                    <router-link to="/terms">자세히 보기</router-link>
+                    <input type="checkbox" required id="checkbox-terms" @click="checkOneArticles" />
+                    <span> [필수] 개인 정보의 수집 및 이용에 대한 동의</span>
+                    <router-link to="/terms"> 자세히 보기</router-link>
                   </v-list-item-subtitle>
 
                   <v-list-item-subtitle>
                     <input type="checkbox" id="checkbox-terms" @click="checkOneArticles" />
-                    <span>[선택] 공지사항 / 이벤트 알림</span>
+                    <span> [선택] 공지사항 / 이벤트 알림</span>
                   </v-list-item-subtitle>
 
                   <v-list-item-subtitle>
@@ -155,15 +155,15 @@
               </v-list-item>
 
               <v-container>
-                <v-btn>
-                  추천 코드 입력
-                  <span id="red">
-                    *추천 코드를 입력하면 2,000포인트 즉시 지급!
-                  </span>
-                </v-btn>
+                <div class="recommendation-code">
+                  <form>
+                    <input placeholder="추천 코드 입력" v-model="recommendCode" />
+                    <span id="red">* 추천 코드를 입력하면 2,000포인트 즉시 지급!</span>
+                  </form>
+                </div>
               </v-container>
               <v-container>
-                <v-btn>멤버십 가입하기</v-btn>
+                <v-btn id="btn-signup" class="signup-membership" type="submit" @click="signUpMembership">멤버십 가입하기</v-btn>
               </v-container>
             </v-container>
           </v-row>
@@ -183,7 +183,8 @@ export default {
       selectedBirthYear: '',
       /* refs 속성을 이용해서 DOM에 접근하는 방법으로 수정하기 */
       agreeTerms:[],
-      checkAll:''
+      checkAll:'',
+      recommendCode: '',
       /* ---------------------------------------------- */
     };
   },
@@ -203,6 +204,9 @@ export default {
           this.checkAll[0].checked = true;
         }
       }
+    },
+    signUpMembership() {
+      console.log("회원가입요청!");
     }
   },
   computed: {
@@ -230,6 +234,7 @@ export default {
     flex-direction: column;
     position: relative;
     top: 115px;
+    margin-bottom:150px;
   }
   .section-signup {
     max-width: 1100px;
@@ -241,10 +246,38 @@ export default {
   .form-with-btn {
     display: flex;
   }
-   #btn-signup {
+   #btn-signup{
     width: 30%; 
     color: #fff;
     background-color: #000;
     margin: 5px 0 0 5px;
+  }
+  .container-agreement {
+    width: 100%;
+  }
+  .check-all {
+    width: 45%;
+    white-space: normal;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #000;
+  }
+
+  .recommendation-code {
+    width: 430px;
+    border: 1px solid #000;
+    padding: 10px;
+    position:relative;
+  }
+  #red {
+    color: red;
+    position: absolute;
+    left: 7rem;
+    top: 9px;
+  }
+  #btn-signup.signup-membership {
+    width: 430px;
+    padding: 10px;
+    color: #fff;
+    background-color: #000;
   }
 </style>

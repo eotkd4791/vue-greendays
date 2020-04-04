@@ -42,8 +42,9 @@ export default {
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
-  margin: 0 150px;
+  margin: 150px 150px 0 150px;
   position: relative;
+
   bottom: 500;
 }
 .container .container-title {

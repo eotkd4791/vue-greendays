@@ -91,7 +91,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background-image: url("../assets/greendays.png");
+  background-image: url("../assets/img/greendays.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -189,5 +189,10 @@ input {
   position: absolute;
   right: 0;
   margin-right: 10px;
+}
+
+/* 브랜드 검색 영역 */
+.search-brand-modal {
+  cursor: pointer;
 }
 </style>

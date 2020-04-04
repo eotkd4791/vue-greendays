@@ -3,9 +3,9 @@
     <section class="info-greendays">
       <div>
         <router-link to="/notice">공지사항</router-link>|
-        <router-link to="/notice">자주묻는질문</router-link>|  
-        <router-link to="/notice">이용약관</router-link>|  
-        <router-link to="/notice">개인정보취급방침</router-link>|
+        <router-link to="/faq">자주묻는질문</router-link>|  
+        <router-link to="/terms">이용약관</router-link>|  
+        <router-link to="/privateinfo">개인정보취급방침</router-link>|
         <router-link to="/notice">사업자정보확인</router-link>
       </div>
       <p>
@@ -17,7 +17,7 @@
       <p>
         <span>eotkd4791@gmail.com</span>|
         <span>032-866-XXXX</span>|
-        <span>인천시 미추홀구 학익소로61번길 132</span>|
+        <span>인천광역시 미추홀구</span>|
         <span>개인정보관리책임자 유대상</span>
       </p>      
       <p>Copyright © 2020 GreenDays Inc. All rights reserved.</p>
@@ -39,11 +39,7 @@
 </template>
 
 <script>
-import { router } from '../routes/index.js';
-
-export default {
-  router,
-}
+export default {}
 </script>
 
 <style scoped>

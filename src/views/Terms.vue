@@ -1,6 +1,6 @@
 <template>
   <div>
-    이용 약관 및 정보 보호 정책
+    이용약관
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
   </div>
 </template>

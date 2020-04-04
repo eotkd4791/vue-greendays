@@ -2,9 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Notice from '../components/Notice.vue';
-import Terms from '../components/Terms.vue';
-import FaqList from '../components/FaqList.vue';
-import LogiGuide from '../components/LogiGuide.vue';
+
+
+import FaqList from '../views/FaqList.vue';
+import LogiGuide from '../views/LogiGuide.vue';
 
 
 import Introduction from '../views/Introduction.vue';
@@ -18,6 +19,9 @@ import SignUpView from '../views/SignUpView.vue';
 import WishList from '../views/WishList.vue';
 import CartItems from '../views/CartItems.vue';
 
+import MainView from '../views/MainView.vue';
+import Terms from '../views/Terms.vue';
+import PrivateInfo from '../views/PrivateInfo.vue';
 
 Vue.use(VueRouter);
 
@@ -25,11 +29,15 @@ export const router = new VueRouter({
   mode: "history",
   routes: [
     { 
+      path: '/',
+      component: MainView,
+    },
+    { 
       path: '/notice',
       component: Notice,
     },
     {
-      path: '/fnq',
+      path: '/faq',
       component: FaqList,
     },
     {
@@ -55,6 +63,10 @@ export const router = new VueRouter({
     {
       path: '/terms',
       component: Terms,
+    },
+    {
+      path: '/privateinfo',
+      component: PrivateInfo,
     },
     {
       path: '/mypoint',
