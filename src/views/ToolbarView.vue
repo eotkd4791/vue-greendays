@@ -1,46 +1,58 @@
 <template>
-  <header id="header">
-    <div class="container-logo">
-      <div class="logo" @click="movePage('/')">
-        <div v-if="isLoggedIn" class="user-info-point" @click.stop="movePage('/mypoint')">
-            <span class="user-info-text">{{ points }}</span>
-            <span class="point-icon fas fa-coins"></span>
-        </div>
-        <span v-if="isLoggedIn" class="far fa-calendar-check" @click.stop="movePage('/monthlypromotion')"></span>
-        <span class="user-info fas fa-user" @click.stop="isLoggedIn ? toggleUserInfo : movePage('/login')"></span>
-        <span class="user-info far fa-heart" @click.stop="isLoggedIn ? movePage('/wishlist') : movePage('/login')" style="color: #42b883"></span>
-        <span v-if="isLoggedIn" class="user-info-text">{{ pickedProducts }}</span>
-        <span class="user-info fas fa-shopping-basket" @click.stop="isLoggedIn ? movePage('/cartitems') : movePage('/login')"></span>
-        <span class="user-info-text">{{ cartItems }}</span>
-      </div>
-      <!-- 메뉴 구분 -->
-      <div class="container-menu">
-        <div class="menus">
-          <router-link to="/products">예약구매<span id="purchase-reserve">💚</span></router-link>
-          <router-link to="#">프리오더</router-link>
-          <router-link to="/products">빠른배송</router-link>
-          <router-link to="/reviews">리뷰</router-link>
-          <router-link to="/customerservice">고객센터</router-link>
-        </div>
-        <div class="row-right-menu">
-          <div class="search-brand-modal" @click="toggleSearchBrands">
-            <span class="new-released-item">🎁</span>
-            <span>브랜드 검색</span>
+  <div>  
+    <header id="header">
+      <div class="container-logo">
+        <div class="logo" @click="movePage('/')">
+          <div v-if="isLoggedIn" class="user-info-point" @click.stop="movePage('/mypoint')">
+              <span class="user-info-text">{{ points }}</span>
+              <span class="point-icon fas fa-coins"></span>
           </div>
-          <div class="search-brand-form">
-            <form>
-              <input type="text" placeholder="검색어를 입력해 주세요"/>
-              <i class="fas fa-search"></i>
-            </form>
+          <span v-if="isLoggedIn" class="far fa-calendar-check" @click.stop="movePage('/monthlypromotion')"></span>
+          <span class="user-info fas fa-user" @click.stop="isLoggedIn ? toggleUserInfo : movePage('/login')"></span>
+          <span class="user-info far fa-heart" @click.stop="isLoggedIn ? movePage('/wishlist') : movePage('/login')" style="color: #42b883"></span>
+          <span v-if="isLoggedIn" class="user-info-text">{{ pickedProducts }}</span>
+          <span class="user-info fas fa-shopping-basket" @click.stop="isLoggedIn ? movePage('/cartitems') : movePage('/login')"></span>
+          <span class="user-info-text">{{ cartItems }}</span>
+        </div>
+        <!-- 메뉴 구분 -->
+        <div class="container-menu">
+          <div class="menus">
+            <div class="modal-active" @mouseover="showModal=true">
+              <router-link to="/products">예약구매<span id="purchase-reserve">💚</span></router-link>
+              <router-link to="#">프리오더</router-link>
+              <router-link to="/products">빠른배송</router-link>
+            </div>
+            <div class="modal-passive" @mouseover="showModal=false">
+              <router-link to="/reviews">리뷰</router-link>
+              <router-link to="/customerservice">고객센터</router-link>
+            </div>
+          </div>
+          <div class="row-right-menu">
+            <div class="search-brand-modal" @click="toggleSearchBrands">
+              <span class="new-released-item">🎁</span>
+              <span>브랜드 검색</span>
+            </div>
+            <div class="search-brand-form" @click="showModal=true">
+              <form>
+                <input type="text" placeholder="검색어를 입력해 주세요"/>
+                <i class="fas fa-search"></i>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   </header>
+  <toolbar-modal v-if="showModal" @mouseEsc="showModal=false"></toolbar-modal>
+</div>
 </template>
 
 <script>
+import ToolbarModal from '../common/ToolbarModal.vue';
+
 export default {
+  components: {
+    ToolbarModal,
+  },
   data() {
     return {
       isLoggedIn: false,
@@ -50,8 +62,9 @@ export default {
       menuHover: false,
       showUserInfo: false,
       cartItems: 0,
-
+      openModal: false,
       SearchBrandsModal: false,
+      showModal: false,
     };
   },
   methods: {
@@ -64,7 +77,15 @@ export default {
     },
     toggleSearchBrands() {
       this.SearchBrandsModal = !this.SearchBrandsModal; 
+    },
+    eventWatch(e) {
+      this.$emit("mouse",e);
+      console.log(e);
     }
+    // toggleToolbarModal() { 
+    //   this.showModal = !this.showModal;
+    // }
+    //toggle 방식으로 하면 마우스가 라우터 링크간 이동시에 모달창이 한번 꺼졌다 다시 켜져서 UX가 구려진다.
   },
 }
 </script>
@@ -111,27 +132,30 @@ export default {
 .container-menu {
   height: 36px;
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
 }
 .user-info-text {
   margin-left: 5px;
 }
 
 /* 툴바 왼쪽 하단 메뉴 */
-.menus>a {
+.menus {
+  display: flex;
+}
+.menus a {
   margin-right: 16px;
   font-size: 13px;
   padding: 5px 4px;
 }
-.menus>a:first-child {
+.modal-active>a:first-child {
   margin-left: 10px;
 }
-.menus>a:hover {
+.menus a:hover {
   border-bottom: 3px solid #42b883;
 }
 /* ------------------- */
-
 
 #purchase-reserve {
   font-size: 10px;
