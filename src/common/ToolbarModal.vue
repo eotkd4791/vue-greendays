@@ -3,8 +3,8 @@
     <div class="modal-mask">
       <div class="modal-container" @mouseout="mouseEscape">
         <div class="modal-wrapper">
-          
-          <div class="modal-left-a">
+
+          <!-- <div class="modal-left-a">
             <slot name="header">
               default header
             </slot>
@@ -19,11 +19,8 @@
           <div class="modal-right-text">
             <slot name="footer">
               default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
             </slot>
-          </div>
+          </div> -->
 
         </div>
       </div>
@@ -33,11 +30,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+
+    };
+  },
   methods: {
     mouseEscape() {
       this.$emit("mouseEsc");
-    }
-  }
+    },
+  },
 }
 </script>
 

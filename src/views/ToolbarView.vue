@@ -42,7 +42,9 @@
         </div>
       </div>
   </header>
-  <toolbar-modal v-if="showModal" @mouseEsc="showModal=false"></toolbar-modal>
+  <toolbar-modal v-if="showModal" @mouseEsc="showModal=false">
+
+  </toolbar-modal>
 </div>
 </template>
 
@@ -78,10 +80,7 @@ export default {
     toggleSearchBrands() {
       this.SearchBrandsModal = !this.SearchBrandsModal; 
     },
-    eventWatch(e) {
-      this.$emit("mouse",e);
-      console.log(e);
-    }
+    
     // toggleToolbarModal() { 
     //   this.showModal = !this.showModal;
     // }
