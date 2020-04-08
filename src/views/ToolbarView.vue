@@ -17,10 +17,16 @@
         <!-- 메뉴 구분 -->
         <div class="container-menu">
           <div class="menus">
-            <div class="modal-active" @mouseover="showModal=true">
-              <router-link to="/products">예약구매<span id="purchase-reserve">💚</span></router-link>
-              <router-link to="#">프리오더</router-link>
-              <router-link to="/products">빠른배송</router-link>
+            <div class="modal-active">
+              <span class="anchor-wrapper" @mouseover="showModal=true">
+                <router-link to="/products">예약구매<span id="purchase-reserve">💚</span></router-link>
+              </span>
+              <span class="anchor-wrapper" @mouseover="showModal=true">
+                <router-link to="#">프리오더</router-link>
+              </span>
+              <span class="anchor-wrapper" @mouseover="showModal=true">
+                <router-link to="/products">빠른배송</router-link>
+              </span>
             </div>
             <div class="modal-passive" @mouseover="showModal=false">
               <router-link to="/reviews">리뷰</router-link>
@@ -42,18 +48,18 @@
         </div>
       </div>
   </header>
-  <toolbar-modal v-if="showModal" @mouseEsc="showModal=false">
-
-  </toolbar-modal>
+  <toolbar-modal v-if="showModal" @mouseEsc="showModal=false"></toolbar-modal>
 </div>
 </template>
-
+ 
 <script>
-import ToolbarModal from '../common/ToolbarModal.vue';
+import ToolbarModal from '../components/common/ToolbarModal.vue';
+import PreorderModal from '../components/common/PreorderModal.vue';
 
 export default {
   components: {
     ToolbarModal,
+    PreorderModal,
   },
   data() {
     return {
@@ -80,7 +86,10 @@ export default {
     toggleSearchBrands() {
       this.SearchBrandsModal = !this.SearchBrandsModal; 
     },
-    
+    openToolbarModal(event) {
+      this.showModal = true;
+      this.$emit('open:modal',event)
+    },
     // toggleToolbarModal() { 
     //   this.showModal = !this.showModal;
     // }
@@ -142,14 +151,15 @@ export default {
 /* 툴바 왼쪽 하단 메뉴 */
 .menus {
   display: flex;
+  margin-left: 10px;
 }
 .menus a {
-  margin-right: 16px;
+  margin-right: 20px;
   font-size: 13px;
-  padding: 5px 4px;
+  padding: 5px 0;
 }
-.modal-active>a:first-child {
-  margin-left: 10px;
+.anchor-wrapper {
+  padding: 10px 0;
 }
 .menus a:hover {
   border-bottom: 3px solid #42b883;

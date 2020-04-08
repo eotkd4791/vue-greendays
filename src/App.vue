@@ -1,7 +1,9 @@
 <template>
   <main>
     <toolbar-view></toolbar-view>
+    <!-- <transition name="fade"> -->
     <router-view></router-view>
+    <!-- </transition> -->
     <footer-view></footer-view>
   </main>
 </template>

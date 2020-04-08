@@ -4,31 +4,17 @@
       <div class="modal-container" @mouseout="mouseEscape">
         <div class="modal-wrapper">
 
-          <!-- <div class="modal-left-a">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
-
-          <div class="modal-right-img">
-            <slot name="body">
-              default body
-            </slot>
-          </div>
-
-          <div class="modal-right-text">
-            <slot name="footer">
-              default footer
-            </slot>
-          </div> -->
+          <!-- 예약구매 -->
 
         </div>
       </div>
-    </div>
+    </div> 
   </transition>
 </template>
 
 <script>
+
+
 export default {
   data() {
     return {
@@ -82,6 +68,9 @@ export default {
 
   
 }
+
+
+
 
 
 .modal-header h3 {
