@@ -18,27 +18,27 @@
         <div class="container-menu">
           <div class="menus">
             <div class="modal-active">
-              <span class="anchor-wrapper" @mouseover="showModal=true">
+              <span class="anchor-wrapper" @mouseover="openToolbarModal">
                 <router-link to="/products">예약구매<span id="purchase-reserve">💚</span></router-link>
               </span>
-              <span class="anchor-wrapper" @mouseover="showModal=true">
+              <span class="anchor-wrapper" @mouseover="openToolbarModal">
                 <router-link to="#">프리오더</router-link>
               </span>
-              <span class="anchor-wrapper" @mouseover="showModal=true">
+              <span class="anchor-wrapper" @mouseover="openToolbarModal">
                 <router-link to="/products">빠른배송</router-link>
               </span>
             </div>
-            <div class="modal-passive" @mouseover="showModal=false">
+            <div class="modal-passive" @mouseover="closeToolbarModal">
               <router-link to="/reviews">리뷰</router-link>
               <router-link to="/customerservice">고객센터</router-link>
             </div>
           </div>
           <div class="row-right-menu">
-            <div class="search-brand-modal" @click="toggleSearchBrands">
+            <div class="search-brand-modal" @click="openSearchBrands">
               <span class="new-released-item">🎁</span>
               <span>브랜드 검색</span>
             </div>
-            <div class="search-brand-form" @click="showModal=true">
+            <div class="search-brand-form" @click="openToolbarModal">
               <form>
                 <input type="text" placeholder="검색어를 입력해 주세요"/>
                 <i class="fas fa-search"></i>
@@ -48,18 +48,27 @@
         </div>
       </div>
   </header>
-  <toolbar-modal v-if="showModal" @mouseEsc="showModal=false"></toolbar-modal>
+  <toolbar-modal v-if="showModal && showToolbarModal" @mouseEsc="closeToolbarModal">
+    <div :slot="slotName">
+      <div>
+        
+
+
+      </div>
+    </div>
+  </toolbar-modal>
+  <brand-modal v-if="showModal && SearchBrandsModal" @close="closeSearchBrands"></brand-modal>
 </div>
 </template>
  
 <script>
 import ToolbarModal from '../components/common/ToolbarModal.vue';
-import PreorderModal from '../components/common/PreorderModal.vue';
+import BrandModal from '../components/common/BrandModal.vue';
 
 export default {
   components: {
     ToolbarModal,
-    PreorderModal,
+    BrandModal,
   },
   data() {
     return {
@@ -70,9 +79,12 @@ export default {
       menuHover: false,
       showUserInfo: false,
       cartItems: 0,
-      openModal: false,
-      SearchBrandsModal: false,
+
       showModal: false,
+      showToolbarModal: false,
+      SearchBrandsModal: false,
+
+      slotName: '',
     };
   },
   methods: {
@@ -83,17 +95,40 @@ export default {
     toggleUserInfo() {
       this.showUserInfo = !this.showUserInfo;
     },
-    toggleSearchBrands() {
-      this.SearchBrandsModal = !this.SearchBrandsModal; 
-    },
     openToolbarModal(event) {
+      console.log(event);
+      // if(event.type ==="mouseover"){
+      //   const menuTabName = event.originalTarget.firstChild.data;
+
+      //   if(menuTabName === undefined) return;
+
+      //   if(menuTabName==='예약구매' || menuTabName ==='💚') {
+      //     this.slotName = 'toolbar-reserve-buying';
+      //   } else if(menuTabName==='프리오더') {
+      //     this.slotName = 'toolbar-preorder';
+      //   } else if(menuTabName==='빠른배송') {
+      //     this.slotName = 'toolbar-quick-delivery';
+      //   }  
+      // }
+
+      // else {
+      //   this.slotName = 'toolbar-search-brand';
+      // }
+      this.showToolbarModal = true;
       this.showModal = true;
-      this.$emit('open:modal',event)
     },
-    // toggleToolbarModal() { 
-    //   this.showModal = !this.showModal;
-    // }
-    //toggle 방식으로 하면 마우스가 라우터 링크간 이동시에 모달창이 한번 꺼졌다 다시 켜져서 UX가 구려진다.
+    closeToolbarModal() {
+      this.showToolbarModal = false;
+      this.showModal = false;
+    },
+    openSearchBrands() {
+      this.showModal = true;
+      this.SearchBrandsModal = true;
+    },
+    closeSearchBrands() {
+      this.showModal = false;
+      this.SearchBrandsModal = false;
+    },
   },
 }
 </script>

@@ -1,11 +1,20 @@
 <template>
   <transition name="toolbar-modal">
     <div class="modal-mask">
-      <div class="modal-container" @mouseout="mouseEscape">
+      <div class="modal-container" @mouseleave="mouseEscape">
         <div class="modal-wrapper">
+          <slot name="toolbar-reserve-buying">
 
-          <!-- 예약구매 -->
+          </slot>
+          <slot name="toolbar-preorder">
 
+          </slot>
+          <slot name="toolbar-quick-delivery">
+
+          </slot>
+          <slot name="toolbar-search-brand">
+
+          </slot>
         </div>
       </div>
     </div> 
@@ -13,7 +22,6 @@
 </template>
 
 <script>
-
 
 export default {
   data() {
@@ -39,7 +47,7 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, .5);
   display: table;
-  transition: opacity .3s ease;
+  /* transition:  .3s ease; */
 }
 
 .modal-container {
@@ -49,7 +57,6 @@ export default {
   padding: 20px 30px;
   background-color: #fff;
   border: none;
-  /* box-shadow: 0 2px 8px rgba(0, 0, 0, .); */
   transition: all .3s ease;
   font-family: Helvetica, Arial, sans-serif;
   position: fixed;
