@@ -24,16 +24,17 @@ export default {
 /*---------------------------
       > color table <
 
-    green:          #42b883
+    brightgray:     #F7F7F7
     gray:           #f8f8f8
-    midgray:        #757575
+    gray:           #EDEDED
     darkgray:       #8b8b8b
-
-    mint:           #9AECDB
-
     neon-off:       #7C7C7C
+    midgray:        #757575
+
     neon-on:        #8bc34a
     neon-shadow:    #4dcf34
+    green:          #42b883
+    mint:           #9AECDB
 -----------------------------*/
 
   @import "./plugins/reset.css";

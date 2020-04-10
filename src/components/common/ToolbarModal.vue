@@ -3,18 +3,7 @@
     <div class="modal-mask">
       <div class="modal-container" @mouseleave="mouseEscape">
         <div class="modal-wrapper">
-          <slot name="toolbar-reserve-buying">
 
-          </slot>
-          <slot name="toolbar-preorder">
-
-          </slot>
-          <slot name="toolbar-quick-delivery">
-
-          </slot>
-          <slot name="toolbar-search-brand">
-
-          </slot>
         </div>
       </div>
     </div> 
@@ -23,7 +12,11 @@
 
 <script>
 
+
 export default {
+  components: {
+
+  },
   data() {
     return {
 
@@ -33,6 +26,9 @@ export default {
     mouseEscape() {
       this.$emit("mouseEsc");
     },
+  },
+  created() {
+
   },
 }
 </script>
@@ -63,7 +59,6 @@ export default {
   top: 115px;
 }
 
-
 .modal-wrapper {
   max-width: 1100px;
   height: 372px;
@@ -72,8 +67,6 @@ export default {
   background-color: #fff;
   display: flex;
   justify-content: space-between;
-
-  
 }
 
 

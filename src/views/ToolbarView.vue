@@ -48,15 +48,7 @@
         </div>
       </div>
   </header>
-  <toolbar-modal v-if="showModal && showToolbarModal" @mouseEsc="closeToolbarModal">
-    <div :slot="slotName">
-      <div>
-        
-
-
-      </div>
-    </div>
-  </toolbar-modal>
+  <toolbar-modal v-if="showModal && showToolbarModal" @mouseEsc="closeToolbarModal"></toolbar-modal>
   <brand-modal v-if="showModal && SearchBrandsModal" @close="closeSearchBrands"></brand-modal>
 </div>
 </template>
@@ -96,24 +88,24 @@ export default {
       this.showUserInfo = !this.showUserInfo;
     },
     openToolbarModal(event) {
-      console.log(event);
-      // if(event.type ==="mouseover"){
-      //   const menuTabName = event.originalTarget.firstChild.data;
+      console.dir(event);
+      if(event.type ==="mouseover"){
+        const menuTabName = event.target.textContent;
 
-      //   if(menuTabName === undefined) return;
+        if(menuTabName === undefined) return;
 
-      //   if(menuTabName==='예약구매' || menuTabName ==='💚') {
-      //     this.slotName = 'toolbar-reserve-buying';
-      //   } else if(menuTabName==='프리오더') {
-      //     this.slotName = 'toolbar-preorder';
-      //   } else if(menuTabName==='빠른배송') {
-      //     this.slotName = 'toolbar-quick-delivery';
-      //   }  
-      // }
+        if(menuTabName==='예약구매' || menuTabName ==='💚') {
+          this.slotName = 'toolbar-reserve-buying';
+        } else if(menuTabName==='프리오더') {
+          this.slotName = 'toolbar-preorder';
+        } else if(menuTabName==='빠른배송') {
+          this.slotName = 'toolbar-quick-delivery';
+        }  
+      }
 
-      // else {
-      //   this.slotName = 'toolbar-search-brand';
-      // }
+      else {
+        this.slotName = 'toolbar-search-brand';
+      }
       this.showToolbarModal = true;
       this.showModal = true;
     },
