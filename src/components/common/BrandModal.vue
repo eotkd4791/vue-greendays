@@ -141,6 +141,10 @@ export default {
   color: #42b883;
 }
 
+/* .list-brands {
+
+} */
+
 
 
 
