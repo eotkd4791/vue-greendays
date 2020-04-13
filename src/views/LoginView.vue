@@ -95,9 +95,11 @@ export default {
       }
     }, 
     movePage(to) {
-      const nextPage ={ path: to };
-      this.$router.push(nextPage);
-    }
+      if(this.$route.path !== to) {
+        const nextPage = { path: to };
+        this.$router.push(nextPage);
+      }
+    },
   }
 }
 </script>

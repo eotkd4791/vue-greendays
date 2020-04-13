@@ -31,38 +31,47 @@ export const router = new VueRouter({
     { 
       path: '/',
       component: MainView,
+      name: 'main',
     },
     { 
       path: '/notice',
       component: Notice,
+      name: 'notice'
     },
     {
       path: '/faq',
       component: FaqList,
+      name: 'faq'
     },
     {
       path: '/customerservice',
       component: CustomerService,
+      name: 'customerService'
     },
     {
       path: '/logi_guide',
       component: LogiGuide,
+      name: 'logiGuide'
     },
     {
       path: '/introduction',
       component: Introduction,
+      name: 'introduction'
     },
     {
       path: '/reviews',
       component: Reviews,
+      name: 'review'
     },
     {
       path: '/products',
       component: ProductView,
+      name: 'products'
     },
     {
       path: '/terms',
       component: Terms,
+      name:'terms'
     },
     {
       path: '/privateinfo',
@@ -79,18 +88,22 @@ export const router = new VueRouter({
     {
       path: '/login',
       component: LoginView,
+      name: 'login'
     },
     {
       path: '/signup',
       component: SignUpView,
+      name: 'signup'
     },
     {
       path: '/wishlist',
       component: WishList,
+      name: 'wishlist'
     },
     {
       path: '/cartitems',
       component: CartItems,
+      name: 'cartItems'
     },
   ]
 });

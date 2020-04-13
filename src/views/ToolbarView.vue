@@ -81,8 +81,10 @@ export default {
   },
   methods: {
     movePage(to) {
-      const nextPage = { path: to };
-      this.$router.push(nextPage);
+      if(this.$route.path !== to) {
+        const nextPage = { path: to };
+        this.$router.push(nextPage);
+      }
     },
     toggleUserInfo() {
       this.showUserInfo = !this.showUserInfo;

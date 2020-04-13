@@ -7,28 +7,32 @@
           <div class="modal-header">
             <header class="brand-modal-title">브랜드 검색</header>
             <button class="modal-default-button" @click="$emit('close')">
-              <i class="fas fa-times"></i>
+              <i class="fas fa-times" />
             </button>
           </div>
 
           <div class="modal-body">
-            <div>
-              <div v-if="pickBrands" class="custom-pick-menu" ref="brands">
-                <div class="brands-active" @click="changeTab">
-                  인기브랜드
-                </div> |
-                <div @click="changeTab">
-                  전체브랜드
-                </div>
-                <div class="list-brands" v-for="brand in brandsList" :key="brand">
-                  <span>{{ brand.rank }}</span>
-                  <i class="fas fa-heart"></i>
-                  <span>{{ brand.name }}</span>
-                </div>
+            <div class="custom-pick-menu" ref="brands">
+              <div class="brands-active" @click="changeTab">
+                인기브랜드
+              </div> |
+              <div @click="changeTab">
+                전체브랜드
               </div>
+            </div>
 
-              <div v-else>
+            <pick-brand v-if="showModal" @close="closePickBrand" />
 
+            <div class="popular-brands" v-if="pickBrands">
+              <div class="list-brands" v-for="brand in brandsList" :key="brand">
+                <span class="brands-ranks">{{ brandsList.indexOf(brand) + 1 }}</span>
+                <i class="fas fa-heart" @click="openPickBrand" />
+                <router-link to="/">{{ brand }}</router-link>
+              </div>
+            </div>
+            <div v-else>
+              <div class="alphabet-container">
+                
               </div>
             </div>
           </div>
@@ -39,11 +43,18 @@
 </template>
 
 <script>
+import PickBrand from './PickBrandModal.vue';
+
 export default {
+  components: {
+    PickBrand,
+  },
   data() {
     return {
       pickBrands: true,
-      brandsList: [],
+      brandsList: ["GUCCI", "BURBERRY", "BALENCIAGA", "PRADA", "VALENTINO", "SAINT LAURENT", "MAISION MARGIELA", "GOLDEN GOOSE","CELINE"," FENDI"],
+      showPickBrand: false,
+      showModal: false,
     };
   },
   methods: {
@@ -54,14 +65,19 @@ export default {
     },
     changeTab() {
       this.pickBrands = !this.pickBrands;
-        // <!-- v-if절의 조건이 잘못됨 !!!!!!!!! -->
       this.$refs.brands.children[0].classList.toggle('brands-active');
       this.$refs.brands.children[1].classList.toggle('brands-active');
     },
+    openPickBrand() {
+      this.showModal = true;
+    },
+    closePickBrand() {
+      this.showModal = false;
+    }
   },
   created() {
     this.pickBrands = true;
-
+    
   },
 }
 </script>
@@ -128,6 +144,7 @@ export default {
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+  color: #bbbbbb;
   border-bottom: 1px solid #EDEDED;
 }
 .custom-pick-menu div {
@@ -141,11 +158,31 @@ export default {
   color: #42b883;
 }
 
-/* .list-brands {
-
-} */
-
-
+.popular-brands {
+  width: 100%;
+  height: 460px;
+  display: flex;
+  flex-direction: column;
+}
+.list-brands {
+  padding: 15px 0;
+  font-size: 11px;
+  border-bottom: 1px solid #EDEDED;
+}
+.brands-ranks {
+  margin: 0 10px 0 20px;
+  color: #42b883;
+  font-weight: 500;
+  font-size: 12px;
+}
+.list-brands:last-child .brands-ranks {
+  margin: 0 10px 0 14px;
+}
+.fas.fa-heart {
+  margin: 0 20px 0 24px;
+  color: #d9d9d9;
+  cursor: pointer;
+}
 
 
 .modal-default-button {
