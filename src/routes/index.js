@@ -107,3 +107,12 @@ export const router = new VueRouter({
     },
   ]
 });
+
+// router.beforeEach(function(to, from, next) {
+//   console.log(to.path, from.path);
+//   if(to.path === `${from.path}#`) {
+//     console.log("preorder");
+//   } else {
+//     next();
+//   }
+// });

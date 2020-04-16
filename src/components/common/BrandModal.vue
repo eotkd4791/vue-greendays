@@ -1,12 +1,12 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
-      <div class="modal-wrapper" @click="onClickOutside">
+      <div class="modal-wrapper" @click.stop="onClickOutside">
         <div class="modal-container">
           
           <div class="modal-header">
             <header class="brand-modal-title">브랜드 검색</header>
-            <button class="modal-default-button" @click="$emit('close')">
+            <button class="modal-default-button" @click="$emit('closeBrands')">
               <i class="fas fa-times" />
             </button>
           </div>
@@ -20,21 +20,10 @@
                 전체브랜드
               </div>
             </div>
-
-            <pick-brand v-if="showModal" @close="closePickBrand" />
-
-            <div class="popular-brands" v-if="pickBrands">
-              <div class="list-brands" v-for="brand in brandsList" :key="brand">
-                <span class="brands-ranks">{{ brandsList.indexOf(brand) + 1 }}</span>
-                <i class="fas fa-heart" @click="openPickBrand" />
-                <router-link to="/">{{ brand }}</router-link>
-              </div>
-            </div>
-            <div v-else>
-              <div class="alphabet-container">
-                
-              </div>
-            </div>
+            <popular-brands v-if="pickBrands" @openAlarmModal="openPickBrand(pickedBrand)" />
+            <alphabet-brands v-else />
+            
+            <pick-brand v-if="showModal" :propsBrand="pickedBrand" @closePickedBrands="closePickBrand" />
           </div>
         </div>
       </div>
@@ -44,23 +33,27 @@
 
 <script>
 import PickBrand from './PickBrandModal.vue';
+import AlphabetBrands from '../AlphabetBrands.vue';
+import PopularBrands from '../PopularBrands.vue';
 
 export default {
   components: {
     PickBrand,
+    AlphabetBrands,
+    PopularBrands,
   },
   data() {
     return {
+      isLoggedIn: false,
       pickBrands: true,
-      brandsList: ["GUCCI", "BURBERRY", "BALENCIAGA", "PRADA", "VALENTINO", "SAINT LAURENT", "MAISION MARGIELA", "GOLDEN GOOSE","CELINE"," FENDI"],
-      showPickBrand: false,
       showModal: false,
+      pickedBrand: ''
     };
   },
   methods: {
     onClickOutside(e) {
       if(e.target.className ==='modal-wrapper') {
-        this.$emit('close');
+        this.$emit('closeBrands');
       }
     },
     changeTab() {
@@ -68,17 +61,31 @@ export default {
       this.$refs.brands.children[0].classList.toggle('brands-active');
       this.$refs.brands.children[1].classList.toggle('brands-active');
     },
-    openPickBrand() {
+    openPickBrand(payload) {
       this.showModal = true;
+      this.pickedBrand = payload;
     },
     closePickBrand() {
       this.showModal = false;
-    }
+    },
   },
   created() {
     this.pickBrands = true;
-    
+    // this.isLoggedIn = this.$store.modules.userInfo.state.
+    // 생성되자마자 로그인 여부로 화면에 보여줄 모달 선택하는 로직 구현하기
+
+
+
+    //알파벳 선택하는 로직 -> 디비에서 불러온 브랜드 이름이 하나도 없으면 passive라는 클래스를 추가한다.(cursor: not-allowed)
+    //
   },
+  mounted() {
+    // 0-9는 wide라는 클래스를 추가한다.
+    
+    
+    // this.$refs.btnLetter.children[1].classList.add('alphabet-active'); 알파벳 A로 active 클래스 추가
+    
+  }
 }
 </script>
 
@@ -158,45 +165,9 @@ export default {
   color: #42b883;
 }
 
-.popular-brands {
-  width: 100%;
-  height: 460px;
-  display: flex;
-  flex-direction: column;
-}
-.list-brands {
-  padding: 15px 0;
-  font-size: 11px;
-  border-bottom: 1px solid #EDEDED;
-}
-.brands-ranks {
-  margin: 0 10px 0 20px;
-  color: #42b883;
-  font-weight: 500;
-  font-size: 12px;
-}
-.list-brands:last-child .brands-ranks {
-  margin: 0 10px 0 14px;
-}
-.fas.fa-heart {
-  margin: 0 20px 0 24px;
-  color: #d9d9d9;
-  cursor: pointer;
-}
-
-
 .modal-default-button {
   float: right;
 }
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
 
 .modal-enter {
   opacity: 0;

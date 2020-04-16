@@ -49,7 +49,7 @@
       </div>
   </header>
   <toolbar-modal v-if="showModal && showToolbarModal" @mouseEsc="closeToolbarModal"></toolbar-modal>
-  <brand-modal v-if="showModal && SearchBrandsModal" @close="closeSearchBrands"></brand-modal>
+  <brand-modal v-if="showModal && SearchBrandsModal" @closeBrands="closeSearchBrands"></brand-modal>
 </div>
 </template>
  
@@ -76,11 +76,11 @@ export default {
       showToolbarModal: false,
       SearchBrandsModal: false,
 
-      slotName: '',
     };
   },
   methods: {
     movePage(to) {
+      if(to ==='#') return;
       if(this.$route.path !== to) {
         const nextPage = { path: to };
         this.$router.push(nextPage);

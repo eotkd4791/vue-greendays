@@ -30,6 +30,7 @@ export default {
     darkgray:       #8b8b8b
     neon-off:       #7C7C7C
     midgray:        #757575
+    gray:           #D9D9D9
 
     neon-on:        #8bc34a
     neon-shadow:    #4dcf34
