@@ -3,7 +3,7 @@
     <div class="modal-mask">
       <div class="modal-container" @mouseleave="mouseEscape">
         <div class="modal-wrapper">
-
+          
         </div>
       </div>
     </div> 
