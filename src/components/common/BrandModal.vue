@@ -20,10 +20,10 @@
                 전체브랜드
               </div>
             </div>
-            <popular-brands v-if="pickBrands" @openAlarmModal="openPickBrand(pickedBrand)" />
-            <alphabet-brands v-else />
-            
             <pick-brand v-if="showModal" :propsBrand="pickedBrand" @closePickedBrands="closePickBrand" />
+            <popular-brands v-if="pickBrands" @openAlarmModal="openPickBrand" />
+            <alphabet-brands v-else @openAlarmModal="openPickBrand" />
+            <!-- 로그인이 안되있을 때 로직 구현하기 -->
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: false,
+      user: {},
       pickBrands: true,
       showModal: false,
       pickedBrand: ''
@@ -71,21 +71,13 @@ export default {
   },
   created() {
     this.pickBrands = true;
-    // this.isLoggedIn = this.$store.modules.userInfo.state.
+    this.isLoggedIn = this.$store.state.userInfo;
     // 생성되자마자 로그인 여부로 화면에 보여줄 모달 선택하는 로직 구현하기
-
-
 
     //알파벳 선택하는 로직 -> 디비에서 불러온 브랜드 이름이 하나도 없으면 passive라는 클래스를 추가한다.(cursor: not-allowed)
     //
   },
-  mounted() {
-    // 0-9는 wide라는 클래스를 추가한다.
-    
-    
-    // this.$refs.btnLetter.children[1].classList.add('alphabet-active'); 알파벳 A로 active 클래스 추가
-    
-  }
+ 
 }
 </script>
 

@@ -97,6 +97,4 @@ a {
   padding: 0 0 7px 0;
   color: #B8B8B8;
 }
-
-
 </style>

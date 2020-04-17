@@ -3,15 +3,15 @@
     <header id="header">
       <div class="container-logo">
         <div class="logo" @click="movePage('/')">
-          <div v-if="isLoggedIn" class="user-info-point" @click.stop="movePage('/mypoint')">
+          <div v-if="user.isLoggedIn" class="user-info-point" @click.stop="movePage('/mypoint')">
               <span class="user-info-text">{{ points }}</span>
               <span class="point-icon fas fa-coins"></span>
           </div>
-          <span v-if="isLoggedIn" class="far fa-calendar-check" @click.stop="movePage('/monthlypromotion')"></span>
-          <span class="user-info fas fa-user" @click.stop="isLoggedIn ? toggleUserInfo : movePage('/login')"></span>
-          <span class="user-info far fa-heart" @click.stop="isLoggedIn ? movePage('/wishlist') : movePage('/login')" style="color: #42b883"></span>
-          <span v-if="isLoggedIn" class="user-info-text">{{ pickedProducts }}</span>
-          <span class="user-info fas fa-shopping-basket" @click.stop="isLoggedIn ? movePage('/cartitems') : movePage('/login')"></span>
+          <span v-if="user.isLoggedIn" class="far fa-calendar-check" @click.stop="movePage('/monthlypromotion')"></span>
+          <span class="user-info fas fa-user" @click.stop="user.isLoggedIn ? toggleUserInfo : movePage('/login')"></span>
+          <span class="user-info far fa-heart" @click.stop="user.isLoggedIn ? movePage('/wishlist') : movePage('/login')" style="color: #42b883"></span>
+          <span v-if="user.isLoggedIn" class="user-info-text">{{ pickedProducts }}</span>
+          <span class="user-info fas fa-shopping-basket" @click.stop="user.isLoggedIn ? movePage('/cartitems') : movePage('/login')"></span>
           <span class="user-info-text">{{ cartItems }}</span>
         </div>
         <!-- 메뉴 구분 -->
@@ -64,7 +64,7 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: false,
+      user:{},
       points: 11000,
       pickedProducts: 0,
       productsInBasket: 0,
@@ -91,23 +91,23 @@ export default {
     },
     openToolbarModal(event) {
       console.dir(event);
-      if(event.type ==="mouseover"){
-        const menuTabName = event.target.textContent;
+      // if(event.type ==="mouseover"){
+      //   const menuTabName = event.target.textContent;
 
-        if(menuTabName === undefined) return;
+      //   if(menuTabName === undefined) return;
 
-        if(menuTabName==='예약구매' || menuTabName ==='💚') {
-          this.slotName = 'toolbar-reserve-buying';
-        } else if(menuTabName==='프리오더') {
-          this.slotName = 'toolbar-preorder';
-        } else if(menuTabName==='빠른배송') {
-          this.slotName = 'toolbar-quick-delivery';
-        }  
-      }
+      //   if(menuTabName==='예약구매' || menuTabName ==='💚') {
+      //     this.slotName = 'toolbar-reserve-buying';
+      //   } else if(menuTabName==='프리오더') {
+      //     this.slotName = 'toolbar-preorder';
+      //   } else if(menuTabName==='빠른배송') {
+      //     this.slotName = 'toolbar-quick-delivery';
+      //   }  
+      // }
 
-      else {
-        this.slotName = 'toolbar-search-brand';
-      }
+      // else {
+      //   this.slotName = 'toolbar-search-brand';
+      // }
       this.showToolbarModal = true;
       this.showModal = true;
     },
@@ -124,6 +124,9 @@ export default {
       this.SearchBrandsModal = false;
     },
   },
+  mounted() {
+    this.user = this.$store.state.userInfo;
+  }
 }
 </script>
 

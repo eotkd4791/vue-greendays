@@ -13,13 +13,12 @@ export default {
   data() {
     return {
       brandsList: ["GUCCI", "BURBERRY", "BALENCIAGA", "PRADA", "VALENTINO", "SAINT LAURENT", "MAISION MARGIELA", "GOLDEN GOOSE","CELINE"," FENDI"],
-      pickedBrand:'',
     };
   },
   methods: {
     openAlarmBrand(e) {
-      this.pickedBrand = e.target.nextElementSibling.text;
-      this.$emit('openAlarmModal', this.pickedBrand);
+      const onClickBrand = e.target.nextElementSibling.text;
+      this.$emit('openAlarmModal', onClickBrand);
     },
   },
 }
@@ -50,5 +49,10 @@ export default {
   margin: 0 20px 0 24px;
   color: #d9d9d9;
   cursor: pointer;
+}
+
+/* Brands List */
+li {
+  list-style-type: none;
 }
 </style>

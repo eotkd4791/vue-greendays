@@ -46,9 +46,15 @@ export default {
   },
   methods: {
     movePage(to) {
-      const nextPage = { path: to };
-      this.$router.push(nextPage);
+      if(to ==='#') return;
+      if(this.$route.path !== to) {
+        const nextPage = { path: to };
+        this.$router.push(nextPage);
+      }
     },
+  },
+  created() {
+    //이미지 통신을 불러오기
   }
 }
 </script>
