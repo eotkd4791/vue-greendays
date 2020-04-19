@@ -1,20 +1,18 @@
 <template>
   <div>
-    <div>
-      <header>CATEGORIES</header>
+    <section>
+      <!-- 빠른배송 상품 mini component 3개 -->
+    </section>
+    <section>
       <div>
-        <span>All Categories ({{ totalProductsNum }})</span>
-        <span>Bags ({{ totalProducts.bags.length }})</span>
-        <span>Wallets ({{ totalProducts.wallets.length }})</span>
-        <span>Clothes ({{ totalProducts.clothes.length }})</span>
-        <span>Shoes ({{ totalProducts.shoes.length }})</span>
-        <span>Accessories ({{ totalProducts.accessories.length }})</span>
+        <!-- 이미지 -->
       </div>
-    </div>
-    <div>
-      <img src="`${}`" />
-      <p></p>
-    </div>
+      <div>
+        <h3>1년 365일 신상품 상시 할인 SALE</h3>
+        <p>바로구매와 당일배송이 가능한 그린데이즈 빠른배송 상품!</p>
+        <p>그린데이즈 빠른배송은 인기 있는 상품을 저렴하고, 신속하게 만나볼 수 있습니다.</p>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -22,13 +20,17 @@
 export default {
   data() {
     return {
-      imgPath: '',
-
+      allProducts:[],
+      bags:[],
+      wallets:[],
+      clothes:[],
+      shoes:[],
+      acc:[],
     };
   },
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

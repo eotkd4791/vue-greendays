@@ -3,10 +3,13 @@
     <div class="menus">
       <div class="modal-active">
         <span class="anchor-wrapper" @mouseover="mouseOverOnMenu">
-          <router-link to="/products">예약구매<span id="purchase-reserve">💚</span></router-link>
+          <router-link to="/products">
+            예약구매
+            <span id="purchase-reserve">💚</span>
+          </router-link>
         </span>
         <span class="anchor-wrapper" @mouseover="mouseOverOnMenu">
-          <router-link to="#">프리오더</router-link>
+          <a @click="movePage('#')">프리오더</a>       
         </span>
         <span class="anchor-wrapper" @mouseover="mouseOverOnMenu">
           <router-link to="/products">빠른배송</router-link>
@@ -41,31 +44,35 @@ export default {
   },
   methods: {
     mouseOverOnMenu(e) {
-      // console.log(e);
-      this.$emit('onToolbarModal');
+      const whichMenu = e.target.textContent;
+      this.$emit('onToolbarModal', whichMenu);
     },
-    mouseLeaveFromMenu(e) {
-      // console.log(e);
+    mouseLeaveFromMenu() {
       this.$emit('offToolbarModal');
     },
-    onClickSearchBrands(e) {
-      // console.log(e);
+    onClickSearchBrands() {
       this.$emit('onSearchBrands');
     }
   }, 
-  
 }
 </script>
 
 <style scoped>
+.container-menu {
+  max-width: 1100px;
+  height: 36px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
 .menus {
   display: flex;
-  margin-left: 10px;
 }
 .menus a {
   margin-right: 20px;
   font-size: 13px;
   padding: 5px 0;
+  cursor: pointer;
 }
 .anchor-wrapper {
   padding: 10px 0;
@@ -73,8 +80,6 @@ export default {
 .menus a:hover {
   border-bottom: 3px solid #42b883;
 }
-/* ------------------- */
-
 #purchase-reserve {
   font-size: 10px;
 }
@@ -123,6 +128,7 @@ input {
   width: 100%;
   height: 33px;
   text-align: center;
+  font-size: 13px;
 }
 .fa-search {
   color: #8b8b8b;
@@ -132,8 +138,6 @@ input {
   right: 0;
   margin-right: 10px;
 }
-
-/* 브랜드 검색 영역 */
 .search-brand-modal {
   cursor: pointer;
 }

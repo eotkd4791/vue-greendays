@@ -25,6 +25,7 @@ div {
   width: 100%;
   height: 650px;
   overflow: hidden;
+  font-family: 'Montserrat';
 }
 
 </style>

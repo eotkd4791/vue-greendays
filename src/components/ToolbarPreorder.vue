@@ -1,53 +1,44 @@
 <template>
   <div>
-    <div>
+    <section>
       <header>PRE ORDER</header>
+      <span @click="movePage('/')">#프리오더가 뭐에요?</span>
+      <span @click="movePage('/')">{{ preOrder.name }}</span>
+      <!-- 프리오더 행사 갯수만큼 뿌리기 -->
+    </section>
+    <section>
       <div>
-        <span><router-link to="/aboutpreorder">#프리오더가 뭐에요?</router-link></span>
-        <div>
-          <span>온전히 나를 위한 아이템</span>
-          <span></span>
-        </div>
-
-        <div>
-          <span>19FW SEASON OFF SALE</span>
-          <span></span>
-        </div>
-  
-        <div>
-          <span>FOR MEN AND KIDS</span>
-          <span></span>
-        </div>
-
-        <div>
-          <span>SPRING HOT SALE!</span>
-          <span></span>
-        </div>
-
-        <div>
-          <span>메종 마르지엘라 핫세일</span>
-          <span></span>
-        </div>
-
-        <div>
-          <span>뉴트럴의 향연</span>
-          <span></span>
-        </div>
+        <!-- 이미지 -->
       </div>
-    </div>
-    <div>
-      <img src="" />
-      <p></p>
-    </div>
+      <h3>한정된 기간동안만 열리는 특별한 타임세일!</h3>
+      <p>프리오더를 통해 낮은 금액으로 명품을 즉시 구매해보세요!</p>
+      <p>단, 한정된 시간 동안만 구매할 수 있으니 서둘러주세요</p>
+    </section>
   </div>
 </template>
 
 <script>
 export default {
-
+  data() {
+    return {
+      preOrder:[],
+    };
+  },
+  methods: {
+    movePage(to) {
+      if(to ==='#') return;
+      if(this.$route.path !== to) {
+        const nextPage = { path: to };
+        this.$router.push(nextPage);
+      }
+    },
+  },
+  created() {
+    // 프리오더 행사 가져오기 Vuex에서
+  },
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

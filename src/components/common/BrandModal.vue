@@ -23,7 +23,6 @@
             <pick-brand v-if="showModal" :propsBrand="pickedBrand" @closePickedBrands="closePickBrand" />
             <popular-brands v-if="pickBrands" @openAlarmModal="openPickBrand" />
             <alphabet-brands v-else @openAlarmModal="openPickBrand" />
-            <!-- 로그인이 안되있을 때 로직 구현하기 -->
           </div>
         </div>
       </div>
