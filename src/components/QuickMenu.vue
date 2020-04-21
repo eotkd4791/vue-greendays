@@ -1,23 +1,23 @@
 <template>
-  <div class="container">
-    <div class="container-title">
+  <div class="quick-container">
+    <div class="quick-container__title">
       <span>Quick menu</span>
     </div>
 
-    <div class="container-btn">
-      <div>
-        <i class="fas fa-truck"></i>
+    <div class="quick-container__btn">
+      <div @click="movePage('/')">
+        <i class="fas fa-truck" />
         <p>Free delivery</p>
         <p>배송가이드</p>
       </div>
 
-      <div>
+      <div @click="movePage('/')">
         <i class="far fa-comments" />
         <p>FAQ</p>
         <p>자주 묻는 질문</p>
       </div>
 
-      <div>
+      <div @click="movePage('/')">
         <i class="fas fa-phone-alt" />
         <p>Need help?</p>
         <p>고객 센터</p>
@@ -33,47 +33,51 @@
 
 <script>
 export default {
+  methods: {
+     movePage(to) {
+      if(to ==='#') return;
+      if(this.$route.path !== to) {
+        const nextPage = { path: to };
+        this.$router.push(nextPage);
+      }
+    },
+  }
 }
 </script>
 
 <style scoped>
-.container {
+.quick-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
   justify-content: center;
-  margin: 150px 150px 0 150px;
-  position: relative;
-
-  bottom: 500;
+  font-size: 16px;
+  font-family: 'Montserrat';
+  background-color: #fff;
 }
-.container .container-title {
+.quick-container__title {
   text-align: center;  
   border-top: 1px solid rgb(235,235,235);
   padding-top: 100px;
-  margin: 40px 0px 0px;
+  margin-top: 100px;
+  font-weight: 700;
 }
-.container-btn {
+.quick-container__btn {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   justify-content: space-around;
   text-align: center;
   margin: 100px 0;
+  cursor: pointer;
 }
-
-.container-btn div>i {
+.quick-container__btn div>i {
   color: #42b883;
   font-size: 25px;
   padding-bottom: 40px;
   margin-bottom:  30px;
   border-bottom: 2px solid #42b883;
 }
-.container-btn div p:nth-child(2) {
-  margin: 0 0 9px;
-}
-.container-btn div p:nth-child(3) {
-  color: #8b8b8b;
-  font-size: 12px;
-}
+.quick-container__btn div p:nth-child(2) { margin: 0 0 9px; }
+.quick-container__btn div p:nth-child(3) { color: #8b8b8b; font-size: 12px; }
 </style>

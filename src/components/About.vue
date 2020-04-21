@@ -48,11 +48,14 @@ p {
 }
 /* section 1 */
 .container {
+  width:100%;
+  max-width: 1100px;
+  height: 255px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  margin: 0 150px;
+  margin: 0 auto;
   padding: 50px 0;
 }
 a {

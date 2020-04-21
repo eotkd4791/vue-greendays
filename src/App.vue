@@ -1,10 +1,8 @@
 <template>
   <main>
-    <toolbar-view></toolbar-view>
-    <!-- <transition name="fade"> -->
-    <router-view></router-view>
-    <!-- </transition> -->
-    <footer-view></footer-view>
+    <toolbar-view />
+    <router-view />
+    <footer-view />
   </main>
 </template>
 
@@ -20,7 +18,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 /*---------------------------
       > color table <
 
@@ -36,20 +34,9 @@ export default {
     neon-shadow:    #4dcf34
     green:          #42b883
     mint:           #9AECDB
-
-
-  @font-face {
-    font-family: 'Montserrat';
-    src: url('./assets/fonts/Montserrat-Light.ttf');
-  } 
 -----------------------------*/
 
-  @import "./plugins/reset.css";
-  @font-face {
-    font-family: 'Montserrat';
-    src: url('./assets/fonts/Montserrat-Light.ttf');
-  } 
-  body {
-    width: 100%;
-  }
+@import "./plugins/reset.css";
+@font-face { font-family: 'Montserrat'; src: url('./assets/fonts/Montserrat-Light.ttf'); } 
+main { display: flex; flex-direction: column; }
 </style>

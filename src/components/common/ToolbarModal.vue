@@ -5,6 +5,7 @@
         <div class="modal-wrapper">
           <toolbar-preorder v-if="onToolbar==='프리오더'" />
           <toolbar-quick-delivery  v-else-if="onToolbar==='빠른배송'" />
+          <toolbar-search-brands v-else-if="onToolbar===''"/>
           <toolbar-reserve-purchase v-else />
         </div>
       </div>
@@ -16,12 +17,14 @@
 import ToolbarReservePurchase from '../ToolbarReservePurchase.vue';
 import ToolbarPreorder from '../ToolbarPreorder.vue';
 import ToolbarQuickDelivery from '../ToolbarQuickDelivery.vue';
+import ToolbarSearchBrands from '../ToolbarSearchBrands.vue';
 
 export default {
   components: {
     ToolbarReservePurchase,
     ToolbarPreorder,
     ToolbarQuickDelivery,
+    ToolbarSearchBrands,
   },
   props:['onToolbar'],
   data() {

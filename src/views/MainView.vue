@@ -1,6 +1,6 @@
 <template>
   <div>
-    <preorder-neon></preorder-neon>
+    <preorder-neon />
   </div>
 </template>
 
@@ -14,6 +14,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

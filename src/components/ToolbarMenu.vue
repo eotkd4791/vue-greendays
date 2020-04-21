@@ -27,7 +27,7 @@
       </div>
       <div class="search-brand-form" @click="mouseOverOnMenu">
         <form>
-          <input type="text" placeholder="검색어를 입력해 주세요"/>
+          <input type="text" placeholder="검색어를 입력해 주세요" v-model="searchBrands" />
           <i class="fas fa-search" />
         </form>
       </div>
@@ -39,7 +39,7 @@
 export default {
   data() {
     return {
-
+      searchBrands: '',
     };
   },
   methods: {
@@ -52,7 +52,7 @@ export default {
     },
     onClickSearchBrands() {
       this.$emit('onSearchBrands');
-    }
+    },
   }, 
 }
 </script>
@@ -129,6 +129,7 @@ input {
   height: 33px;
   text-align: center;
   font-size: 13px;
+  outline-style: none;
 }
 .fa-search {
   color: #8b8b8b;

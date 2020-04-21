@@ -1,31 +1,70 @@
 <template>
-  <div>
-    상품뷰
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
+  <div class="product-container">
+    <div class="product-wrapper">
+      <div class="product-container__text">총 {{ totalCountProducts }} 개의 상품</div>
+      <display-items 
+        v-for="product in products" 
+        :key="product.name" 
+        :imgPath="product.photoUrl"
+      >
+        <!-- <template #productInfo-photo>
+          <div v-html="product.imgElement" />
+        </template> -->
+        <template #productInfo-brand>{{ product.brand }}</template>
+        <template #productInfo-name>{{ product.name }}</template>
+        <template #productInfo-beforePrice>{{ product.priceBefore.toLocaleString() }}</template>
+        <template #productInfo-discountRate>{{ product.discountRate }}% 할인</template>
+        <template #productInfo-afterPrice>{{ product.priceAfter.toLocaleString() }}</template>
+      </display-items>
+    </div>
   </div>
 </template>
 
 <script>
+import DisplayItems from '../components/common/DisplayItems.vue';
+
 export default {
+  components: {
+    DisplayItems,
+  },
   data() {
     return {
-      
+      products: [],
     };
+  },
+  computed: {
+    totalCountProducts() {
+      return this.products.length;
+    },
+  },
+  created() {
+    // 상품정보 받아오기
+    this.products = this.$store.state.products.products;
+    console.dir(this.products);
+  },
+  mounted() {
+    // 상품 배경이미지 적용
+    
   }
 }
 </script>
 
 <style scoped>
-div {
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+.product-container {
   width: 100%;
-  height: 650px;
-  overflow: hidden;
-  font-family: 'Montserrat';
+  margin-top: 200px;
+}
+.product-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
+.product-container__text {
+  max-width: 1100px;
+  width: 100%;
+  margin: 40px 0;
+  font-size: 14px;
+  font-family: 'Montserrat';
+  text-align: center;
+}
 </style>

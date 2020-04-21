@@ -77,8 +77,11 @@ export default {
   height: 115px;
   position: fixed;
   top: 0;
+  left: 0;
   background-color: white;
   z-index: 9000;
+  overflow: hidden;
+  transition: height 0.6s;
 }
 .container-logo {
   max-width: 1100px;
