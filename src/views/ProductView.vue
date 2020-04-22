@@ -5,11 +5,10 @@
       <display-items 
         v-for="product in products" 
         :key="product.name" 
-        :imgPath="product.photoUrl"
       >
-        <!-- <template #productInfo-photo>
-          <div v-html="product.imgElement" />
-        </template> -->
+        <template #productInfo-photo>
+          <img :src="product.photoUrl" width="262px" height="262px" />
+        </template>
         <template #productInfo-brand>{{ product.brand }}</template>
         <template #productInfo-name>{{ product.name }}</template>
         <template #productInfo-beforePrice>{{ product.priceBefore.toLocaleString() }}</template>
@@ -21,7 +20,7 @@
 </template>
 
 <script>
-import DisplayItems from '../components/common/DisplayItems.vue';
+import DisplayItems from '@/components/common/DisplayItems.vue';
 
 export default {
   components: {
@@ -40,11 +39,9 @@ export default {
   created() {
     // 상품정보 받아오기
     this.products = this.$store.state.products.products;
-    console.dir(this.products);
   },
   mounted() {
     // 상품 배경이미지 적용
-    
   }
 }
 </script>
@@ -66,5 +63,11 @@ export default {
   font-size: 14px;
   font-family: 'Montserrat';
   text-align: center;
+}
+
+.item-container__photo {
+  width: 262px;
+  height: 262px;
+  outline-style: none;
 }
 </style>

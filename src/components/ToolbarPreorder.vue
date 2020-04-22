@@ -4,8 +4,8 @@
       <header class="preorder-container__category__title">PRE ORDER</header>
       <div class="preorder-container__category__link" ref="tabs">
         <span 
+          class="active"
           @click="movePage('/')" 
-          @mouseover="activatingTab"
         >#프리오더가 뭐에요?</span>
         
         <span 
@@ -58,18 +58,17 @@ export default {
         this.$router.push(nextPage);
       }
     },
-    activatingTab(e) {
-      const tabToActivate = e.target;
+    activatingTab() {
       this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('active');
-
-      tabToActivate.classList.add('active');
-      console.log(tabToActivate);
-
-      const tabLists = tabToActivate.parentNode.children;
-      this.activatedTabIndex = [...tabLists].indexOf(tabToActivate);
+      
+      // const tabToActivate = e.target;
+      // const tabLists = tabToActivate.parentNode.children;
+      // this.activatedTabIndex = [...tabLists].indexOf(tabToActivate);
     }
   },
   created() {
+
+
     // 프리오더 행사 가져오기 Vuex에서
   },
 }
@@ -83,6 +82,7 @@ export default {
 .preorder-container__category__link>span { display: flex; width: 220px; height: 24px; flex-wrap: nowrap; justify-content: space-between; padding: 3px 0 3px 10px; margin: 10px 0; font-size: 14px; font-weight: 600; cursor: pointer; }
 .preorder-container__category__link i { margin-right: 10px; }
 .preorder-container__category__link>span:hover  { font-size: 14px; font-weight: 600; color: #fff; background-color: #42b883; }
+.active { font-size: 14px; font-weight: 600; color: #fff; background-color: #42b883; }
 
 .preorder-container__promotion { width: 600px; height: 100%; }
 .preorder-container__promotion__img { width: 100%; height: 250px; background-image: url('../assets/img/brands/gucci-logo.png'); background-repeat: no-repeat; background-size: cover; background-position: center; cursor: pointer; }

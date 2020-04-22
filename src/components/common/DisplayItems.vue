@@ -1,6 +1,8 @@
 <template>
   <div class="item-container" ref="item">
-    <img :src="imgPath" class="item-container__photo" />
+    <div class="item-container__photo">
+      <slot name="productInfo-photo" />
+    </div>
     <div class="item-container__info">
       <div class="item-container__space" />
       <p class="item-container__brand">
@@ -27,7 +29,7 @@
 
 <script>
 export default {
-  props:['imgPath'],
+  props: ['imgPath'],
   data() {
     return {
 
@@ -58,11 +60,9 @@ export default {
   height: 262px;
 }
 .item-container__photo {
-  display: block;
-  outline-style: none;
-  position: relative;
   width: 262px;
   height: 262px;
+  outline-style: none;
 }
 
 .item-container__space { height: 32px; }

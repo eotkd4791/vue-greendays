@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import ToolbarView from './views/ToolbarView.vue';
-import FooterView from './views/FooterView.vue';
+import ToolbarView from '@/views/ToolbarView.vue';
+import FooterView from '@/views/FooterView.vue';
 
 export default { 
   components: {
