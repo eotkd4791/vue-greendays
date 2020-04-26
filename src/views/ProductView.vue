@@ -4,7 +4,8 @@
       <div class="product-container__text">총 {{ totalCountProducts }} 개의 상품</div>
       <display-items 
         v-for="product in products" 
-        :key="product.name" 
+        :key="product.name"
+        @click="movePage('/hal')"
       >
         <template #productInfo-photo>
           <img :src="product.photoUrl" width="262px" height="262px" />
@@ -36,13 +37,19 @@ export default {
       return this.products.length;
     },
   },
+  methods: {
+    movePage(to) {
+      if(to ==='#') return;
+      if(this.$route.path !== to) {
+        const nextPage = { path: to };
+        this.$router.push(nextPage);
+      }
+    },
+  },
   created() {
     // 상품정보 받아오기
     this.products = this.$store.state.products.products;
   },
-  mounted() {
-    // 상품 배경이미지 적용
-  }
 }
 </script>
 
