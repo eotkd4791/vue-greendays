@@ -11,6 +11,12 @@ export default {
   components: {
     PreorderNeon,
   },
+  created() {
+    
+  },
+  mounted() {
+
+  },
 }
 </script>
 

@@ -33,7 +33,9 @@ export default {
     neon-on:        #8bc34a
     neon-shadow:    #4dcf34
     green:          #42b883
+    dark-green:     #42b850
     mint:           #9AECDB
+    dark-mint:      #9AECB0
 -----------------------------*/
 
 @import "./plugins/reset.css";

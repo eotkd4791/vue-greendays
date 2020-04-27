@@ -7,6 +7,7 @@ import brands from './modules/brands.js';
 import reviews from './modules/reviews.js';
 import preorders from './modules/preorders.js';
 import myitems from './modules/myitems.js';
+import categories from './modules/categories.js';
 
 Vue.use(Vuex);
 
@@ -18,5 +19,6 @@ export const store = new Vuex.Store({
     reviews,
     preorders,
     myitems,
+    categories,
   }
 });

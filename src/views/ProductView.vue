@@ -4,8 +4,10 @@
       <div class="product-container__text">총 {{ totalCountProducts }} 개의 상품</div>
       <display-items 
         v-for="product in products" 
-        :key="product.name"
-        @click="movePage('/hal')"
+        :key="product.id"
+        :productId="product.id"
+        :sendToday="product.productSendToday"
+        :ableToBuy="product.productAbleToBuy"
       >
         <template #productInfo-photo>
           <img :src="product.photoUrl" width="262px" height="262px" />
@@ -37,15 +39,7 @@ export default {
       return this.products.length;
     },
   },
-  methods: {
-    movePage(to) {
-      if(to ==='#') return;
-      if(this.$route.path !== to) {
-        const nextPage = { path: to };
-        this.$router.push(nextPage);
-      }
-    },
-  },
+  methods: {},
   created() {
     // 상품정보 받아오기
     this.products = this.$store.state.products.products;
@@ -70,11 +64,5 @@ export default {
   font-size: 14px;
   font-family: 'Montserrat';
   text-align: center;
-}
-
-.item-container__photo {
-  width: 262px;
-  height: 262px;
-  outline-style: none;
 }
 </style>

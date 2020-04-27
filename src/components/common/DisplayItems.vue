@@ -1,5 +1,5 @@
 <template>
-  <div class="item-container" ref="item">
+  <div class="item-container" ref="item" @click="movePage('`products/show?product_id=${productId}`')">
     <div class="item-container__photo">
       <slot name="productInfo-photo" />
     </div>
@@ -24,23 +24,48 @@
         <slot name="productInfo-afterPrice" />
       </p>
     </div>
+    <div class="item-container__chips-wrapper">
+      <div v-if="sendToday" class="item-container__chips send-today">
+        <p class="item-container__chips__send-today__text">당일발송</p>
+      </div>
+      <div v-if="ableToBuy" class="item-container__chips able-to-buy">
+        <p class="item-container__chips__able-to-buy__text">구매가능</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['imgPath'],
+  props: ['imgPath','productId','sendToday', 'ableToBuy'],
   data() {
     return {
 
     };
   },
+  methods: {
+    movePage(to) {
+      if(to ==='#') return;
+      if(this.$route.path !== to) {
+        const nextPage = { path: to };
+        this.$router.push(nextPage);
+      }
+    },
+  },
   created() {
 
   },
   mounted() {
+    console.dir(this.$refs.item.style);
 
-  },
+    // const currentUrl = this.$route.path;
+    // if(currentUrl === '/') {
+    //   // this.$refs.item.style
+    // } else if (currentUrl === '/products') {
+
+    // }
+
+  }
 }
 </script>
 
@@ -48,6 +73,7 @@ export default {
 .item-container {
   display: inline-block;
   width: 262px;
+  height: 444px;
   margin-right: 10px;
   margin-bottom: 100px;
   cursor: pointer;
@@ -98,9 +124,48 @@ export default {
 }
 .item-container__discount-rate { margin-left: 10px; }
 .item-container__after-price {
-  color: #e80000;
+  color: #4dcf34;
   font-size: 16px;
   font-weight: 600;
   text-align: center;
+}
+
+/* chips */
+.item-container__chips-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 262px;
+  height: 20px;
+  margin: 30px 0 0;
+  font-size: 16px;  
+}
+.item-container__chips {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 20px;
+  margin: 0 7px 0 0;
+  padding: 0 0 1px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+.item-container__chips-wrapper::after {
+  content: '';
+  height: 20px;
+}
+.item-container__chips.send-today {
+  background-color: rgba(57, 57, 57, 0.08);
+}
+.item-container__chips__send-today__text {
+  color: #393939;
+}
+.item-container__chips.able-to-buy {
+  background-color: #42b850;
+}
+.item-container__chips__able-to-buy__text {
+  color: white;
+  font-weight: 700;
 }
 </style>
