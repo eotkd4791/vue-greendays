@@ -22,9 +22,6 @@ export default {
 </script>
 
 <style scoped>
-.footer-container {
-  margin-top: 80vh;
-}
 img {
   display: block;
   width: 70px;

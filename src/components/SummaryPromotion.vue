@@ -1,12 +1,18 @@
 <template>
   <div class="promo__info-container">
     <div class="promo__info-container-title-wrapper">
-      <slot name="promo__info-container-title" />
+      <slot name="promoInfo-name" />
     </div>
     <div class="promo__info-container-overview-wrapper">
-      <section class="promo__info-container-overview" ref="expire-timer">
-        <slot name="promoInfo-timer" />
-        <slot name="promoInfo-overview" />
+      <section 
+        class="promo__info-container-overview" 
+        ref="promo"
+      >
+        <div class="wrap-opacity" />
+        <div class="promo__info-container-overview-text">
+          <slot name="promoInfo-timer" />
+          <slot name="promoInfo-overview" />
+        </div>
       </section>
       <section class="promo__info-container-items">
         <display-items
@@ -19,7 +25,8 @@
           <template #productInfo-photo>
             <img 
               :src="product[i-1].photoUrl" 
-              class="item-container__photo" 
+              class="item-container__photo"
+              :class="callfrom"
             />
           </template>
           <template #productInfo-brand>
@@ -64,7 +71,13 @@ export default {
     this.product = this.$store.state.products.products;
   },
   mounted() {
-    console.log('Summary');
+    const promoStyle = this.$refs.promo.style;
+    promoStyle.setProperty('background-image', `url(${this.imgUrl})`);
+    promoStyle.setProperty('background-repeat','no-repeat');
+    promoStyle.setProperty('background-position','center');
+    promoStyle.setProperty('background-size','cover');
+
+
     // this.intervalTimer = setInterval(()=> {
     //   new Date();
     // });
@@ -79,18 +92,25 @@ export default {
 .promo__info-container {
   width: 540px;
   height: 1444px;
-  margin: 60px 20px 0 0;
+  margin: 30px 0;
 }
 .promo__info-container-title-wrapper {
+  display: flex;
+  align-items: center;
   width: 100%;
   text-align: center;
-  margin-bottom: 60px;
 }
 .promo__info-container-title {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 540px;
+  height: 74px;
   font-size: 14px;
+  color: #000;
 }
 .promo__info-container-overview-wrapper {
-  width: 100%;
+  width: 540px;
   height: 1370px;
   border-radius: 10px;
   display:flex;
@@ -102,35 +122,72 @@ export default {
 
 .promo__info-container-overview {
   display: flex;
+  position: relative;
   width: 540px;
   height: 333.417px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+.wrap-opacity {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.44);
+}
+.promo__info-container-overview-text {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  z-index: 1001;
   cursor: pointer;
 }
 .promo__info-container-timer {
-  color: #fff;
+  color: #9AECDB;
   font-size: 14px;
+  font-weight: 600;
 }
 .promo__info-container-timer.clock {
-  font-size: 25px;
-  color: #fff;
+  width: 100%;
+  height: 30px;
+  font-size: 30px;
+  color: #9AECDB;
   font-weight: bold;
   line-height: 1;
+  text-align: center;
 }
 .promo__info-container-overview-sub {
   color: #fff;
   font-size: 15px;
+  font-weight: 700;
 }
 .promo__info-container-overview-title {
   font-size: 25px;
+  font-weight: bold;
   margin: 24px 0 0;
+  text-align: center;
 }
 .promo__info-container-items {
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   width: 100%;
   height: 973.58px;
   padding : 20px;

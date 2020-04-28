@@ -4,26 +4,25 @@
       <summary-promotion
         v-for="promotion in promotions"
         :key="promotion.title"
+        :imgUrl="promotion.imgUrl"
       >
         <template #promoInfo-name>
-          <span class="promo__info-container-title">
+          <p class="promo__info-container-title">
             {{ promotion.promoName }}
-          </span>
+          </p>
         </template>
         <template #promoInfo-timer>
-          <div v-if="promotion.expireAt !== null">
-            <p class="promo__info-container-timer">TIMER</p>
-            <p class="promo__info-container-timer clock">
-              {{ promotion.expireAt }}
-            </p>
-          </div>
+          <p class="promo__info-container-timer">TIMER</p>
+          <p class="promo__info-container-timer clock">
+            {{ promotion.hour }} : {{ promotion.min }} : {{ promotion.sec }}
+          </p>
         </template>
         <template #promoInfo-overview>
           <div class="promo__info-container-overview-sub">
             <p class="promo__info-container-overview-title">
               {{ promotion.title }}
             </p>
-            <p v-if="promotion.expireAt !== null" 
+            <p v-if="promotion.expireAt !== undefined" 
               class="promo__info-container-overview-subtitle"
             >
               {{ promotion.subtitle }}
@@ -63,10 +62,11 @@ export default {
 <style scoped>
 .promotion-container {
   max-width: 1100px;
-  width: 100%;
   margin: 0 auto;
 }
 .promotion-container-wrapper {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 </style>

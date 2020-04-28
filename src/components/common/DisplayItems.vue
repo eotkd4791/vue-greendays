@@ -1,30 +1,31 @@
 <template>
   <div 
-    class="item-container" 
+    class="item-container"
+    :class ="`${callFrom}`"
     @click="movePage('`products/show?product_id=${productId}`')"
     >
     <slot name="productInfo-photo" />
-    <div class="item-container__info" ref="item">
-      <div class="item-container__space" />
-      <p class="item-container__brand">
+    <div class="item-container__info" :class ="`${callFrom}`">
+      <div class="item-container__space" :class ="`${callFrom}`" />
+      <p class="item-container__brand" :class ="`${callFrom}`">
         <slot name="productInfo-brand" />
       </p>
-      <p class="item-container__name">
+      <p class="item-container__name" :class ="`${callFrom}`">
         <slot name="productInfo-name" />
       </p>
-      <div class="item-container__price">
-        <span class="item-container__before-price">
+      <div class="item-container__price" :class ="`${callFrom}`">
+        <span class="item-container__before-price" :class ="`${callFrom}`">
           <slot name="productInfo-beforePrice" />
         </span> |
-        <span class="item-container__discount-rate">
+        <span class="item-container__discount-rate" :class ="`${callFrom}`">
           <slot name="productInfo-discountRate" />
         </span> 
       </div>
-      <p class="item-container__after-price">
+      <p class="item-container__after-price" :class ="`${callFrom}`">
         <slot name="productInfo-afterPrice" />
       </p>
     </div>
-    <div class="item-container__chips-wrapper">
+    <div class="item-container__chips-wrapper" :class ="`${callFrom}`">
       <div v-if="sendToday" class="item-container__chips send-today">
         <p class="item-container__chips__send-today__text">당일발송</p>
       </div>
@@ -57,16 +58,25 @@ export default {
         this.$router.push(nextPage);
       }
     },
+    addClass(condition) {
+      condition
+    }
   },
   created() {
     
   },
   mounted() {
-    console.dir(this.$refs.item);
-    // const itemRef = this.$refs.item;
-    // for(let i=0; i<this.$refs.length; i++) {
-    //   this.$refs[i].classList.add(`${this.callFrom}`);
-    // }
+    // //main__view , toolbar__quick
+    // const idx = this.$refs.item;
+    // let tar = `${this.callFrom}`;
+    // idx.parentElement.classList.add(tar);
+    // idx.classList.add(tar);
+    // idx.previousSibling.classList.add(tar);
+    // idx.nextSibling.classList.add(tar);
+    // idx.firstChild.classList.add(tar);
+    // idx.firstChild.nextSibling.classList.add(tar);
+
+
   },
   beforeDestroy() {
     // for(let i=0; i<this.$refs.length; i++) {
@@ -80,7 +90,7 @@ export default {
 <style scoped>
 .item-container {
   display: inline-block;
-  width: 262px;
+  width: 260px;
   height: 444px;
   margin-right: 10px;
   margin-bottom: 100px;
@@ -89,10 +99,10 @@ export default {
   font-size: 16px;
   line-height: 1.06;
 }
-.item-container.main__view { width: 230px; height: 424.78px; margin: 10px 10px 32px; }
+.item-container.main__view { width: 220px; height: 424.78px; margin: 5px 5px 32px; }
 .item-container.toolbar__quick { width: 190px; height: 331px; margin: 0 13px 0 0; }
-.item-container__photo { width: 262px; height: 262px; outline-style: none; }
-.item-container__photo.main__view { width: 230px; height: 230px; }
+.item-container__photo { width: 260px; height: 260px; outline-style: none; }
+.item-container__photo.main__view { width: 220px; height: 220px; }
 .item-container__photo.toolbar__quick { width: 190px; height: 190px; }
 
 .item-container__space { height: 32px; }
@@ -148,12 +158,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 262px;
+  width: 260px;
   height: 20px;
   margin: 30px 0 0;
   font-size: 16px;  
 }
 .item-container__chips-wrapper.toolbar__quick { margin: 20px 0 0; }
+.item-container__chips-wrapper.main__view { width:220px; }
 .item-container__chips {
   display: flex;
   justify-content: center;
