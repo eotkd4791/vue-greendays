@@ -1,9 +1,10 @@
 <template>
-  <div class="item-container" ref="item" @click="movePage('`products/show?product_id=${productId}`')">
-    <div class="item-container__photo">
-      <slot name="productInfo-photo" />
-    </div>
-    <div class="item-container__info">
+  <div 
+    class="item-container" 
+    @click="movePage('`products/show?product_id=${productId}`')"
+    >
+    <slot name="productInfo-photo" />
+    <div class="item-container__info" ref="item">
       <div class="item-container__space" />
       <p class="item-container__brand">
         <slot name="productInfo-brand" />
@@ -11,7 +12,6 @@
       <p class="item-container__name">
         <slot name="productInfo-name" />
       </p>
-
       <div class="item-container__price">
         <span class="item-container__before-price">
           <slot name="productInfo-beforePrice" />
@@ -37,7 +37,13 @@
 
 <script>
 export default {
-  props: ['imgPath','productId','sendToday', 'ableToBuy'],
+  props: [
+    'imgPath',
+    'productId',
+    'sendToday',
+    'ableToBuy',
+    'callFrom'
+  ],
   data() {
     return {
 
@@ -53,18 +59,20 @@ export default {
     },
   },
   created() {
-
+    
   },
   mounted() {
-    console.dir(this.$refs.item.style);
-
-    // const currentUrl = this.$route.path;
-    // if(currentUrl === '/') {
-    //   // this.$refs.item.style
-    // } else if (currentUrl === '/products') {
-
+    console.dir(this.$refs.item);
+    // const itemRef = this.$refs.item;
+    // for(let i=0; i<this.$refs.length; i++) {
+    //   this.$refs[i].classList.add(`${this.callFrom}`);
     // }
-
+  },
+  beforeDestroy() {
+    // for(let i=0; i<this.$refs.length; i++) {
+    //   this.$refs[i].classList.remove(`${this.callFrom}`);
+    // }
+    // this.$refs.item.classList.remove(`${this.callFrom}`);
   }
 }
 </script>
@@ -81,32 +89,33 @@ export default {
   font-size: 16px;
   line-height: 1.06;
 }
-.item-container__wrapper {
-  width: 262px;
-  height: 262px;
-}
-.item-container__photo {
-  width: 262px;
-  height: 262px;
-  outline-style: none;
-}
+.item-container.main__view { width: 230px; height: 424.78px; margin: 10px 10px 32px; }
+.item-container.toolbar__quick { width: 190px; height: 331px; margin: 0 13px 0 0; }
+.item-container__photo { width: 262px; height: 262px; outline-style: none; }
+.item-container__photo.main__view { width: 230px; height: 230px; }
+.item-container__photo.toolbar__quick { width: 190px; height: 190px; }
 
 .item-container__space { height: 32px; }
+.item-container__space.toolbar__quick { height: 0; }
 .item-container__brand {
   font-size: 13px;
-  margin-bottom: 6px;
+  margin: 0 0 6px;
   text-align: center;
   font-weight: bold;
 }
+.item-container__brand.main__view { font-size: 13px; }
+.item-container__brand.toolbar__quick { font-size: 12px; }
+
 .item-container__name {
   width:100%;
   font-size: 15px;
   margin-bottom: 24px;
   text-align: center;
   text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
 }
+.item-container__name.toolbar__quick { font-size: 12px; margin: 7px 0 0; }
+
 .item-container__price {
   font-size: 16px;
   margin-bottom: 10px;
@@ -114,22 +123,26 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
+.item-container__price.toolbar__quick { font-size: 12px; margin: 15px 0 0; }
+
 .item-container__before-price {
   text-decoration-line: line-through;
   text-decoration-style: solid;
-  text-decoration-color: currentColor;
-  text-decoration-thickness: auto;
   color: #b6b6b6;
   margin-right: 10px;
 }
+.item-container__before-price.toolbar__quick { font-size:12px; }
 .item-container__discount-rate { margin-left: 10px; }
+.item-container__discount-rate.toolbar__quick { font-size: 12px; }
+
 .item-container__after-price {
   color: #4dcf34;
   font-size: 16px;
   font-weight: 600;
   text-align: center;
 }
-
+.item-container__after-price.toolbar__quick { font-size: 12px; margin: 15px 0 0; }
 /* chips */
 .item-container__chips-wrapper {
   display: flex;
@@ -140,6 +153,7 @@ export default {
   margin: 30px 0 0;
   font-size: 16px;  
 }
+.item-container__chips-wrapper.toolbar__quick { margin: 20px 0 0; }
 .item-container__chips {
   display: flex;
   justify-content: center;
@@ -151,21 +165,11 @@ export default {
   border-radius: 10px;
   font-size: 11px;
 }
-.item-container__chips-wrapper::after {
-  content: '';
-  height: 20px;
-}
-.item-container__chips.send-today {
-  background-color: rgba(57, 57, 57, 0.08);
-}
-.item-container__chips__send-today__text {
-  color: #393939;
-}
-.item-container__chips.able-to-buy {
-  background-color: #42b850;
-}
-.item-container__chips__able-to-buy__text {
-  color: white;
-  font-weight: 700;
-}
+.item-container__chips.toolbar__quick { height: 18px; }
+.item-container__chips-wrapper::after { content: ''; height: 7px; }
+.item-container__chips.send-today { background-color: rgba(57, 57, 57, 0.08); }
+.item-container__chips__send-today__text { color: #393939; }
+
+.item-container__chips.able-to-buy { background-color: #42b850; }
+.item-container__chips__able-to-buy__text { color: white; font-weight: 700; }
 </style>

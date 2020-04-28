@@ -38,7 +38,7 @@ export default {
     },
   },
   created() {
-
+    console.log("모달 열림");
   },
 }
 </script>
@@ -72,10 +72,8 @@ export default {
   max-width: 1100px;
   height: 372px;
   margin: 0 auto;
-
   background-color: #fff;
   display: flex;
   justify-content: space-between;
 }
-
 </style>

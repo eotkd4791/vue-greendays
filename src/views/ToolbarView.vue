@@ -25,10 +25,10 @@
 </template>
  
 <script>
-import ToolbarUserInfo from '../components/ToolbarUserInfo.vue';
-import ToolbarMenu from '../components/ToolbarMenu.vue';
-import ToolbarModal from '../components/common/ToolbarModal.vue';
-import BrandModal from '../components/common/BrandModal.vue';
+import ToolbarUserInfo from '@/components/ToolbarUserInfo.vue';
+import ToolbarMenu from '@/components/ToolbarMenu.vue';
+import ToolbarModal from '@/components/common/ToolbarModal.vue';
+import BrandModal from '@/components/common/BrandModal.vue';
 
 export default {
   components: {
@@ -50,6 +50,7 @@ export default {
     openToolbarModal(menuToOpen) {
       this.showToolbarModal = true;
       this.showModal = true;
+      console.log(this.showToolbarModal, this.showModal);
       this.toolbarToOpen = menuToOpen;
     },
     closeToolbarModal() {

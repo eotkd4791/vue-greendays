@@ -43,6 +43,13 @@ export default {
     };
   },
   methods: {
+    movePage(to) {
+      if(to ==='#') return;
+      if(this.$route.path !== to) {
+        const nextPage = { path: to };
+        this.$router.push(nextPage);
+      }
+    },
     mouseOverOnMenu(e) {
       const whichMenu = e.target.textContent;
       this.$emit('onToolbarModal', whichMenu);

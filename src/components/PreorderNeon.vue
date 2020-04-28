@@ -65,11 +65,6 @@ export default {
   margin-top: 200px;
   margin-right: auto;
   margin-left: auto;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1001;
   cursor: default;
 }
 .wrapper-neon {

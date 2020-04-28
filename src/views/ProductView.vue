@@ -10,7 +10,7 @@
         :ableToBuy="product.productAbleToBuy"
       >
         <template #productInfo-photo>
-          <img :src="product.photoUrl" width="262px" height="262px" />
+          <img :src="product.photoUrl" class="item-container__photo" />
         </template>
         <template #productInfo-brand>{{ product.brand }}</template>
         <template #productInfo-name>{{ product.name }}</template>
