@@ -2,7 +2,7 @@
   <div 
     class="item-container"
     :class ="`${callFrom}`"
-    @click="movePage('`products/show?product_id=${productId}`')"
+    @click="movePage(`/products/show?product_id=${productId}`)"
     >
     <slot name="productInfo-photo" />
     <div class="item-container__info" :class ="`${callFrom}`">
@@ -58,32 +58,7 @@ export default {
         this.$router.push(nextPage);
       }
     },
-    addClass(condition) {
-      condition
-    }
   },
-  created() {
-    
-  },
-  mounted() {
-    // //main__view , toolbar__quick
-    // const idx = this.$refs.item;
-    // let tar = `${this.callFrom}`;
-    // idx.parentElement.classList.add(tar);
-    // idx.classList.add(tar);
-    // idx.previousSibling.classList.add(tar);
-    // idx.nextSibling.classList.add(tar);
-    // idx.firstChild.classList.add(tar);
-    // idx.firstChild.nextSibling.classList.add(tar);
-
-
-  },
-  beforeDestroy() {
-    // for(let i=0; i<this.$refs.length; i++) {
-    //   this.$refs[i].classList.remove(`${this.callFrom}`);
-    // }
-    // this.$refs.item.classList.remove(`${this.callFrom}`);
-  }
 }
 </script>
 
@@ -115,7 +90,6 @@ export default {
 }
 .item-container__brand.main__view { font-size: 13px; }
 .item-container__brand.toolbar__quick { font-size: 12px; }
-
 .item-container__name {
   width:100%;
   font-size: 15px;
@@ -125,7 +99,6 @@ export default {
   overflow: hidden;
 }
 .item-container__name.toolbar__quick { font-size: 12px; margin: 7px 0 0; }
-
 .item-container__price {
   font-size: 16px;
   margin-bottom: 10px;
@@ -133,9 +106,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
 .item-container__price.toolbar__quick { font-size: 12px; margin: 15px 0 0; }
-
 .item-container__before-price {
   text-decoration-line: line-through;
   text-decoration-style: solid;
@@ -145,7 +116,6 @@ export default {
 .item-container__before-price.toolbar__quick { font-size:12px; }
 .item-container__discount-rate { margin-left: 10px; }
 .item-container__discount-rate.toolbar__quick { font-size: 12px; }
-
 .item-container__after-price {
   color: #4dcf34;
   font-size: 16px;
@@ -163,7 +133,7 @@ export default {
   margin: 30px 0 0;
   font-size: 16px;  
 }
-.item-container__chips-wrapper.toolbar__quick { margin: 20px 0 0; }
+.item-container__chips-wrapper.toolbar__quick { width: 190px; margin: 20px 0 0; }
 .item-container__chips-wrapper.main__view { width:220px; }
 .item-container__chips {
   display: flex;
@@ -176,11 +146,10 @@ export default {
   border-radius: 10px;
   font-size: 11px;
 }
-.item-container__chips.toolbar__quick { height: 18px; }
 .item-container__chips-wrapper::after { content: ''; height: 7px; }
+.item-container__chips.toolbar__quick { height: 18px; }
 .item-container__chips.send-today { background-color: rgba(57, 57, 57, 0.08); }
 .item-container__chips__send-today__text { color: #393939; }
-
 .item-container__chips.able-to-buy { background-color: #42b850; }
 .item-container__chips__able-to-buy__text { color: white; font-weight: 700; }
 </style>

@@ -47,7 +47,7 @@ const state = () => ({
     {
       photoUrl: 'https://cdn-images.farfetch-contents.com/13/40/78/17/13407817_15449691_600.jpg',
       brand: 'HERMES',
-      name: '홀랄리띨랄리 핸드백',
+      name: '홀랄띨랄리 핸드백',
       id: 20200004,
       priceBefore: 1000000,
       discountRate: 100,
@@ -58,7 +58,7 @@ const state = () => ({
     {
       photoUrl: 'https://cdn-images.farfetch-contents.com/13/40/78/17/13407817_15449691_600.jpg',
       brand: 'HERMES',
-      name: '홀랄리띨랄리 핸드백',
+      name: '홀랄리띨리 핸드백',
       id: 20200005,
       priceBefore: 1000000,
       discountRate: 100,
@@ -69,7 +69,7 @@ const state = () => ({
     {
       photoUrl: 'https://cdn-images.farfetch-contents.com/13/40/78/17/13407817_15449691_600.jpg',
       brand: 'HERMES',
-      name: '홀랄리띨랄리 핸드백',
+      name: '랄리띨랄리 핸드백',
       id: 20200006,
       priceBefore: 1000000,
       discountRate: 100,
@@ -80,7 +80,7 @@ const state = () => ({
     {
       photoUrl: 'https://cdn-images.farfetch-contents.com/13/40/78/17/13407817_15449691_600.jpg',
       brand: 'HERMES',
-      name: '홀랄리띨랄리 핸드백',
+      name: '홀랄리띨랄리 백',
       id: 20200007,
       priceBefore: 1000000,
       discountRate: 100,
@@ -91,7 +91,7 @@ const state = () => ({
     {
       photoUrl: 'https://cdn-images.farfetch-contents.com/13/40/78/17/13407817_15449691_600.jpg',
       brand: 'HERMES',
-      name: '홀랄리띨랄리 핸드백',
+      name: '홀랄랄리 핸드백',
       id: 20200008,
       priceBefore: 1000000,
       discountRate: 100,
@@ -102,7 +102,7 @@ const state = () => ({
     {
       photoUrl: 'https://cdn-images.farfetch-contents.com/13/40/78/17/13407817_15449691_600.jpg',
       brand: 'HERMES',
-      name: '홀랄리띨랄리 핸드백',
+      name: '홀랄리띨랄 핸드백',
       id: 20200009,
       priceBefore: 1000000,
       discountRate: 100,
@@ -113,7 +113,7 @@ const state = () => ({
     {
       photoUrl: 'https://cdn-images.farfetch-contents.com/13/40/78/17/13407817_15449691_600.jpg',
       brand: 'HERMES',
-      name: '홀랄리띨랄리 핸드백',
+      name: '리띨랄리 핸드백',
       id: 20200010,
       priceBefore: 1000000,
       discountRate: 100,

@@ -13,7 +13,7 @@
         </template>
         <template #promoInfo-timer>
           <p class="promo__info-container-timer">TIMER</p>
-          <p class="promo__info-container-timer clock">
+          <p class="promo__info-container-timer clock" ref="timer">
             {{ promotion.hour }} : {{ promotion.min }} : {{ promotion.sec }}
           </p>
         </template>
@@ -48,14 +48,51 @@ export default {
     return {
       promotions:[],
       quickDelivery: {},
+      Timers: [],
     };
   },
+  methods: {},
   created() {
     this.promotions = this.$store.state.preorders.preorders;
     console.log("total", this.promotions);
     // this.quickDelivery = this.$store.state
     // this.preorders.push(this.quickDelivery);
+    // 진행중인 모든 프리오더 행사 뒤에 빠른배송 넣기
   },
+  mounted() {
+    this.promotions.forEach((p)=> {
+      // const hour = p.hour;
+      // const min = p.min;
+      // let sec = p.sec;
+      const Timer = window.setInterval(() => {
+        console.log('fsdfsd ');
+        if(p.hour === 0 && p.min === 0 && p.sec === 0) {
+          p.activated = false;
+          clearInterval(Timer);
+        }
+        if(p.sec === 0) {
+          if(p.min > 0) {
+            p.sec = 59;
+          }
+          if(p.min === 0) {
+            if(p.hour > 0) {
+              p.min = 59;
+            }
+          } else {
+            p.min -= 1;
+          }
+        } else {
+          p.sec -= 1;
+        }
+      }, 1000);
+      this.Timers.push(Timer);
+    });
+  },
+  beforeDestroy() {
+    this.Timers.forEach((t) => {
+      clearInterval(t);
+    });
+  }
 }
 </script>
 

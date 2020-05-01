@@ -76,14 +76,6 @@ export default {
     promoStyle.setProperty('background-repeat','no-repeat');
     promoStyle.setProperty('background-position','center');
     promoStyle.setProperty('background-size','cover');
-
-
-    // this.intervalTimer = setInterval(()=> {
-    //   new Date();
-    // });
-  },
-  beforeDestroy() {
-    // clearInterval(this.intervalTimer);
   },
 }
 </script>

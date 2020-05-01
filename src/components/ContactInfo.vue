@@ -45,9 +45,9 @@ export default {}
 }
 .info-container {
   max-width: 1100px;
+  display: flex;
   height: 100%;
   margin: 0 auto;
-  display: flex;
 }
 .info-container__contact {
   width: 200px;
