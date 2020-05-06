@@ -46,9 +46,7 @@ export default {
     'callFrom'
   ],
   data() {
-    return {
-
-    };
+    return {};
   },
   methods: {
     movePage(to) {

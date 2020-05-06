@@ -1,6 +1,7 @@
 <template>
   <div class="product-container">
     <div class="product-wrapper">
+      <product-sort />
       <div class="product-container__text">총 {{ totalCountProducts }} 개의 상품</div>
       <display-items 
         v-for="product in products" 
@@ -24,10 +25,12 @@
 
 <script>
 import DisplayItems from '@/components/common/DisplayItems.vue';
+import ProductSort from '@/components/ProductSort.vue';
 
 export default {
   components: {
     DisplayItems,
+    ProductSort,
   },
   data() {
     return {
@@ -50,7 +53,7 @@ export default {
 <style scoped>
 .product-container {
   width: 100%;
-  margin-top: 200px;
+  margin-top:130px;
 }
 .product-wrapper {
   max-width: 1100px;

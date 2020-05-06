@@ -1,5 +1,5 @@
 <template>
-  <transition name="toolbar-modal">
+  <transition name="fade">
     <div class="modal-mask">
       <div class="modal-container" @mouseleave="mouseEscape">
         <div class="modal-wrapper">
@@ -46,7 +46,7 @@ export default {
 <style scoped>
 .modal-mask {
   position: fixed;
-  z-index: 8999;
+  z-index: 9000;
   top: 115px;
   left: 0;
   width: 100%;
@@ -76,4 +76,6 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.fade-enter-active, .fade-leave-active { transition: opacity .5s; }
+.fade-enter, .fade-leave-to { opacity: 0; }
 </style>
