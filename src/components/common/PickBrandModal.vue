@@ -5,8 +5,9 @@
         
         <pick-brand-log-in 
           v-if="user.isLoggedIn"
+          v-text="propsBrand"
           @closeBrandsPickingModal="$emit('closePickedBrands')"
-          >{{ propsBrand }}</pick-brand-log-in>
+        />
           
         <pick-brand-log-out 
           v-else 

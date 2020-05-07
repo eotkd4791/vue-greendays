@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import ToolbarReservePurchase from '../ToolbarReservePurchase.vue';
-import ToolbarPreorder from '../ToolbarPreorder.vue';
-import ToolbarQuickDelivery from '../ToolbarQuickDelivery.vue';
-import ToolbarSearchBrands from '../ToolbarSearchBrands.vue';
+import ToolbarReservePurchase from '@/components/ToolbarReservePurchase.vue';
+import ToolbarPreorder from '@/components/ToolbarPreorder.vue';
+import ToolbarQuickDelivery from '@/components/ToolbarQuickDelivery.vue';
+import ToolbarSearchBrands from '@/components/ToolbarSearchBrands.vue';
 
 export default {
   components: {

@@ -4,7 +4,6 @@
       <span class="user-info-text">{{ points }}</span>
       <span class="point-icon fas fa-coins" />
     </div>
-    <span v-if="userLoggedIn" class="far fa-calendar-check" @click.stop="movePage('/monthlypromotion')"></span>
     <span class="user-info fas fa-user" @click.stop="userLoggedIn ? toggleUserInfo : movePage('/login')"></span>
     <span class="user-info far fa-heart" @click.stop="userLoggedIn ? movePage('/wishlist') : movePage('/login')" style="color: #42b883"></span>
     <span v-if="userLoggedIn" class="user-info-text">{{ pickedProducts }}</span>
@@ -62,7 +61,7 @@ export default {
 }
 .fas.fa-coins {
   margin-left: 5px;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .user-info-text {

@@ -81,8 +81,8 @@ export default {
       }
     },
     activatingTab(e) {
-
       const tabToActivate = e.target;
+      if(!this.$refs.tabs) return;
       this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('active');
       tabToActivate.classList.add('active');
 
@@ -92,7 +92,6 @@ export default {
       // Array.prototype.slice.call(foo);
       // Array.from(foo);
       // [...foo];
-
       //Array.isArray(name);
     }
   },

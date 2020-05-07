@@ -1,7 +1,7 @@
 <template>
   <div class="product-container">
+    <product-sort />
     <div class="product-wrapper">
-      <product-sort />
       <div class="product-container__text">총 {{ totalCountProducts }} 개의 상품</div>
       <display-items 
         v-for="product in products" 
@@ -53,11 +53,12 @@ export default {
 <style scoped>
 .product-container {
   width: 100%;
-  margin-top:130px;
-}
-.product-wrapper {
   max-width: 1100px;
   margin: 0 auto;
+}
+.product-wrapper {
+  position: relative;
+  top: 200px;
 }
 
 .product-container__text {

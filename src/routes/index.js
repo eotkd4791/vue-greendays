@@ -7,13 +7,11 @@ import Notice from '../components/Notice.vue';
 import FaqList from '../views/FaqList.vue';
 import LogiGuide from '../views/LogiGuide.vue';
 
-
 import Introduction from '../views/Introduction.vue';
 import CustomerService from '../views/CustomerService.vue';
 import Reviews from '../views/Reviews.vue';
 import ProductView from '../views/ProductView.vue';
 import MyPoint from '../views/MyPoint.vue';
-import MonthlyPromotion from '../views/MonthlyPromotion.vue';
 import LoginView from '../views/LoginView.vue';
 import SignUpView from '../views/SignUpView.vue';
 import WishList from '../views/WishList.vue';
@@ -82,10 +80,6 @@ export const router = new VueRouter({
       component: MyPoint,
     },
     {
-      path: '/monthlypromotion',
-      component: MonthlyPromotion,
-    },
-    {
       path: '/login',
       component: LoginView,
       name: 'login'
@@ -107,12 +101,3 @@ export const router = new VueRouter({
     },
   ]
 });
-
-// router.beforeEach(function(to, from, next) {
-//   console.log(to.path, from.path);
-//   if(to.path === `${from.path}#`) {
-//     console.log("preorder");
-//   } else {
-//     next();
-//   }
-// });

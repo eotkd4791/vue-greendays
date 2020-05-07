@@ -24,8 +24,8 @@ export default {
   /* width */
   height: 30px;
   border-radius: 15px;
+  margin: 0 10px 8px 0;
   padding: 0 7px 0 15px;
-  margin: 0 8px 0 0;
   background-color: #42b883;
   color: #fff;
   font-size: 16px;

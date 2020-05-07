@@ -59,6 +59,7 @@ export default {
       }
     },
     activatingTab() {
+      if(!this.$refs.tabs) return;
       this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('active');
       
       // const tabToActivate = e.target;
@@ -67,9 +68,6 @@ export default {
     }
   },
   created() {
-
-
-    // 프리오더 행사 가져오기 Vuex에서
   },
 }
 </script>
@@ -79,7 +77,7 @@ export default {
 .preorder-container__category { width: 218px; height: 345px; }
 .preorder-container__category__title { font-weight: 700; }
 .preorder-container__category__link { margin-top: 20px; }
-.preorder-container__category__link>span { display: flex; width: 220px; height: 24px; flex-wrap: nowrap; justify-content: space-between; padding: 3px 0 3px 10px; margin: 10px 0; font-size: 14px; font-weight: 600; cursor: pointer; }
+.preorder-container__category__link>span { display: flex; width: 220px; height: 24px; flex-wrap: nowrap; justify-content: space-between; padding: 3px 0 3px 10px; margin: 10px 0; font-size: 14px; cursor: pointer; }
 .preorder-container__category__link i { margin-right: 10px; }
 .preorder-container__category__link>span:hover  { font-size: 14px; font-weight: 600; color: #fff; background-color: #42b883; }
 .active { font-size: 14px; font-weight: 600; color: #fff; background-color: #42b883; }
