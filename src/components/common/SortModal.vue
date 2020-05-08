@@ -19,6 +19,9 @@ export default {
   methods: {
     pickedOrderBy(val) {
       if(this.whichModal.length === 4) {
+        if(this.whichModal.indexOf(val) === 0) {
+          return this.$emit('pickedFirst');
+        }
         this.$emit('pickedGender', val);
       } else {
         this.$emit('pickedOrderBy', val);

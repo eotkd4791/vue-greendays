@@ -14,16 +14,19 @@
                 v-if="showModal && sortByGender" 
                 :whichModal="gender"
                 @pickedGender="createChips"
+                @pickedFirst="sortModalClose"
               />
             </div>
 
             <div 
               class="sort__bar-keyword-pick"
-              @mouseover="sortModalOpen"
-              @mouseleave="sortModalClose"
+              @mouseover="sortCategoryOpen"
             >
               카테고리
               <i class="fas fa-chevron-down" />
+              <sort-category
+                v-if="showModal && sortByCategory"
+              />
             </div>
             <div 
               class="sort__bar-keyword-pick"
@@ -31,6 +34,9 @@
             >
               브랜드
               <i class="fas fa-chevron-down" />
+              <sort-brands 
+                v-if="showModal && sortByBrand"
+              />
             </div>
           </div>
           <sort-index-chips
@@ -50,7 +56,7 @@
           class="sort__bar-row-right"
           @mouseover="sortModalOpen('orderby')"
           @mouseleave="sortModalClose"
-          >
+        >
           <div class="sort__bar-keyword-pick orderby">
             {{ orderBy[orderByIndex] }}
             <i class="fas fa-chevron-down" />
@@ -68,19 +74,26 @@
 
 <script>
 import SortModal from '@/components/common/SortModal.vue';
+import SortCategory from '@/components/common/SortCategory.vue';
+import SortBrands from '@/components/common/SortBrands.vue';
 import SortIndexChips from '@/components/SortIndexChips.vue';
 
 export default {
   components: {
     SortModal,
     SortIndexChips,
+    SortCategory,
+    SortBrands,
   },
   data () {
     return {
-      active: true,
+      active: true, 
       showModal: false,
       sortByGender: false,
       rulesOrderBy: false,
+      sortByCategory: false,
+      sortByBrand: false,
+
       sortChips: [],
       gender: ['전체','여성','남성','키즈'],
       orderBy: ['인기순','최신순','높은 가격순','낮은 가격순','높은 할인율순','낮은 할인율순'],
@@ -90,6 +103,7 @@ export default {
   },
   methods: {
     sortModalOpen(modalToOpen) {
+      this.sortModalClose();
       this.showModal = true;
       if(modalToOpen === 'gender') {
         this.sortByGender = true;
@@ -97,13 +111,21 @@ export default {
         this.rulesOrderBy = true;
       }
     },
+    sortCategoryOpen() {
+      this.sortModalClose();
+      this.showModal = true;
+      this.sortByCategory = true;
+    },
     sortModalClose() {
       this.showModal = false;
       this.sortByGender = false;
       this.rulesOrderBy = false;
+      this.sortByCategory = false;
+      this.sortByBrand = false;
     },
     pickBrandModalOpen() {
       this.showModal = true;
+      this.sortByBrand = true;
     },
     onScroll(e) {
       if(e.deltaY < 0) {
@@ -114,19 +136,21 @@ export default {
       }
     },
     removeChips(payload) {
+      if(this.sortChips.length === 1){
+        return this.removeAll();
+      }
       this.sortChips.splice(this.sortChips.indexOf(payload), 1);
     },
     removeAll() {
-      this.sortChips = [];
       const keywords = this.$refs.keyword.childNodes;
-      for(let i = 0; keywords.length; i++) {
-        if(keywords[i].classList.contain('active')) {
+      for(let i = 0; i < keywords.length; i++) {
+        if(keywords[i].classList.contains('active')) {
           keywords[i].classList.remove('active');
         }
       }
+      this.sortChips = [];
     },
     createChips(payload) {
-      console.log(payload);
       const idx = this.gender.indexOf(payload);
       if (idx !== -1) {
         this.$refs.keyword.childNodes[0].classList.add('active');
@@ -136,7 +160,6 @@ export default {
         //라우터 쿼리 스트링 전송
       }
       this.sortModalClose();
-      console.log(this.sortChips.length);
     },
     
   },
