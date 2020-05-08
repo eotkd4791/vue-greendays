@@ -69,7 +69,6 @@ export default {
     },
   },
   created() {
-    console.log("할랄");
     this.pickBrands = true;
     this.user = this.$store.state.userInfo;
     // 생성되자마자 로그인 여부로 화면에 보여줄 모달 선택하는 로직 구현하기

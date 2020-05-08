@@ -18,11 +18,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-
-    };
-  },
   mounted() {
     this.$refs.phoneNum.focus();
   },
