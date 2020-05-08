@@ -3,6 +3,7 @@
     <div class="modal-mask">
       <div class="modal-container">
         <!-- 모달 마스크에 정렬 툴바 가려지는 문제 해결하기 -->
+        <!-- mixins폴더에 movePage만들고 window.scrollTo(0,0) 추가하기 -->
       </div>
     </div>
   </transition>
