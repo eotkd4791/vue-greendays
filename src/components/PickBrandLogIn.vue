@@ -5,7 +5,7 @@
         <span class="title">
           브랜드 
           <span class="emphasis-title">Pick!</span>
-          <button class="modal-close-button" @click="$emit('closeBrandsPickingModal')">
+          <button class="modal-close-button" @click="$emit('closeBrandsPickingModal')" >
             <i class="fas fa-times" />
           </button>
         </span>
@@ -31,9 +31,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style scoped>
@@ -69,6 +67,8 @@ export default {
 
 .modal-close-button {
   float: right;
+  border-style: none;
+  outline: none;
 }
 
 .body {

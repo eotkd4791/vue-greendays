@@ -69,8 +69,9 @@ export default {
     },
   },
   created() {
+    console.log("할랄");
     this.pickBrands = true;
-    this.isLoggedIn = this.$store.state.userInfo;
+    this.user = this.$store.state.userInfo;
     // 생성되자마자 로그인 여부로 화면에 보여줄 모달 선택하는 로직 구현하기
 
     //알파벳 선택하는 로직 -> 디비에서 불러온 브랜드 이름이 하나도 없으면 passive라는 클래스를 추가한다.(cursor: not-allowed)
@@ -158,6 +159,8 @@ export default {
 
 .modal-default-button {
   float: right;
+  border-style: none;
+  outline: none;
 }
 
 .modal-enter {

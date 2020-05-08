@@ -5,9 +5,8 @@
         
         <pick-brand-log-in 
           v-if="user.isLoggedIn"
-          v-text="propsBrand"
           @closeBrandsPickingModal="$emit('closePickedBrands')"
-        />
+        >{{ propsBrand }}</pick-brand-log-in>
           
         <pick-brand-log-out 
           v-else 
@@ -19,8 +18,8 @@
 </template>
 
 <script>
-import PickBrandLogIn from '../PickBrandLogIn';
-import PickBrandLogOut from '../PickBrandLogOut';
+import PickBrandLogIn from '@/components/PickBrandLogIn.vue';
+import PickBrandLogOut from '@/components/PickBrandLogOut.vue';
 
 export default {
   components: {
@@ -43,6 +42,7 @@ export default {
   },
   created() {
     this.user = this.$store.state.userInfo;
+    console.log(this.user);
   },
 }
 </script>

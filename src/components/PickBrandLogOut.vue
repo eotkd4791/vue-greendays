@@ -78,4 +78,8 @@ input:focus {
   color: #fff;
   font-weight: 600;
 }
+.modal-close-button {
+  border-style: none;
+  outline: none;
+}
 </style>

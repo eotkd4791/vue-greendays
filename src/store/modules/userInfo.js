@@ -1,13 +1,12 @@
 const state = () => ({
-  isLoggedIn: true,
+  isLoggedIn: false,
   userId: "admin",
 });
 
 const mutations = () => ({
   SET_USER(state, payload) {
-    this.state.user = payload.userId;
-    console.log("mutations");
-    this.isLoggedIn = true;
+    state.userId = payload.userId;
+    state.isLoggedIn = true;
   },
 });
 
