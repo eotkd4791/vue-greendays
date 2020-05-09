@@ -55,20 +55,16 @@ export default {
       if(to ==='#') return;
       if(this.$route.path !== to) {
         const nextPage = { path: to };
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
         this.$router.push(nextPage);
       }
     },
     activatingTab() {
       if(!this.$refs.tabs) return;
       this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('active');
-      
-      // const tabToActivate = e.target;
-      // const tabLists = tabToActivate.parentNode.children;
-      // this.activatedTabIndex = [...tabLists].indexOf(tabToActivate);
     }
   },
-  created() {
-  },
+  created() {},
 }
 </script>
 

@@ -29,6 +29,7 @@ export default {
       if(to ==='#') return;
       if(this.$route.path !== to) {
         const nextPage = { path: to };
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
         this.$router.push(nextPage);
       }
     },

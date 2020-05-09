@@ -1,17 +1,18 @@
 <template>
   <div class="modal-container">
-    <div class="modal-row-left">
+    <div class="modal-row-left" ref="tabs">
       <div
         class="modal-categories"
         v-for="val in categories"
         :key="val"
+        @mouseover="activatingMenu"
       >{{ val }}</div>
     </div>
     <div class="modal-row-right">
       <ul>
         <li 
           class="category__detail" 
-          v-for="kind in arr" 
+          v-for="kind in kinds" 
           :key="kind"
         >{{ kind }}</li>
       </ul>
@@ -24,8 +25,23 @@ export default {
   data() {
     return {
       categories: ['Bags','Wallets','Clothes','Shoes','Accessories'],
-      arr: ['asdf','asdfasd','asdfasfas','asfasf','asfasdf','asdfasfasdfa','sdafasf','sdfhhjjgh','uyiyui yt','fghdgfgjhd','dfghdfghtjty','ytuityuiyuityui','uyityuityityu']
+      kinds: [],
+      arr: ['asdf','asdfasd','asdfasfas','asfasf','asfasdf','asdfasfasdfa','sdafasf','sdfhhjjgh','uyiyui yt','fghdgfgjhd','dfghdfghtjty','ytuityuiyuityui','uyityuityityu'],
+      switch: ['aaaa','ssssssss','ddddd','eeeeeee'],
+      activatedTabIndex: 0,
     };
+  },
+  methods: {
+    activatingMenu() {
+      this.kinds = this.switch;
+      if(!this.$refs.tabs) return;
+      this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('left-active');
+      
+    },
+  },
+  mounted() {
+    this.kinds = this.arr;
+    this.$refs.tabs.firstChild.classList.add('left-active');
   },
 }
 </script>
@@ -70,6 +86,14 @@ ul {
   height: 40px;
 }
 .category__detail:hover {
+  background-color: #fff;
+  color: #42b883;
+}
+.left-active {
+  background-color: #42b883;
+  color: #fff;
+}
+.right-active {
   background-color: #fff;
   color: #42b883;
 }

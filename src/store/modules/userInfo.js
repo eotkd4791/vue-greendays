@@ -1,6 +1,6 @@
 const state = () => ({
-  isLoggedIn: false,
-  userId: "admin",
+  isLoggedIn: true,
+  userId: 'admin',
 });
 
 const mutations = () => ({

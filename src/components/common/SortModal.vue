@@ -4,7 +4,8 @@
       class="modal-list" 
       v-for="val in whichModal"
       :key="val"
-      @click="pickedOrderBy(val)">
+      @click="pickedOrderBy(val)"
+      @mouseover="activatingTab">
       <div 
         class="modal-text"
         v-text="val" 
@@ -16,6 +17,11 @@
 <script>
 export default {
   props: ['whichModal'],
+  data() {
+    return {
+      activatedTabIndex: 0,
+    };
+  },
   methods: {
     pickedOrderBy(val) {
       if(this.whichModal.length === 4) {
@@ -26,9 +32,14 @@ export default {
       } else {
         this.$emit('pickedOrderBy', val);
       }
-    }
+    },
+    activatingTab() {
+      if(!this.$refs.modal) return;
+      this.$refs.modal.childNodes[this.activatedTabIndex].classList.remove('active');
+    },
   },
   mounted() {
+    this.$refs.modal.firstChild.classList.add('active');
     if(this.whichModal.length > 4) {
       this.$refs.modal.setAttribute('style', 'width: 150px');
     } else {
@@ -53,6 +64,10 @@ export default {
   align-items: center;
   height: 40px;
   cursor: pointer;
+}
+.active {
+  color: #fff;
+  background-color: #42b883;
 }
 .modal-list:hover {
   color: #fff;
