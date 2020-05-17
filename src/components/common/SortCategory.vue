@@ -3,9 +3,9 @@
     <div class="modal-row-left" ref="tabs">
       <div
         class="modal-categories"
-        v-for="val in categories"
+        v-for="val in Object.keys(categories)"
         :key="val"
-        @mouseover="activatingMenu"
+        @mouseover="activatingMenu(val)"
       >{{ val }}</div>
     </div>
     <div class="modal-row-right">
@@ -24,23 +24,89 @@
 export default {
   data() {
     return {
-      categories: ['Bags','Wallets','Clothes','Shoes','Accessories'],
-      kinds: [],
-      arr: ['asdf','asdfasd','asdfasfas','asfasf','asfasdf','asdfasfasdfa','sdafasf','sdfhhjjgh','uyiyui yt','fghdgfgjhd','dfghdfghtjty','ytuityuiyuityui','uyityuityityu'],
-      switch: ['aaaa','ssssssss','ddddd','eeeeeee'],
+      categories: {
+        Bags: [
+          'Shoulder Bags',
+          'Clutch Bags',
+          'Tote Bags',
+          'Backpacks',
+          'Belt Bags',
+          'Cross Bags',
+          'Travel Bags'
+        ],
+        Wallets: [
+          'Wallets',
+          'Small Wallets',
+          'Strap Wallets',
+          'Card Cases',
+          'Pouches'
+        ],
+        Clothes: [
+          'Cardigans',
+          'Shirts',
+          'Dresses',
+          'Skirts',
+          'Knits',
+          'Blouse',
+          'Long Sleeves',
+          'Short Sleeves',
+          'Hoodie',
+          'Coats',
+          'Jackets',
+          'Jumpers',
+          'Denim Pants',
+          'Pants',
+          'Slacks',
+          'Traning Wear',
+          'Swimwear',
+          'Vests',
+          'Jump Suit'
+        ],
+        Shoes: [
+          'Sandals',
+          'Espadrilles',
+          'Sneackers',
+          'Slippers',
+          'Moccasins',
+          'Pumps',
+          'Boots',
+          'Flats',
+          'Wedges',
+          'Mules',
+          'Loafers'
+        ],
+        Accessories: [
+          'Jewelry',
+          'Belts',
+          'Scarfs',
+          'Hats',
+          'Keyrings',
+          'Eyewear',
+          'Socks',
+          'Ties',
+          'Gloves',
+          'Keycases',
+          'Tights',
+          'Fancy',
+          'Bag Straps'
+        ],
+      },
+      kinds:[],
       activatedTabIndex: 0,
     };
   },
   methods: {
-    activatingMenu() {
-      this.kinds = this.switch;
+    //chip 생성하는 로직 추가하기 
+    activatingMenu(menu) {
+      this.kinds = this.categories[menu];
       if(!this.$refs.tabs) return;
       this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('left-active');
-      
+      this.activatedTabIndex = Object.keys(this.categories).indexOf(menu);
+      this.$refs.tabs.childNodes[this.activatedTabIndex].classList.add('left-active');
     },
   },
   mounted() {
-    this.kinds = this.arr;
+    this.kinds = this.categories.Bags;
     this.$refs.tabs.firstChild.classList.add('left-active');
   },
 }
