@@ -10,13 +10,11 @@
                 <v-subheader>본인 확인을 위해 연락처를 입력하세요.</v-subheader>
                 <v-form ref="form" v-model="valid">
                   <v-text-field
-                    v-model="userPhoneNum"
                     label="연락처"
-                    type="string"
                     :rules="phoneNumRules"
                     required
                   />
-                  <v-text-field
+                <v-text-field
                     v-if="activatedPw"
                     v-model="userPassword"
                     label="비밀번호"

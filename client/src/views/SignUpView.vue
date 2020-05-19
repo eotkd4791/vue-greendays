@@ -11,6 +11,7 @@
               <v-col cols="5">
                 <div class="form-with-btn">
                   <v-text-field 
+                    v-model="phoneNum"
                     label="연락처"
                     type="string"
                     required
@@ -21,8 +22,8 @@
               <v-col cols="5">
                 <div class="form-with-btn">
                   <v-text-field 
+                    v-model="authCodePhoneNum"
                     label="인증코드 입력"
-                    type="string"
                     required
                   />
                   <v-btn id="btn-signup">인증코드 확인</v-btn>
@@ -34,15 +35,17 @@
           <v-row class="article-signup">
             <v-col cols="5">
               <v-text-field 
+                v-model="password"
                 label="비밀번호"
-                type="string"
+                type="password"
                 required
               />
               </v-col>
             <v-col cols="5">
-              <v-text-field 
+              <v-text-field
+                v-model="passwordCheck"
                 label="비밀번호 확인"
-                type="string"
+                type="password"
                 required
               />
             </v-col>
@@ -52,7 +55,8 @@
         <v-container>
           <v-row class="article-signup">
             <v-col cols="5">
-              <v-text-field 
+              <v-text-field
+                v-model="userName" 
                 label="이름"
                 type="string"
                 required
@@ -60,7 +64,8 @@
               </v-col>
                <v-col cols="5">
                 <div class="form-with-btn">
-                  <v-text-field 
+                  <v-text-field
+                    v-model="postCode" 
                     label="우편번호"
                     type="string"
                     required
@@ -74,13 +79,15 @@
           <v-row class="article-signup">
             <v-col cols="5">
               <v-text-field 
+                v-model="userAddress"
                 label="주소"
                 type="string"
                 required
               />
               </v-col>
             <v-col cols="5">
-              <v-text-field 
+              <v-text-field
+                v-model="userDetailAddress" 
                 label="나머지 주소"
                 type="string"
                 required
@@ -177,32 +184,37 @@
 export default {
   data() {
     return {
+      phoneNum:'',
+      authCodePhoneNum:'',
+      password:'',
+      passwordCheck:'',
+      userName:'',
+      postCode: '',
+      userAddress:'',
+      userDetailAddress: '',
       gender:['남', '여', '해당없음'],
       years:[],
       selectedGender: '',
       selectedBirthYear: '',
       /* refs 속성을 이용해서 DOM에 접근하는 방법으로 수정하기 */
       agreeTerms:[],
-      checkAll:'',
+      checkAll: Object,
       recommendCode: '',
       /* ---------------------------------------------- */
     };
   },
   methods: {
-    checkAllArticles() {
-      for(let i=0; i<this.checkAll.length; i++) {
-        if(i === 1) continue;
-        this.checkAll[i].checked = this.checkAll[0].checked;
-      }
+    checkAllArticles(e) {
+      this.checkAll[2].checked = this.checkAll[3].checked = e.target.checked;
     },
     checkOneArticles(e) {
-      // console.dir(e);
-      if(!e.explicitOriginalTarget.checked) {
-        this.checkAll[0].checked = false;
+      const checkIdx = Array.prototype.indexOf.call(this.checkAll, e.target);
+      this.checkAll[checkIdx].checked = e.target.checked;
+
+      if(this.checkAll[2].checked === this.checkAll[3].checked) {
+        this.checkAll[0].checked = this.checkAll[2].checked;
       } else {
-        if(this.checkAll[2].checked === this.checkAll[3].checked) {
-          this.checkAll[0].checked = true;
-        }
+        this.checkAll[0].checked = false;
       }
     },
     signUpMembership() {
@@ -217,7 +229,7 @@ export default {
   },
   created() {
     const yearArr = [];
-    for(let i=2020; i>=1920; i--) { yearArr.push(i); }
+    for(let i = 2020; i >=1920; i--) { yearArr.push(i); }
     this.years = yearArr;
   },
   mounted() {
@@ -251,6 +263,8 @@ export default {
     color: #fff;
     background-color: #000;
     margin: 5px 0 0 5px;
+    position: relative;
+    top: 9px;
   }
   .container-agreement {
     width: 100%;
@@ -278,7 +292,7 @@ export default {
     color: red;
     position: absolute;
     left: 7rem;
-    top: 13px;
+    top: 10px;
   }
   #btn-signup.signup-membership {
     width: 430px;
