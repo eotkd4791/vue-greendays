@@ -40,11 +40,11 @@
               />
               </v-col>
             <v-col cols="5">
-                <v-text-field 
-                  label="비밀번호를 한 번 더 입력해 주세요."
-                  type="string"
-                  required
-                />
+              <v-text-field 
+                label="비밀번호 확인"
+                type="string"
+                required
+              />
             </v-col>
           </v-row>
         </v-container>
@@ -80,11 +80,11 @@
               />
               </v-col>
             <v-col cols="5">
-                <v-text-field 
-                  label="나머지 주소"
-                  type="string"
-                  required
-                />
+              <v-text-field 
+                label="나머지 주소"
+                type="string"
+                required
+              />
             </v-col>
           </v-row>
         </v-container>
@@ -268,11 +268,17 @@ export default {
     padding: 10px;
     position:relative;
   }
+  .recommendation-code input {
+    outline-style: none;
+    border: none;
+    font-size: 16px;
+  }
+
   #red {
     color: red;
     position: absolute;
     left: 7rem;
-    top: 9px;
+    top: 13px;
   }
   #btn-signup.signup-membership {
     width: 430px;

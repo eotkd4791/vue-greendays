@@ -1,5 +1,5 @@
 const state = () => ({
-  isLoggedIn: true,
+  isLoggedIn: false,
   userId: 'admin',
 });
 
