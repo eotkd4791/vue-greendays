@@ -1,12 +1,15 @@
 {
-  "name": "greendays",
-  "version": "0.1.0",
+  "name": "vue-greendays-client",
+  "version": "1.0.0",
   "private": true,
+  "description": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "author": "stef",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",

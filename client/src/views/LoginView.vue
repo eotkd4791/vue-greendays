@@ -10,8 +10,8 @@
                 <v-subheader>본인 확인을 위해 연락처를 입력하세요.</v-subheader>
                 <v-form ref="form" v-model="valid">
                   <v-text-field
-                    label="연락처"
-                    :rules="phoneNumRules"
+                    label="이메일"
+                    :rules="emailRules"
                     required
                   />
                 <v-text-field
@@ -56,17 +56,15 @@ export default {
       tmpPW:'daesang1974',
       userPhoneNum: '',
       userPassword: '',
-      phoneNumRules: [
-        v => !!v || '연락처를 입력하세요.',
-        v => !/[^0-9]/ig.test(v) ||  '숫자만 입력해 주세요',
-        v => !(v.length > 11 || v.length < 10) || '연락처 자릿수를 확인해 주세요.',
-        v =>  this.activatedPw = (/[^a-z]/ig.test(v) && /[0-9]/ig.test(v) && (v.length === 11 || v.length === 10)) ? true : false,
+      emailRules: [
+        v => !!v || '이메일 입력하세요.',
+        v => /[\S]+@[\S\D]+\.[\S\D]+/ig.test(v) || '이메일 형식이 올바르지 않습니다.'
       ],
       passwordRules: [
         v => !!v || '패스워드를 입력하세요.',
         v => /[0-9]/g.test(v) || '숫자가 존재하지 않습니다.',
         v => /[a-z]/ig.test(v) || '영어 알파벳이 존재하지 않습니다.',
-        // v => /[~!@#$%^&*/?]/g.test(v) || '특수문자가 존재하지 않습니다.',
+        v => /[~!@#$%^&*/?]/g.test(v) || '특수문자가 존재하지 않습니다.',
         v => !(v.length < 8 || v.length > 20) || '비밀번호 자릿수를 확인해 주세요.'
       ]
     };

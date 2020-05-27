@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => (
-  sequelize.define('order', {
+  sequelize.define('brand', {
+    
 
   }, {
     timestamps: true,

@@ -1,15 +1,15 @@
-module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('user', {
-    name: {
-      type:DataTypes.STRING(20),
-      allowNull: false,
-    },
-    phoneNum: {
-      type: DataTypes.STRING(11),
+module.exports = (sequelize, DataTypes) => (
+  sequelize.define('user', {
+    email: {
+      type: DataTypes.STRING(40),
       allowNull: false,
       unique: true,
     },
     password: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    name: {
       type: DataTypes.STRING(20),
       allowNull: false,
     },
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     gender: {
-      type: DataTypes.STRING(4),
+      type: DataTypes.STRING(8),
       allowNull: false,
     },
     promotionCode: {
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     address: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     birthYear: {
@@ -35,5 +35,6 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     timestamps: true,
-  });
-};
+    paranoid: true,
+  })
+);
