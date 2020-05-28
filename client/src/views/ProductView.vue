@@ -45,7 +45,7 @@ export default {
   methods: {},
   created() {
     // 상품정보 받아오기
-    this.products = this.$store.state.products.products;
+    this.products = this.$store.state.products;
   },
 }
 </script>

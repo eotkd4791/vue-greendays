@@ -6,11 +6,15 @@ module.exports = (sequelize, DataTypes) => (
       unique: true,
     },
     password: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     name: {
       type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    position: {
+      type: DataTypes.STRING(10),
       allowNull: false,
     },
     age: {
@@ -21,18 +25,18 @@ module.exports = (sequelize, DataTypes) => (
       type: DataTypes.STRING(8),
       allowNull: false,
     },
-    promotionCode: {
-      type: DataTypes.STRING(6),
-      allowNull: false,
-    },
     address: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(140),
       allowNull: false,
     },
-    birthYear: {
-      type: DataTypes.STRING(4),
-      allowNull: false
+    promotionCode: {
+      type: DataTypes.STRING(8),
+      allowNull: false,
     },
+    point: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   }, {
     timestamps: true,
     paranoid: true,

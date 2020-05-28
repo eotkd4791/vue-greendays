@@ -4,8 +4,13 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 
-const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { User } = require('../models');
+const {
+  isLoggedIn,
+  isNotLoggedIn
+} = require('./middlewares');
+const {
+  User
+} = require('../models');
 
 const router = express.Router();
 
@@ -51,14 +56,13 @@ router.post('/email/send', isNotLoggedIn, async (req, res, next) => {
   });
 });
 
-router.post('/email/check', (req, res, next) => {
+router.post('/email/check', isNotLoggedIn, (req, res, next) => {
   emailChecked = false;
-  console.log(typeof req.body.code, typeof checkCode);
-  if(req.body.code === checkCode) {
+  if (req.body.code === checkCode) {
     emailChecked = true;
     return res.json({
       code: 200,
-      message: '인증을 완료하였습니다.'
+      message: '인증을 성공하였습니다.'
     });
   } else {
     return res.status(401).json({
@@ -71,26 +75,43 @@ router.post('/email/check', (req, res, next) => {
 
 // POST /auth/signup
 router.post('/signup', isNotLoggedIn, async (req, res, next) => {
-  const {
-    email,
-    name,
-    password
-  } = req.body;
+  console.log(req.body);
+  const userInfo = {
+    ...req.body.userInfo
+  };
   try {
     const exUser = await User.findOne({
       where: {
-        email
+        email: userInfo.email
       }
     });
     if (exUser) {
       req.flash('signupError', '이미 가입된 이메일입니다.');
       return res.redirect('/signup');
     }
-    const hash = await bcrypt.hash(password, 12);
+
+    let point = 0;
+    const matchPromotionCode = await User.findOne({
+      where: {
+        promotionCode: userInfo.recommendCode
+      }
+    });
+    if (matchPromotionCode) {
+      point += 2000;
+    }
+
+    const hash = await bcrypt.hash(userInfo.password, 12);
+
     await User.create({
-      email,
-      name,
+      email: userInfo.email,
       password: hash,
+      name: userInfo.name,
+      position: 'admin',
+      age: new Date().getFullYear() - parseInt(userInfo.selectedBirthYear),
+      gender: userInfo.selectedGender,
+      address: `${userInfo.postCode} ${userInfo.address} ${userInfo.detailAddress}`,
+      promotionCode: Math.random().toString(36).substr(2, 6).toUpperCase(),
+      point,
     });
     return res.redirect('/');
   } catch (err) {

@@ -1,7 +1,7 @@
 <template>
   <div class="quick__delivery-container">
     <section class="quick__delivery-wrapper__products">
-      <display-items 
+      <display-items
         v-for="product in products"
         :key="product.id"
         :sendToday="product.productSendToday"
@@ -9,35 +9,17 @@
         :callFrom="callfrom"
       >
         <template #productInfo-photo>
-          <img 
-            :src="product.photoUrl" 
-            class="item-container__photo"
-            :class="callfrom"
-          />
+          <img :src="product.photoUrl" class="item-container__photo" :class="callfrom" />
         </template>
-        <template #productInfo-brand>
-          {{ product.brand }}
-        </template>
-        <template #productInfo-name>
-          {{ product.name }}
-        </template>
-        <template #productInfo-beforePrice>
-          {{ product.priceBefore.toLocaleString() }}
-        </template>
-        <template #productInfo-discountRate>
-          {{ product.discountRate }}% 할인
-        </template>
-        <template #productInfo-afterPrice>
-          {{ product.priceAfter.toLocaleString() }}
-        </template>
-      </display-items> 
+        <template #productInfo-brand>{{ product.brand }}</template>
+        <template #productInfo-name>{{ product.name }}</template>
+        <template #productInfo-beforePrice>{{ product.priceBefore.toLocaleString() }}</template>
+        <template #productInfo-discountRate>{{ product.discountRate }}% 할인</template>
+        <template #productInfo-afterPrice>{{ product.priceAfter.toLocaleString() }}</template>
+      </display-items>
     </section>
     <section class="quick__delivery-wrapper__info">
-      <div 
-        class="quick__delivery-wrapper__info-pic"
-        ref="quickDelivery"
-        @click="moveToAbout"
-      />
+      <div class="quick__delivery-wrapper__info-pic" ref="quickDelivery" @click="moveToAbout" />
       <div class="quick__delivery-wrapper__info-text">
         <h3>1년 365일 신상품 상시 할인 SALE</h3>
         <p>바로구매와 당일배송이 가능한 그린데이즈 빠른배송 상품!</p>
@@ -67,7 +49,7 @@ export default {
     }
   },
   created() {
-    const storeProduct = this.$store.state.products.products.filter((v) => v.productSendToday);
+    const storeProduct = this.$store.state.products.filter((v) => v.productSendToday);
     this.products = storeProduct.slice(0, 3);
   },
   mounted() {

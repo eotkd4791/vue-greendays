@@ -4,10 +4,7 @@
       <slot name="promoInfo-name" />
     </div>
     <div class="promo__info-container-overview-wrapper">
-      <section 
-        class="promo__info-container-overview" 
-        ref="promo"
-      >
+      <section class="promo__info-container-overview" ref="promo">
         <div class="wrap-opacity" />
         <div class="promo__info-container-overview-text">
           <slot name="promoInfo-timer" />
@@ -23,27 +20,13 @@
           :callFrom="callfrom"
         >
           <template #productInfo-photo>
-            <img 
-              :src="product[i-1].photoUrl" 
-              class="item-container__photo"
-              :class="callfrom"
-            />
+            <img :src="product[i-1].photoUrl" class="item-container__photo" :class="callfrom" />
           </template>
-          <template #productInfo-brand>
-            {{ product[i-1].brand }}
-          </template>
-          <template #productInfo-name>
-            {{ product[i-1].name }}
-          </template>
-          <template #productInfo-beforePrice>
-            {{ product[i-1].priceBefore.toLocaleString() }}
-          </template>
-          <template #productInfo-discountRate>
-            {{ product[i-1].discountRate }}% 할인
-          </template>
-          <template #productInfo-afterPrice>
-            {{ product[i-1].priceAfter.toLocaleString() }}
-          </template>
+          <template #productInfo-brand>{{ product[i-1].brand }}</template>
+          <template #productInfo-name>{{ product[i-1].name }}</template>
+          <template #productInfo-beforePrice>{{ product[i-1].priceBefore.toLocaleString() }}</template>
+          <template #productInfo-discountRate>{{ product[i-1].discountRate }}% 할인</template>
+          <template #productInfo-afterPrice>{{ product[i-1].priceAfter.toLocaleString() }}</template>
         </display-items>
       </section>
     </div>
@@ -68,7 +51,7 @@ export default {
     };
   },
   created() {
-    this.product = this.$store.state.products.products;
+    this.product = this.$store.state.products;
   },
   mounted() {
     const promoStyle = this.$refs.promo.style;

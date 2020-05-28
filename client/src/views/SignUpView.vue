@@ -35,6 +35,7 @@
               <v-text-field
                 v-model="userInfo.password"
                 label="비밀번호"
+                type="password"
                 :rules="passwordRules"
                 required
               />
@@ -54,11 +55,18 @@
         <v-container>
           <v-row class="article-signup">
             <v-col cols="5">
-              <v-text-field v-model="userInfo.userName" label="이름" type="string" required />
+              <v-text-field v-model="userInfo.name" label="이름" type="string" required />
             </v-col>
             <v-col cols="5">
               <div class="form-with-btn">
-                <v-text-field v-model="userInfo.postCode" label="우편번호" type="string" required />
+                <v-text-field
+                  type="string"
+                  label="우편번호"
+                  v-model="userInfo.postCode"
+                  res="postcode"
+                  readonly
+                  required
+                />
                 <v-btn id="btn-signup" @click="openAddressSearch">우편번호 찾기</v-btn>
               </div>
             </v-col>
@@ -67,15 +75,17 @@
         <v-container>
           <v-row class="article-signup">
             <v-col cols="5">
-              <v-text-field v-model="userInfo.userAddress" label="주소" type="string" required />
-            </v-col>
-            <v-col cols="5">
               <v-text-field
-                v-model="userInfo.userDetailAddress"
-                label="나머지 주소"
                 type="string"
+                label="주소"
+                v-model="userInfo.address"
+                ref="detailAddress"
+                readonly
                 required
               />
+            </v-col>
+            <v-col cols="5">
+              <v-text-field v-model="userInfo.detailAddress" label="나머지 주소" type="string" required />
             </v-col>
           </v-row>
         </v-container>
@@ -146,9 +156,9 @@
                   </v-list-item-subtitle>
 
                   <v-list-item-subtitle>
-                    <input type="checkbox" required id="checkbox-terms" @click="checkOneArticles" />
+                    <input type="checkbox" @click="checkOneArticles" id="checkbox-terms" required />
                     <span>[필수] 개인 정보의 수집 및 이용에 대한 동의</span>
-                    <router-link to="/terms">자세히 보기</router-link>
+                    <router-link to="/terms">&nbsp; 자세히 보기</router-link>
                   </v-list-item-subtitle>
 
                   <v-list-item-subtitle>
@@ -157,10 +167,7 @@
                   </v-list-item-subtitle>
 
                   <v-list-item-subtitle>
-                    <span>
-                      고객님께 전달해야 할 소식이 있는 경우 최대 월 1회에 한해
-                      발송됩니다.
-                    </span>
+                    <span>고객님께 전달해야 할 소식이 있는 경우 최대 월 1회에 한해 발송됩니다.</span>
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -191,28 +198,33 @@
 
 <script>
 import axios from "axios";
-import { config } from "@/api/index.js";
+import { 
+  getEmailCheckCode,
+  getCheckSentCode,
+  signUp,
+} from "@/api/index.js";
 
 export default {
   data() {
     return {
       userInfo: {
-        email: "",
-        password: "",
-        userName: "",
-        postCode: "",
-        userAddress: "",
-        userDetailAddress: "",
-        selectedGender: "",
-        selectedBirthYear: "",
+        email: '',
+        password: '',
+        name: '',
+        postCode: '',
+        address: '',
+        detailAddress: '',
+        selectedGender: '',
+        selectedBirthYear: '',
         agreeTerms: [],
-        recommendCode: "",
+        recommendCode: '',
       },
       gender: ["남", "여", "해당없음"],
       years: [],
-      authCodeEmail: "",
-      passwordCheck: "",
+      authCodeEmail: '',
+      passwordCheck: '',
       checkAll: {},
+      formValid: false,
       emailRules: [
         v => !!v || "이메일 입력하세요.",
         v => /[\S]+@[\S\D]+\.[\S\D]+/gi.test(v) || "이메일 형식이 올바르지 않습니다.",
@@ -226,39 +238,39 @@ export default {
       ],
       passwordCheckRules: [
         v => !!v || "패스워드를 한번 더 입력하세요",
-        v => v === this.userInfo.password,
+        v => v === this.userInfo.password || "패스워드가 일치하지 않습니다.",
       ],
     };
   },
   methods: {
-    sendEmailCheckCode() {
-      axios.post(`${config.baseUrl}/auth/email/send`, { email: this.userInfo.email })
-        .then((res) => {
-          console.log(res);
-          return alert(res.message);
-        })
-        .catch((error) => {
-          console.error(error);
-          return alert(error.message);
-        });
+    async sendEmailCheckCode() {
+      try {
+        const response = await getEmailCheckCode(this.userInfo.email);
+        return alert(response.data.message)
+      } catch (error) {
+        console.error(error);
+        return alert(error.message);
+      }
     },
-    checkSentCode() {
-      axios.post(`${config.baseUrl}/auth/email/check`, { code: this.authCodeEmail })
-        .then((res) => {
-          console.log(res);
-          return alert(res.data.message);
-        })
-        .catch((error) => {
-          return alert(error.message);
-        });
+    async checkSentCode() {
+      try {
+        const response = await getCheckSentCode(this.authCodeEmail);
+        this.formValid = true;
+        return alert(response.data.message);
+      } catch (error) {
+        this.formValid = false;
+        console.error(error);
+        return alert(error.message);
+      }
     },
     openAddressSearch() {
       new daum.Postcode({
-        oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-        }
-    }).open();
+        oncomplete: ((data) => {
+          this.userInfo.postCode = data.zonecode;
+          this.userInfo.address = `${data.roadAddress} ${data.buildingName}`;
+        }),
+        animation: true,
+      }).open();
     },
     checkAllArticles(e) {
       this.checkAll[2].checked = this.checkAll[3].checked = e.target.checked;
@@ -266,15 +278,41 @@ export default {
     checkOneArticles(e) {
       const checkIdx = Array.prototype.indexOf.call(this.checkAll, e.target);
       this.checkAll[checkIdx].checked = e.target.checked;
-
       if (this.checkAll[2].checked === this.checkAll[3].checked) {
         this.checkAll[0].checked = this.checkAll[2].checked;
       } else {
         this.checkAll[0].checked = false;
       }
     },
-    signUpMembership() {
-      console.log("회원가입요청!");
+    signUpValidate() {
+      if(!this.checkAll[2].checked) {
+        alert('14세 이상만 가입할 수 있습니다.');
+        return false;
+      }
+      if(!this.checkAll[3].checked) {
+        alert('필수 항목에 동의하여야 가입이 가능합니다.');
+        return false;
+      }
+      if(!this.userInfo.address || !this.userInfo.detailAddress || !this.userInfo.selectedGender || !this.userInfo.selectedBirthYear) {
+        alert('회원가입 양식을 완성하여 주십시오.');
+        return false;
+      }
+      return true;
+    },
+    async signUpMembership(e) {
+      try {
+        e.preventDefault();
+        Array.prototype.map.call(this.checkAll, v => {
+          this.userInfo.agreeTerms[Array.prototype.indexOf.call(this.checkAll, v)] = v.checked;
+        });
+        if(this.signUpValidate()) {
+          const response = await signUp(this.userInfo); //서버쪽에서 추천코드 검사/발급
+          return alert(response.data.message);
+        }
+      } catch (error) {
+        console.error(error);
+        return alert(error.message);
+      }
     },
   },
   computed: {
@@ -284,10 +322,8 @@ export default {
     },
   },
   created() {
-    const yearArr = [];
-    for (let i = 2020; i >= 1920; i--) {
-      yearArr.push(i);
-    }
+    let value = 2020;
+    const yearArr = new Array(80).fill(0).map(v =>  v = value--)
     this.years = yearArr;
   },
   mounted() {
@@ -297,6 +333,9 @@ export default {
 </script>
 
 <style scoped>
+span {
+  margin-left: 5px;
+}
 #container-signup {
   width: 100%;
   height: 1138px;
@@ -344,6 +383,10 @@ export default {
   outline-style: none;
   border: none;
   font-size: 16px;
+}
+#checkbox-terms {
+  width: 20px;
+  height: 20px;
 }
 
 #red {
