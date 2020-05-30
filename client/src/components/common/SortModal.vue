@@ -1,15 +1,13 @@
 <template>
   <div class="modal-container" ref="modal">
-    <div 
-      class="modal-list" 
+    <div
+      class="modal-list"
       v-for="val in whichModal"
       :key="val"
       @click="pickedOrderBy(val)"
-      @mouseover="activatingTab">
-      <div 
-        class="modal-text"
-        v-text="val" 
-      />
+      @mouseover="activatingTab"
+    >
+      <div class="modal-text" v-text="val" />
     </div>
   </div>
 </template>
@@ -53,6 +51,7 @@ export default {
 .modal-container {
   position: absolute;
   top: 60px;
+  z-index: 9000;
   color: #000;
   background-color: #fff;
   border-radius: 5px;

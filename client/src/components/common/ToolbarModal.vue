@@ -4,12 +4,12 @@
       <div class="modal-container" @mouseleave="mouseEscape">
         <div class="modal-wrapper">
           <toolbar-preorder v-if="onToolbar==='프리오더'" />
-          <toolbar-quick-delivery  v-else-if="onToolbar==='빠른배송'" />
-          <toolbar-search-brands v-else-if="onToolbar===''"/>
+          <toolbar-quick-delivery v-else-if="onToolbar==='빠른배송'" />
+          <toolbar-search-brands v-else-if="onToolbar===''" />
           <toolbar-reserve-purchase v-else />
         </div>
       </div>
-    </div> 
+    </div>
   </transition>
 </template>
 
@@ -36,9 +36,6 @@ export default {
     mouseEscape() {
       this.$emit("mouseEsc");
     },
-  },
-  created() {
-    console.log("모달 열림");
   },
 }
 </script>

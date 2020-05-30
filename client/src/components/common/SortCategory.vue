@@ -10,11 +10,7 @@
     </div>
     <div class="modal-row-right">
       <ul>
-        <li 
-          class="category__detail" 
-          v-for="kind in kinds" 
-          :key="kind"
-        >{{ kind }}</li>
+        <li class="category__detail" v-for="kind in kinds" :key="kind">{{ kind }}</li>
       </ul>
     </div>
   </div>
@@ -116,6 +112,9 @@ export default {
 ul {
   list-style: none;
 }
+ul>li {
+  font-weight:700;
+}
 .modal-container {
   display: flex;
   width: 270px;
@@ -141,6 +140,7 @@ ul {
   background-color: #42b883;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  font-weight: 600;
   color: #fff;
   overflow: scroll;
 }
@@ -154,14 +154,22 @@ ul {
 .category__detail:hover {
   background-color: #fff;
   color: #42b883;
+  font-weight:600;
 }
+.categories, .left-active:first-child {
+  border-top-left-radius: 5px;
+}
+
+
 .left-active {
   background-color: #42b883;
   color: #fff;
+  font-weight:600;
 }
 .right-active {
   background-color: #fff;
   color: #42b883;
+  font-weight:600;
 }
 .modal-categories:hover {
   background-color: #42b883;

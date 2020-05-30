@@ -60,25 +60,16 @@ export default {
       // const min = p.min;
       // let sec = p.sec;
       const Timer = window.setInterval(() => {
-        console.log('fsdfsd ');
         if(p.hour === 0 && p.min === 0 && p.sec === 0) {
           p.activated = false;
           clearInterval(Timer);
         }
         if(p.sec === 0) {
-          if(p.min > 0) {
-            p.sec = 59;
-          }
+          if(p.min > 0) { p.sec = 59; }
           if(p.min === 0) {
-            if(p.hour > 0) {
-              p.min = 59;
-            }
-          } else {
-            p.min -= 1;
-          }
-        } else {
-          p.sec -= 1;
-        }
+            if(p.hour > 0) { p.min = 59; }
+          } else { p.min -= 1; }
+        } else { p.sec -= 1; }
       }, 1000);
       this.Timers.push(Timer);
     });

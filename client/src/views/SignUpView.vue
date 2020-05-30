@@ -249,7 +249,7 @@ export default {
         return alert(response.data.message)
       } catch (error) {
         console.error(error);
-        return alert(error.message);
+        return alert(error.response.data.message);
       }
     },
     async checkSentCode() {
@@ -260,7 +260,7 @@ export default {
       } catch (error) {
         this.formValid = false;
         console.error(error);
-        return alert(error.message);
+        return alert(error.response.data.message);
       }
     },
     openAddressSearch() {
@@ -356,7 +356,7 @@ span {
   display: flex;
 }
 #btn-signup {
-  width: 30%;
+  width: 35%;
   color: #fff;
   background-color: #000;
   margin: 5px 0 0 5px;

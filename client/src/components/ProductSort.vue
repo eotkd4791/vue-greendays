@@ -1,42 +1,28 @@
 <template>
   <transition name="slide-fade">
-    <div v-if="active" class="sort__bar-container" ref="sortBar">
+    <div v-if="active" class="sort__bar-container" ref="sortBar" @mouseleave="sortModalClose">
       <div class="sort__bar-wrapper">
-        <div class="sort__bar-row-left" @mouseleave="sortModalClose" >
+        <div class="sort__bar-row-left">
           <div class="sort__bar-keyword" ref="keyword">
-            <div 
-              class="sort__bar-keyword-pick"
-              @mouseover="sortModalOpen('gender')"
-            >
+            <div class="sort__bar-keyword-pick" @mouseover="sortModalOpen('gender')">
               성별
               <i class="fas fa-chevron-down" />
-              <sort-modal 
-                v-if="showModal && sortByGender" 
+              <sort-modal
+                v-if="showModal && sortByGender"
                 :whichModal="gender"
                 @pickedGender="createChips"
                 @pickedFirst="sortModalClose"
               />
             </div>
 
-            <div 
-              class="sort__bar-keyword-pick"
-              @mouseover="sortCategoryOpen"
-            >
+            <div class="sort__bar-keyword-pick" @mouseover="sortCategoryOpen">
               카테고리
               <i class="fas fa-chevron-down" />
-              <sort-category
-                v-if="showModal && sortByCategory"
-              />
+              <sort-category v-if="showModal && sortByCategory" />
             </div>
-            <div 
-              class="sort__bar-keyword-pick"
-              @click="pickBrandModalOpen"
-            >
+            <div class="sort__bar-keyword-pick" @click="pickBrandModalOpen">
               브랜드
               <i class="fas fa-chevron-down" />
-              <sort-brands 
-                v-if="showModal && sortByBrand"
-              />
             </div>
           </div>
           <sort-index-chips
@@ -45,14 +31,9 @@
             :sortindex="index"
             @remove-chips="removeChips"
           />
-          <div 
-            class="sort__bar-chips-clear" 
-            @click="removeAll"
-            v-if="this.sortChips.length"
-          >초기화
-          </div>
+          <div class="sort__bar-chips-clear" @click="removeAll" v-if="this.sortChips.length">초기화</div>
         </div>
-        <div 
+        <div
           class="sort__bar-row-right"
           @mouseover="sortModalOpen('orderby')"
           @mouseleave="sortModalClose"
@@ -60,14 +41,15 @@
           <div class="sort__bar-keyword-pick orderby">
             {{ orderBy[orderByIndex] }}
             <i class="fas fa-chevron-down" />
-            <sort-modal 
+            <sort-modal
               v-if="showModal && rulesOrderBy"
-              :whichModal="orderBy" 
+              :whichModal="orderBy"
               @pickedOrderBy="createChips"
             />
           </div>
         </div>
       </div>
+      <sort-brands v-if="showModal && sortByBrand" />
     </div>
   </transition>
 </template>
@@ -117,6 +99,7 @@ export default {
       this.sortByCategory = true;
     },
     sortModalClose() {
+      console.log("close");
       this.showModal = false;
       this.sortByGender = false;
       this.rulesOrderBy = false;
@@ -124,6 +107,7 @@ export default {
       this.sortByBrand = false;
     },
     pickBrandModalOpen() {
+      this.sortModalClose();
       this.showModal = true;
       this.sortByBrand = true;
     },
@@ -179,14 +163,14 @@ export default {
   max-width: 1100px;
   width: 100%;
   font-size: 13px;
+  font-weight: 600;
   border-bottom: 1px solid #d9d9d9;
   background-color: #fff;
   position:fixed;
-  z-index: 8999;
   top: 115px;
 }
 
-.sort__bar-wrapper { display: flex; justify-content: space-between; }
+.sort__bar-wrapper { display: flex; position: relative; z-index: 9000; justify-content: space-between; }
 .sort__bar-row-left { display: flex; align-items: center; }
 .sort__bar-keyword { display: flex; height: 38px; }
 .sort__bar-keyword-pick {
@@ -199,8 +183,8 @@ export default {
   background-color: #f8f8f8;
   cursor: pointer;
 }
-.sort__bar-keyword-pick:hover { color: #fff; background-color: #42b883; }
-.active { color: #fff; background-color: #42b883; }
+.sort__bar-keyword-pick:hover { color: #fff; font-weight: 600; background-color: #42b883; }
+.active { color: #fff; font-weight: 600; background-color: #42b883; }
 .sort__bar-keyword-pick.orderby { 
   margin: 15px 10px 15px 0;
   color: #000; 

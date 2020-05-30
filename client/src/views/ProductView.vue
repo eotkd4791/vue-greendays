@@ -3,8 +3,8 @@
     <product-sort />
     <div class="product-wrapper">
       <div class="product-container__text">총 {{ totalCountProducts }} 개의 상품</div>
-      <display-items 
-        v-for="product in products" 
+      <display-items
+        v-for="product in products"
         :key="product.id"
         :productId="product.id"
         :sendToday="product.productSendToday"
@@ -56,10 +56,7 @@ export default {
   max-width: 1100px;
   margin: 0 auto;
 }
-.product-wrapper {
-  position: relative;
-  top: 200px;
-}
+.product-wrapper { margin-top: 240px; }
 
 .product-container__text {
   max-width: 1100px;

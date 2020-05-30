@@ -3,7 +3,6 @@
     <div class="modal-mask">
       <div class="modal-wrapper" @click.stop="onClickOutside">
         <div class="modal-container">
-          
           <div class="modal-header">
             <header class="brand-modal-title">브랜드 검색</header>
             <button class="modal-default-button" @click="$emit('closeBrands')">
@@ -13,14 +12,14 @@
 
           <div class="modal-body">
             <div class="custom-pick-menu" ref="brands">
-              <div class="brands-active" @click="changeTab">
-                인기브랜드
-              </div> |
-              <div @click="changeTab">
-                전체브랜드
-              </div>
+              <div class="brands-active" @click="changeTab">인기브랜드</div>|
+              <div @click="changeTab">전체브랜드</div>
             </div>
-            <pick-brand v-if="showModal" :propsBrand="pickedBrand" @closePickedBrands="closePickBrand" />
+            <pick-brand
+              v-if="showModal"
+              :propsBrand="pickedBrand"
+              @closePickedBrands="closePickBrand"
+            />
             <popular-brands v-if="pickBrands" @openAlarmModal="openPickBrand" />
             <alphabet-brands v-else @openAlarmModal="openPickBrand" />
           </div>
@@ -76,7 +75,7 @@ export default {
     //알파벳 선택하는 로직 -> 디비에서 불러온 브랜드 이름이 하나도 없으면 passive라는 클래스를 추가한다.(cursor: not-allowed)
     //
   },
- 
+
 }
 </script>
 

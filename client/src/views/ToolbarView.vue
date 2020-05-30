@@ -1,11 +1,9 @@
 <template>
-  <div>  
+  <div>
     <header id="header">
       <div class="container-logo">
-        <toolbar-user-info 
-          :userLoggedIn="user.isLoggedIn"
-        />
-        <toolbar-menu 
+        <toolbar-user-info :userLoggedIn="user.isLoggedIn" />
+        <toolbar-menu
           @onToolbarModal="openToolbarModal"
           @onSearchBrands="openSearchBrands"
           @offToolbarModal="closeToolbarModal"
@@ -15,15 +13,12 @@
     <toolbar-modal
       v-if="showModal && showToolbarModal"
       :onToolbar="toolbarToOpen"
-      @mouseEsc="closeToolbarModal" 
+      @mouseEsc="closeToolbarModal"
     />
-    <brand-modal
-      v-if="showModal && SearchBrandsModal"
-      @closeBrands="closeSearchBrands" 
-    />
+    <brand-modal v-if="showModal && SearchBrandsModal" @closeBrands="closeSearchBrands" />
   </div>
 </template>
- 
+
 <script>
 import ToolbarUserInfo from '@/components/ToolbarUserInfo.vue';
 import ToolbarMenu from '@/components/ToolbarMenu.vue';
@@ -68,7 +63,7 @@ export default {
   },
   created() {
     this.user = this.$store.state.userInfo;
-  }
+  },
 }
 </script>
 
