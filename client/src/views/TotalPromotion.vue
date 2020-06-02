@@ -48,13 +48,11 @@ export default {
   methods: {},
   created() {
     this.promotions = this.$store.state.preorders;
-    console.log("total", this.promotions);
     // this.quickDelivery = this.$store.state
     // this.preorders.push(this.quickDelivery);
     // 진행중인 모든 프리오더 행사 뒤에 빠른배송 넣기
   },
   mounted() {
-    console.log(typeof this.promotions)
     this.promotions.forEach((p)=> {
       // const hour = p.hour;
       // const min = p.min;

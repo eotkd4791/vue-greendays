@@ -1,8 +1,9 @@
 <template>
   <div>
     <header id="header">
+      <user-info-modal v-if="showUserInfo" :userInfo="user" @closeUserInfo="toggleUserInfo"></user-info-modal>
       <div class="container-logo">
-        <toolbar-user-info :userLoggedIn="user.isLoggedIn" />
+        <toolbar-user-info @userInfoOpen="toggleUserInfo" :userLoggedIn="user.name" />
         <toolbar-menu
           @onToolbarModal="openToolbarModal"
           @onSearchBrands="openSearchBrands"
@@ -24,6 +25,7 @@ import ToolbarUserInfo from '@/components/ToolbarUserInfo.vue';
 import ToolbarMenu from '@/components/ToolbarMenu.vue';
 import ToolbarModal from '@/components/common/ToolbarModal.vue';
 import BrandModal from '@/components/common/BrandModal.vue';
+import UserInfoModal from '@/components/common/UserInfoModal.vue';
 
 export default {
   components: {
@@ -31,6 +33,7 @@ export default {
     BrandModal,
     ToolbarMenu,
     ToolbarUserInfo,
+    UserInfoModal,
   },
   data() {
     return {
@@ -39,26 +42,29 @@ export default {
       showToolbarModal: false,
       SearchBrandsModal: false,
       toolbarToOpen: '',
+      showUserInfo: false,
     };
   },
   methods: {
     openToolbarModal(menuToOpen) {
       this.showToolbarModal = true;
       this.showModal = true;
-      console.log(this.showToolbarModal, this.showModal);
       this.toolbarToOpen = menuToOpen;
-    },
-    closeToolbarModal() {
-      this.showToolbarModal = false;
-      this.showModal = false;
     },
     openSearchBrands() {
       this.showModal = true;
       this.SearchBrandsModal = true;
     },
+    closeToolbarModal() {
+      this.showToolbarModal = false;
+      this.showModal = false;
+    },
     closeSearchBrands() {
       this.showModal = false;
       this.SearchBrandsModal = false;
+    },
+    toggleUserInfo() {
+      this.showUserInfo = !this.showUserInfo;
     },
   },
   created() {
@@ -75,7 +81,7 @@ export default {
   top: 0;
   left: 0;
   background-color: white;
-  z-index: 9000;
+  z-index: 1002;
   overflow: hidden;
   transition: height 0.6s;
 }

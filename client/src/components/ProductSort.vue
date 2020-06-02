@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-      <sort-brands v-if="showModal && sortByBrand" />
+      <sort-brands v-if="showModal && sortByBrand" @closeBrandSearchModal="sortModalClose" />
     </div>
   </transition>
 </template>

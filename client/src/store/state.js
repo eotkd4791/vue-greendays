@@ -393,8 +393,11 @@ const products = [{
 ];
 
 const userInfo = {
-  isLoggedIn: false,
-  userId: ''
+  name: 'asdf',
+  promotionCode: 'X123DEW',
+  orderDone: [],
+  delivering: [],
+  changeOrRefund: [],
 };
 
 export default {

@@ -10,7 +10,7 @@
       <span class="notice-logout">입고 알림을 받으실 휴대폰 번호를 입력해주세요.</span>
       <form>
         <input ref="phoneNum" type="text" placeholder="휴대폰 번호" class="phone-num-input" />
-        <button @submit.prevent="" class="phone-num-btn">확인</button>
+        <button @submit.prevent class="phone-num-btn">확인</button>
       </form>
     </div>
   </div>
@@ -29,12 +29,14 @@ input:focus {
   outline: none;
 }
 .modal-container-logout {
+  position: relative;
+  z-index: 9998;
   width:340px;
   height:370px;
   margin:0 auto;
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
+  transition: all 0.3s ease;;
 }
 
 .header-logout {
@@ -77,4 +79,5 @@ input:focus {
   border-style: none;
   outline: none;
 }
+
 </style>

@@ -3,9 +3,9 @@
     <div class="header">
       <div class="title-button">
         <span class="title">
-          브랜드 
+          브랜드
           <span class="emphasis-title">Pick!</span>
-          <button class="modal-close-button" @click="$emit('closeBrandsPickingModal')" >
+          <button class="modal-close-button" @click="$emit('closeBrandsPickingModal')">
             <i class="fas fa-times" />
           </button>
         </span>
@@ -20,11 +20,21 @@
         <slot />
       </div>
       <ul>
-        <li><i class="fas fa-heart" />Bags</li>
-        <li><i class="fas fa-heart" />Clothes</li>
-        <li><i class="fas fa-heart" />Shoes</li>
-        <li><i class="fas fa-heart" />Accessories</li>
-        <li><i class="fas fa-heart" />Wallets</li>
+        <li>
+          <i class="fas fa-heart" />Bags
+        </li>
+        <li>
+          <i class="fas fa-heart" />Clothes
+        </li>
+        <li>
+          <i class="fas fa-heart" />Shoes
+        </li>
+        <li>
+          <i class="fas fa-heart" />Accessories
+        </li>
+        <li>
+          <i class="fas fa-heart" />Wallets
+        </li>
       </ul>
     </div>
   </div>
@@ -36,6 +46,8 @@ export default {}
 
 <style scoped>
 .modal-container-login {
+  position: relative;
+  z-index: 9998;
   width: 320px;
   height: 454px;
   margin: 0px auto;

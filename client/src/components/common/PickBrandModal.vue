@@ -2,16 +2,12 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper" @click.stop="onClickOutside">
-        
-        <pick-brand-log-in 
-          v-if="user.isLoggedIn"
+        <pick-brand-log-in
+          v-if="userInfo.name"
           @closeBrandsPickingModal="$emit('closePickedBrands')"
         >{{ propsBrand }}</pick-brand-log-in>
-          
-        <pick-brand-log-out 
-          v-else 
-          @closeBrandsPickingModal="$emit('closePickedBrands')"
-        />
+
+        <pick-brand-log-out v-else @closeBrandsPickingModal="$emit('closePickedBrands')" />
       </div>
     </div>
   </transition>
@@ -29,7 +25,7 @@ export default {
   props: ['propsBrand'],
   data() {
     return {
-      user: {},
+      userInfo: {},
       brandName:'',
     };
   },
@@ -41,7 +37,7 @@ export default {
     }
   },
   created() {
-    this.user = this.$store.state.userInfo;
+    this.userInfo = this.$store.state.userInfo;
   },
 }
 </script>
