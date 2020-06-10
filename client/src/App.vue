@@ -1,6 +1,7 @@
 <template>
   <main>
     <toolbar-view />
+    <div v-if="onSpace" class="space" />
     <router-view />
     <footer-view />
   </main>
@@ -9,11 +10,22 @@
 <script>
 import ToolbarView from '@/views/ToolbarView.vue';
 import FooterView from '@/views/FooterView.vue';
+import Bus from '@/utils/bus.js';
 
 export default { 
   components: {
     ToolbarView,
     FooterView,
+  },
+  data() {
+    return {
+      onSpace: false,
+    };
+  },
+  mounted() {
+    Bus.$on('showUserInfo', () => {
+      this.onSpace = !this.onSpace;
+    });
   },
 }
 </script>
@@ -26,5 +38,9 @@ main {
   flex-direction: column; 
   width: 100%;
   margin: 0 auto;
+}
+.space {
+  width: 100%;
+  height: 280px;
 }
 </style>

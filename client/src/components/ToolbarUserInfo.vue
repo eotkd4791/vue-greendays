@@ -12,7 +12,6 @@
     <span
       class="user-info far fa-heart"
       @click.stop="userInfo.name ? movePage('/wishlist') : movePage('/login')"
-      style="color: #42b883"
     ></span>
     <span v-if="userInfo.name" class="user-info-text">{{ pickedProducts }}</span>
     <span
@@ -24,6 +23,7 @@
 </template>
 
 <script>
+import Bus from '@/utils/bus.js';
 
 export default {
   data() {
@@ -42,23 +42,24 @@ export default {
       if(to ==='#') return;
       if(this.$route.path !== to) {
         const nextPage = { path: to };
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         this.$router.push(nextPage);
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
       }
     },
     toggleUserInfo() {
-      if(this.showUserInfo) { //열려진 상태에서 닫기
-        this.$emit('userInfoClose');
-        this.$refs.userInfo.style.setProperty('color','#000');
-      } else {
-        this.$emit('userInfoOpen'); // 닫혀진 상태에서 열기
-        this.$refs.userInfo.style.setProperty('color','#42b883');
-      }
+      this.$refs.userInfo.classList.toggle('active');
       this.showUserInfo = !this.showUserInfo;
+      Bus.$emit('showUserInfo', this.showUserInfo);
     },
   },
   created() {
     this.userInfo = this.$store.state.userInfo;
+  },
+  mounted() {
+    Bus.$on('userInfoToggle', this.toggleUserInfo);
+  },
+  beforeDestroy() {
+    Bus.$off('userInfoToggle', this.toggleUserInfo);
   }
 }
 </script>
@@ -85,12 +86,15 @@ export default {
 }
 .fas.fa-coins {
   margin-left: 5px;
-  margin-right: 10px;
+  margin-right: 10
+}
+.far.fa-heart {
+  color: #42b883
 }
 .fa-user {
   color: #000;
 }
-.active {
+.fa-user.active {
   color: #42b883;
 }
 .user-info-text {

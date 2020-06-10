@@ -131,7 +131,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1001;
+  z-index: 1000;
   cursor: pointer;
 }
 .promo__info-container-timer {

@@ -4,20 +4,26 @@
       <div class="userinfo__modal-wrapper">
         <section class="userinfo__modal-list">
           <ul>
-            <router-link to="/user">
-              <li>{{ userInfo.name }}</li>
-            </router-link>
-            <router-link to="/user">
-              <li>{{ `내 추천 코드 ${userInfo.promotionCode}` }}</li>
-            </router-link>
-            <user-info-list></user-info-list>
+            <li>
+              <router-link to="/user">{{ userInfo.name }}</router-link>
+            </li>
+            <li>{{ `내 추천 코드 ${userInfo.promotionCode}` }}</li>
+            <li>
+              <router-link to="/user">내 정보 관리</router-link>
+            </li>
+            <li>
+              <router-link to="/user">주문 및 반품 내역</router-link>
+            </li>
+            <li>
+              <router-link to="/user">포인트</router-link>
+            </li>
             <router-link to="/logout">
               <li>로그아웃</li>
             </router-link>
           </ul>
         </section>
         <section class="userinfo__modal-order">
-          <i class="fas fa-times" @click="$emit('closeUserInfo')" />
+          <i class="fas fa-times" @click="closeUserInfo" />
           <div>
             <div>
               <span>결제완료</span>
@@ -40,25 +46,42 @@
 </template>
 
 <script>
-import UserInfoList from '@/components/common/UserInfoList.vue';
+import Bus from '@/utils/bus.js';
 
 export default {
-  components: { UserInfoList },
   props: ['userInfo'],
+  methods: {
+    closeUserInfo() {
+      Bus.$emit('userInfoToggle');
+    }
+  },
 }
 </script>
 
 <style scoped>
+ul {
+  list-style-type: none;
+}
 .userinfo__modal-container {
-  display: flex;
-  
+  position: fixed;
+  top: 0;
+  left: 0;
   width:100%;
   height: 280px;
+  background-color: #f8f8f8;
 }
-.modal-default-button {
-  float: right;
+.userinfo__modal-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.fa-times {
   border-style: none;
   outline: none;
+  cursor: pointer;
 }
 .modal-enter { opacity: 0; }
 .modal-leave-active { opacity: 0; }

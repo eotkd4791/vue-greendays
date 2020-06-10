@@ -1,6 +1,12 @@
 <template>
   <transition name="slide-fade">
-    <div v-if="active" class="sort__bar-container" ref="sortBar" @mouseleave="sortModalClose">
+    <div
+      v-show="active"
+      class="sort__bar-container"
+      :class="{ 'active-userinfo': onUserInfo }"
+      ref="sortBar"
+      @mouseleave="sortModalClose"
+    >
       <div class="sort__bar-wrapper">
         <div class="sort__bar-row-left">
           <div class="sort__bar-keyword" ref="keyword">
@@ -59,6 +65,7 @@ import SortModal from '@/components/common/SortModal.vue';
 import SortCategory from '@/components/common/SortCategory.vue';
 import SortBrands from '@/components/common/SortBrands.vue';
 import SortIndexChips from '@/components/SortIndexChips.vue';
+import Bus from '@/utils/bus.js';
 
 export default {
   components: {
@@ -75,12 +82,13 @@ export default {
       rulesOrderBy: false,
       sortByCategory: false,
       sortByBrand: false,
+      onUserInfo: false,
 
       sortChips: [],
       gender: ['전체','여성','남성','키즈'],
       orderBy: ['인기순','최신순','높은 가격순','낮은 가격순','높은 할인율순','낮은 할인율순'],
       orderByIndex: 0,
-      scrollListener: Object,
+      scrollListener: {},
     }
   },
   methods: {
@@ -99,7 +107,6 @@ export default {
       this.sortByCategory = true;
     },
     sortModalClose() {
-      console.log("close");
       this.showModal = false;
       this.sortByGender = false;
       this.rulesOrderBy = false;
@@ -127,9 +134,9 @@ export default {
     },
     removeAll() {
       const keywords = this.$refs.keyword.childNodes;
-      for(let i = 0; i < keywords.length; i++) {
-        if(keywords[i].classList.contains('active')) {
-          keywords[i].classList.remove('active');
+      for(let keyword of keywords) {
+        if(keyword.classList.contains('active')) {
+          keyword.classList.remove('active');
         }
       }
       this.sortChips = [];
@@ -145,15 +152,18 @@ export default {
       }
       this.sortModalClose();
     },
-    
-  },
-  created() {
+    toggleUserInfo(payload) {
+      this.onUserInfo = payload;
+      this.$refs.sortBar.classList.toggle('active-userinfo');
+    }
   },
   mounted() {
-    window.addEventListener('wheel', (e) => this.onScroll(e));
+    window.addEventListener('wheel', this.onScroll);
+    Bus.$on('showUserInfo', this.toggleUserInfo);
   },
   beforeDestroy() {
-    window.removeEventListener('wheel', (e) => this.onScroll(e));
+    window.removeEventListener('wheel', this.onScroll);
+    Bus.$off('showUserInfo', this.toggleUserInfo);
   }
 }
 </script>
@@ -168,6 +178,10 @@ export default {
   background-color: #fff;
   position:fixed;
   top: 115px;
+}
+.sort__bar-container.active-userinfo {
+  position:fixed;
+  top: 395px;
 }
 
 .sort__bar-wrapper { display: flex; position: relative; z-index: 9000; justify-content: space-between; }

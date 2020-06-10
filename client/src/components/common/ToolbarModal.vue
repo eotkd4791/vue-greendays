@@ -1,7 +1,12 @@
 <template>
   <transition name="fade">
     <div class="modal-mask">
-      <div class="modal-container" @mouseleave="mouseEscape">
+      <div
+        class="modal-container"
+        :class="{ 'active': onUserInfo }"
+        ref="modalContainer"
+        @mouseleave="mouseEscape"
+      >
         <div class="modal-wrapper">
           <toolbar-preorder v-if="onToolbar==='프리오더'" />
           <toolbar-quick-delivery v-else-if="onToolbar==='빠른배송'" />
@@ -18,6 +23,7 @@ import ToolbarReservePurchase from '@/components/ToolbarReservePurchase.vue';
 import ToolbarPreorder from '@/components/ToolbarPreorder.vue';
 import ToolbarQuickDelivery from '@/components/ToolbarQuickDelivery.vue';
 import ToolbarSearchBrands from '@/components/ToolbarSearchBrands.vue';
+import Bus from '@/utils/bus.js';
 
 export default {
   components: {
@@ -30,20 +36,31 @@ export default {
   data() {
     return {
       user: {},
+      onUserInfo: false,
     };
   },
   methods: {
     mouseEscape() {
-      this.$emit("mouseEsc");
+      // this.$emit("mouseEsc");
     },
+    toggleUserInfo(payload) {
+      this.onUserInfo = payload;
+      this.$refs.modalContainer.classList.toggle('active');
+    }
   },
+  mounted() {
+    Bus.$on('showUserInfo', this.toggleUserInfo);
+  },
+  beforeDestroy() {
+    Bus.$off('showUserInfo', this.toggleUserInfo);
+  }
 }
 </script>
 
 <style scoped>
 .modal-mask {
   position: fixed;
-  z-index: 9000;
+  z-index: 1001;
   top: 115px;
   left: 0;
   width: 100%;
@@ -63,6 +80,11 @@ export default {
   font-family: Helvetica, Arial, sans-serif;
   position: fixed;
   top: 115px;
+}
+
+.modal-container.active {
+  position: fixed;
+  top: 395px;
 }
 
 .modal-wrapper {

@@ -73,9 +73,7 @@ export default {
     });
   },
   beforeDestroy() {
-    this.Timers.forEach((t) => {
-      clearInterval(t);
-    });
+    this.Timers.forEach((t) => clearInterval(t));
   }
 }
 </script>

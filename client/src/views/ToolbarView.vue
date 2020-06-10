@@ -1,9 +1,9 @@
 <template>
   <div>
-    <header id="header">
-      <user-info-modal v-if="showUserInfo" :userInfo="user" @closeUserInfo="toggleUserInfo"></user-info-modal>
+    <header id="header" ref="header">
       <div class="container-logo">
-        <toolbar-user-info @userInfoOpen="toggleUserInfo" :userLoggedIn="user.name" />
+        <user-info-modal v-if="showUserInfo" :userInfo="user" />
+        <toolbar-user-info :userLoggedIn="user.name" />
         <toolbar-menu
           @onToolbarModal="openToolbarModal"
           @onSearchBrands="openSearchBrands"
@@ -26,6 +26,7 @@ import ToolbarMenu from '@/components/ToolbarMenu.vue';
 import ToolbarModal from '@/components/common/ToolbarModal.vue';
 import BrandModal from '@/components/common/BrandModal.vue';
 import UserInfoModal from '@/components/common/UserInfoModal.vue';
+import Bus from '@/utils/bus.js';
 
 export default {
   components: {
@@ -37,7 +38,7 @@ export default {
   },
   data() {
     return {
-      user:{},
+      user: {},
       showModal: false,
       showToolbarModal: false,
       SearchBrandsModal: false,
@@ -64,17 +65,31 @@ export default {
       this.SearchBrandsModal = false;
     },
     toggleUserInfo() {
+      if(!this.showUserInfo) {
+        this.$refs.header.style.setProperty('top','280px');
+      } else {
+        this.$refs.header.style.setProperty('top','0');
+      }
       this.showUserInfo = !this.showUserInfo;
+      
     },
   },
   created() {
     this.user = this.$store.state.userInfo;
   },
+  mounted() {
+    Bus.$on('showUserInfo', this.toggleUserInfo);
+  },
+  beforeDestroy() {
+    Bus.$off('showUserInfo', this.toggleUserInfo);
+  }
 }
 </script>
 
 <style scoped>
 #header {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 115px;
   position: fixed;
@@ -82,12 +97,11 @@ export default {
   left: 0;
   background-color: white;
   z-index: 1002;
-  overflow: hidden;
-  transition: height 0.6s;
+  transition: height 0.6s linear;
 }
 .container-logo {
-  max-width: 1100px;
-  height: 70px;
+  width: 100%;
   margin: 0 auto;
+  height: 70px;
 }
 </style>

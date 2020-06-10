@@ -2,16 +2,16 @@
   <div class="container-menu">
     <div class="menus">
       <div class="modal-active">
-        <span class="anchor-wrapper" @mouseover="mouseOverOnMenu">
+        <span class="anchor-wrapper" @mouseover="mouseOverOnMenu" @click="$emit('offToolbarModal')">
           <router-link to="/products">
             예약구매
             <span id="purchase-reserve">💚</span>
           </router-link>
         </span>
-        <span class="anchor-wrapper" @mouseover="mouseOverOnMenu">
-          <a @click="movePage('#')">프리오더</a>       
+        <span class="anchor-wrapper" @mouseover="mouseOverOnMenu" @click="$emit('offToolbarModal')">
+          <a @click="movePage('#')">프리오더</a>
         </span>
-        <span class="anchor-wrapper" @mouseover="mouseOverOnMenu">
+        <span class="anchor-wrapper" @mouseover="mouseOverOnMenu" @click="$emit('offToolbarModal')">
           <router-link to="/products">빠른배송</router-link>
         </span>
       </div>
@@ -46,7 +46,6 @@ export default {
     movePage(to) {
       if(to ==='#') return;
       if(this.$route.path !== to) {
-        console.log("scroll");
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
         const nextPage = { path: to };
         this.$router.push(nextPage);

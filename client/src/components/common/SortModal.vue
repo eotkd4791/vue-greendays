@@ -2,12 +2,12 @@
   <div class="modal-container" ref="modal">
     <div
       class="modal-list"
-      v-for="val in whichModal"
-      :key="val"
-      @click="pickedOrderBy(val)"
+      v-for="value in whichModal"
+      :key="value"
+      @click="pickedOrderBy(value)"
       @mouseover="activatingTab"
     >
-      <div class="modal-text" v-text="val" />
+      <div class="modal-text" v-text="value" />
     </div>
   </div>
 </template>
@@ -21,28 +21,31 @@ export default {
     };
   },
   methods: {
-    pickedOrderBy(val) {
+    pickedOrderBy(value) {
       if(this.whichModal.length === 4) {
-        if(this.whichModal.indexOf(val) === 0) {
+        if(this.whichModal.indexOf(value) === 0) {
           return this.$emit('pickedFirst');
         }
-        this.$emit('pickedGender', val);
+        this.$emit('pickedGender', value);
       } else {
-        this.$emit('pickedOrderBy', val);
+        this.$emit('pickedOrderBy', value);
       }
     },
     activatingTab() {
       if(!this.$refs.modal) return;
       this.$refs.modal.childNodes[this.activatedTabIndex].classList.remove('active');
     },
+    initializingTab() {
+      this.$refs.modal.firstChild.classList.add('active');
+      if(this.whichModal.length > 4) {
+        this.$refs.modal.setAttribute('style', 'width: 150px');
+      } else {
+        this.$refs.modal.setAttribute('style', 'width: 72px');
+      }
+    }
   },
   mounted() {
-    this.$refs.modal.firstChild.classList.add('active');
-    if(this.whichModal.length > 4) {
-      this.$refs.modal.setAttribute('style', 'width: 150px');
-    } else {
-      this.$refs.modal.setAttribute('style', 'width: 72px');
-    }
+    this.initializingTab();
   }
 }
 </script>
