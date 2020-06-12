@@ -1,22 +1,22 @@
 <template>
   <div class="logo" @click="movePage('/')">
-    <div v-if="userInfo" class="user-info-point" @click.stop="movePage('/mypoint')">
+    <div v-if="getUserInfo.name" class="user-info-point" @click.stop="movePage('/mypoint')">
       <span class="user-info-text">{{ points }}</span>
       <span class="point-icon fas fa-coins" />
     </div>
     <span
       class="user-info fas fa-user"
       ref="userInfo"
-      @click.stop="userInfo.name ? toggleUserInfo() : movePage('/login')"
+      @click.stop="getUserInfo.name ? toggleUserInfo() : movePage('/login')"
     ></span>
     <span
       class="user-info far fa-heart"
-      @click.stop="userInfo.name ? movePage('/wishlist') : movePage('/login')"
+      @click.stop="getUserInfo.name ? movePage('/wishlist') : movePage('/login')"
     ></span>
-    <span v-if="userInfo.name" class="user-info-text">{{ pickedProducts }}</span>
+    <span v-if="getUserInfo.name" class="user-info-text">{{ pickedProducts }}</span>
     <span
       class="user-info fas fa-shopping-basket"
-      @click.stop="userInfo.name ? movePage('/cartitems') : movePage('/login')"
+      @click.stop="getUserInfo.name ? movePage('/cartitems') : movePage('/login')"
     ></span>
     <span class="user-info-text">{{ cartItems }}</span>
   </div>
@@ -37,6 +37,11 @@ export default {
       userInfo: {},
     };
   },
+  computed: {
+    getUserInfo() {
+      return this.$store.state.userInfo;
+    }
+  },
   methods: {
     movePage(to) {
       if(to ==='#') return;
@@ -51,9 +56,6 @@ export default {
       this.showUserInfo = !this.showUserInfo;
       Bus.$emit('showUserInfo', this.showUserInfo);
     },
-  },
-  created() {
-    this.userInfo = this.$store.state.userInfo;
   },
   mounted() {
     Bus.$on('userInfoToggle', this.toggleUserInfo);
