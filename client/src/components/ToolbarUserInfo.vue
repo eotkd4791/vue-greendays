@@ -84,11 +84,16 @@ export default {
 .user-info-point {
   color: #42b883;
 }
-.fas.fa-coins {
+
+.fas, .far {
+  padding: 5px 5px;
+}
+
+.fa-coins {
   margin-left: 5px;
   margin-right: 10
 }
-.far.fa-heart {
+.fa-heart {
   color: #42b883
 }
 .fa-user {

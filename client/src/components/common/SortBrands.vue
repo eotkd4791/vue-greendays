@@ -64,6 +64,11 @@ export default {
       brandInModal:'',
     };
   },
+  computed: {
+    getUserInfo() {
+      return this.$store.state.userInfo;
+    }
+  },
   methods: {
     openModal(brandName) {
       this.brandInModal = brandName;
@@ -74,12 +79,11 @@ export default {
       this.$emit('closeBrandSearchModal');
     },
     setScrollLock() {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     },
   },
   created() {
-    this.userInfo = this.$store.state.userInfo;
-    console.log(this.userInfo);
+    //브랜드 정보를 가져와서 이니셜 문자로 정렬, 배열이 비어있으면 html disabled 속성, css cursor: not-allow 속성을 추가한다.
   },
   mounted() {
     window.addEventListener('scroll', this.setScrollLock);
@@ -87,7 +91,6 @@ export default {
     // 고른 브랜드가 있으면 picked 클래스를 넣어준다.
   },
   beforeDestroy() {
-    console.log('modal open');
     window.removeEventListener('scroll', this.setScrollLock);
   }
 }
@@ -160,6 +163,7 @@ export default {
   width: 55px;
   height: 52px;
   border-color: #000;
+  cursor: pointer;
 }
 .brand__search-btn {
   display: flex;

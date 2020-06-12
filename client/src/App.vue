@@ -30,7 +30,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 @import './style/reset.css';
 @font-face { font-family: 'Montserrat'; src: url('./assets/fonts/Montserrat-Light.ttf'); } 
 main { 

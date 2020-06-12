@@ -71,16 +71,20 @@ export default {
   space-between; 
   font-family: 'Montserrat'; 
 }
+
 .preorder-container__category { 
   width: 218px; 
   height: 345px;
 }
+
 .preorder-container__category__title {
   font-weight: 700;
 }
+
 .preorder-container__category__link { 
   margin-top: 20px; 
 }
+
 .preorder-container__category__link>span { 
   display: flex;
   width: 220px; 
@@ -92,13 +96,52 @@ export default {
   font-size: 14px; 
   cursor: pointer; 
 }
-.preorder-container__category__link i { margin-right: 10px; }
-.preorder-container__category__link>span:hover  { font-size: 14px; font-weight: 600; color: #fff; background-color: #42b883; }
-.active { font-size: 14px; font-weight: 600; color: #fff; background-color: #42b883; }
 
-.preorder-container__promotion { width: 600px; height: 100%; }
-.preorder-container__promotion__img { width: 100%; height: 250px; background-image: url('../assets/img/brands/gucci-logo.png'); background-repeat: no-repeat; background-size: cover; background-position: center; cursor: pointer; }
-.preorder-container__promotion__text { width: 100%; height: 40px; margin: 14px 0 0; }
-.preorder-container__promotion__title { font-size: 14px; font-weight: 600; }
-.preorder-container__promotion__subtitle { font-size: 12px; margin-top: 14px; }
+.preorder-container__category__link i { 
+  margin-right: 10px; 
+}
+
+.preorder-container__category__link>span:hover  { 
+  font-size: 14px; 
+  font-weight: 600; 
+  color: #fff; 
+  background-color: #42b883; 
+}
+.active { 
+  font-size: 14px; 
+  font-weight: 600; 
+  color: #fff; 
+  background-color: #42b883; 
+}
+
+.preorder-container__promotion {
+  width: 600px; 
+  height: 100%; 
+}
+
+.preorder-container__promotion__img {
+  width: 100%; 
+  height: 250px; 
+  background-image: url('../assets/img/brands/gucci-logo.png'); 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-position: center; 
+  cursor: pointer; 
+}
+
+.preorder-container__promotion__text { 
+  width: 100%; 
+  height: 40px; 
+  margin: 14px 0 0; 
+}
+
+.preorder-container__promotion__title { 
+  font-size: 14px; 
+  font-weight: 600;
+}
+
+.preorder-container__promotion__subtitle { 
+  font-size: 12px; 
+  margin-top: 14px; 
+}
 </style>

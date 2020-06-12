@@ -1,21 +1,23 @@
 <template>
-  <transition name="fade">
-    <div class="modal-mask">
+  <div class="toolbar__modal-container">
+    <div class="modal-mask" v-if="onToolbar" />
+    <transition appear name="rolling">
       <div
+        v-if="onToolbar"
         class="modal-container"
-        :class="{ 'active': onUserInfo }"
+        :class="{ 'active-userinfo': activeUserInfo }"
         ref="modalContainer"
-        @mouseleave="mouseEscape"
+        @mouseleave="$emit('mouseEsc')"
       >
         <div class="modal-wrapper">
-          <toolbar-preorder v-if="onToolbar==='프리오더'" />
-          <toolbar-quick-delivery v-else-if="onToolbar==='빠른배송'" />
-          <toolbar-search-brands v-else-if="onToolbar===''" />
+          <toolbar-preorder v-if="toolbarToOpen==='프리오더'" />
+          <toolbar-quick-delivery v-else-if="toolbarToOpen==='빠른배송'" />
+          <toolbar-search-brands v-else-if="toolbarToOpen===''" />
           <toolbar-reserve-purchase v-else />
         </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -32,59 +34,46 @@ export default {
     ToolbarQuickDelivery,
     ToolbarSearchBrands,
   },
-  props:['onToolbar'],
+  props:['toolbarToOpen', 'onToolbar', 'activeUserInfo'],
   data() {
     return {
       user: {},
       onUserInfo: false,
     };
   },
-  methods: {
-    mouseEscape() {
-      // this.$emit("mouseEsc");
-    },
-    toggleUserInfo(payload) {
-      this.onUserInfo = payload;
-      this.$refs.modalContainer.classList.toggle('active');
-    }
-  },
-  mounted() {
-    Bus.$on('showUserInfo', this.toggleUserInfo);
-  },
-  beforeDestroy() {
-    Bus.$off('showUserInfo', this.toggleUserInfo);
-  }
 }
 </script>
 
 <style scoped>
+.toolbar__modal-container {
+  width:100%;
+}
+
 .modal-mask {
   position: fixed;
-  z-index: 1001;
+  z-index: 100;
   top: 115px;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, .5);
-  display: table;
 }
 
 .modal-container {
   width: 100%;
   height:410px;
+  z-index: 1002;
   margin: 0px auto;
   padding: 20px 30px;
-  background-color: #fff;
   border: none;
-  transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
   position: fixed;
   top: 115px;
+  background-color: #fff;
 }
 
-.modal-container.active {
-  position: fixed;
-  top: 395px;
+.modal-container.active-userinfo {
+  transition: all 250ms;
+  transform: translateY(280px);
 }
 
 .modal-wrapper {
@@ -95,6 +84,13 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.fade-enter-active, .fade-leave-active { transition: opacity .5s; }
-.fade-enter, .fade-leave-to { opacity: 0; }
+
+.rolling-enter-active, .rolling-leave-active {
+  transition: all .6s ease-in-out;
+}
+
+.rolling-enter, .rolling-leave-to {
+  transform: translateY(-115px);
+  z-index: 0;
+}
 </style>

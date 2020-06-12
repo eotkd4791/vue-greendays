@@ -2,7 +2,9 @@
   <div>
     <header id="header" ref="header">
       <div class="container-logo">
-        <user-info-modal v-if="showUserInfo" :userInfo="user" />
+        <transition name="rolling">
+          <user-info-modal v-if="showUserInfo" :userInfo="user" />
+        </transition>
         <toolbar-user-info :userLoggedIn="user.name" />
         <toolbar-menu
           @onToolbarModal="openToolbarModal"
@@ -12,8 +14,9 @@
       </div>
     </header>
     <toolbar-modal
-      v-if="showModal && showToolbarModal"
-      :onToolbar="toolbarToOpen"
+      :onToolbar="showToolbarModal"
+      :toolbarToOpen="toolbarToOpen"
+      :activeUserInfo="showUserInfo"
       @mouseEsc="closeToolbarModal"
     />
     <brand-modal v-if="showModal && SearchBrandsModal" @closeBrands="closeSearchBrands" />
@@ -97,11 +100,19 @@ export default {
   left: 0;
   background-color: white;
   z-index: 1002;
-  transition: height 0.6s linear;
 }
 .container-logo {
   width: 100%;
   margin: 0 auto;
   height: 70px;
+}
+
+.rolling-enter-active, .rolling-leave-active {
+  transition: all .3s ease;
+}
+
+.rolling-enter, .rolling-leave-to {
+  transform: translateY(-280px);
+  z-index: 0;
 }
 </style>

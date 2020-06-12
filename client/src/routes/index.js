@@ -23,15 +23,14 @@ import PrivateInfo from '../views/PrivateInfo.vue';
 
 Vue.use(VueRouter);
 
-export const router = new VueRouter({
+export default new VueRouter({
   mode: "history",
-  routes: [
-    { 
+  routes: [{
       path: '/',
       component: MainView,
       name: 'main',
     },
-    { 
+    {
       path: '/notice',
       component: Notice,
       name: 'notice'
@@ -69,7 +68,7 @@ export const router = new VueRouter({
     {
       path: '/terms',
       component: Terms,
-      name:'terms'
+      name: 'terms'
     },
     {
       path: '/privateinfo',
@@ -100,11 +99,14 @@ export const router = new VueRouter({
       name: 'cartItems'
     },
   ],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
     } else {
-      return { x: 0, y: 0 };
+      return {
+        x: 0,
+        y: 0
+      };
     }
   }
 });

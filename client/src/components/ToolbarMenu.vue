@@ -26,7 +26,7 @@
         <span>브랜드 검색</span>
       </div>
       <div class="search-brand-form" @click="mouseOverOnMenu">
-        <form>
+        <form @input="searchKeyword(searchBrands)">
           <input type="text" placeholder="검색어를 입력해 주세요" v-model="searchBrands" />
           <i class="fas fa-search" />
         </form>
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
   data() {
     return {
@@ -46,7 +48,7 @@ export default {
     movePage(to) {
       if(to ==='#') return;
       if(this.$route.path !== to) {
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         const nextPage = { path: to };
         this.$router.push(nextPage);
       }
@@ -61,7 +63,17 @@ export default {
     onClickSearchBrands() {
       this.$emit('onSearchBrands');
     },
-  }, 
+  },
+  created() {
+    this.searchKeyword = _.debounce(() => {
+      // this.$store.dispatch('', this.searchBrands);
+
+      // DB에서 연관 검색어 조회하기
+      // Form 태그에서 submit Event 발생 시 DB 연관 검색어 테이블에 검색어 삽입하기.
+    }, 700);
+
+    // 검색어 받아오는 로직
+  },
 }
 </script>
 

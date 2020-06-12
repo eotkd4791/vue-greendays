@@ -1,7 +1,7 @@
 <template>
   <div class="chip-container">
     {{ sortindex }}
-    <i class="fas fa-times-circle" @click="remove(sortindex)" />
+    <i class="fas fa-times-circle" @click="removeOne(sortindex)" />
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
   props: ['sortindex'],
   methods: {
-    remove(payload) {
+    removeOne(payload) {
       this.$emit('remove-chips', payload);
     }
   }

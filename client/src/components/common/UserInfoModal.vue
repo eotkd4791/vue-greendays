@@ -1,48 +1,46 @@
 <template>
-  <transition name="modal">
-    <div class="userinfo__modal-container">
-      <div class="userinfo__modal-wrapper">
-        <section class="userinfo__modal-list">
-          <ul>
-            <li>
-              <router-link to="/user">{{ userInfo.name }}</router-link>
-            </li>
-            <li>{{ `내 추천 코드 ${userInfo.promotionCode}` }}</li>
-            <li>
-              <router-link to="/user">내 정보 관리</router-link>
-            </li>
-            <li>
-              <router-link to="/user">주문 및 반품 내역</router-link>
-            </li>
-            <li>
-              <router-link to="/user">포인트</router-link>
-            </li>
-            <router-link to="/logout">
-              <li>로그아웃</li>
-            </router-link>
-          </ul>
-        </section>
-        <section class="userinfo__modal-order">
-          <i class="fas fa-times" @click="closeUserInfo" />
-          <div>
-            <div>
-              <span>결제완료</span>
-              <span>{{ userInfo.orderDone.length }}</span>
-            </div>
-            <div>
-              <span>배송중</span>
-              <span>{{ userInfo.delivering.length }}</span>
-            </div>
-            <div>
-              <span>반품/교환</span>
-              <span>{{ userInfo.changeOrRefund.length }}</span>
-            </div>
-          </div>
-          <button>주문 및 반품 내역</button>
-        </section>
-      </div>
+  <div class="userinfo__modal-container">
+    <div class="userinfo__modal-wrapper">
+      <section class="userinfo__modal-list">
+        <ul>
+          <li>
+            <router-link to="/user">{{ userInfo.name }}</router-link>
+          </li>
+          <li>{{ `내 추천 코드 ${userInfo.promotionCode}` }}</li>
+          <li>
+            <router-link to="/user">내 정보 관리</router-link>
+          </li>
+          <li>
+            <router-link to="/user">주문 및 반품 내역</router-link>
+          </li>
+          <li>
+            <router-link to="/user">포인트</router-link>
+          </li>
+          <li>
+            <router-link to="/logout">로그아웃</router-link>
+          </li>
+        </ul>
+      </section>
+      <aside class="userinfo__modal-order">
+        <i class="fas fa-times" ref="closeBtn" @click="closeUserInfo" />
+        <ul>
+          <li>
+            <em>결제완료</em>
+            <strong>{{ userInfo.orderDone.length }}</strong>
+          </li>
+          <li>
+            <em>배송중</em>
+            <strong>{{ userInfo.delivering.length }}</strong>
+          </li>
+          <li>
+            <em>반품/교환</em>
+            <strong>{{ userInfo.changeOrRefund.length }}</strong>
+          </li>
+        </ul>
+        <button>주문 및 반품 내역</button>
+      </aside>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -52,7 +50,11 @@ export default {
   props: ['userInfo'],
   methods: {
     closeUserInfo() {
-      Bus.$emit('userInfoToggle');
+      this.$refs.closeBtn.classList.add('rotation');
+      const timer = setTimeout(() => {
+        clearTimeout(timer);  
+        Bus.$emit('userInfoToggle');
+      }, 1000);
     }
   },
 }
@@ -69,6 +71,7 @@ ul {
   width:100%;
   height: 280px;
   background-color: #f8f8f8;
+  font-size: 14px;
 }
 .userinfo__modal-wrapper {
   display: flex;
@@ -79,15 +82,83 @@ ul {
 }
 
 .fa-times {
+  font-size: 33px;
+  margin-bottom: 55px;
   border-style: none;
   outline: none;
   cursor: pointer;
+  
 }
-.modal-enter { opacity: 0; }
-.modal-leave-active { opacity: 0; }
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+.fa-times.rotation {
+  animation-name: rotating;
+  animation-duration: .6s;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(2turn);
+  }
+}
+
+.userinfo__modal-list {
+  width: 810px;
+  height: 235px;
+  margin-top: 44px;
+  font-weight: 500;
+}
+
+.userinfo__modal-list li {
+  width: 100%;
+  margin: 0 0 20px;
+}
+
+.userinfo__modal-list li:first-child {
+  font-size: 20px;  
+}
+
+.userinfo__modal-list li:nth-child(2) {
+  color: #42b850;
+}
+
+.userinfo__modal-order {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 290px;
+  height: 235px;
+  margin-top: 44px;
+}
+
+.userinfo__modal-order>ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+}
+
+.userinfo__modal-order li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo__modal-order li>em {
+  display: block;
+  font-size: 13px;
+}
+.userinfo__modal-order li>strong{
+  font-size: 36px;
+}
+
+.userinfo__modal-order>button {
+  width: 100%;
+  height: 36px;
+  background-color: #393939;
+  color: #fff;
 }
 </style>

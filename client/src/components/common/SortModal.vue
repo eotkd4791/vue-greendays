@@ -4,7 +4,7 @@
       class="modal-list"
       v-for="value in whichModal"
       :key="value"
-      @click="pickedOrderBy(value)"
+      @click="pickedOrderBy({value, detail: null})"
       @mouseover="activatingTab"
     >
       <div class="modal-text" v-text="value" />
@@ -28,7 +28,7 @@ export default {
         }
         this.$emit('pickedGender', value);
       } else {
-        this.$emit('pickedOrderBy', value);
+        this.$emit('pickedOrderBy', value.value);
       }
     },
     activatingTab() {

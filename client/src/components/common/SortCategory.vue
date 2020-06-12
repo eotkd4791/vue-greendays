@@ -1,108 +1,59 @@
 <template>
   <div class="modal-container">
-    <div class="modal-row-left" ref="tabs">
+    <section class="modal-row-left" ref="tabs">
       <div
         class="modal-categories"
-        v-for="val in Object.keys(categories)"
-        :key="val"
-        @mouseover="activatingMenu(val)"
-      >{{ val }}</div>
-    </div>
-    <div class="modal-row-right">
+        v-for="value in Object.keys(getCategories)"
+        :key="value"
+        @mouseover="activatingMenu(value)"
+        @click="pickedCategory({ value, detail: null})"
+      >{{ value }}</div>
+    </section>
+    <section class="modal-row-right">
       <ul>
-        <li class="category__detail" v-for="kind in kinds" :key="kind">{{ kind }}</li>
+        <li
+          class="category__detail"
+          v-for="kind in kinds"
+          :key="kind"
+          @click="pickedCategory({ value: tempCategory, detail: kind })"
+        >{{ kind }}</li>
       </ul>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
+// Array.prototype.forEach.call(Object.values(categories), (v, i) => {
+//     console.log(v.indexOf('Jewelry'), i);
+// })
 export default {
   data() {
     return {
-      categories: {
-        Bags: [
-          'Shoulder Bags',
-          'Clutch Bags',
-          'Tote Bags',
-          'Backpacks',
-          'Belt Bags',
-          'Cross Bags',
-          'Travel Bags'
-        ],
-        Wallets: [
-          'Wallets',
-          'Small Wallets',
-          'Strap Wallets',
-          'Card Cases',
-          'Pouches'
-        ],
-        Clothes: [
-          'Cardigans',
-          'Shirts',
-          'Dresses',
-          'Skirts',
-          'Knits',
-          'Blouse',
-          'Long Sleeves',
-          'Short Sleeves',
-          'Hoodie',
-          'Coats',
-          'Jackets',
-          'Jumpers',
-          'Denim Pants',
-          'Pants',
-          'Slacks',
-          'Traning Wear',
-          'Swimwear',
-          'Vests',
-          'Jump Suit'
-        ],
-        Shoes: [
-          'Sandals',
-          'Espadrilles',
-          'Sneackers',
-          'Slippers',
-          'Moccasins',
-          'Pumps',
-          'Boots',
-          'Flats',
-          'Wedges',
-          'Mules',
-          'Loafers'
-        ],
-        Accessories: [
-          'Jewelry',
-          'Belts',
-          'Scarfs',
-          'Hats',
-          'Keyrings',
-          'Eyewear',
-          'Socks',
-          'Ties',
-          'Gloves',
-          'Keycases',
-          'Tights',
-          'Fancy',
-          'Bag Straps'
-        ],
-      },
       kinds:[],
+      tempCategory: '',
       activatedTabIndex: 0,
     };
   },
+  computed: {
+    getCategories() {
+      return this.$store.state.categories;
+    }
+  },
   methods: {
-    //chip 생성하는 로직 추가하기 
     activatingMenu(menu) {
-      this.kinds = this.categories[menu];
+      this.tempCategory = menu;
+      this.kinds = this.getCategories[menu];
       if(!this.$refs.tabs) return;
       this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('left-active');
-      this.activatedTabIndex = Object.keys(this.categories).indexOf(menu);
+      this.activatedTabIndex = Object.keys(this.getCategories).indexOf(menu);
       this.$refs.tabs.childNodes[this.activatedTabIndex].classList.add('left-active');
     },
+    pickedCategory(payload) {
+      this.$emit('pickedCategory', payload);
+    }
   },
   mounted() {
-    this.kinds = this.categories.Bags;
+    this.kinds = this.getCategories.Bags;
     this.$refs.tabs.firstChild.classList.add('left-active');
   },
 }
@@ -156,7 +107,7 @@ ul>li {
   color: #42b883;
   font-weight:600;
 }
-.categories, .left-active:first-child {
+.left-active:first-child {
   border-top-left-radius: 5px;
 }
 
