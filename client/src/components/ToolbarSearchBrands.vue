@@ -94,6 +94,7 @@ ul>li:first-child {
 }
 
 button {
+  outline-style: none;
   width: 100%;
   font-size: 13px;
   text-align: left;
