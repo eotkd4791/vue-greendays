@@ -285,16 +285,16 @@ export default {
       }
     },
     signUpValidate() {
+      if(!this.userInfo.address || !this.userInfo.detailAddress || !this.userInfo.selectedGender || !this.userInfo.selectedBirthYear) {
+        alert('회원가입 양식을 완성하여 주십시오.');
+        return false;
+      }
       if(!this.checkAll[2].checked) {
         alert('14세 이상만 가입할 수 있습니다.');
         return false;
       }
       if(!this.checkAll[3].checked) {
         alert('필수 항목에 동의하여야 가입이 가능합니다.');
-        return false;
-      }
-      if(!this.userInfo.address || !this.userInfo.detailAddress || !this.userInfo.selectedGender || !this.userInfo.selectedBirthYear) {
-        alert('회원가입 양식을 완성하여 주십시오.');
         return false;
       }
       return true;
