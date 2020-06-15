@@ -8,13 +8,9 @@
               <v-container>
                 <v-container>저는 이미 그린데이즈 멤버입니다.</v-container>
                 <v-subheader>본인 확인을 위해 연락처를 입력하세요.</v-subheader>
-                <v-form ref="form" v-model="valid">
+                <v-form ref="form">
+                  <v-text-field label="이메일" :rules="emailRules" required />
                   <v-text-field
-                    label="이메일"
-                    :rules="emailRules"
-                    required
-                  />
-                <v-text-field
                     v-if="activatedPw"
                     v-model="userPassword"
                     label="비밀번호"
@@ -22,7 +18,7 @@
                     :rules="passwordRules"
                     required
                   />
-                  <v-btn type="submit" :disabled="!valid" style="width: 50%; background-color: #000; color: #fff;" @click="userLogin">로그인</v-btn>
+                  <v-btn style="color:#fff" color="#000" block @click="userLogin">로그인</v-btn>
                 </v-form>
               </v-container>
             </v-card>
@@ -35,7 +31,12 @@
                 <v-subheader>아직 그린데이즈 멤버가 아니라면 연락처로 간편하게 가입하실 수 있습니다.</v-subheader>
               </v-container>
               <v-container>
-                <v-btn style="width: 50%; background-color: #000; color: #fff;" @click="movePage('/signup')">그린데이즈 멤버십 가입</v-btn>
+                <v-btn
+                  style="color:#fff"
+                  color="#000"
+                  block
+                  @click="movePage('/signup')"
+                >그린데이즈 멤버십 가입</v-btn>
               </v-container>
             </v-card>
           </v-col>
@@ -52,43 +53,52 @@ export default {
     return {
       valid: false,
       activatedPw: false,
-      tmpPN:'01075014791',
-      tmpPW:'daesang1974',
-      userPhoneNum: '',
+      tmpEmail:'eee@1234.com',
+      tmpPW:'abcd123!',
+      userEmail: '',
       userPassword: '',
       emailRules: [
         v => !!v || '이메일 입력하세요.',
-        v => /[\S]+@[\S\D]+\.[\S\D]+/ig.test(v) || '이메일 형식이 올바르지 않습니다.'
+        v => /[\S]+@[\S\D]+\.[\S\D]+/ig.test(v) || '이메일 형식이 올바르지 않습니다.',
+        v => this.activatedPw || 'Enter 키를 눌러주세요!',
       ],
       passwordRules: [
         v => !!v || '패스워드를 입력하세요.',
         v => /[0-9]/g.test(v) || '숫자가 존재하지 않습니다.',
         v => /[a-z]/ig.test(v) || '영어 알파벳이 존재하지 않습니다.',
         v => /[~!@#$%^&*/?]/g.test(v) || '특수문자가 존재하지 않습니다.',
-        v => !(v.length < 8 || v.length > 20) || '비밀번호 자릿수를 확인해 주세요.'
+        v => !(v.length < 8 || v.length > 20) || '비밀번호 자릿수를 확인해 주세요.',
       ]
     };
   },
   methods: {
     userLogin() {
-      console.log("userLogin 호출!!");
-      console.log(typeof this.userPhoneNum, typeof this.tmpPN);
+      console.log(this.$refs.form.validate());
+      // if(this.$refs.form.validate()) {
+      //   if(this.tmpEmail === this.userEmail && this.tmpPW === this.userPassword) {
+      //     return alert('폼 유효!');
+      //   } else {
+      //     return alert('폼 유효하지않음!');
+      //   }
+      //   // this.$store.dispatch('userLogin', userInfo);
 
-
+      // } else {
+      //   return alert("올바르지 않은 이메일 또는 비밀번호 입니다.");
+      // }
         // Vuex actions 처리 하기
-      const userId = this.userPhoneNum;
-      const userPw = this.userPassword;
+      // const userId = this.userEmail;
+      // const userPw = this.userPassword;
       
-      console.log(typeof userId);
-      if(this.tmpPN === userId && this.tmpPW === userPw) {
-        console.log(this.valid===true ? '입력이 잘됨' : '입력이 잘못됨');
+      // console.log(typeof userId);
+      // if(this.tmpEmail === userId && this.tmpPW === userPw) {
+      //   console.log(this.valid===true ? '입력이 잘됨' : '입력이 잘못됨');
 
-        const userInfo = {userId, userPw};
-        this.$store.dispatch("userLogin", userInfo);
+      //   const userInfo = {userId, userPw};
+      //   this.$store.dispatch("userLogin", userInfo);
 
-      } else {
-        return alert("올바르지 않은 연락처 또는 비밀번호 입니다.");
-      }
+      // } else {
+      //   return alert("올바르지 않은 이메일 또는 비밀번호 입니다.");
+      // }
     }, 
     movePage(to) {
       if(this.$route.path !== to) {
@@ -107,6 +117,7 @@ export default {
   width: 100%;
   position: relative;
   top: 115px;
+  color: #fff;
   background-color: #fff;
 }
 
