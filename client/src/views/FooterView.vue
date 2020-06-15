@@ -3,14 +3,14 @@
     <quick-menu />
     <contact-info />
     <about-greendays />
-    <img src="../assets/img/green-present.png" />
+    <img src="@/assets/img/green-present.png" />
   </div>
 </template>
 
 <script>
-import QuickMenu from '../components/QuickMenu.vue';
-import ContactInfo from '../components/ContactInfo.vue';
-import AboutGreendays from '../components/About.vue';
+import QuickMenu from '@/components/QuickMenu.vue';
+import ContactInfo from '@/components/ContactInfo.vue';
+import AboutGreendays from '@/components/About.vue';
 
 export default {
   components: {
