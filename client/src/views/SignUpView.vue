@@ -197,7 +197,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { 
   getEmailCheckCode,
   getCheckSentCode,
@@ -246,7 +245,7 @@ export default {
     async sendEmailCheckCode() {
       try {
         const response = await getEmailCheckCode(this.userInfo.email);
-        return alert(response.data.message)
+        return alert(response.data.message);
       } catch (error) {
         console.error(error);
         return alert(error.response.data.message);
