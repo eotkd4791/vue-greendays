@@ -1,6 +1,6 @@
 <template>
   <div>
-    상품뷰
+    상품 상세뷰
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
   </div>
 </template>
