@@ -22,7 +22,7 @@
         <p>Need help?</p>
         <p>고객 센터</p>
       </div>
-      <div> <!--채널톡 -->
+      <div>
         <i class="far fa-comment-dots" />
         <p>Channel Talk</p>
         <p>채널톡</p>
@@ -34,7 +34,7 @@
 <script>
 export default {
   methods: {
-     movePage(to) {
+    movePage(to) {
       if(to ==='#') return;
       if(this.$route.path !== to) {
         const nextPage = { path: to };
