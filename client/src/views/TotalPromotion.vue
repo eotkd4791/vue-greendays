@@ -20,7 +20,7 @@
           <div class="promo__info-container-overview-sub">
             <p class="promo__info-container-overview-title">{{ promotion.title }}</p>
             <p
-              v-if="promotion.expireAt !== undefined"
+              v-if="!!promotion.expireAt"
               class="promo__info-container-overview-subtitle"
             >{{ promotion.subtitle }}</p>
             <p class="promo__info-container-overview-description">{{ promotion.description }}</p>
