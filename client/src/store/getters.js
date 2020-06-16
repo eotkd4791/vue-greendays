@@ -2,24 +2,28 @@ export default {
   getCustomerLinks() {
     return [
       {
-        routePath: '/',
+        routePath: '/customerservice',
         name: '고객센터'
       },
       {
-        routePath: '/',
+        routePath: '/customerservice/logi_guide',
         name: '배송가이드'
       },
       {
-        routePath: '/',
+        routePath: '/customerservice/notice',
         name: '공지사항'
       },
       {
-        routePath: '/',
+        routePath: '/customerservice/faq',
         name: '자주묻는질문'
       },
       {
-        routePath: '/',
+        routePath: '/customerservice/terms',
         name: '이용약관'
+      },
+      {
+        routePath: '/customerservice/private_info_policy',
+        name: '개인정보취급방침'
       },
     ];
   },

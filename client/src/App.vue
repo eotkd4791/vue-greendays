@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main onselectstart="return false">
     <toolbar-view />
     <div v-if="onSpace" class="space" />
     <router-view />

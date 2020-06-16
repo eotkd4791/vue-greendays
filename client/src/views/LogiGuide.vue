@@ -1,12 +1,16 @@
 <template>
-  <div>
-    배송가이드
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
-  </div>
+  <section class="logi-guide">
+    <header class="logi-guide__header">배송가이드</header>
+    <info-list></info-list>
+  </section>
 </template>
 
 <script>
+import InfoList from '@/components/common/InfoList.vue';
 export default {
+  components: {
+    InfoList,
+  },
   data() {
     return {
       
@@ -16,15 +20,14 @@ export default {
 </script>
 
 <style scoped>
-div {
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 650px;
-  overflow: hidden;
+.logi-guide {
+  width: 840px;
+  height: 100%;
 }
+.logi-guide__header {
+  font-size: 20px;
+  margin: 0 0 36px;
+}
+
 
 </style>
