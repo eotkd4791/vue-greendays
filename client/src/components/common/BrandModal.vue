@@ -66,6 +66,9 @@ export default {
     closePickBrand() {
       this.showModal = false;
     },
+    setScrollLock() {
+      window.scrollTo(0, 0);
+    },
   },
   created() {
     this.pickBrands = true;
@@ -75,7 +78,12 @@ export default {
     //알파벳 선택하는 로직 -> 디비에서 불러온 브랜드 이름이 하나도 없으면 passive라는 클래스를 추가한다.(cursor: not-allowed)
     //
   },
-
+  mounted() {
+    window.addEventListener('scroll', this.setScrollLock);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.setScrollLock);
+  }
 }
 </script>
 
