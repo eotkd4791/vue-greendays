@@ -91,6 +91,6 @@ export default {
 
 .rolling-enter, .rolling-leave-to {
   transform: translateY(-115px);
-  z-index: 0;
+  z-index: 1001;
 }
 </style>
