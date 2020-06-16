@@ -14,7 +14,7 @@
           </article>
         </a>
       </li>
-      <router-link tag="li" to="/logiguide" class="customer-service__li">
+      <router-link tag="li" to="/logi_guide" class="customer-service__li">
         <div class="customer-service__div">
           <i class="fas fa-truck" />
           <h1 class="customer-service__title">배송가이드</h1>
@@ -55,7 +55,7 @@
         </article>
       </router-link>
 
-      <router-link tag="li" to="/privateinfo" class="customer-service__li">
+      <router-link tag="li" to="/private_info_policy" class="customer-service__li">
         <div class="customer-service__div">
           <i class="fas fa-tasks" />
           <h1 class="customer-service__title">개인정보취급방침</h1>
@@ -97,7 +97,6 @@ export default {}
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  
   width: 260px;
   height: 187px;
   padding: 30px 0;
@@ -111,8 +110,8 @@ export default {}
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width :100%;
-  height :100%;
+  width: 100%;
+  height: 100%;
 }
 
 .customer-service__li:hover, .customer-service__first-list:hover {
