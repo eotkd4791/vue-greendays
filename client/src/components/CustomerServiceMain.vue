@@ -54,7 +54,6 @@
           <h3 class="customer-service-h3">확인하세요.</h3>
         </article>
       </router-link>
-
       <router-link tag="li" to="/private_info_policy" class="customer-service__li">
         <div class="customer-service__div">
           <i class="fas fa-tasks" />
