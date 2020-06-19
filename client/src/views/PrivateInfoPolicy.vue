@@ -1,30 +1,39 @@
 <template>
-  <div>
-    개인정보취급방침
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
-  </div>
+  <section class="private-info-policy">
+    <header class="private-info-policy__header">개인정보취급방침</header>
+    <blockquote class="private-info-policy__blockquote" v-html="customerService.privateInfoPolicy" />
+  </section>
 </template>
 
 <script>
+import customerService from '@/static/customerService.js';
+
 export default {
   data() {
     return {
-      
+      customerService,
     };
   }
 }
 </script>
 
 <style scoped>
-div {
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 650px;
-  overflow: hidden;
+.private-info-policy {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 840px;
+  min-height: 532px;
+  font-size: 14px;
 }
-
+.private-info-policy__header {
+  font-size: 20px;
+  margin: 0 0 36px;
+}
+.private-info-policy__blockquote {
+  padding: 30px 50px;
+  border: 1px solid #dedede;
+  white-space: normal;
+}
 </style>

@@ -1,30 +1,39 @@
 <template>
-  <div>
-    이용약관
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
-  </div>
+  <section class="terms" v-once>
+    <header class="terms__header">이용약관</header>
+    <blockquote class="terms__blockquote" v-html="customerService.terms" />
+  </section>
 </template>
 
 <script>
+import customerService from '@/static/customerService.js';
+
 export default {
   data() {
     return {
-      
+      customerService,
     };
-  }
+  },
 }
 </script>
 
 <style scoped>
-div {
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 650px;
-  overflow: hidden;
+.terms {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 840px;
+  min-height: 532px;
+  font-size: 14px;
 }
-
+.terms__header {
+  font-size: 20px;
+  margin: 0 0 36px;
+}
+.terms__blockquote {
+  padding: 30px 50px;
+  border: 1px solid #dedede;
+  white-space: normal;
+}
 </style>
