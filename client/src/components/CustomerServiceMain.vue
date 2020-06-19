@@ -14,7 +14,7 @@
           </article>
         </a>
       </li>
-      <router-link tag="li" to="/logi_guide" class="customer-service__li">
+      <router-link tag="li" to="/customerservice/logi_guide" class="customer-service__li">
         <div class="customer-service__div">
           <i class="fas fa-truck" />
           <h1 class="customer-service__title">배송가이드</h1>
@@ -24,7 +24,7 @@
           <h3 class="customer-service-h3">주의사항을 참고하세요.</h3>
         </article>
       </router-link>
-      <router-link tag="li" to="/notice" class="customer-service__li">
+      <router-link tag="li" to="/customerservice/notice" class="customer-service__li">
         <div class="customer-service__div">
           <i class="fas fa-bullhorn" />
           <h1 class="customer-service__title">공지사항</h1>
@@ -34,7 +34,7 @@
           <h3 class="customer-service-h3">그린데이즈 소식을 확인하세요.</h3>
         </article>
       </router-link>
-      <router-link tag="li" to="/faq" class="customer-service__li">
+      <router-link tag="li" to="/customerservice/faq" class="customer-service__li">
         <div class="customer-service__div">
           <i class="far fa-question-circle" />
           <h1 class="customer-service__title">자주묻는질문</h1>
@@ -44,7 +44,7 @@
           <h3 class="customer-service-h3">질문에 대한 답을 찾아보세요.</h3>
         </article>
       </router-link>
-      <router-link tag="li" to="/terms" class="customer-service__li">
+      <router-link tag="li" to="/customerservice/terms" class="customer-service__li">
         <div class="customer-service__div">
           <i class="fas fa-scroll" />
           <h1 class="customer-service__title">이용약관</h1>
@@ -54,7 +54,7 @@
           <h3 class="customer-service-h3">확인하세요.</h3>
         </article>
       </router-link>
-      <router-link tag="li" to="/private_info_policy" class="customer-service__li">
+      <router-link tag="li" to="/customerservice/private_info_policy" class="customer-service__li">
         <div class="customer-service__div">
           <i class="fas fa-tasks" />
           <h1 class="customer-service__title">개인정보취급방침</h1>
