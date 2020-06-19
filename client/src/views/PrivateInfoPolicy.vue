@@ -1,5 +1,5 @@
 <template>
-  <section class="private-info-policy">
+  <section class="private-info-policy" v-once>
     <header class="private-info-policy__header">개인정보취급방침</header>
     <blockquote class="private-info-policy__blockquote" v-html="customerService.privateInfoPolicy" />
   </section>
