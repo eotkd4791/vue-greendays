@@ -1,9 +1,13 @@
 <template>
   <aside class="left-link">
-    <ul class="left-link__ul" ref="lists">
-      <li class="left-link__li" v-for="link in linkList" :key="link.name">
-        <router-link :to="link.routePath">{{ link.name }}</router-link>
-      </li>
+    <ul class="left-link__ul" ref="lists" @click="activatedRouterLink">
+      <router-link
+        tag="li"
+        :to="link.routePath"
+        v-for="link in linkList"
+        :key="link.name"
+        class="left-link__li"
+      >{{ link.name }}</router-link>
     </ul>
   </aside>
 </template>
@@ -23,11 +27,28 @@ export default {
         'getUserInfoLinks',
       ]), 
   },
+  methods: {
+    activatedRouterLink(e) {
+      const firstList = this.$refs.lists.firstChild;
+      const classList = firstList.classList;
+      const includes = Array.prototype.includes;
+
+      if(firstList === e.target) {
+        if(!includes.call(classList, 'router-link-exact-active')) {
+          classList.add('router-link-exact-active');
+        } 
+      } else {
+        if(includes.call(classList, 'router-link-exact-active')) {
+          classList.remove('router-link-exact-active');
+        } 
+      }
+    }
+  },
   created() {
     this.linkList = this.$route.path.includes('customerservice') ? this.getCustomerLinks : this.getUserInfoLinks;
   },
   mounted() {
-    // this.$refs.lists.firstChild.firstChild.classList.add('left-link__li-modifier');
+    this.$refs.lists.firstChild.classList.add('router-link-exact-active');
   }
 }
 </script>
@@ -49,13 +70,9 @@ export default {
   font-weight: 400;
   margin: 0 0 20px;
   color: #000;
+  cursor: pointer;
 }
 
-/* .left-link__li-modifier {
-  color: #42b850;
-} 
-활성화된 router link에 표시하는 클래스로 처리하기
-*/
 .router-link-active.router-link-exact-active {
   color:#42b850;
   font-weight: 500;
