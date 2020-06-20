@@ -3,7 +3,7 @@
     <header class="customer-service__header">고객센터</header>
     <ul class="customer-service__ul">
       <li class="customer-service__li">
-        <a class="customer-service__first-list" href="tel:010-1234-5678">
+        <a class="customer-service__a" href="tel:010-1234-5678">
           <div class="customer-service__div">
             <i class="fas fa-phone-volume" />
             <h1 class="customer-service__title">전화하기</h1>
@@ -104,16 +104,21 @@ export default {}
   cursor: pointer;
 }
 
-.customer-service__first-list {
+.customer-service__li:first-child {
+  padding: 0;
+}
+
+.customer-service__a {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 30px 0;
 }
 
-.customer-service__li:hover, .customer-service__first-list:hover {
+.customer-service__li:hover, .customer-service__a:hover {
   color: white;
   font-weight: 500;
   background-color: #393939;
