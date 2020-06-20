@@ -1,27 +1,17 @@
 <template>
   <div class="userinfo__modal-container">
     <div class="userinfo__modal-wrapper">
-      <section class="userinfo__modal-list">
+      <section class="userinfo_section">
         <ul>
-          <li>
-            <router-link to="/user">{{ userInfo.name }}</router-link>
-          </li>
+          <router-link tag="li" to="/user">{{ userInfo.name }}</router-link>
           <li>{{ `내 추천 코드 ${userInfo.promotionCode}` }}</li>
-          <li>
-            <router-link to="/user">내 정보 관리</router-link>
-          </li>
-          <li>
-            <router-link to="/user">주문 및 반품 내역</router-link>
-          </li>
-          <li>
-            <router-link to="/user">포인트</router-link>
-          </li>
-          <li>
-            <router-link to="/logout">로그아웃</router-link>
-          </li>
+          <router-link tag="li" to="/user">내 정보 관리</router-link>
+          <router-link tag="li" to="/user">주문 및 반품 내역</router-link>
+          <router-link tag="li" to="/user">포인트</router-link>
+          <router-link tag="li" to="/logout">로그아웃</router-link>
         </ul>
       </section>
-      <aside class="userinfo__modal-order">
+      <aside class="userinfo__aside">
         <i class="fas fa-times" ref="closeBtn" @click="closeUserInfo" />
         <ul>
           <li>
@@ -61,9 +51,6 @@ export default {
 </script>
 
 <style scoped>
-ul {
-  list-style-type: none;
-}
 .userinfo__modal-container {
   position: fixed;
   top: 0;
@@ -73,6 +60,7 @@ ul {
   background-color: #f8f8f8;
   font-size: 14px;
 }
+
 .userinfo__modal-wrapper {
   display: flex;
   justify-content: space-between;
@@ -95,36 +83,29 @@ ul {
   animation-iteration-count: 1;
 }
 
-@keyframes rotating {
-  from {
-    transform: rotate(0turn);
-  }
-  to {
-    transform: rotate(2turn);
-  }
-}
-
-.userinfo__modal-list {
+.userinfo_section {
   width: 810px;
   height: 235px;
   margin-top: 44px;
   font-weight: 500;
 }
 
-.userinfo__modal-list li {
+.userinfo_section li {
   width: 100%;
   margin: 0 0 20px;
+  cursor: pointer;
 }
 
-.userinfo__modal-list li:first-child {
+.userinfo_section li:first-child {
   font-size: 20px;  
 }
 
-.userinfo__modal-list li:nth-child(2) {
+.userinfo_section li:nth-child(2) {
   color: #42b850;
+  cursor: default;
 }
 
-.userinfo__modal-order {
+.userinfo__aside {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -133,7 +114,7 @@ ul {
   margin-top: 44px;
 }
 
-.userinfo__modal-order>ul {
+.userinfo__aside>ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -141,24 +122,34 @@ ul {
   height: 70px;
 }
 
-.userinfo__modal-order li {
+.userinfo__aside li {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.userinfo__modal-order li>em {
+.userinfo__aside li>em {
   display: block;
   font-size: 13px;
 }
-.userinfo__modal-order li>strong{
+
+.userinfo__aside li>strong{
   font-size: 36px;
 }
 
-.userinfo__modal-order>button {
+.userinfo__aside>button {
   width: 100%;
   height: 36px;
   background-color: #393939;
   color: #fff;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(2turn);
+  }
 }
 </style>
