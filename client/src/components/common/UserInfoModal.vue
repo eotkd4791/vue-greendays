@@ -3,12 +3,12 @@
     <div class="userinfo__modal-wrapper">
       <section class="userinfo_section">
         <ul>
-          <router-link tag="li" to="/user">{{ userInfo.name }}</router-link>
+          <router-link tag="li" to="/user/edit">{{ userInfo.name }}</router-link>
           <li>{{ `내 추천 코드 ${userInfo.promotionCode}` }}</li>
-          <router-link tag="li" to="/user">내 정보 관리</router-link>
-          <router-link tag="li" to="/user">주문 및 반품 내역</router-link>
-          <router-link tag="li" to="/user">포인트</router-link>
-          <router-link tag="li" to="/logout">로그아웃</router-link>
+          <router-link tag="li" to="/user/edit">내 정보 관리</router-link>
+          <router-link tag="li" to="/user/total_order_refund">주문 및 반품 내역</router-link>
+          <router-link tag="li" to="/user/point">포인트</router-link>
+          <li>로그아웃</li>
         </ul>
       </section>
       <aside class="userinfo__aside">
