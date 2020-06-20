@@ -855,7 +855,7 @@ const privateInfoPolicy =
     </li>
     <li style="margin: 5px 0">
       <h3 style="line-height: 200%; margin: 30px 0">12. 고지의 의무</h3>
-      <article style="line-height: 200%">       margin: 5px 0;  
+      <article style="line-height: 200%">
         현 개인정보처리방침의 내용은 정부의 정책 또는 보안기술의 변경에 따라 내용의 추가 삭제 및
         수정이 있을 시에는 홈페이지의 '공지사항'을 통해 고지할 것입니다.
       </article>
