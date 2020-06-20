@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-container">
+  <div class="footer">
     <quick-menu />
     <contact-info />
     <about-greendays />
@@ -22,6 +22,10 @@ export default {
 </script>
 
 <style scoped>
+.footer {
+  margin: 0;
+}
+
 img {
   display: block;
   width: 70px;
