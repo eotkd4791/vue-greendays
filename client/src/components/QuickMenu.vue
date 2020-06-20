@@ -1,10 +1,10 @@
 <template>
-  <div class="quick-container">
-    <div class="quick-container__title">
+  <div class="quick-menu">
+    <div class="quick-menu__title">
       <span>Quick menu</span>
     </div>
 
-    <div class="quick-container__btn">
+    <div class="quick-menu__btn">
       <div @click="movePage('/')">
         <i class="fas fa-truck" />
         <p>Free delivery</p>
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style scoped>
-.quick-container {
+.quick-menu {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
@@ -57,27 +57,27 @@ export default {
   font-family: 'Montserrat';
   background-color: #fff;
 }
-.quick-container__title {
+.quick-menu__title {
   text-align: center;  
   border-top: 1px solid rgb(235,235,235);
   padding-top: 100px;
   margin-top: 100px;
   font-weight: 700;
 }
-.quick-container__btn {
+.quick-menu__btn {
   display: flex;
   justify-content: space-around;
   text-align: center;
   margin: 100px 0;
   cursor: pointer;
 }
-.quick-container__btn div>i {
+.quick-menu__btn div>i {
   color: #42b883;
   font-size: 25px;
   padding-bottom: 40px;
   margin-bottom:  30px;
   border-bottom: 2px solid #42b883;
 }
-.quick-container__btn div p:nth-child(2) { margin: 0 0 9px; }
-.quick-container__btn div p:nth-child(3) { color: #8b8b8b; font-size: 12px; }
+.quick-menu__btn div p:nth-child(2) { margin: 0 0 9px; }
+.quick-menu__btn div p:nth-child(3) { color: #8b8b8b; font-size: 12px; }
 </style>
