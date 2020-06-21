@@ -8,11 +8,11 @@
             <span class="info-container__contact__ask__text">1 : 1 실시간 문의</span>
             <i class="fas fa-chevron-right" />
           </span>
-        <div class="info-container__contact__subtitle">
-          <p>Tel. 032-123-4567</p>
-          <p>AM 09:30 ~ PM 18:00</p>
-          <p>CLOSED (SAT, SUN, HOLIDAY)</p>
-        </div>
+        <ul class="info-container__contact__subtitle">
+          <li>Tel. 032-123-4567</li>
+          <li>AM 09:30 ~ PM 18:00</li>
+          <li>CLOSED (SAT, SUN, HOLIDAY)</li>
+        </ul>
       </section>
 
       <section class="info-container__bank">
