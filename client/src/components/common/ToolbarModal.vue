@@ -62,7 +62,7 @@ export default {
 .modal-container {
   width: 100%;
   height:410px;
-  z-index: 1002;
+  z-index: 1001;
   margin: 0px auto;
   padding: 20px 30px;
   border: none;
@@ -72,7 +72,7 @@ export default {
 }
 
 .modal-container.active-userinfo {
-  transition: all 250ms;
+  transition: transform 250ms;
   transform: translateY(280px);
 }
 
@@ -86,7 +86,7 @@ export default {
 }
 
 .rolling-enter-active, .rolling-leave-active {
-  transition: all .6s ease-in-out;
+  transition: all .4s cubic-bezier(.645,.045,.355,1);
 }
 
 .rolling-enter, .rolling-leave-to {
