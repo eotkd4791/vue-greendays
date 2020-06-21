@@ -18,7 +18,7 @@
       <section class="info-container__bank">
         <span class="info-container__bank__title">BANK ACCOUNT</span>
         <p class="info-container__bank__subtitle">신한은행 110-359-XXXXXX</p>
-        <p calss="info-container__bank__subtitle">예금주:(주)그린데이즈</p>
+        <p class="info-container__bank__subtitle">예금주:(주)그린데이즈</p>
       </section>
 
       <aside class="info__link">
@@ -29,10 +29,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {}
-</script>
 
 <style scoped>
 .info-wrapper {
