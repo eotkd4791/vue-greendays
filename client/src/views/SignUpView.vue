@@ -185,7 +185,7 @@
                   id="btn-signup"
                   class="signup-membership"
                   type="submit"
-                  @click="signUpMembership"
+                  @click.prevent="signUpMembership"
                 >멤버십 가입하기</v-btn>
               </v-container>
             </v-container>
@@ -203,6 +203,9 @@ import {
   signUp,
 } from "@/api/index.js";
 
+import fillBirthYear from '@/mixins/fillBirthYear.js';
+import daumAddressAPI from '@/mixins/daumAddressAPI';
+
 export default {
   data() {
     return {
@@ -219,7 +222,6 @@ export default {
         recommendCode: '',
       },
       gender: ["남", "여", "해당없음"],
-      years: [],
       authCodeEmail: '',
       passwordCheck: '',
       checkAll: {},
@@ -262,15 +264,6 @@ export default {
         return alert(error.response.data.message);
       }
     },
-    openAddressSearch() {
-      new daum.Postcode({
-        oncomplete: ((data) => {
-          this.userInfo.postCode = data.zonecode;
-          this.userInfo.address = `${data.roadAddress} ${data.buildingName}`;
-        }),
-        animation: true,
-      }).open();
-    },
     checkAllArticles(e) {
       this.checkAll[2].checked = this.checkAll[3].checked = e.target.checked;
     },
@@ -284,6 +277,7 @@ export default {
       }
     },
     signUpValidate() {
+      //refs 속성의 validate 함수 이용하기
       if(!this.userInfo.address || !this.userInfo.detailAddress || !this.userInfo.selectedGender || !this.userInfo.selectedBirthYear) {
         alert('회원가입 양식을 완성하여 주십시오.');
         return false;
@@ -298,9 +292,8 @@ export default {
       }
       return true;
     },
-    async signUpMembership(e) {
+    async signUpMembership() {
       try {
-        e.preventDefault();
         Array.prototype.map.call(this.checkAll, v => {
           this.userInfo.agreeTerms[Array.prototype.indexOf.call(this.checkAll, v)] = v.checked;
         });
@@ -320,11 +313,7 @@ export default {
       return this.userInfo.selectedBirthYear > currentYear - 14 ? false : true;
     },
   },
-  created() {
-    let value = 2020;
-    const yearArr = new Array(80).fill(0).map(v =>  v = value--)
-    this.years = yearArr;
-  },
+  mixins: [fillBirthYear, daumAddressAPI],
   mounted() {
     this.checkAll = document.querySelectorAll("#checkbox-terms");
   },
