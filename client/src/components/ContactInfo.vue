@@ -3,11 +3,11 @@
     <div class="info-container">
       <section class="info-container__contact">
         <div class="info-container__contact__title">무엇이든 물어보세요!</div>
-          <span class="info-container__contact__ask">
-            <i class="fas fa-info" />
-            <span class="info-container__contact__ask__text">1 : 1 실시간 문의</span>
-            <i class="fas fa-chevron-right" />
-          </span>
+        <span class="info-container__contact__ask">
+          <i class="fas fa-info" />
+          <span class="info-container__contact__ask__text">1 : 1 실시간 문의</span>
+          <i class="fas fa-chevron-right" />
+        </span>
         <ul class="info-container__contact__subtitle">
           <li>Tel. 032-123-4567</li>
           <li>AM 09:30 ~ PM 18:00</li>
@@ -22,9 +22,15 @@
       </section>
 
       <aside class="info__link">
-          <a href="https://www.instagram.com/st2f_you/"><i class="fab fa-instagram" /></a>
-          <a href="https://www.facebook.com/profile.php?id=100049844413064"><i class="fab fa-facebook" /></a>
-          <a href="https://www.github.com/eotkd4791"><i class="fab fa-github" /></a>
+        <a href="https://www.instagram.com/st2f_you/">
+          <i class="fab fa-instagram" />
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100049844413064">
+          <i class="fab fa-facebook" />
+        </a>
+        <a href="https://www.github.com/eotkd4791">
+          <i class="fab fa-github" />
+        </a>
       </aside>
     </div>
   </div>
@@ -72,12 +78,11 @@
   margin: 0 12px 0 0;
   color: #252525;
 }
- .info-container__contact__subtitle>p {
-   font-size: 12px;
-   font-weight: 600;
-   margin: 0 0 15px;
- }
-/*  */
+.info-container__contact__subtitle>li {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 15px;
+}
 
 .info-container__bank {
   margin: 50px auto 0 0;
