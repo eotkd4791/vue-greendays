@@ -1,26 +1,29 @@
 <template>
-  <div>
-    리뷰
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
+  <div class="reviews">
+    <inspection-center></inspection-center>
+    <user-reviews></user-reviews>
   </div>
 </template>
 
 <script>
-export default {
+import InspectionCenter from '@/components/InspectionCenter.vue';
+import UserReviews from '@/components/UserReviews.vue';
 
+export default {
+  components: {
+    InspectionCenter,
+    UserReviews
+  },
 }
 </script>
 
 <style scoped>
-div {
+.reviews {
   display:flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 650px;
-  overflow: hidden;
+  max-width: 1100px;
+  margin: 150px auto 0;
 }
-
 </style>
