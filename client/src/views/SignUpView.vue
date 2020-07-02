@@ -1,392 +1,398 @@
 <template>
-  <v-container id="container-signup">
-    <v-container class="section-signup">
-      <v-card>
-        <v-container>
-          <v-card-title>그린데이즈 멤버십 가입</v-card-title>
-        </v-container>
+	<v-container class="sign-up">
+		<v-container class="sign-up__container">
+			<v-card>
+				<v-container>
+					<v-card-title>그린데이즈 멤버십 가입</v-card-title>
+				</v-container>
+				<v-container>
+					<v-row class="sign-up__article">
+						<v-col cols="5">
+							<form class="sign-up__form">
+								<v-text-field
+									type="string"
+									label="이메일"
+									v-model="userInfo.email"
+									:rules="emailRules"
+									required
+								/>
+								<v-btn class="sign-up__btn" color="#000" @click="sendEmailCheckCode">이메일 인증</v-btn>
+							</form>
+						</v-col>
+						<v-col cols="5">
+							<form class="sign-up__form">
+								<v-text-field label="인증코드 입력" v-model="authCodeEmail" required />
+								<v-btn class="sign-up__btn" color="#000" @click="checkSentCode">인증코드 확인</v-btn>
+							</form>
+						</v-col>
+					</v-row>
+				</v-container>
+				<v-container>
+					<v-row class="sign-up__article">
+						<v-col cols="5">
+							<v-text-field
+								type="password"
+								label="비밀번호"
+								v-model="userInfo.password"
+								:rules="passwordRules"
+								required
+							/>
+						</v-col>
+						<v-col cols="5">
+							<v-text-field
+								type="password"
+								label="비밀번호 확인"
+								v-model="passwordCheck"
+								:rules="passwordCheckRules"
+								required
+							/>
+						</v-col>
+					</v-row>
+				</v-container>
+				<v-container>
+					<v-row class="sign-up__article">
+						<v-col cols="5">
+							<v-text-field type="string" label="이름" v-model="userInfo.name" required />
+						</v-col>
+						<v-col cols="5">
+							<form class="sign-up__form">
+								<v-text-field
+									type="string"
+									label="우편번호"
+									v-model="userInfo.postCode"
+									ref="postcode"
+									readonly
+									required
+								/>
+								<v-btn class="sign-up__btn" color="#000" @click="openAddressSearch">우편번호 찾기</v-btn>
+							</form>
+						</v-col>
+					</v-row>
+				</v-container>
+				<v-container>
+					<v-row class="sign-up__article">
+						<v-col cols="5">
+							<v-text-field
+								type="string"
+								label="주소"
+								v-model="userInfo.address"
+								ref="detailAddress"
+								readonly
+								required
+							/>
+						</v-col>
+						<v-col cols="5">
+							<v-text-field type="string" label="나머지 주소" v-model="userInfo.detailAddress" required />
+						</v-col>
+					</v-row>
+				</v-container>
+				<v-container>
+					<v-row class="sign-up__article">
+						<v-col cols="5">
+							<v-overflow-btn
+								class="sign-up__gender"
+								label="성별"
+								v-model="userInfo.selectedGender"
+								:items="gender"
+								dense
+								outlined
+								attach=".sign-up__gender"
+							></v-overflow-btn>
+						</v-col>
 
-        <v-container>
-          <v-row class="article-signup">
-            <v-col cols="5">
-              <div class="form-with-btn">
-                <v-text-field
-                  v-model="userInfo.email"
-                  label="이메일"
-                  type="string"
-                  :rules="emailRules"
-                  required
-                />
-                <v-btn id="btn-signup" @click="sendEmailCheckCode">이메일 인증</v-btn>
-              </div>
-            </v-col>
+						<v-col cols="5">
+							<v-overflow-btn
+								class="sign-up__birth-year"
+								label="출생년도"
+								v-model="userInfo.selectedBirthYear"
+								:items="years"
+								dense
+								outlined
+								attach=".sign-up__birth-year"
+							></v-overflow-btn>
+						</v-col>
+					</v-row>
 
-            <v-col cols="5">
-              <div class="form-with-btn">
-                <v-text-field v-model="authCodeEmail" label="인증코드 입력" required />
-                <v-btn id="btn-signup" @click="checkSentCode">인증코드 확인</v-btn>
-              </div>
-            </v-col>
-          </v-row>
-        </v-container>
-        <v-container>
-          <v-row class="article-signup">
-            <v-col cols="5">
-              <v-text-field
-                v-model="userInfo.password"
-                label="비밀번호"
-                type="password"
-                :rules="passwordRules"
-                required
-              />
-            </v-col>
-            <v-col cols="5">
-              <v-text-field
-                v-model="passwordCheck"
-                label="비밀번호 확인"
-                type="password"
-                :rules="passwordCheckRules"
-                required
-              />
-            </v-col>
-          </v-row>
-        </v-container>
+					<v-row>
+						<v-container class="sign-up__terms">
+							<v-list-item>
+								<v-list-item-content>
+									<v-list-item-title>
+										<input
+											type="checkbox"
+											class="sign-up__checkbox"
+											:checked="userInfo.agreeTerms[0]"
+											@click="checkAllArticles"
+										/>
+										<span class="sign-up__label">모든 항목에 체크하기</span>
+									</v-list-item-title>
+									<v-container>
+										<v-list-item-subtitle class="sign-up__check-all">
+											전체 동의는 필수 및 선택 정보에 대한 동의도 포함되어
+											있으며, 개별적으로도 동의를 선택하실 수 있습니다.
+											선택항목에 대한 동의를 거부하시는 경우에도 서비스는 이용이
+											가능합니다.
+										</v-list-item-subtitle>
+									</v-container>
+								</v-list-item-content>
+							</v-list-item>
 
-        <v-container>
-          <v-row class="article-signup">
-            <v-col cols="5">
-              <v-text-field v-model="userInfo.name" label="이름" type="string" required />
-            </v-col>
-            <v-col cols="5">
-              <div class="form-with-btn">
-                <v-text-field
-                  type="string"
-                  label="우편번호"
-                  v-model="userInfo.postCode"
-                  res="postcode"
-                  readonly
-                  required
-                />
-                <v-btn id="btn-signup" @click="openAddressSearch">우편번호 찾기</v-btn>
-              </div>
-            </v-col>
-          </v-row>
-        </v-container>
-        <v-container>
-          <v-row class="article-signup">
-            <v-col cols="5">
-              <v-text-field
-                type="string"
-                label="주소"
-                v-model="userInfo.address"
-                ref="detailAddress"
-                readonly
-                required
-              />
-            </v-col>
-            <v-col cols="5">
-              <v-text-field v-model="userInfo.detailAddress" label="나머지 주소" type="string" required />
-            </v-col>
-          </v-row>
-        </v-container>
+							<v-list-item two-line>
+								<v-list-item-content>
+									<v-list-item-subtitle>
+										<input
+											type="checkbox"
+											class="sign-up__checkbox"
+											@click="checkOneArticles"
+											:checked="overFourteen"
+											required
+											disabled
+										/>
+										<span class="sign-up__label">만 14세 이상입니다.</span>
+									</v-list-item-subtitle>
 
-        <v-container>
-          <v-row class="article-signup">
-            <v-col cols="5">
-              <v-overflow-btn
-                class="dropdown-gender"
-                v-model="userInfo.selectedGender"
-                :items="gender"
-                label="성별"
-                dense
-                outlined
-                attach=".dropdown-gender"
-              ></v-overflow-btn>
-            </v-col>
+									<v-list-item-subtitle>
+										<input type="checkbox" class="sign-up__checkbox" @click="checkOneArticles" required />
+										<span class="sign-up__label">[필수] 개인 정보의 수집 및 이용에 대한 동의</span>
+										<router-link to="/terms">자세히 보기</router-link>
+									</v-list-item-subtitle>
 
-            <v-col cols="5">
-              <v-overflow-btn
-                class="dropdown-birth-year"
-                v-model="userInfo.selectedBirthYear"
-                :items="years"
-                label="출생년도"
-                dense
-                outlined
-                attach=".dropdown-birth-year"
-              ></v-overflow-btn>
-            </v-col>
-          </v-row>
+									<v-list-item-subtitle>
+										<input type="checkbox" class="sign-up__checkbox" @click="checkOneArticles" />
+										<span class="sign-up__label">[선택] 공지사항 / 이벤트 알림</span>
+									</v-list-item-subtitle>
 
-          <v-row>
-            <v-container class="container-agreement">
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title>
-                    <input
-                      type="checkbox"
-                      id="checkbox-terms"
-                      :checked="userInfo.agreeTerms[0]"
-                      @click="checkAllArticles"
-                    />
-                    <span>모든 항목에 체크하기</span>
-                  </v-list-item-title>
-                  <v-container>
-                    <v-list-item-subtitle class="check-all">
-                      전체 동의는 필수 및 선택 정보에 대한 동의도 포함되어
-                      있으며, 개별적으로도 동의를 선택하실 수 있습니다.
-                      선택항목에 대한 동의를 거부하시는 경우에도 서비스는 이용이
-                      가능합니다.
-                    </v-list-item-subtitle>
-                  </v-container>
-                </v-list-item-content>
-              </v-list-item>
+									<v-list-item-subtitle>
+										<span class="sign-up__label">고객님께 전달해야 할 소식이 있는 경우 최대 월 1회에 한해 발송됩니다.</span>
+									</v-list-item-subtitle>
+								</v-list-item-content>
+							</v-list-item>
 
-              <v-list-item two-line>
-                <v-list-item-content>
-                  <v-list-item-subtitle>
-                    <input
-                      type="checkbox"
-                      required
-                      disabled
-                      :checked="overFourteen"
-                      id="checkbox-terms"
-                      @click="checkOneArticles"
-                    />
-                    <span>만 14세 이상입니다.</span>
-                  </v-list-item-subtitle>
-
-                  <v-list-item-subtitle>
-                    <input type="checkbox" @click="checkOneArticles" id="checkbox-terms" required />
-                    <span>[필수] 개인 정보의 수집 및 이용에 대한 동의</span>
-                    <router-link to="/terms">&nbsp; 자세히 보기</router-link>
-                  </v-list-item-subtitle>
-
-                  <v-list-item-subtitle>
-                    <input type="checkbox" id="checkbox-terms" @click="checkOneArticles" />
-                    <span>[선택] 공지사항 / 이벤트 알림</span>
-                  </v-list-item-subtitle>
-
-                  <v-list-item-subtitle>
-                    <span>고객님께 전달해야 할 소식이 있는 경우 최대 월 1회에 한해 발송됩니다.</span>
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-
-              <v-container>
-                <div class="recommendation-code">
-                  <form>
-                    <input placeholder="추천 코드 입력" v-model="userInfo.recommendCode" />
-                    <span id="red">* 추천 코드를 입력하면 2,000포인트 즉시 지급!</span>
-                  </form>
-                </div>
-              </v-container>
-              <v-container>
-                <v-btn
-                  id="btn-signup"
-                  class="signup-membership"
-                  type="submit"
-                  @click.prevent="signUpMembership"
-                >멤버십 가입하기</v-btn>
-              </v-container>
-            </v-container>
-          </v-row>
-        </v-container>
-      </v-card>
-    </v-container>
-  </v-container>
+							<v-container>
+								<div class="sign-up__recommend-code">
+									<form>
+										<input placeholder="추천 코드 입력" v-model="userInfo.recommendCode" />
+										<span class="sign-up__recommend-code--red">* 추천 코드를 입력하면 2,000포인트 즉시 지급!</span>
+									</form>
+								</div>
+							</v-container>
+							<v-container>
+								<v-btn
+									type="submit"
+									class="sign-up__btn signup-membership"
+									color="#000"
+									@click.prevent="signUpMembership"
+								>멤버십 가입하기</v-btn>
+							</v-container>
+						</v-container>
+					</v-row>
+				</v-container>
+			</v-card>
+		</v-container>
+	</v-container>
 </template>
 
 <script>
-import { 
-  getEmailCheckCode,
-  getCheckSentCode,
-  signUp,
-} from "@/api/index.js";
+import { getEmailCheckCode, getCheckSentCode, signUp } from '@/api/index.js';
 
 import fillBirthYear from '@/mixins/fillBirthYear.js';
 import daumAddressAPI from '@/mixins/daumAddressAPI';
 
 export default {
-  data() {
-    return {
-      userInfo: {
-        email: '',
-        password: '',
-        name: '',
-        postCode: '',
-        address: '',
-        detailAddress: '',
-        selectedGender: '',
-        selectedBirthYear: '',
-        agreeTerms: [],
-        recommendCode: '',
-      },
-      gender: ["남", "여", "해당없음"],
-      authCodeEmail: '',
-      passwordCheck: '',
-      checkAll: {},
-      formValid: false,
-      emailRules: [
-        v => !!v || "이메일 입력하세요.",
-        v => /[\S]+@[\S\D]+\.[\S\D]+/gi.test(v) || "이메일 형식이 올바르지 않습니다.",
-      ],
-      passwordRules: [
-        v => !!v || "패스워드를 입력하세요.",
-        v => /[0-9]/g.test(v) || "숫자가 존재하지 않습니다.",
-        v => /[a-z]/gi.test(v) || "영어 알파벳이 존재하지 않습니다.",
-        v => /[~!@#$%^&*/?]/g.test(v) || "특수문자가 존재하지 않습니다.",
-        v => !(v.length < 8 || v.length > 20) || "비밀번호 자릿수를 확인해 주세요.",
-      ],
-      passwordCheckRules: [
-        v => !!v || "패스워드를 한번 더 입력하세요",
-        v => v === this.userInfo.password || "패스워드가 일치하지 않습니다.",
-      ],
-    };
-  },
-  methods: {
-    async sendEmailCheckCode() {
-      try {
-        const response = await getEmailCheckCode(this.userInfo.email);
-        return alert(response.data.message);
-      } catch (error) {
-        console.error(error);
-        return alert(error.response.data.message);
-      }
-    },
-    async checkSentCode() {
-      try {
-        const response = await getCheckSentCode(this.authCodeEmail);
-        this.formValid = true;
-        return alert(response.data.message);
-      } catch (error) {
-        this.formValid = false;
-        console.error(error);
-        return alert(error.response.data.message);
-      }
-    },
-    checkAllArticles(e) {
-      this.checkAll[2].checked = this.checkAll[3].checked = e.target.checked;
-    },
-    checkOneArticles(e) {
-      const checkIdx = Array.prototype.indexOf.call(this.checkAll, e.target);
-      this.checkAll[checkIdx].checked = e.target.checked;
-      if (this.checkAll[2].checked === this.checkAll[3].checked) {
-        this.checkAll[0].checked = this.checkAll[2].checked;
-      } else {
-        this.checkAll[0].checked = false;
-      }
-    },
-    signUpValidate() {
-      //refs 속성의 validate 함수 이용하기
-      if(!this.userInfo.address || !this.userInfo.detailAddress || !this.userInfo.selectedGender || !this.userInfo.selectedBirthYear) {
-        alert('회원가입 양식을 완성하여 주십시오.');
-        return false;
-      }
-      if(!this.checkAll[2].checked) {
-        alert('14세 이상만 가입할 수 있습니다.');
-        return false;
-      }
-      if(!this.checkAll[3].checked) {
-        alert('필수 항목에 동의하여야 가입이 가능합니다.');
-        return false;
-      }
-      return true;
-    },
-    async signUpMembership() {
-      try {
-        Array.prototype.map.call(this.checkAll, v => {
-          this.userInfo.agreeTerms[Array.prototype.indexOf.call(this.checkAll, v)] = v.checked;
-        });
-        if(this.signUpValidate()) {
-          const response = await signUp(this.userInfo); //서버쪽에서 추천코드 검사/발급
-          return alert(response.data.message);
-        }
-      } catch (error) {
-        console.error(error);
-        return alert(error.message);
-      }
-    },
-  },
-  computed: {
-    overFourteen() {
-      const currentYear = new Date().getFullYear();
-      return this.userInfo.selectedBirthYear > currentYear - 14 ? false : true;
-    },
-  },
-  mixins: [fillBirthYear, daumAddressAPI],
-  mounted() {
-    this.checkAll = document.querySelectorAll("#checkbox-terms");
-  },
+	data() {
+		return {
+			userInfo: {
+				email: '',
+				password: '',
+				name: '',
+				postCode: '',
+				address: '',
+				detailAddress: '',
+				selectedGender: '',
+				selectedBirthYear: '',
+				agreeTerms: [],
+				recommendCode: '',
+			},
+			gender: ['남', '여', '해당없음'],
+			authCodeEmail: '',
+			passwordCheck: '',
+			checkAll: {},
+			formValid: false,
+			emailRules: [
+				v => !!v || '이메일 입력하세요.',
+				v =>
+					/[\S]+@[\S\D]+\.[\S\D]+/gi.test(v) ||
+					'이메일 형식이 올바르지 않습니다.',
+			],
+			passwordRules: [
+				v => !!v || '패스워드를 입력하세요.',
+				v => /[0-9]/g.test(v) || '숫자가 존재하지 않습니다.',
+				v => /[a-z]/gi.test(v) || '영어 알파벳이 존재하지 않습니다.',
+				v => /[~!@#$%^&*/?]/g.test(v) || '특수문자가 존재하지 않습니다.',
+				v =>
+					!(v.length < 8 || v.length > 20) ||
+					'비밀번호 자릿수를 확인해 주세요.',
+			],
+			passwordCheckRules: [
+				v => !!v || '패스워드를 한번 더 입력하세요',
+				v => v === this.userInfo.password || '패스워드가 일치하지 않습니다.',
+			],
+		};
+	},
+	methods: {
+		async sendEmailCheckCode() {
+			try {
+				const response = await getEmailCheckCode(this.userInfo.email);
+				return alert(response.data.message);
+			} catch (error) {
+				console.error(error);
+				return alert(error.response.data.message);
+			}
+		},
+		async checkSentCode() {
+			try {
+				const response = await getCheckSentCode(this.authCodeEmail);
+				this.formValid = true;
+				return alert(response.data.message);
+			} catch (error) {
+				this.formValid = false;
+				console.error(error);
+				return alert(error.response.data.message);
+			}
+		},
+		checkAllArticles(e) {
+			this.checkAll[2].checked = this.checkAll[3].checked = e.target.checked;
+		},
+		checkOneArticles(e) {
+			const checkIdx = Array.prototype.indexOf.call(this.checkAll, e.target);
+			this.checkAll[checkIdx].checked = e.target.checked;
+			if (this.checkAll[2].checked === this.checkAll[3].checked) {
+				this.checkAll[0].checked = this.checkAll[2].checked;
+			} else {
+				this.checkAll[0].checked = false;
+			}
+		},
+		signUpValidate() {
+			//refs 속성의 validate 함수 이용하기
+			if (
+				!this.userInfo.address ||
+				!this.userInfo.detailAddress ||
+				!this.userInfo.selectedGender ||
+				!this.userInfo.selectedBirthYear
+			) {
+				alert('회원가입 양식을 완성하여 주십시오.');
+				return false;
+			}
+			if (!this.checkAll[2].checked) {
+				alert('14세 이상만 가입할 수 있습니다.');
+				return false;
+			}
+			if (!this.checkAll[3].checked) {
+				alert('필수 항목에 동의하여야 가입이 가능합니다.');
+				return false;
+			}
+			return true;
+		},
+		async signUpMembership() {
+			try {
+				Array.prototype.map.call(this.checkAll, v => {
+					this.userInfo.agreeTerms[
+						Array.prototype.indexOf.call(this.checkAll, v)
+					] = v.checked;
+				});
+				if (this.signUpValidate()) {
+					const response = await signUp(this.userInfo); //서버쪽에서 추천코드 검사/발급
+					return alert(response.data.message);
+				}
+			} catch (error) {
+				console.error(error);
+				return alert(error.message);
+			}
+		},
+	},
+	computed: {
+		overFourteen() {
+			const currentYear = new Date().getFullYear();
+			return this.userInfo.selectedBirthYear > currentYear - 14 ? false : true;
+		},
+	},
+	mixins: [fillBirthYear, daumAddressAPI],
+	mounted() {
+		this.checkAll = document.querySelectorAll('.sign-up__checkbox');
+	},
 };
 </script>
 
 <style scoped>
-span {
-  margin-left: 5px;
-}
-#container-signup {
-  width: 100%;
-  height: 1138px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  top: 115px;
-  margin-bottom: 150px;
-}
-.section-signup {
-  max-width: 1100px;
-}
-.article-signup {
-  display: flex;
-  justify-content: space-around;
-}
-.form-with-btn {
-  display: flex;
-}
-#btn-signup {
-  width: 35%;
-  color: #fff;
-  background-color: #000;
-  margin: 5px 0 0 5px;
-  position: relative;
-  top: 9px;
-}
-.container-agreement {
-  width: 100%;
-}
-.check-all {
-  width: 45%;
-  white-space: normal;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #000;
+.sign-up__label {
+	margin-left: 5px;
 }
 
-.recommendation-code {
-  width: 430px;
-  border: 1px solid #000;
-  padding: 10px;
-  position: relative;
-}
-.recommendation-code input {
-  outline-style: none;
-  border: none;
-  font-size: 16px;
-}
-#checkbox-terms {
-  width: 20px;
-  height: 20px;
+.sign-up {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	top: 115px;
+	margin-bottom: 150px;
 }
 
-#red {
-  color: red;
-  position: absolute;
-  left: 7rem;
-  top: 10px;
+.sign-up__container {
+	max-width: 1100px;
 }
-#btn-signup.signup-membership {
-  width: 430px;
-  padding: 10px;
-  color: #fff;
-  background-color: #000;
+
+.sign-up__article {
+	display: flex;
+	justify-content: space-around;
+}
+
+.sign-up__form {
+	display: flex;
+}
+
+.sign-up__btn {
+	width: 35%;
+	color: #fff;
+	margin: 5px 0 0 5px;
+	position: relative;
+	top: 9px;
+}
+
+.sign-up__terms {
+	width: 100%;
+}
+
+.sign-up__check-all {
+	width: 45%;
+	white-space: normal;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #000;
+}
+
+.sign-up__recommend-code {
+	width: 430px;
+	border: 1px solid #000;
+	padding: 10px;
+	position: relative;
+}
+.sign-up__recommend-code input {
+	outline-style: none;
+	border: none;
+	font-size: 16px;
+}
+.sign-up__checkbox {
+	width: 20px;
+	height: 20px;
+}
+
+.sign-up__recommend-code--red {
+	color: red;
+	position: absolute;
+	left: 7rem;
+	top: 10px;
+}
+.sign-up__btn.signup-membership {
+	width: 430px;
+	padding: 10px;
 }
 </style>
