@@ -1,26 +1,28 @@
 <template>
-  <div>
-    고객센터
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
-  </div>
+  <section class="customer-service__container">
+    <left-link />
+    <router-view />
+  </section>
 </template>
 
 <script>
-export default {
+import LeftLink from '@/components/common/LeftLink.vue';
 
+export default {
+  components: {
+    LeftLink,
+  },
 }
 </script>
 
 <style scoped>
-div {
+.customer-service__container {
   display:flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 650px;
-  overflow: hidden;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1100px;
+  min-height: 532px;
+  margin: 150px auto 0;
+  z-index: 1001;
 }
-
 </style>
