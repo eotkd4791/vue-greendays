@@ -11,19 +11,26 @@
         </template>
         <template #promoInfo-timer>
           <p class="promo__info-container-timer">TIMER</p>
-          <p
-            class="promo__info-container-timer clock"
-            ref="timer"
-          >{{ promotion.hour }} : {{ promotion.min }} : {{ promotion.sec }}</p>
+          <p class="promo__info-container-timer clock" ref="timer">
+            {{ promotion.hour < 10 ? `0${promotion.hour}` : promotion.hour }} :
+            {{ promotion.min < 10 ? `0${promotion.min}` : promotion.min }} :
+            {{ promotion.sec < 10 ? `0${promotion.sec}` : promotion.sec }}
+          </p>
         </template>
         <template #promoInfo-overview>
           <div class="promo__info-container-overview-sub">
-            <p class="promo__info-container-overview-title">{{ promotion.title }}</p>
+            <p class="promo__info-container-overview-title">
+              {{ promotion.title }}
+            </p>
             <p
               v-if="!!promotion.expireAt"
               class="promo__info-container-overview-subtitle"
-            >{{ promotion.subtitle }}</p>
-            <p class="promo__info-container-overview-description">{{ promotion.description }}</p>
+            >
+              {{ promotion.subtitle }}
+            </p>
+            <p class="promo__info-container-overview-description">
+              {{ promotion.description }}
+            </p>
           </div>
         </template>
       </summary-promotion>
@@ -32,17 +39,17 @@
 </template>
 
 <script>
-import SummaryPromotion from '@/components/SummaryPromotion.vue';
+import SummaryPromotion from "@/components/SummaryPromotion.vue";
 
 export default {
   components: {
-    SummaryPromotion,
+    SummaryPromotion
   },
   data() {
     return {
-      promotions:[],
+      promotions: [],
       quickDelivery: {},
-      Timers: [],
+      Timers: []
     };
   },
   methods: {},
@@ -53,29 +60,37 @@ export default {
     // 진행중인 모든 프리오더 행사 뒤에 빠른배송 넣기
   },
   mounted() {
-    this.promotions.forEach((p)=> {
+    this.promotions.forEach(p => {
       // const hour = p.hour;
       // const min = p.min;
       // let sec = p.sec;
-      const Timer = window.setInterval(() => {
-        if(p.hour === 0 && p.min === 0 && p.sec === 0) {
+      const Timer = setInterval(() => {
+        if (p.hour === 0 && p.min === 0 && p.sec === 0) {
           p.activated = false;
           clearInterval(Timer);
         }
-        if(p.sec === 0) {
-          if(p.min > 0) { p.sec = 59; }
-          if(p.min === 0) {
-            if(p.hour > 0) { p.min = 59; }
-          } else { p.min -= 1; }
-        } else { p.sec -= 1; }
+        if (p.sec === 0) {
+          if (p.min > 0) {
+            p.sec = 59;
+          }
+          if (p.min === 0) {
+            if (p.hour > 0) {
+              p.min = 59;
+            }
+          } else {
+            p.min -= 1;
+          }
+        } else {
+          p.sec -= 1;
+        }
       }, 1000);
       this.Timers.push(Timer);
     });
   },
   beforeDestroy() {
-    this.Timers.forEach((t) => clearInterval(t));
+    this.Timers.forEach(t => clearInterval(t));
   }
-}
+};
 </script>
 
 <style scoped>
