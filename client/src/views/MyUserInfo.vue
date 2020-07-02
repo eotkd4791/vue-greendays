@@ -21,7 +21,6 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
   max-width: 1100px;
-  min-height: 532px;
   margin: 150px auto 0;
   z-index: 1001;
 }
