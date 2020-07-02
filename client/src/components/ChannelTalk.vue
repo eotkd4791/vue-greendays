@@ -149,8 +149,6 @@ export default {
 
 <style scoped>
 .channel-talk {
-	width: 320px;
-	height: 610px;
 	position: fixed;
 	bottom: 30px;
 	right: 30px;
@@ -169,8 +167,8 @@ export default {
 }
 
 .channel-talk__on {
-	width: 100%;
-	height: 100%;
+	width: 320px;
+	height: 610px;
 	background-color: #fff;
 	border-radius: 15px;
 	box-shadow: 0 10px 10px 0 #444;
