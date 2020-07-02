@@ -1,40 +1,30 @@
 <template>
-  <div class="footer">
-    <quick-menu />
-    <contact-info />
-    <about-greendays />
-    <img src="@/assets/img/green-present.png" />
-  </div>
+	<div class="footer">
+		<quick-menu />
+		<contact-info />
+		<about-greendays />
+		<channel-talk />
+	</div>
 </template>
 
 <script>
 import QuickMenu from '@/components/QuickMenu.vue';
 import ContactInfo from '@/components/ContactInfo.vue';
 import AboutGreendays from '@/components/About.vue';
+import ChannelTalk from '@/components/ChannelTalk.vue';
 
 export default {
-  components: {
-    QuickMenu,
-    ContactInfo,
-    AboutGreendays
-  }
-}
+	components: {
+		QuickMenu,
+		ContactInfo,
+		AboutGreendays,
+		ChannelTalk,
+	},
+};
 </script>
 
 <style scoped>
 .footer {
-  margin: 0;
-}
-
-img {
-  display: block;
-  width: 70px;
-  height: 70px;
-  filter: drop-shadow(5px 5px 5px #000);
-  position: fixed;
-  bottom: 30px; 
-  right: 30px;
-  z-index: 9999;
-  cursor: pointer;
+	margin: 0;
 }
 </style>
