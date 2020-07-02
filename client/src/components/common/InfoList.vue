@@ -1,68 +1,58 @@
 <template>
-  <ul class="info-list" ref="ul">
-    <li class="info-list__li">
-      <section class="info-list__section">
-        <h1
-          class="info-list__title"
-          :class="{'info-list__title--modified': showDetail[index] }"
-        >{{ item.title }}</h1>
-        <i class="info-list__btn" v-text="showDetail[index] ? '-' : '+'" @click="toggleShowDetail" />
-      </section>
-      <aside class="info-list__aside" v-html="item.detail"></aside>
-    </li>
-  </ul>
+  <li class="info-list__li">
+    <section class="info-list__section">
+      <h1
+        class="info-list__title"
+        :class="{ 'info-list__title--modifier': isShownDetail }"
+      >{{ eachOfListItems.title }}</h1>
+      <i class="info-list__btn" v-text="isShownDetail ? '-' : '+'" @click="toggleShowDetail" />
+    </section>
+    <aside
+      class="info-list__aside"
+      v-if="isShownDetail && !isUserInfoView"
+      v-html="eachOfListItems.detail"
+    />
+    <aside class="info-list__aside" v-else-if="isShownDetail && isUserInfoView">
+      <slot name="edit-user-info" />
+      <slot name="shipping-address-setting" />
+      <slot name="user-promotion-code" />
+    </aside>
+  </li>
 </template>
 
 <script>
 export default {
+  props: ['eachOfListItems'],
   data() {
     return {
-      listItems: [
-        {
-          title: '배송가이드 1',
-          detail: 'loreamsdafjslkdjflkasdjfklasjdlfkjasldkjflaksdjfklasjdfklasjdflkjasldkfjaskldjfaksdljfklasd'
-        },
-        {
-          title: '배송가이드 2',
-          detail: 'ewqioruewiourweiouroieuqoiwioeuqwoiueqwioueiowqueoiwqueoiqwueoiqwueiouqwioeuqwioeuqwioeuqwoqwejlkqwjeklqwjeklqwjelkqwjklieuqowiueoiq'
-        }
-      ],
-      showDetail: [],
+      isShownDetail: false,
+      isUserInfoView: false,
     };
   },
   methods: {
-    toggleShowDetail(e) {
-      const targetList = e.target.parentElement.parentElement;
-      const indexToShow = Array.prototype.indexOf.call(this.$refs.ul.children, targetList);
-      if(indexToShow !== -1) {
-        this.showDetail[indexToShow] = !this.showDetail[indexToShow];
-      }
-      console.log(this.showDetail);
+    toggleShowDetail() {
+      this.isShownDetail = !this.isShownDetail;
     }
   },
   created() {
-    this.showDetail = new Array(this.listItems.length).fill(false);
-    const NameOfCurrentView = this.$route.name;
+    this.isUserInfoView = this.$route.path.includes('user');
   },
 }
 </script>
 
 <style scoped>
-.info-list {
-  width: 100%;
-}
-.info-list__ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
 .info-list__li {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
   padding: 0 50px;
   margin-bottom: 10px;
   border: 1px solid #dedede;
+  font-size: 15px;
+  font-weight: 500;
 }
+
 .info-list__section {
   display: flex;
   justify-content: space-between;
@@ -71,13 +61,12 @@ export default {
   height: 100%;
   cursor: pointer;
 }
-/* .info-list__title {
 
-} */
-
-.info-list__title--modified {
+.info-list__title--modifier {
   color: #42b850;
+  font-weight: 600;
 }
+
 .info-list__btn {
   display: flex;
   justify-content: center;
@@ -88,7 +77,13 @@ export default {
 }
 
 .info-list__aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-wrap: wrap;
   width: 100%;
-  height: 100%;
+  padding: 20px 0;
+  white-space: normal;
 }
 </style>
