@@ -9,140 +9,30 @@
 				@click="onChannelTalk = true"
 			/>
 		</transition>
-		<transition name="zoom-in">
-			<aside class="channel-talk__on" v-if="onChannelTalk">
-				<header class="channel-talk__header">
-					<h1 class="channel-talk__h1">그린데이즈</h1>
-					<i class="fas fa-times" @click="onChannelTalk = false" />
-				</header>
-				<ol class="channel-talk__message">
-					<li
-						class="channel-talk__list"
-						:class="{ 'channel-talk__list--fromMe': item.sender!=='GreenDays' }"
-						v-for="(item, index) in messages"
-						:key="index"
-					>
-						<ol class="channel-talk__info">
-							<li class="channel-talk__info-list" v-if="item.sender==='GreenDays'">
-								<img src="@/assets/img/green-present.png" alt="Greendays" class="channel-talk__info-img" />
-							</li>
-							<li class="channel-talk__info-list">
-								<h2 class="channel-talk__sender">{{ item.sender }}</h2>
-							</li>
-							<li class="channel-talk__info-list">
-								<h3 class="channel-talk__sentedTime">{{ item.sentedTime }}</h3>
-							</li>
-						</ol>
-						<article
-							class="channel-talk__content"
-							:class="{ 'channel-talk__content--fromMe': item.sender!=='GreenDays' }"
-						>{{ item.content }}</article>
-					</li>
-				</ol>
-				<footer class="channel-talk__footer">
-					<input
-						type="text"
-						v-model.trim="newMessage"
-						class="channel-talk__input"
-						placeholder="메시지를 입력해주세요."
-						required
-						@keypress.enter="onSubmitMessage"
-					/>
-					<button class="channel-talk__btn" @click="onSubmitMessage">
-						<i class="far fa-paper-plane" />
-					</button>
-				</footer>
-			</aside>
-		</transition>
+		<channel-talk-body v-if="onChannelTalk" />
 	</div>
 </template>
 
 <script>
+import Bus from '@/utils/bus.js';
+import ChannelTalkBody from '@/components/ChannelTalkBody.vue';
+
 export default {
+	components: {
+		ChannelTalkBody,
+	},
 	data() {
 		return {
 			onChannelTalk: false,
-			newMessage: '',
-			messages: [
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content:
-						'호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-			],
 		};
 	},
 	methods: {
-		onSubmitMessage() {
-			const messageRemovedSpace = this.newMessage.replace(/ /g, '');
-			if (messageRemovedSpace.length === 0 || !this.newMessage) return;
-			const currentTime = new Date();
-			this.messages.push({
-				sender: 'GreenDays',
-				sentedTime: `${currentTime.getHours()} ${currentTime.getMinutes()}`,
-				content: this.newMessage,
-			});
-			this.newMessage = null;
+		toggleChannelTalk() {
+			this.onChannelTalk = !this.onChannelTalk;
 		},
 	},
-	created() {
-		// localStorage.getItem();
+	mounted() {
+		Bus.$on('toggle-channel-talk', this.toggleChannelTalk);
 	},
 };
 </script>
@@ -282,6 +172,7 @@ export default {
 .zoom-in-leave-active {
 	transition: transform 0.25s;
 }
+
 .zoom-in-enter,
 .zoom-in-leave-to {
 	transform: scale(0, 0);
