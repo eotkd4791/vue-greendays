@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <preorder-neon />
-    <total-promotion />
-  </div>
+	<div class="main-view">
+		<preorder-neon />
+		<total-promotion />
+	</div>
 </template>
 
 <script>
@@ -10,18 +10,15 @@ import PreorderNeon from '@/components/PreorderNeon.vue';
 import TotalPromotion from '@/views/TotalPromotion.vue';
 
 export default {
-  components: {
-    PreorderNeon,
-    TotalPromotion,
-  },
-  
-  mounted() {
-  },
-}
+	components: {
+		PreorderNeon,
+		TotalPromotion,
+	},
+};
 </script>
 
 <style scoped>
-div {
-  width: 100%;
+.main-view {
+	width: 100%;
 }
 </style>
