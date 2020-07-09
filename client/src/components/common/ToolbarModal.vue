@@ -9,9 +9,9 @@
 				ref="modalContainer"
 			>
 				<div class="modal-wrapper">
-					<toolbar-preorder v-if="toolbarToOpen==='프리오더'" />
-					<toolbar-quick-delivery v-else-if="toolbarToOpen==='빠른배송'" />
-					<toolbar-search-brands v-else-if="toolbarToOpen===''" />
+					<toolbar-preorder v-if="toolbarToOpen === '프리오더'" />
+					<toolbar-quick-delivery v-else-if="toolbarToOpen === '빠른배송'" />
+					<toolbar-search-brands v-else-if="toolbarToOpen === ''" />
 					<toolbar-reserve-purchase v-else />
 				</div>
 			</div>
@@ -92,6 +92,5 @@ export default {
 .rolling-enter,
 .rolling-leave-to {
 	transform: translateY(-115px);
-	z-index: 1001;
 }
 </style>
