@@ -3,9 +3,9 @@
 		<header id="header" ref="header">
 			<div class="container-logo">
 				<transition name="rolling">
-					<user-info-modal v-if="showUserInfo" :userInfo="user" />
+					<user-info-modal v-if="showUserInfo" />
 				</transition>
-				<toolbar-user-info :userLoggedIn="user.name" />
+				<toolbar-user-info :userLoggedIn="getUserInfo.name" />
 				<toolbar-menu
 					@onToolbarModal="openToolbarModal"
 					@onSearchBrands="openSearchBrands"
@@ -19,7 +19,10 @@
 			:activeUserInfo="showUserInfo"
 			@mouseEsc="closeToolbarModal"
 		/>
-		<brand-modal v-if="showModal && SearchBrandsModal" @closeBrands="closeSearchBrands" />
+		<brand-modal
+			v-if="showModal && SearchBrandsModal"
+			@closeBrands="closeSearchBrands"
+		/>
 	</div>
 </template>
 
@@ -49,6 +52,11 @@ export default {
 			showUserInfo: false,
 		};
 	},
+	computed: {
+		getUserInfo() {
+			return this.$store.state.auth.userInfo;
+		},
+	},
 	methods: {
 		openToolbarModal(menuToOpen) {
 			this.showToolbarModal = true;
@@ -75,9 +83,6 @@ export default {
 			}
 			this.showUserInfo = !this.showUserInfo;
 		},
-	},
-	created() {
-		this.user = this.$store.state.userInfo;
 	},
 	mounted() {
 		Bus.$on('showUserInfo', this.toggleUserInfo);
