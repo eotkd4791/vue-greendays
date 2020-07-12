@@ -7,13 +7,15 @@
 				v-for="link in linkList"
 				:key="link.name"
 				class="left-link__li"
-			>{{ link.name }}</router-link>
+			>
+				{{ link.name }}
+			</router-link>
 		</ul>
 	</aside>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import getLinkList from '@/static/links.js';
 
 export default {
 	data() {
@@ -22,7 +24,8 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters(['getCustomerLinks', 'getUserInfoLinks']),
+		getCustomerLinks: getLinkList.getCustomerLinks,
+		getUserInfoLinks: getLinkList.getUserInfoLinks,
 	},
 	methods: {
 		activatedRouterLink(e) {
@@ -50,7 +53,6 @@ export default {
 	},
 };
 </script>
-
 
 <style scoped>
 .left-link {
