@@ -1,54 +1,61 @@
 <template>
 	<div class="logo" @click="movePage('/')">
 		<div
-			v-if="isLoggedIn"
+			v-if="!!getUserInfo"
 			class="user-info-point"
-			@click.stop="movePage(`/mypoint/${getUserInfo.id}`)"
+			@click.stop="movePage(`/user/mypoint/${getUserInfo.id}`)"
 		>
-			<span class="user-info-text">{{ getUserInfo.point }}</span>
-			<span v-show="isLoggedIn" class="point-icon fas fa-coins" />
+			<span v-if="!!getUserInfo" class="user-info-text">
+				{{ !!getUserInfo ? getUserInfo.point : '' }}
+			</span>
+			<span v-show="!!getUserInfo" class="point-icon fas fa-coins" />
 		</div>
 		<span
 			class="user-info fas fa-user"
 			ref="userInfo"
-			@click.stop="isLoggedIn ? toggleUserInfo() : movePage('/login')"
+			@click.stop="!!getUserInfo ? toggleUserInfo() : movePage('/login')"
 		></span>
 		<span
-			class="user-info far fa-heart"
+			class="user-info fa-heart"
+			:class="{
+				fas: !!getUserInfo && getUserInfo.wishList.length > 0,
+				far: !getUserInfo || !getUserInfo.wishList.length,
+			}"
 			@click.stop="
-				isLoggedIn
+				!!getUserInfo
 					? movePage(`/wishlist/${getUserInfo.id}`)
 					: movePage('/login')
 			"
-		></span>
-		<span v-if="isLoggedIn" class="user-info-text">
-			{{ getUserInfo.wishList }}
+		/>
+		<span v-show="getUserInfo" class="user-info-text">
+			{{ !!getUserInfo ? getUserInfo.wishList.length : '' }}
 		</span>
 		<span
 			class="user-info fas fa-shopping-basket"
 			@click.stop="
-				isLoggedIn
-					? movePage(`/cartitems/${getUserInfo.id}`)
-					: movePage('/login')
+				!!getUserInfo
+					? movePage('/login')
+					: movePage(`/cartitems/${getUserInfo.id}`)
 			"
-		></span>
-		<span class="user-info-text">{{ getUserInfo.cartItems }}</span>
+		/>
+		<span class="user-info-text">
+			{{ !!getUserInfo ? getUserInfo.cartItems.length : 0 }}
+		</span>
 	</div>
 </template>
 
 <script>
 import Bus from '@/utils/bus.js';
+import util from '@/mixins/utilMethods.js';
 
 export default {
+	mixins: [util],
 	data() {
 		return {
 			showUserInfo: false,
 		};
 	},
 	computed: {
-		isLoggedIn() {
-			return this.$store.state.auth.userInfo !== {};
-		},
 		getUserInfo() {
 			return this.$store.state.auth.userInfo;
 		},
@@ -67,6 +74,9 @@ export default {
 			this.showUserInfo = !this.showUserInfo;
 			Bus.$emit('showUserInfo', this.showUserInfo);
 		},
+	},
+	created() {
+		this.$store.dispatch('auth/IS_LOGGED_IN');
 	},
 	mounted() {
 		Bus.$on('userInfoToggle', this.toggleUserInfo);
