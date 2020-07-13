@@ -1,19 +1,34 @@
 <template>
-	<div class="toolbar__modal-container">
-		<div class="modal-mask" v-if="onToolbar" @mouseenter="$emit('mouseEsc')" />
+	<div class="toolbar-modal">
+		<div
+			class="toolbar-modal__mask"
+			v-if="onToolbar"
+			@mouseenter="$emit('mouseEsc')"
+		/>
 		<transition appear name="rolling">
 			<div
 				v-if="onToolbar"
-				class="modal-container"
+				class="toolbar-modal__container"
 				:class="{ 'active-userinfo': activeUserInfo }"
 				ref="modalContainer"
 			>
-				<div class="modal-wrapper">
-					<toolbar-preorder v-if="toolbarToOpen === '프리오더'" />
-					<toolbar-quick-delivery v-else-if="toolbarToOpen === '빠른배송'" />
-					<toolbar-search-brands v-else-if="toolbarToOpen === ''" />
-					<toolbar-reserve-purchase v-else />
-				</div>
+				<ol class="toolbar-modal__wrapper">
+					<li class="toolbar-modal__list" v-if="toolbarToOpen === '프리오더'">
+						<toolbar-preorder />
+					</li>
+					<li
+						class="toolbar-modal__list"
+						v-else-if="toolbarToOpen === '빠른배송'"
+					>
+						<toolbar-quick-delivery />
+					</li>
+					<li class="toolbar-modal__list" v-else-if="toolbarToOpen === ''">
+						<toolbar-search-brands />
+					</li>
+					<li class="toolbar-modal__list" v-else>
+						<toolbar-reserve-purchase />
+					</li>
+				</ol>
 			</div>
 		</transition>
 	</div>
@@ -44,13 +59,13 @@ export default {
 </script>
 
 <style scoped>
-.toolbar__modal-container {
+.toolbar-modal {
 	width: 100%;
 }
 
-.modal-mask {
+.toolbar-modal__mask {
 	position: fixed;
-	z-index: 100;
+	z-index: 1002;
 	top: 115px;
 	left: 0;
 	width: 100%;
@@ -58,10 +73,10 @@ export default {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-container {
+.toolbar-modal__container {
 	width: 100%;
 	height: 410px;
-	z-index: 1001;
+	z-index: 1002;
 	margin: 0px auto;
 	padding: 20px 30px;
 	border: none;
@@ -70,18 +85,22 @@ export default {
 	background-color: #fff;
 }
 
-.modal-container.active-userinfo {
+.toolbar-modal__container.active-userinfo {
 	transition: transform 250ms;
 	transform: translateY(280px);
 }
 
-.modal-wrapper {
+.toolbar-modal__wrapper {
 	max-width: 1100px;
 	height: 372px;
 	margin: 0 auto;
 	background-color: #fff;
 	display: flex;
 	justify-content: space-between;
+}
+
+.toolbar-modal__list {
+	width: 100%;
 }
 
 .rolling-enter-active,
