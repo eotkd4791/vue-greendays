@@ -1,22 +1,20 @@
 <template>
-	<div class="logo" @click="movePage('/')">
-		<div
+	<ul class="user-info" @click="movePage('/')">
+		<li
+			class="user-info__point"
 			v-if="!!getUserInfo"
-			class="user-info-point"
 			@click.stop="movePage(`/user/mypoint/${getUserInfo.id}`)"
 		>
-			<span v-if="!!getUserInfo" class="user-info-text">
-				{{ !!getUserInfo ? getUserInfo.point : '' }}
-			</span>
-			<span v-show="!!getUserInfo" class="point-icon fas fa-coins" />
-		</div>
-		<span
-			class="user-info fas fa-user"
+			<span class="user-info__text" v-if="!!getUserInfo">{{ !!getUserInfo ? getUserInfo.point : '' }}</span>
+			<span class="fas fa-coins" v-show="!!getUserInfo" />
+		</li>
+		<li
+			class="user-info__list fas fa-user"
 			ref="userInfo"
 			@click.stop="!!getUserInfo ? toggleUserInfo() : movePage('/login')"
-		></span>
-		<span
-			class="user-info fa-heart"
+		/>
+		<li
+			class="user-info__list fa-heart"
 			:class="{
 				fas: !!getUserInfo && getUserInfo.wishList.length > 0,
 				far: !getUserInfo || !getUserInfo.wishList.length,
@@ -27,60 +25,60 @@
 					: movePage('/login')
 			"
 		/>
-		<span v-show="getUserInfo" class="user-info-text">
-			{{ !!getUserInfo ? getUserInfo.wishList.length : '' }}
-		</span>
-		<span
-			class="user-info fas fa-shopping-basket"
+		<li
+			v-show="getUserInfo"
+			class="user-info__text"
+		>{{ !!getUserInfo ? getUserInfo.wishList.length : '' }}</li>
+		<li
+			class="user-info__list fas fa-shopping-basket"
 			@click.stop="
 				!!getUserInfo
-					? movePage('/login')
-					: movePage(`/cartitems/${getUserInfo.id}`)
+					? movePage(`/cartitems/${getUserInfo.id}`)
+					: movePage('/login')
 			"
 		/>
-		<span class="user-info-text">
-			{{ !!getUserInfo ? getUserInfo.cartItems.length : 0 }}
-		</span>
-	</div>
+		<li class="user-info__text">{{ !!getUserInfo ? getUserInfo.cartItems.length : 0 }}</li>
+	</ul>
 </template>
 
 <script>
 import Bus from '@/utils/bus.js';
 import util from '@/mixins/utilMethods.js';
+import { mapActions } from 'vuex';
 
 export default {
 	mixins: [util],
+
 	data() {
 		return {
 			showUserInfo: false,
 		};
 	},
+
 	computed: {
 		getUserInfo() {
 			return this.$store.state.auth.userInfo;
 		},
 	},
+
 	methods: {
-		movePage(to) {
-			if (to === '#') return;
-			if (this.$route.path !== to) {
-				const nextPage = { path: to };
-				this.$router.push(nextPage);
-				window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-			}
-		},
+		...mapActions('auth', ['IS_LOGGED_IN']),
+
 		toggleUserInfo() {
 			this.$refs.userInfo.classList.toggle('active');
 			this.showUserInfo = !this.showUserInfo;
 			Bus.$emit('showUserInfo', this.showUserInfo);
 		},
 	},
+
 	created() {
-		this.$store.dispatch('auth/IS_LOGGED_IN');
+		this.IS_LOGGED_IN();
 	},
+
 	mounted() {
 		Bus.$on('userInfoToggle', this.toggleUserInfo);
 	},
+
 	beforeDestroy() {
 		Bus.$off('userInfoToggle', this.toggleUserInfo);
 	},
@@ -88,7 +86,7 @@ export default {
 </script>
 
 <style scoped>
-.logo {
+.user-info {
 	max-width: 1100px;
 	height: 40px;
 	margin: 15px auto;
@@ -101,10 +99,12 @@ export default {
 	background-size: contain;
 	cursor: pointer;
 }
-.user-info {
+
+.user-info__list {
 	margin-left: 20px;
 }
-.user-info-point {
+
+.user-info__point {
 	color: #42b883;
 }
 
@@ -117,16 +117,19 @@ export default {
 	margin-left: 5px;
 	margin-right: 10;
 }
+
 .fa-heart {
 	color: #42b883;
 }
 .fa-user {
 	color: #000;
 }
+
 .fa-user.active {
 	color: #42b883;
 }
-.user-info-text {
+
+.user-info__text {
 	margin-left: 5px;
 	font-size: 13px;
 }
