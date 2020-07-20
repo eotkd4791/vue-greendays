@@ -2,19 +2,34 @@
 	<footer class="about">
 		<section class="about__section">
 			<ul class="about__ul about__ul--title">
-				<router-link tag="li" class="about__router-li" to="/customerservice/notice">공지사항</router-link>
+				<router-link
+					tag="li"
+					class="about__router-li"
+					to="/customerservice/notice"
+					>공지사항</router-link
+				>
 				<span class="about__divider">|</span>
-				<router-link tag="li" class="about__router-li" to="/customerservice/faq">자주묻는질문</router-link>
+				<router-link tag="li" class="about__router-li" to="/customerservice/faq"
+					>자주묻는질문</router-link
+				>
 				<span class="about__divider">|</span>
-				<router-link tag="li" class="about__router-li" to="/customerservice/terms">이용약관</router-link>
+				<router-link
+					tag="li"
+					class="about__router-li"
+					to="/customerservice/terms"
+					>이용약관</router-link
+				>
 				<span class="about__divider">|</span>
 				<router-link
 					tag="li"
 					class="about__router-li"
 					to="/customerservice/private_info_policy"
-				>개인정보취급방침</router-link>
+					>개인정보취급방침</router-link
+				>
 				<span class="about__divider">|</span>
-				<router-link tag="li" class="about__router-li" to="/introduction">사업자정보확인</router-link>
+				<router-link tag="li" class="about__router-li" to="/introduction"
+					>사업자정보확인</router-link
+				>
 			</ul>
 			<ul class="about__ul about__ul--mid">
 				<li class="about__li">(주)그린데이즈</li>
@@ -34,24 +49,38 @@
 				<span class="about__divider">|</span>
 				<li class="about__li">개인정보관리책임자 유대상</li>
 			</ul>
-			<p class="about__p">Copyright © 2020 GreenDays Inc. All rights reserved.</p>
+			<p class="about__p">
+				Copyright © 2020 GreenDays Inc. All rights reserved.
+			</p>
 		</section>
 		<aside class="about__aside">
 			<ul class="about__ul about__ul--left">
 				<li class="about__li about__li--title">CUSTOMER SERVICE</li>
-				<router-link tag="li" class="about__router-li" to="/customerservice">무엇을 도와드릴까요?</router-link>
-				<router-link tag="li" class="about__router-li" to="/customerservice/logi_guide">주문 & 배송</router-link>
-				<router-link tag="li" class="about__router-li" to="/customerservice/faq">결제 & 가격</router-link>
-				<router-link tag="li" class="about__router-li" to="/customerservice/faq">반품 & 환불</router-link>
+				<router-link tag="li" class="about__router-li" to="/customerservice"
+					>무엇을 도와드릴까요?</router-link
+				>
+				<router-link
+					tag="li"
+					class="about__router-li"
+					to="/customerservice/logi_guide"
+					>주문 & 배송</router-link
+				>
+				<router-link tag="li" class="about__router-li" to="/customerservice/faq"
+					>결제 & 가격</router-link
+				>
+				<router-link tag="li" class="about__router-li" to="/customerservice/faq"
+					>반품 & 환불</router-link
+				>
 			</ul>
 			<ul class="about__ul">
 				<li class="about__li about__li--title">ABOUT GREENDAYS</li>
-				<router-link tag="li" class="about__router-li" to="/introduction">그린데이즈 소개</router-link>
+				<router-link tag="li" class="about__router-li" to="/introduction"
+					>그린데이즈 소개</router-link
+				>
 			</ul>
 		</aside>
 	</footer>
 </template>
-
 
 <style scoped>
 .about {
@@ -124,6 +153,6 @@
 }
 
 .about__divider {
-	margin: 0 10px;
+	margin: 0 3px;
 }
 </style>
