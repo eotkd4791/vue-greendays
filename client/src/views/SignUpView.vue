@@ -1,5 +1,5 @@
 <template>
-	<v-container class="sign-up">
+	<v-app class="sign-up">
 		<v-container class="sign-up__container">
 			<v-card>
 				<v-container>
@@ -8,35 +8,47 @@
 				<v-container>
 					<v-row class="sign-up__article">
 						<v-col cols="5">
-							<form class="sign-up__form">
+							<v-form class="sign-up__form" ref="email">
 								<v-text-field
 									type="string"
 									label="이메일"
+									@input="checkEmailRules"
 									v-model="userInfo.email"
 									:rules="emailRules"
 									required
 								/>
-								<v-btn class="sign-up__btn" color="#000" @click="sendEmailCheckCode">이메일 인증</v-btn>
-							</form>
+								<v-btn
+									class="sign-up__btn"
+									color="#000"
+									@click="checkEmailRedundancy"
+									:disabled="!isProperEmail"
+								>
+									이메일 중복확인
+								</v-btn>
+							</v-form>
 						</v-col>
 						<v-col cols="5">
-							<form class="sign-up__form">
-								<v-text-field label="인증코드 입력" v-model="authCodeEmail" required />
-								<v-btn class="sign-up__btn" color="#000" @click="checkSentCode">인증코드 확인</v-btn>
-							</form>
+							<v-text-field
+								label="휴대폰 번호를 입력하세요."
+								v-model="userInfo.phoneNum"
+								required
+							/>
 						</v-col>
 					</v-row>
 				</v-container>
 				<v-container>
 					<v-row class="sign-up__article">
 						<v-col cols="5">
-							<v-text-field
-								type="password"
-								label="비밀번호"
-								v-model="userInfo.password"
-								:rules="passwordRules"
-								required
-							/>
+							<v-form ref="password">
+								<v-text-field
+									type="password"
+									label="비밀번호"
+									v-model="userInfo.password"
+									:rules="passwordRules"
+									@input="AllowOnlyEnglish(userInfo.password)"
+									required
+								/>
+							</v-form>
 						</v-col>
 						<v-col cols="5">
 							<v-text-field
@@ -44,6 +56,7 @@
 								label="비밀번호 확인"
 								v-model="passwordCheck"
 								:rules="passwordCheckRules"
+								:disabled="isProperPassword"
 								required
 							/>
 						</v-col>
@@ -52,20 +65,32 @@
 				<v-container>
 					<v-row class="sign-up__article">
 						<v-col cols="5">
-							<v-text-field type="string" label="이름" v-model="userInfo.name" required />
+							<v-text-field
+								type="string"
+								label="이름"
+								v-model="userInfo.name"
+								required
+							/>
 						</v-col>
 						<v-col cols="5">
-							<form class="sign-up__form">
+							<v-form class="sign-up__form">
 								<v-text-field
 									type="string"
 									label="우편번호"
-									v-model="userInfo.postCode"
 									ref="postcode"
+									v-model="userInfo.postCode"
+									@click="openAddressSearch"
 									readonly
 									required
 								/>
-								<v-btn class="sign-up__btn" color="#000" @click="openAddressSearch">우편번호 찾기</v-btn>
-							</form>
+								<v-btn
+									class="sign-up__btn"
+									color="#000"
+									@click="openAddressSearch"
+								>
+									우편번호 찾기
+								</v-btn>
+							</v-form>
 						</v-col>
 					</v-row>
 				</v-container>
@@ -82,7 +107,12 @@
 							/>
 						</v-col>
 						<v-col cols="5">
-							<v-text-field type="string" label="나머지 주소" v-model="userInfo.detailAddress" required />
+							<v-text-field
+								type="string"
+								label="나머지 주소"
+								v-model="userInfo.detailAddress"
+								required
+							/>
 						</v-col>
 					</v-row>
 				</v-container>
@@ -152,29 +182,50 @@
 									</v-list-item-subtitle>
 
 									<v-list-item-subtitle>
-										<input type="checkbox" class="sign-up__checkbox" @click="checkOneArticles" required />
-										<span class="sign-up__label">[필수] 개인 정보의 수집 및 이용에 대한 동의</span>
-										<router-link to="/terms">자세히 보기</router-link>
+										<input
+											type="checkbox"
+											class="sign-up__checkbox"
+											@click="checkOneArticles"
+											required
+										/>
+										<span class="sign-up__label">
+											[필수] 개인 정보의 수집 및 이용에 대한 동의
+										</span>
+										<router-link to="/terms" tag="span">
+											자세히 보기
+										</router-link>
 									</v-list-item-subtitle>
 
 									<v-list-item-subtitle>
-										<input type="checkbox" class="sign-up__checkbox" @click="checkOneArticles" />
-										<span class="sign-up__label">[선택] 공지사항 / 이벤트 알림</span>
+										<input
+											type="checkbox"
+											class="sign-up__checkbox"
+											@click="checkOneArticles"
+										/>
+										<span class="sign-up__label">
+											[선택] 공지사항 / 이벤트 알림
+										</span>
 									</v-list-item-subtitle>
 
 									<v-list-item-subtitle>
-										<span class="sign-up__label">고객님께 전달해야 할 소식이 있는 경우 최대 월 1회에 한해 발송됩니다.</span>
+										<span class="sign-up__label">
+											고객님께 전달해야 할 소식이 있는 경우 최대 월 1회에 한해
+											발송됩니다.
+										</span>
 									</v-list-item-subtitle>
 								</v-list-item-content>
 							</v-list-item>
 
 							<v-container>
-								<div class="sign-up__recommend-code">
-									<form>
-										<input placeholder="추천 코드 입력" v-model="userInfo.recommendCode" />
-										<span class="sign-up__recommend-code--red">* 추천 코드를 입력하면 2,000포인트 즉시 지급!</span>
-									</form>
-								</div>
+								<v-form class="sign-up__recommend-code">
+									<input
+										placeholder="추천 코드 입력"
+										v-model="gotPromotionCode"
+									/>
+									<span class="sign-up__recommend-code--red">
+										* 추천 코드를 입력하면 2,000포인트 즉시 지급!
+									</span>
+								</v-form>
 							</v-container>
 							<v-container>
 								<v-btn
@@ -182,27 +233,34 @@
 									class="sign-up__btn signup-membership"
 									color="#000"
 									@click.prevent="signUpMembership"
-								>멤버십 가입하기</v-btn>
+								>
+									멤버십 가입하기
+								</v-btn>
 							</v-container>
 						</v-container>
 					</v-row>
 				</v-container>
 			</v-card>
 		</v-container>
-	</v-container>
+	</v-app>
 </template>
 
 <script>
-import { getEmailCheckCode, getCheckSentCode, signUp } from '@/api/index.js';
-
+import { mapActions } from 'vuex';
+import { getRandomNumber, createPromotionCode } from '@/utils/dummy.js';
 import fillBirthYear from '@/mixins/fillBirthYear.js';
-import daumAddressAPI from '@/mixins/daumAddressAPI';
+import daumAddressAPI from '@/mixins/daumAddressAPI.js';
+import rules from '@/mixins/rules.js';
+import staticData from '@/static/orderby.js';
+import { debounce } from 'lodash';
 
 export default {
+	mixins: [fillBirthYear, daumAddressAPI, rules],
 	data() {
 		return {
 			userInfo: {
 				email: '',
+				phoneNum: '',
 				password: '',
 				name: '',
 				postCode: '',
@@ -211,69 +269,70 @@ export default {
 				selectedGender: '',
 				selectedBirthYear: '',
 				agreeTerms: [],
-				recommendCode: '',
+				promotionCode: '',
+				point: 10000,
 			},
-			gender: ['남', '여', '해당없음'],
-			authCodeEmail: '',
+			isUniqueEmail: false,
+			isProperEmail: false,
+			isProperPassword: false,
 			passwordCheck: '',
-			checkAll: {},
+			gender: staticData.genderForSignUp,
+			checkAll: [],
 			formValid: false,
-			emailRules: [
-				v => !!v || '이메일 입력하세요.',
-				v =>
-					/[\S]+@[\S\D]+\.[\S\D]+/gi.test(v) ||
-					'이메일 형식이 올바르지 않습니다.',
-			],
-			passwordRules: [
-				v => !!v || '패스워드를 입력하세요.',
-				v => /[0-9]/g.test(v) || '숫자가 존재하지 않습니다.',
-				v => /[a-z]/gi.test(v) || '영어 알파벳이 존재하지 않습니다.',
-				v => /[~!@#$%^&*/?]/g.test(v) || '특수문자가 존재하지 않습니다.',
-				v =>
-					!(v.length < 8 || v.length > 20) ||
-					'비밀번호 자릿수를 확인해 주세요.',
-			],
+			gotPromotionCode: '',
 			passwordCheckRules: [
 				v => !!v || '패스워드를 한번 더 입력하세요',
 				v => v === this.userInfo.password || '패스워드가 일치하지 않습니다.',
 			],
 		};
 	},
+	computed: {
+		overFourteen() {
+			const currentYear = new Date().getFullYear();
+			return this.userInfo.selectedBirthYear > currentYear - 14 ? false : true;
+		},
+	},
 	methods: {
-		async sendEmailCheckCode() {
-			try {
-				const response = await getEmailCheckCode(this.userInfo.email);
-				return alert(response.data.message);
-			} catch (error) {
-				console.error(error);
-				return alert(error.response.data.message);
-			}
+		...mapActions('auth', [
+			'FETCH_USER_LIST',
+			'CHECK_EMAIL',
+			'COMPARE_PROMOTION_CODE',
+			'SIGN_UP',
+		]),
+
+		createPromotionCode,
+
+		checkEmailRules: debounce(function() {
+			this.isProperEmail = this.$refs.email.validate();
+		}, 300),
+
+		checkEmailRedundancy() {
+			this.CHECK_EMAIL(this.userInfo.email)
+				.then(res => (this.isUniqueEmail = res))
+				.catch(err => console.error(err));
 		},
-		async checkSentCode() {
-			try {
-				const response = await getCheckSentCode(this.authCodeEmail);
-				this.formValid = true;
-				return alert(response.data.message);
-			} catch (error) {
-				this.formValid = false;
-				console.error(error);
-				return alert(error.response.data.message);
-			}
-		},
+
+		checkPasswordRules: debounce(function() {
+			this.isProperPassword = this.$refs.password.validate();
+		}, 300),
+
+		AllowOnlyEnglish: debounce(function(value) {
+			this.userInfo.password = value.replace(/[ㄱ-힣]/gi, '');
+		}, 250),
+
 		checkAllArticles(e) {
 			this.checkAll[2].checked = this.checkAll[3].checked = e.target.checked;
 		},
+
 		checkOneArticles(e) {
 			const checkIdx = Array.prototype.indexOf.call(this.checkAll, e.target);
 			this.checkAll[checkIdx].checked = e.target.checked;
-			if (this.checkAll[2].checked === this.checkAll[3].checked) {
-				this.checkAll[0].checked = this.checkAll[2].checked;
-			} else {
-				this.checkAll[0].checked = false;
-			}
+			this.checkAll[2].checked === this.checkAll[3].checked
+				? (this.checkAll[0].checked = this.checkAll[2].checked)
+				: (this.checkAll[0].checked = false);
 		},
+
 		signUpValidate() {
-			//refs 속성의 validate 함수 이용하기
 			if (
 				!this.userInfo.address ||
 				!this.userInfo.detailAddress ||
@@ -291,32 +350,72 @@ export default {
 				alert('필수 항목에 동의하여야 가입이 가능합니다.');
 				return false;
 			}
+			if (this.userInfo.password !== this.passwordCheck) {
+				alert('비밀번호가 일치하지 않습니다.');
+				return false;
+			}
 			return true;
 		},
-		async signUpMembership() {
+
+		getCheckedBox() {
+			Array.prototype.map.call(this.checkAll, v => {
+				this.userInfo.agreeTerms[
+					Array.prototype.indexOf.call(this.checkAll, v)
+				] = v.checked;
+			});
+		},
+
+		async comparePromotionCode() {
 			try {
-				Array.prototype.map.call(this.checkAll, v => {
-					this.userInfo.agreeTerms[
-						Array.prototype.indexOf.call(this.checkAll, v)
-					] = v.checked;
-				});
-				if (this.signUpValidate()) {
-					const response = await signUp(this.userInfo); //서버쪽에서 추천코드 검사/발급
-					return alert(response.data.message);
+				if (!this.gotPromotionCode.length) return 0;
+				const response = await this.COMPARE_PROMOTION_CODE(
+					this.gotPromotionCode.toUpperCase(),
+				);
+				if (response) {
+					this.$set(this.userInfo, 'point', this.userInfo.point + response);
+				} else {
+					throw Error('존재하는 추천 코드가 존재하지 않습니다.');
 				}
 			} catch (error) {
-				console.error(error);
-				return alert(error.message);
+				alert(error.message);
+			}
+		},
+
+		async signUpMembership() {
+			try {
+				if (this.signUpValidate()) {
+					this.getCheckedBox();
+					await this.comparePromotionCode();
+					this.userInfo.promotionCode = this.createPromotionCode();
+					await this.SIGN_UP({
+						...this.userInfo,
+						wishList: [],
+						cartItems: [],
+						orderDone: [],
+						delivering: [],
+						changeOrRefund: [],
+						pickedBrands: {},
+						shippingAddressList: [
+							{
+								recipientName: this.userInfo.name,
+								recipientPhoneNum: this.userInfo.phoneNum,
+								recipientAddress: this.userInfo.address,
+							},
+						],
+						searchedKeywords: [],
+					});
+					this.$router.replace('/');
+				} else {
+					throw Error('회원가입 양식을 확인하여 주십시오.');
+				}
+			} catch (error) {
+				alert(error.message);
 			}
 		},
 	},
-	computed: {
-		overFourteen() {
-			const currentYear = new Date().getFullYear();
-			return this.userInfo.selectedBirthYear > currentYear - 14 ? false : true;
-		},
+	created() {
+		this.FETCH_USER_LIST();
 	},
-	mixins: [fillBirthYear, daumAddressAPI],
 	mounted() {
 		this.checkAll = document.querySelectorAll('.sign-up__checkbox');
 	},
