@@ -1,22 +1,24 @@
-import faker from 'faker';
-import product from './product.js';
+import dbProduct from './product.js';
+import { Faker, getRandomNumber } from '@/utils/dummy.js';
 
-const reviewList = [];
+let reviewList = [];
 
-const storedReview = JSON.parse(localStorage.getItem('review'));
-
-if (!storedReview) {
+function makeReviewData() {
 	for (let i = 0; i < 100; i++) {
-		const reviewedProduct = product[Math.random() * 400];
+		const reviewedProduct = dbProduct[getRandomNumber(400)];
 		reviewList.push({
-			writer: faker.name.findName(),
+			writer: Faker.name.findName(),
 			nameOfProduct: reviewedProduct.name,
-			postedTime: faker.date.recent(),
-			content: faker.lorem.sentences(),
+			postedTime: Faker.date.recent(),
+			content: Faker.lorem.sentences(),
 			imgPath: reviewedProduct.photoUrl,
 		});
 	}
-} else {
-	reviewList = storedReview;
+	localStorage.setItem('reviews', JSON.stringify(reviewList));
 }
+
+const storedReview = JSON.parse(localStorage.getItem('reviews'));
+
+!!storedReview ? makeReviewData() : (reviewList = storedReview);
+
 export default reviewList;
