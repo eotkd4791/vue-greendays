@@ -1,29 +1,35 @@
 <template>
-	<div>
-		<header id="header" ref="header">
-			<div class="container-logo">
-				<transition name="rolling">
-					<user-info-modal v-if="showUserInfo" />
-				</transition>
-				<toolbar-user-info :userLoggedIn="getUserInfo.name" />
-				<toolbar-menu
-					@onToolbarModal="openToolbarModal"
-					@onSearchBrands="openSearchBrands"
-					@offToolbarModal="closeToolbarModal"
-				/>
-			</div>
-		</header>
-		<toolbar-modal
-			:onToolbar="showToolbarModal"
-			:toolbarToOpen="toolbarToOpen"
-			:activeUserInfo="showUserInfo"
-			@mouseEsc="closeToolbarModal"
-		/>
-		<brand-modal
-			v-if="showModal && SearchBrandsModal"
-			@closeBrands="closeSearchBrands"
-		/>
-	</div>
+	<ol>
+		<li>
+			<header class="toolbar__header" ref="header">
+				<div class="toolbar__container">
+					<transition name="rolling">
+						<user-info-modal v-if="showUserInfo" />
+					</transition>
+					<toolbar-user-info />
+					<toolbar-menu
+						@onToolbarModal="openToolbarModal"
+						@onSearchBrands="openSearchBrands"
+						@offToolbarModal="closeToolbarModal"
+					/>
+				</div>
+			</header>
+		</li>
+		<li>
+			<toolbar-modal
+				:onToolbar="showToolbarModal"
+				:toolbarToOpen="toolbarToOpen"
+				:activeUserInfo="showUserInfo"
+				@mouseEsc="closeToolbarModal"
+			/>
+		</li>
+		<li>
+			<brand-modal
+				v-if="showModal && SearchBrandsModal"
+				@closeBrands="closeSearchBrands"
+			/>
+		</li>
+	</ol>
 </template>
 
 <script>
@@ -87,14 +93,11 @@ export default {
 	mounted() {
 		Bus.$on('showUserInfo', this.toggleUserInfo);
 	},
-	beforeDestroy() {
-		Bus.$off('showUserInfo', this.toggleUserInfo);
-	},
 };
 </script>
 
 <style scoped>
-#header {
+.toolbar__header {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -103,9 +106,9 @@ export default {
 	top: 0;
 	left: 0;
 	background-color: white;
-	z-index: 1002;
+	z-index: 1003;
 }
-.container-logo {
+.toolbar__container {
 	width: 100%;
 	margin: 0 auto;
 	height: 70px;
