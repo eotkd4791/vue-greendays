@@ -1,0 +1,22 @@
+.fa-heart {
+	margin: 18px;
+	color: #d9d9d9;
+	cursor: pointer;
+}
+
+.fa-heart.fa-heart--picked {
+	animation-name: rotating;
+	animation-iteration-count: 2;
+	animation-direction: alternate;
+	animation-duration: 0.5s;
+	color: #42b850;
+}
+
+@keyframes rotating {
+	from {
+		transform: rotateY(0turn);
+	}
+	to {
+		transform: rotateY(0.5turn);
+	}
+}
