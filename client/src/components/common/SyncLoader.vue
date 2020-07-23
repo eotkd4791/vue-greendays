@@ -1,8 +1,8 @@
 <template>
 	<div class="v-spinner" v-show="loading">
-		<div class="v-sync v-sync1" :style="[spinnerStyle,spinnerDelay1]"></div>
-		<div class="v-sync v-sync2" :style="[spinnerStyle,spinnerDelay2]"></div>
-		<div class="v-sync v-sync3" :style="[spinnerStyle,spinnerDelay3]"></div>
+		<div class="v-sync v-sync1" :style="[spinnerStyle, spinnerDelay1]"></div>
+		<div class="v-sync v-sync2" :style="[spinnerStyle, spinnerDelay2]"></div>
+		<div class="v-sync v-sync3" :style="[spinnerStyle, spinnerDelay3]"></div>
 	</div>
 </template>
 
@@ -65,8 +65,9 @@ export default {
 	position: fixed;
 	z-index: 9999;
 	top: 50vh;
-	left: 50vw;
+	left: 45vw;
 }
+
 @-webkit-keyframes v-syncStretchDelay {
 	33% {
 		-webkit-transform: translateY(10px);
