@@ -1,8 +1,10 @@
-import dbProduct from '@/db/product.js';
+import { getItem } from '@/utils/storage.js';
 import { Faker, getRandomNumber } from '@/utils/dummy.js';
 
 const preorderList = [];
-const products = dbProduct.sort((a, b) => (a.productAbleToBuy ? -1 : 1));
+const products = getItem('product').sort((a, b) =>
+	a.productAbleToBuy ? -1 : 1,
+);
 
 const preorderImgPath = [
 	'https://menu.mt.co.kr/moneyweek/thumb/2019/09/27/06/2019092710298098227_1.jpg',
