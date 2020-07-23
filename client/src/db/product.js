@@ -7,6 +7,20 @@ const categoryIndex = ['Bags', 'Wallets', 'Clothes', 'Shoes', 'Accessories'];
 
 const productList = [];
 
+const fakerFunctions = Object.values(Faker.image);
+
+function createRandomPhotoUrl() {
+	const index = getRandomNumber(6);
+	const [abstract, city, nature, nightlife, sports, food] = fakerFunctions;
+	return [abstract, city, nature, nightlife, sports, food][index](
+		260,
+		260,
+		undefined,
+		true,
+		true,
+	);
+}
+
 function makeProductData() {
 	for (let i = 0; i < 400; i++) {
 		const categoryDetail = category[categoryIndex[getRandomNumber(5)]];
@@ -16,8 +30,12 @@ function makeProductData() {
 			id: getRandomNumber(20200707),
 			name: `${Faker.commerce.productName() + i}`,
 			brand: Faker.commerce.productAdjective(),
-			photoUrl: Faker.image.avatar(),
+			photoUrl: createRandomPhotoUrl(),
+			secondImgUrl: createRandomPhotoUrl(),
+			thirdImgUrl: createRandomPhotoUrl(),
+			fourthImgUrl: createRandomPhotoUrl(),
 			category: categoryDetail[getRandomNumber(categoryDetail.length)],
+			categoryDetail,
 			gender: gender[getRandomNumber(3) + 1],
 			priceBefore,
 			discountRate,
@@ -28,6 +46,7 @@ function makeProductData() {
 			popularity: getRandomNumber(100),
 			productSendToday: getRandomNumber(100) % 2 ? true : false,
 			productAbleToBuy: getRandomNumber(100) % 2 ? false : true,
+			registeredTime: Faker.date.recent(),
 		});
 	}
 }
