@@ -2,7 +2,8 @@ import searchOrderBy from '@/static/orderby.js';
 import { Faker, getRandomNumber } from '@/utils/dummy.js';
 
 const gender = searchOrderBy.genders;
-const category = searchOrderBy.categories;
+const categoryObj = searchOrderBy.categories;
+console.log(categoryObj);
 const categoryIndex = ['Bags', 'Wallets', 'Clothes', 'Shoes', 'Accessories'];
 
 const productList = [];
@@ -23,9 +24,15 @@ function createRandomPhotoUrl() {
 
 function makeProductData() {
 	for (let i = 0; i < 400; i++) {
-		const categoryDetail = category[categoryIndex[getRandomNumber(5)]];
+		const randomNumber = getRandomNumber(5);
+		const category = categoryIndex[randomNumber];
+		console.log(category);
+
+		const categoryDetail =
+			categoryObj[category][getRandomNumber(categoryObj[category].length)];
 		const priceBefore = Math.floor(Faker.commerce.price());
 		const discountRate = parseFloat(Math.random().toFixed(2));
+
 		productList.push({
 			id: getRandomNumber(20200707),
 			name: `${Faker.commerce.productName() + i}`,
@@ -34,7 +41,7 @@ function makeProductData() {
 			secondImgUrl: createRandomPhotoUrl(),
 			thirdImgUrl: createRandomPhotoUrl(),
 			fourthImgUrl: createRandomPhotoUrl(),
-			category: categoryDetail[getRandomNumber(categoryDetail.length)],
+			category,
 			categoryDetail,
 			gender: gender[getRandomNumber(3) + 1],
 			priceBefore,
