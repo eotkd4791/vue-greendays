@@ -5,16 +5,27 @@
 				<h1 class="channel-talk__h1">그린데이즈</h1>
 				<i class="fas fa-times" @click="closeChannelTalk" />
 			</header>
-			<ol class="channel-talk__message" ref="message">
+			<ol
+				class="channel-talk__message"
+				ref="message"
+				v-chat-scroll="{ smooth: true, notSmoothOnInit: true }"
+			>
 				<li
 					class="channel-talk__list"
-					:class="{ 'channel-talk__list--fromMe': item.sender!=='GreenDays' }"
+					:class="{ 'channel-talk__list--fromMe': item.sender !== 'GreenDays' }"
 					v-for="(item, index) in messages"
 					:key="index"
 				>
 					<ol class="channel-talk__info">
-						<li class="channel-talk__info-list" v-if="item.sender==='GreenDays'">
-							<img src="@/assets/img/green-present.png" alt="Greendays" class="channel-talk__info-img" />
+						<li
+							class="channel-talk__info-list"
+							v-if="item.sender === 'GreenDays'"
+						>
+							<img
+								src="@/assets/img/green-present.png"
+								alt="Greendays"
+								class="channel-talk__info-img"
+							/>
 						</li>
 						<li class="channel-talk__info-list">
 							<h2 class="channel-talk__sender">{{ item.sender }}</h2>
@@ -25,8 +36,12 @@
 					</ol>
 					<article
 						class="channel-talk__content"
-						:class="{ 'channel-talk__content--fromMe': item.sender!=='GreenDays' }"
-					>{{ item.content }}</article>
+						:class="{
+							'channel-talk__content--fromMe': item.sender !== 'GreenDays',
+						}"
+					>
+						{{ item.content }}
+					</article>
 				</li>
 			</ol>
 			<footer class="channel-talk__footer">
@@ -37,7 +52,7 @@
 					class="channel-talk__input"
 					placeholder="메시지를 입력해주세요."
 					required
-					@keypress.enter="onSubmitMessage"
+					@keyup.enter="onSubmitMessage"
 				/>
 				<button class="channel-talk__btn" @click="onSubmitMessage">
 					<i class="far fa-paper-plane" />
@@ -137,24 +152,21 @@ export default {
 				content: this.newMessage,
 			});
 			this.newMessage = null;
-			this.setScrollBottom();
+
 			this.$refs.input.focus();
 		},
-		setScrollBottom() {
-			const messageElement = this.$refs.message;
-			return (messageElement.scrollTop = messageElement.scrollHeight);
-		},
+
 		addZero(number) {
 			const numberToString = number.toString();
 			return numberToString.length < 2 ? '0' + numberToString : numberToString;
 		},
+
 		closeChannelTalk() {
 			Bus.$emit('toggle-channel-talk');
 		},
 	},
 	mounted() {
 		this.$refs.input.focus();
-		this.setScrollBottom();
 	},
 };
 </script>
