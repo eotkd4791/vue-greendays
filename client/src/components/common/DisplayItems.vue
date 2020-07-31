@@ -1,55 +1,69 @@
 <template>
-	<ul
-		:class="`item-container ${callFrom}`"
-		@click="movePage(`/products/show?product_id=${productId}`)"
-	>
-		<li class="item-container__img">
-			<slot name="productInfo-photo" />
-		</li>
-		<li :class="`item-container__info ${callFrom}`">
-			<div class="item-container__space" v-if="callFrom === ''" />
-			<ol>
-				<li :class="`item-container__brand ${callFrom}`">
-					<slot name="productInfo-brand" />
-				</li>
-				<li :class="`item-container__name ${callFrom}`">
-					<slot name="productInfo-name" />
-				</li>
-				<li :class="`item-container__price ${callFrom}`">
-					<span :class="`item-container__before-price ${callFrom}`">
-						<slot name="productInfo-beforePrice" />
-					</span>
-					|
-					<span :class="`item-container__discount-rate ${callFrom}`">
-						<slot name="productInfo-discountRate" />
-					</span>
-				</li>
-				<li :class="`item-container__after-price ${callFrom}`">
-					<slot name="productInfo-afterPrice" />
-				</li>
-			</ol>
-		</li>
-		<li :class="`item-container__chips-wrapper ${callFrom}`">
-			<div v-if="sendToday" class="item-container__chips send-today">
-				<p class="item-container__chips__send-today__text">당일발송</p>
-			</div>
-			<div v-if="ableToBuy" class="item-container__chips able-to-buy">
-				<p class="item-container__chips__able-to-buy__text">구매가능</p>
-			</div>
-		</li>
-	</ul>
+	<intersect @enter="visible = true" @leave="visible = false">
+		<ul
+			:class="`item-container ${callFrom} ${!visible ? 'item--invisible' : ''}`"
+			@click.stop="$router.push(`/products/show/${productId}`)"
+		>
+			<li
+				class="item-container__img"
+				:class="{ callFrom: callFrom.length > 0 }"
+			>
+				<slot name="productInfo-photo" />
+			</li>
+			<li :class="`item-container__info ${callFrom}`">
+				<div class="item-container__space" v-if="callFrom === ''" />
+				<ol>
+					<li :class="`item-container__brand ${callFrom}`">
+						<slot name="productInfo-brand" />
+					</li>
+					<li :class="`item-container__name ${callFrom}`">
+						<slot name="productInfo-name" />
+					</li>
+					<li :class="`item-container__price ${callFrom}`">
+						<span :class="`item-container__before-price ${callFrom}`">
+							<slot name="productInfo-beforePrice" />
+						</span>
+						|
+						<span :class="`item-container__discount-rate ${callFrom}`">
+							<slot name="productInfo-discountRate" />
+						</span>
+					</li>
+					<li :class="`item-container__after-price ${callFrom}`">
+						<slot name="productInfo-afterPrice" />
+					</li>
+				</ol>
+			</li>
+			<li :class="`item-container__chips-wrapper ${callFrom}`">
+				<div v-if="sendToday" class="item-container__chips send-today">
+					<p class="item-container__chips__send-today__text">당일발송</p>
+				</div>
+				<div v-if="ableToBuy" class="item-container__chips able-to-buy">
+					<p class="item-container__chips__able-to-buy__text">구매가능</p>
+				</div>
+			</li>
+		</ul>
+	</intersect>
 </template>
 
 <script>
 import util from '@/mixins/utilMethods.js';
-
+import Intersect from 'vue-intersect';
 export default {
+	components: {
+		Intersect,
+	},
+
 	mixins: [util],
 
 	props: ['imgPath', 'productId', 'sendToday', 'ableToBuy', 'callFrom'],
+
+	data() {
+		return {
+			visible: true,
+		};
+	},
 };
 </script>
-
 <style scoped>
 .item-container {
 	display: inline-block;
@@ -61,6 +75,10 @@ export default {
 	font-family: 'Montsarret';
 	font-size: 13px;
 	line-height: 1.06;
+}
+
+.item-container.item--invisible {
+	visibility: hidden;
 }
 
 .item-container.main__view {
