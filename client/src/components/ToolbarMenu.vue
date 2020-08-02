@@ -1,134 +1,229 @@
 <template>
-	<div class="container-menu">
-		<div class="menus">
-			<div class="modal-active">
-				<span class="anchor-wrapper" @mouseover="mouseOverOnMenu" @click="$emit('offToolbarModal')">
-					<router-link to="/products">
+	<div class="toolbar-menu">
+		<div class="toolbar-menu__menus">
+			<ul class="toolbar-menu__active">
+				<li
+					class="toolbar-menu__active__li"
+					@mouseover="mouseOverOnMenu"
+					@click="$emit('offToolbarModal')"
+				>
+					<router-link
+						:to="{
+							path: '/products',
+							query: {
+								keyword: '',
+								gender: '',
+								category: '',
+								brand: '',
+								product_id: '',
+								deal_id: 'reserve-purchase',
+								page: 1,
+								orderby: 'desc',
+								order_std: 'popularity',
+							},
+						}"
+					>
 						예약구매
-						<span id="purchase-reserve">💚</span>
+						<span class="toolbar-menu__green-heart">💚</span>
 					</router-link>
-				</span>
-				<span class="anchor-wrapper" @mouseover="mouseOverOnMenu" @click="$emit('offToolbarModal')">
-					<a @click="movePage('#')">프리오더</a>
-				</span>
-				<span class="anchor-wrapper" @mouseover="mouseOverOnMenu" @click="$emit('offToolbarModal')">
-					<router-link to="/products">빠른배송</router-link>
-				</span>
-			</div>
-			<div class="modal-passive" @mouseover="mouseLeaveFromMenu">
-				<router-link to="/reviews">리뷰</router-link>
-				<router-link to="/customerservice">고객센터</router-link>
-			</div>
+				</li>
+				<li class="toolbar-menu__active__li" @mouseover="mouseOverOnMenu">
+					프리오더
+				</li>
+				<li
+					class="toolbar-menu__active__li"
+					@mouseover="mouseOverOnMenu"
+					@click="$emit('offToolbarModal')"
+				>
+					<router-link
+						:to="{
+							path: '/products',
+							query: {
+								keyword: '',
+								gender: '',
+								category: '',
+								brand: '',
+								product_id: '',
+								deal_id: 'quick-delivery',
+								page: 1,
+								orderby: 'desc',
+								order_std: 'popularity',
+							},
+						}"
+					>
+						빠른배송
+					</router-link>
+				</li>
+			</ul>
+			<ul class="toolbar-menu__passive" @mouseover="mouseLeaveFromMenu">
+				<router-link tag="li" to="/reviews">리뷰</router-link>
+				<router-link tag="li" to="/customerservice">고객센터</router-link>
+			</ul>
 		</div>
-		<div class="row-right-menu">
-			<div class="search-brand-modal" @click="onClickSearchBrands">
-				<span class="new-released-item">🎁</span>
+		<ul class="toolbar-menu__right">
+			<li class="toolbar-menu__brand-modal" @click="onClickSearchBrands">
+				<span class="toolbar-menu__present">🎁</span>
 				<span>브랜드 검색</span>
-			</div>
-			<div class="search-brand-form" @click="mouseOverOnMenu">
-				<form @input="searchKeyword(searchBrands)">
-					<input type="text" placeholder="검색어를 입력해 주세요" v-model="searchBrands" />
+			</li>
+			<li class="toolbar-menu__brand-search" @click="mouseOverOnMenu">
+				<form class="toolbar-menu__form">
+					<input
+						type="text"
+						placeholder="검색어를 입력해 주세요"
+						class="toolbar-menu__input"
+						v-model="keyword"
+						@input="searchKeyword"
+						@keypress.enter.prevent="onSubmitKeyword"
+					/>
 					<i class="fas fa-search" />
 				</form>
-			</div>
-		</div>
+			</li>
+		</ul>
 	</div>
 </template>
 
 <script>
-import _ from 'lodash';
+import util from '@/mixins/utilMethods.js';
+import Bus from '@/utils/bus.js';
+import { mapActions } from 'vuex';
+import { debounce, throttle } from 'lodash';
 
 export default {
+	mixins: [util],
+
 	data() {
 		return {
-			searchBrands: '',
+			keyword: '',
 		};
 	},
+
 	methods: {
-		movePage(to) {
-			if (to === '#') return;
-			if (this.$route.path !== to) {
-				window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-				const nextPage = { path: to };
-				this.$router.push(nextPage);
-			}
-		},
+		...mapActions({
+			ADD_SEARCH_KEYWORD: 'auth/ADD_SEARCH_KEYWORD',
+			IS_LOGGED_IN: 'auth/IS_LOGGED_IN',
+			SET_EXPECTED_KEYWORDS: 'shopping/SET_EXPECTED_KEYWORDS',
+		}),
+
 		mouseLeaveFromMenu() {
 			this.$emit('offToolbarModal');
 		},
+
 		onClickSearchBrands() {
 			this.$emit('onSearchBrands');
 		},
-	},
-	created() {
-		this.searchKeyword = _.debounce(() => {
-			// this.$store.dispatch('', this.searchBrands);
-			// DB에서 연관 검색어 조회하기
-			// Form 태그에서 submit Event 발생 시 DB 연관 검색어 테이블에 검색어 삽입하기.
-		}, 700);
-		// 검색어 받아오는 로직
 
-		this.mouseOverOnMenu = _.throttle(e => {
+		mouseOverOnMenu: throttle(function(e) {
 			const whichMenu = e.target.textContent;
-			this.$emit('onToolbarModal', whichMenu);
-		}, 250);
+			this.$emit('onToolbarModal', whichMenu.trim());
+		}, 250),
+
+		searchKeyword: debounce(function() {
+			const trimmedKeyword = this.keyword.replace(/ /g, '').toUpperCase();
+			Bus.$emit(
+				trimmedKeyword.length === 0 ? 'offRecommendKeywords' : 'onRecommendKeywords',
+				trimmedKeyword,
+			);
+		}, 800),
+
+		onSubmitKeyword() {
+			const trimmedKeyword = this.keyword.replace(/ /g, '').toUpperCase();
+			if (trimmedKeyword.length <= 2) {
+				return alert('3글자 이상 입력해주세요.');
+			} else {
+				this.ADD_SEARCH_KEYWORD(trimmedKeyword)
+					.then(() => {
+						Bus.$emit('offRecommendKeywords');
+						this.mouseLeaveFromMenu();
+						this.$router
+							.push({
+								path: '/products',
+								query: {
+									keyword: trimmedKeyword,
+									gender: '',
+									category: '',
+									brand: '',
+									product_id: '',
+									deal_id: '',
+									page: 1,
+									order_std: 'popularity',
+									orderby: 'desc',
+								},
+							})
+							.catch(() => {});
+						this.keyword = '';
+					})
+					.catch(console.error);
+			}
+		},
+	},
+
+	created() {
+		this.SET_EXPECTED_KEYWORDS();
 	},
 };
 </script>
 
 <style scoped>
-.container-menu {
+.toolbar-menu {
 	max-width: 1100px;
 	height: 36px;
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
 }
-.menus {
+
+.toolbar-menu__menus {
 	display: flex;
 }
-.menus a {
+
+.toolbar-menu__menus li {
 	margin-right: 20px;
 	font-size: 13px;
-	padding: 5px 0;
 	cursor: pointer;
 }
-.anchor-wrapper {
-	padding: 10px 0;
-}
-.menus a:hover {
-	border-bottom: 3px solid #42b883;
-}
-#purchase-reserve {
-	font-size: 10px;
-}
-.row-right-menu {
+
+.toolbar-menu__active,
+.toolbar-menu__passive {
 	display: flex;
 	align-items: center;
 }
-.search-brand-modal {
+
+.toolbar-menu__menus li:hover {
+	border-bottom: 3px solid #42b883;
+}
+
+.toolbar-menu__green-heart {
+	font-size: 10px;
+}
+
+.toolbar-menu__right {
+	display: flex;
+	align-items: center;
+}
+
+.toolbar-menu__brand-modal {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 114px;
 	height: 36px;
 	margin-right: 10px;
-	border: 1px solid #000;
+	border: 1px solid #dedede;
 	position: relative;
 }
-.search-brand-modal span {
+
+.toolbar-menu__brand-modal span {
 	font-size: 13px;
 	font-weight: 500;
 }
-input {
-	border-style: none;
-}
-.search-brand-form {
+
+.toolbar-menu__brand-search {
 	width: 232px;
 	height: 36px;
-	border: 1px solid #000;
+	border: 1px solid #dedede;
 }
-.new-released-item {
+
+.toolbar-menu__present {
 	font-size: 12px;
 	filter: drop-shadow(2px 2px 2px #000);
 	position: absolute;
@@ -137,19 +232,23 @@ input {
 	margin-left: -6px;
 	margin-top: -8px;
 }
-.search-brand-form form {
+
+.toolbar-menu__form {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
 }
-.search-brand-form input {
+
+.toolbar-menu__input {
 	width: 100%;
 	height: 33px;
 	text-align: center;
 	font-size: 13px;
+	border-style: none;
 	outline-style: none;
 }
+
 .fa-search {
 	color: #8b8b8b;
 	font-size: 14px;
@@ -158,7 +257,8 @@ input {
 	right: 0;
 	margin-right: 10px;
 }
-.search-brand-modal {
+
+.toolbar-menu__brand-modal {
 	cursor: pointer;
 }
 </style>
