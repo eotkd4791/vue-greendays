@@ -1,5 +1,7 @@
 const genders = ['All', 'Men', 'Women', 'Kids'];
 
+const genderForSignUp = ['남', '여', '해당없음'];
+
 const orderBy = [
 	'인기순',
 	'최신순',
@@ -8,7 +10,7 @@ const orderBy = [
 	'높은 할인율순',
 	'낮은 할인율순',
 ];
-// genders, orderBy 배열 요소 하나당 객체 만들어서 쿼리 스트링 보낼 때 처리할 멤버변수 만들기 ?
+
 const categories = {
 	Bags: [
 		'Shoulder Bags',
@@ -77,8 +79,40 @@ const categories = {
 	],
 };
 
+const alphabets = [
+	'0-9',
+	'A',
+	'B',
+	'C',
+	'D',
+	'E',
+	'F',
+	'G',
+	'H',
+	'I',
+	'J',
+	'K',
+	'L',
+	'M',
+	'N',
+	'O',
+	'P',
+	'Q',
+	'R',
+	'S',
+	'T',
+	'U',
+	'V',
+	'W',
+	'X',
+	'Y',
+	'Z',
+];
+
 export default {
 	genders,
+	genderForSignUp,
 	orderBy,
 	categories,
+	alphabets,
 };
