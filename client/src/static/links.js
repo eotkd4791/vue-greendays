@@ -30,15 +30,15 @@ export default {
 	getUserInfoLinks() {
 		return [
 			{
-				routePath: '/user/edit',
+				routePath: '/user/edit/:userId',
 				name: '내 정보 관리',
 			},
 			{
-				routePath: '/user/total_order_refund',
+				routePath: '/user/total_order_refund/:userId',
 				name: '주문 및 반품 내역',
 			},
 			{
-				routePath: '/user/point',
+				routePath: '/user/point/:userId',
 				name: '포인트',
 			},
 		];
