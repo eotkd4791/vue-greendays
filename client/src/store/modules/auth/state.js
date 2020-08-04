@@ -1,5 +1,5 @@
 const state = () => ({
-	userInfo: {},
+	userInfo: null,
 	userList: [],
 });
 
