@@ -1,8 +1,10 @@
 import { getItem } from '@/utils/storage.js';
 import { Faker, getRandomNumber } from '@/utils/dummy.js';
+import dbProduct from '@/db/product.js';
 
 const preorderList = [];
-const products = getItem('product').sort((a, b) =>
+const storedProducts = getItem('product');
+const products = (!!storedProducts ? storedProducts : dbProduct).sort((a, b) =>
 	a.productAbleToBuy ? -1 : 1,
 );
 
