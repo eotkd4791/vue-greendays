@@ -7,7 +7,7 @@
 		<li class="wish__empty__picture">
 			<span class="wish__empty__text">Pick!</span>
 		</li>
-		<router-link to="/shopping/product" tag="li" class="wish__empty__link">
+		<router-link to="/products" tag="li" class="wish__empty__link">
 			원하는 상품 PICK! 하러 가기 >
 		</router-link>
 	</ul>
@@ -61,7 +61,8 @@
 	align-items: center;
 	margin: 0 auto;
 	color: #9aecb0;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: bold;
+	cursor: pointer;
 }
 </style>
