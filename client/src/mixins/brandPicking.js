@@ -22,11 +22,16 @@ export default {
 			this.lazyUpdateStore(brandName);
 		},
 
-		lazyUpdateStore: debounce(function(brandName) {
+		lazyUpdateStore: debounce(function (brandName) {
 			this.UPDATE_PICKED_BRANDS({
 				key: brandName,
 				value: this.categories,
 			});
 		}, 800),
+
+		openAlarmBrand(e) {
+			const { text } = e.target.nextElementSibling;
+			this.$emit('openAlarmModal', text);
+		},
 	},
 };
