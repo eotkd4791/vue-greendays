@@ -48,6 +48,7 @@ export default {
 		ToolbarUserInfo,
 		UserInfoModal,
 	},
+
 	data() {
 		return {
 			user: {},
@@ -58,38 +59,44 @@ export default {
 			showUserInfo: false,
 		};
 	},
+
 	computed: {
 		getUserInfo() {
 			return this.$store.state.auth.userInfo;
 		},
 	},
+
 	methods: {
 		openToolbarModal(menuToOpen) {
 			this.showToolbarModal = true;
 			this.showModal = true;
 			this.toolbarToOpen = menuToOpen;
 		},
+
 		openSearchBrands() {
 			this.showModal = true;
 			this.SearchBrandsModal = true;
 		},
+
 		closeToolbarModal() {
 			this.showToolbarModal = false;
 			this.showModal = false;
 		},
+
 		closeSearchBrands() {
 			this.showModal = false;
 			this.SearchBrandsModal = false;
 		},
+
 		toggleUserInfo() {
-			if (!this.showUserInfo) {
-				this.$refs.header.style.setProperty('top', '280px');
-			} else {
-				this.$refs.header.style.setProperty('top', '0');
-			}
+			!this.showUserInfo
+				? this.$refs.header.style.setProperty('top', '280px')
+				: this.$refs.header.style.setProperty('top', '0');
+
 			this.showUserInfo = !this.showUserInfo;
 		},
 	},
+
 	mounted() {
 		Bus.$on('showUserInfo', this.toggleUserInfo);
 	},
