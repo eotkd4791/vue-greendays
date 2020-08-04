@@ -2,17 +2,13 @@
 	<div class="userinfo__modal-container">
 		<div class="userinfo__modal-wrapper">
 			<section class="userinfo_section">
-				<ul>
-					<router-link tag="li" to="`/user/edit/${getUserInfo.email}`">
-						{{ getUserInfo.name }}
-					</router-link>
+				<ul @click="routingPage">
+					<router-link tag="li" :to="`/user/edit/${getUserInfo.id}`">{{ getUserInfo.name }}</router-link>
 					<li>{{ `내 추천 코드 ${getUserInfo.promotionCode}` }}</li>
-					<router-link tag="li" to="/user/edit">내 정보 관리</router-link>
-					<router-link tag="li" to="/user/total_order_refund">
-						주문 및 반품 내역
-					</router-link>
-					<router-link tag="li" to="/user/point">포인트</router-link>
-					<li>로그아웃</li>
+					<router-link tag="li" :to="`/user/edit/${getUserInfo.id}`">내 정보 관리</router-link>
+					<router-link tag="li" :to="`/user/total_order_refund/${getUserInfo.id}`">주문 및 반품 내역</router-link>
+					<router-link tag="li" :to="`/user/point/${getUserInfo.id}`">포인트</router-link>
+					<li @click.stop="userLogOut">로그아웃</li>
 				</ul>
 			</section>
 			<aside class="userinfo__aside">
@@ -31,28 +27,50 @@
 						<strong>{{ getUserInfo.changeOrRefund.length }}</strong>
 					</li>
 				</ul>
-				<button>주문 및 반품 내역</button>
+				<router-link tag="button" :to="`/user/total_order_refund/${getUserInfo.id}`">주문 및 반품 내역</router-link>
 			</aside>
 		</div>
 	</div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import Bus from '@/utils/bus.js';
 
 export default {
 	computed: {
 		...mapGetters('auth', ['getUserInfo']),
 	},
+
 	methods: {
+		...mapActions('auth', ['LOG_OUT']),
+
 		closeUserInfo() {
-			this.$refs.closeBtn.classList.add('rotation');
-			const timer = setTimeout(() => {
-				clearTimeout(timer);
-				Bus.$emit('userInfoToggle');
-			}, 1000);
+			Bus.$emit('userInfoToggle');
 		},
+
+		userLogOut() {
+			const confirmLogOut = confirm('로그아웃 하시겠습니까?');
+			if (confirmLogOut) {
+				this.closeUserInfo();
+				this.$router.push('/logout');
+				this.LOG_OUT()
+					.then(() => {
+						alert('로그아웃 되었습니다.');
+						this.$router.replace('/');
+					})
+					.catch(console.error);
+			}
+		},
+		routingPage() {
+			Bus.$emit('off:user-info-modal');
+		},
+	},
+	mounted() {
+		Bus.$on('off:user-info-modal', this.closeUserInfo);
+	},
+	beforeDestroy() {
+		Bus.$off('off:user-info-modal', this.closeUserInfo);
 	},
 };
 </script>
@@ -82,11 +100,6 @@ export default {
 	border-style: none;
 	outline: none;
 	cursor: pointer;
-}
-.fa-times.rotation {
-	animation-name: rotating;
-	animation-duration: 0.6s;
-	animation-iteration-count: 1;
 }
 
 .userinfo_section {
@@ -148,14 +161,5 @@ export default {
 	height: 36px;
 	background-color: #393939;
 	color: #fff;
-}
-
-@keyframes rotating {
-	from {
-		transform: rotate(0turn);
-	}
-	to {
-		transform: rotate(2turn);
-	}
 }
 </style>
