@@ -35,11 +35,8 @@
 				<wish-list-item
 					v-for="(product, index) in userInfo.wishList"
 					:key="index"
+					:productInfo="product"
 				>
-					<template></template>
-					<template></template>
-					<template></template>
-					<template></template>
 				</wish-list-item>
 			</ol>
 			<empty-wish-list v-else />
@@ -48,8 +45,8 @@
 		<aside class="wish-content" v-else>
 			<ol class="wish__content__list">
 				<pick-brand-item
-					v-for="array in Object.entries(userInfo.pickedBrands)"
-					:key="array"
+					v-for="(array, index) in Object.entries(userInfo.pickedBrands)"
+					:key="index"
 					:categoryPair="array"
 				/>
 			</ol>
@@ -61,7 +58,7 @@
 import WishListItem from '@/components/WishListItem.vue';
 import PickBrandItem from '@/components/PickBrandItem.vue';
 import EmptyWishList from '@/components/EmptyWishList.vue';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
 	components: {
@@ -72,6 +69,8 @@ export default {
 	data() {
 		return {
 			onProductTab: true,
+			checkedBrandsToDelete: [],
+			checkedProductsToDelete: [],
 		};
 	},
 	computed: {
@@ -80,9 +79,22 @@ export default {
 		}),
 	},
 	methods: {
-		deleteSelectedItems() {},
+		...mapActions('auth', ['DELETE_WISHLIST', 'DELETE_PICKED_BRANDS']),
+
+		deleteSelectedItems() {
+			this.onProductTab
+				? this.DELETE_WISHLIST(this.checkedProductsToDelete)
+				: this.DELETE_PICKED_BRANDS(this.checkedBrandsToDelete);
+		},
 	},
 	created() {},
+
+	watch: {
+		onProductTab() {
+			this.checkedBrandsToDelete = [];
+			this.checkedProductsToDelete = [];
+		},
+	},
 };
 </script>
 
@@ -117,7 +129,7 @@ export default {
 
 .wish__menu {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 	width: 100%;
 	margin: 0 auto;
@@ -147,8 +159,8 @@ export default {
 
 .wish__content__list {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
+	align-items: flex-start;
 	flex-wrap: wrap;
-	width: 100%;
 }
 </style>
