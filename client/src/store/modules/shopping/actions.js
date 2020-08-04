@@ -38,24 +38,23 @@ const actions = {
 	//검색한 키워드와 연관 키워드 뽑기
 	FETCH_RECOMMEND_KEYWORDS({ commit }, payload) {
 		const storedKeywords = getItem('totalKeywords');
-		const storedRecentKeywords = new Map(
-			Object.entries(getItem('recentKeywords')),
-		);
+		const storedRecentKeywords = getItem('recentKeywords');
 
-		if (!storedRecentKeywords.has(payload)) {
+		const keywordsMap = !!storedRecentKeywords
+			? new Map(Object.entries(storedRecentKeywords))
+			: new Map();
+
+		if (!keywordsMap.has(payload)) {
 			const croppedKeywords = storedKeywords
 				.map(v => v.includes(payload) && v)
 				.filter(v => v);
 
 			commit('setRecentKeywords', { key: payload, value: croppedKeywords });
 			commit('setRecommendKeywords', croppedKeywords);
-			setItem(
-				'recentKeywords',
-				storedRecentKeywords.set(payload, croppedKeywords),
-			);
+			setItem('recentKeywords', keywordsMap.set(payload, croppedKeywords));
 		} else {
-			commit('setRecentKeywords', storedRecentKeywords.get(payload));
-			commit('setRecommendKeywords', storedRecentKeywords.get(payload));
+			commit('setRecentKeywords', keywordsMap.get(payload));
+			commit('setRecommendKeywords', keywordsMap.get(payload));
 		}
 	},
 
@@ -80,10 +79,10 @@ const actions = {
 					productsAll = productsAll.filter(value => {
 						const { brand, category, material, name } = value;
 						if (
-							new RegExp(brand, 'ig').test(entry[1]) ||
-							new RegExp(category, 'ig').test(entry[1]) ||
-							new RegExp(material, 'ig').test(entry[1]) ||
-							new RegExp(name, 'ig').test(entry[1])
+							new RegExp(entry[1], 'ig').test(brand) ||
+							new RegExp(entry[1], 'ig').test(category) ||
+							new RegExp(entry[1], 'ig').test(material) ||
+							new RegExp(entry[1], 'ig').test(name)
 						) {
 							return value;
 						}
@@ -127,11 +126,15 @@ const actions = {
 					break;
 
 				case 'deal_id':
-					productsAll = productsAll.filter(value =>
-						entry[1] === 'reserve-purchase'
-							? value.productAbleToBuy
-							: value.productSendToday,
-					);
+					productsAll = productsAll.filter(value => {
+						if (entry[1] === 'reserve-purchase') {
+							return value.productAbleToBuy;
+						} else if (entry[1] === 'quick-delivery') {
+							return value.productSendToday;
+						} else {
+							return true;
+						}
+					});
 					break;
 
 				case 'product_id':
@@ -145,6 +148,14 @@ const actions = {
 			}
 		});
 		commit('setOrderedProduct', productsAll);
+	},
+
+	FETCH_PRODUCT_INFO({ commit }, payload) {
+		const storedProducts = getItem('product');
+		commit(
+			'setProductDetail',
+			storedProducts.find(v => v.id === payload),
+		);
 	},
 };
 
