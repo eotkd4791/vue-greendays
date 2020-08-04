@@ -1,22 +1,18 @@
-import MainView from '@/views/MainView.vue';
-import Introduction from '@/views/Introduction.vue';
-import Reviews from '@/views/Reviews.vue';
-
 const publicRoutes = [
 	{
 		path: '/',
-		component: MainView,
 		name: 'main',
+		component: () => import('@/views/MainView.vue'),
 	},
 	{
 		path: '/introduction',
-		component: Introduction,
 		name: 'introduction',
+		component: () => import('@/views/Introduction.vue'),
 	},
 	{
 		path: '/reviews',
-		component: Reviews,
 		name: 'reviews',
+		component: () => import('@/views/Reviews.vue'),
 	},
 ];
 

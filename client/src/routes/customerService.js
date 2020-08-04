@@ -1,45 +1,37 @@
-import CustomerService from '@/views/CustomerService.vue';
-import CustomerServiceMain from '@/views/CustomerServiceMain.vue';
-import LogiGuide from '@/views/LogiGuide.vue';
-import Notice from '@/views/NoticeView.vue';
-import FaqList from '@/views/FaqList.vue';
-import Terms from '@/views/Terms.vue';
-import PrivateInfoPolicy from '@/views/PrivateInfoPolicy.vue';
-
 const customerServiceRoutes = {
 	path: '/customerservice',
 	redirect: '/customerservice/main',
-	component: CustomerService,
+	component: () => import('@/views/CustomerService.vue'),
 	children: [
 		{
 			path: '/customerservice/main',
 			name: 'customerService',
-			component: CustomerServiceMain,
+			component: () => import('@/views/CustomerServiceMain.vue'),
 		},
 		{
 			path: '/customerservice/logi_guide',
 			name: 'logiGuide',
-			component: LogiGuide,
+			component: () => import('@/views/LogiGuide.vue'),
 		},
 		{
 			path: '/customerservice/notice',
 			name: 'notice',
-			component: Notice,
+			component: () => import('@/views/NoticeView.vue'),
 		},
 		{
 			path: '/customerservice/faq',
 			name: 'faqList',
-			component: FaqList,
+			component: () => import('@/views/FaqList.vue'),
 		},
 		{
 			path: '/customerservice/terms',
 			name: 'terms',
-			component: Terms,
+			component: () => import('@/views/Terms.vue'),
 		},
 		{
 			path: '/customerservice/private_info_policy',
 			name: 'privateInfoPolicy',
-			component: PrivateInfoPolicy,
+			component: () => import('@/views/PrivateInfoPolicy.vue'),
 		},
 	],
 };

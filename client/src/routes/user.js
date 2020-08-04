@@ -1,27 +1,22 @@
-import MyUserInfo from '@/views/MyUserInfo.vue';
-import UserInfoEdit from '@/views/UserInfoEdit.vue';
-import TotalOrderRefund from '@/views/TotalOrderRefund.vue';
-import PointUsage from '@/views/PointUsage.vue';
-
 const userRoutes = {
-	path: '/user/:id',
+	path: '/user',
 	redirect: '/user/edit/:userId',
-	component: MyUserInfo,
+	component: () => import('@/views/MyUserInfo.vue'),
 	children: [
 		{
 			path: '/user/edit/:userId',
 			name: 'userInfoEdit',
-			component: UserInfoEdit,
+			component: () => import('@/views/UserInfoEdit.vue'),
 		},
 		{
 			path: '/user/total_order_refund/:userId',
 			name: 'totalOrderRefund',
-			component: TotalOrderRefund,
+			component: () => import('@/views/TotalOrderRefund.vue'),
 		},
 		{
 			path: '/user/point/:userId',
 			name: 'pointUsage',
-			component: PointUsage,
+			component: () => import('@/views/PointUsage.vue'),
 		},
 	],
 };
