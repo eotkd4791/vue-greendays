@@ -105,7 +105,7 @@ export default {
 	justify-content: space-between;
 	align-items: center;
 	height: 20px;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: 600;
 }
 
