@@ -49,11 +49,11 @@ export default {
 		},
 	},
 
-	created() {
+	async created() {
 		this.onSpinner();
-		this.FETCH_ALL_PRODUCTS()
-			.then(() => this.FETCH_PREORDERS())
-			.then(() => this.offSpinner());
+		await this.FETCH_ALL_PRODUCTS();
+		await this.FETCH_PREORDERS;
+		this.offSpinner();
 	},
 	mounted() {
 		Bus.$on('showUserInfo', this.toggleSpace);
@@ -65,6 +65,7 @@ export default {
 
 <style>
 @import './style/reset.css';
+@import './style/transitionFade.css';
 
 @font-face {
 	font-family: 'Montserrat';
@@ -85,15 +86,5 @@ export default {
 
 .space.space--active {
 	height: 280px;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-	transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-	opacity: 0;
 }
 </style>
