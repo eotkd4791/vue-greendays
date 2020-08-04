@@ -115,7 +115,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import daumAddressAPI from '@/mixins/daumAddressAPI.js';
-import _ from 'lodash';
+import { debounce } from 'lodash';
 import userInfo from '@/static/userInfo.js';
 
 export default {
@@ -155,7 +155,7 @@ export default {
 			return isUndefined && this.selectedShippingMessage.length > 0;
 		},
 
-		isOnlyNumber: _.debounce(function() {
+		isOnlyNumber: debounce(function() {
 			this.$set(
 				this.newShippingAddress,
 				'recipientPhoneNum',
