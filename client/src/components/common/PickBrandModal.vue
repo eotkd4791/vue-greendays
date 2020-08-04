@@ -22,12 +22,6 @@ export default {
 
 	props: ['propsBrand'],
 
-	data() {
-		return {
-			brandName: '',
-		};
-	},
-
 	computed: {
 		...mapState('auth', {
 			userInfo: state => state.userInfo,
