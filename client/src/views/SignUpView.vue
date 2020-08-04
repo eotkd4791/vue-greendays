@@ -12,7 +12,9 @@
 								<v-text-field
 									type="string"
 									label="이메일"
+									color="#000"
 									@input="checkEmailRules"
+									@keypress.enter.prevent="checkEmailRedundancy"
 									v-model="userInfo.email"
 									:rules="emailRules"
 									required
@@ -31,6 +33,7 @@
 							<v-text-field
 								label="휴대폰 번호를 입력하세요."
 								v-model="userInfo.phoneNum"
+								color="#000"
 								required
 							/>
 						</v-col>
@@ -43,6 +46,7 @@
 								<v-text-field
 									type="password"
 									label="비밀번호"
+									color="#000"
 									v-model="userInfo.password"
 									:rules="passwordRules"
 									@input="AllowOnlyEnglish(userInfo.password)"
@@ -54,6 +58,7 @@
 							<v-text-field
 								type="password"
 								label="비밀번호 확인"
+								color="#000"
 								v-model="passwordCheck"
 								:rules="passwordCheckRules"
 								:disabled="isProperPassword"
@@ -68,6 +73,7 @@
 							<v-text-field
 								type="string"
 								label="이름"
+								color="#000"
 								v-model="userInfo.name"
 								required
 							/>
@@ -78,8 +84,10 @@
 									type="string"
 									label="우편번호"
 									ref="postcode"
+									color="#000"
 									v-model="userInfo.postCode"
 									@click="openAddressSearch"
+									@keypress.enter.prevent="openAddressSearch"
 									readonly
 									required
 								/>
@@ -100,6 +108,7 @@
 							<v-text-field
 								type="string"
 								label="주소"
+								color="#000"
 								v-model="userInfo.address"
 								ref="detailAddress"
 								readonly
@@ -110,6 +119,7 @@
 							<v-text-field
 								type="string"
 								label="나머지 주소"
+								color="#000"
 								v-model="userInfo.detailAddress"
 								required
 							/>
@@ -122,6 +132,7 @@
 							<v-overflow-btn
 								class="sign-up__gender"
 								label="성별"
+								color="#000"
 								v-model="userInfo.selectedGender"
 								:items="gender"
 								dense
@@ -431,8 +442,6 @@ export default {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	position: relative;
-	top: 115px;
 	margin-bottom: 150px;
 }
 
