@@ -48,13 +48,8 @@ export default {
 		ToolbarQuickDelivery,
 		ToolbarSearchBrands,
 	},
+
 	props: ['toolbarToOpen', 'onToolbar', 'activeUserInfo'],
-	data() {
-		return {
-			user: {},
-			onUserInfo: false,
-		};
-	},
 };
 </script>
 
@@ -94,7 +89,6 @@ export default {
 	max-width: 1100px;
 	height: 372px;
 	margin: 0 auto;
-	background-color: #fff;
 	display: flex;
 	justify-content: space-between;
 }
@@ -105,11 +99,13 @@ export default {
 
 .rolling-enter-active,
 .rolling-leave-active {
-	transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition: all 0.25s ease;
 }
 
 .rolling-enter,
 .rolling-leave-to {
 	transform: translateY(-115px);
+	height: 0;
+	opacity: 0;
 }
 </style>
