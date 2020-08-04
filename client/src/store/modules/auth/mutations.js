@@ -1,12 +1,12 @@
 const mutations = {
-	setUserList(state, payload) {
-		state.userList = payload;
-	},
-
 	setUser(state, payload) {
 		if (state.userInfo !== payload) {
 			state.userInfo = payload;
 		}
+	},
+
+	setUserList(state, payload) {
+		state.userList = payload;
 	},
 
 	setNewUser(state, payload) {
@@ -28,12 +28,18 @@ const mutations = {
 		}
 	},
 
-	addSearchedKeyword(state, payload) {
-		const searchedKeyword = state.userInfo.searchedKeyword;
-		if (searchedKeyword.length >= 6) {
-			searchedKeyword.pop();
+	// 검색한 키워드 검색 목록에 저장
+	addUserKeyword(state, payload) {
+		const { searchedKeywords } = state.userInfo;
+		searchedKeywords.unshift(payload);
+		if (searchedKeywords.length > 6) {
+			searchedKeywords.pop();
 		}
-		searchedKeyword.unshift(payload);
+	},
+
+	//검색 내역 모두 삭제
+	deleteAllSearchKeywords(state) {
+		state.userInfo.searchedKeywords = [];
 	},
 };
 
