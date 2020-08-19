@@ -55,7 +55,7 @@
 									style="color:#fff"
 									color="#000"
 									block
-									@click="movePage('/signup')"
+									@click="movePage('/vue-greendays/signup')"
 									>그린데이즈 멤버십 가입</v-btn
 								>
 							</v-container>
