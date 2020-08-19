@@ -5,7 +5,9 @@
 			v-if="!!getUserInfo"
 			@click.stop="movePage(`/user/mypoint/${getUserInfo.id}`)"
 		>
-			<span class="user-info__text" v-if="!!getUserInfo">{{ !!getUserInfo ? getUserInfo.point : '' }}</span>
+			<span class="user-info__text" v-if="!!getUserInfo">{{
+				!!getUserInfo ? getUserInfo.point : ''
+			}}</span>
 			<span class="fas fa-coins" v-show="!!getUserInfo" />
 		</li>
 		<li
@@ -25,10 +27,9 @@
 					: movePage('/login')
 			"
 		/>
-		<li
-			v-show="getUserInfo"
-			class="user-info__text"
-		>{{ !!getUserInfo ? getUserInfo.wishList.length : '' }}</li>
+		<li v-show="getUserInfo" class="user-info__text">
+			{{ !!getUserInfo ? getUserInfo.wishList.length : '' }}
+		</li>
 		<li
 			class="user-info__list fas fa-shopping-basket"
 			@click.stop="
@@ -37,7 +38,9 @@
 					: movePage('/login')
 			"
 		/>
-		<li class="user-info__text">{{ !!getUserInfo ? getUserInfo.cartItems.length : 0 }}</li>
+		<li class="user-info__text">
+			{{ !!getUserInfo ? getUserInfo.cartItems.length : 0 }}
+		</li>
 	</ul>
 </template>
 
@@ -119,6 +122,7 @@ export default {
 }
 
 .fa-heart {
+	margin: 0 0 0 18px;
 	color: #42b883;
 }
 .fa-user {

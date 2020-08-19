@@ -21,16 +21,19 @@ export default {
 	components: {
 		ChannelTalkBody,
 	},
+
 	data() {
 		return {
 			onChannelTalk: false,
 		};
 	},
+
 	methods: {
 		toggleChannelTalk() {
 			this.onChannelTalk = !this.onChannelTalk;
 		},
 	},
+	
 	mounted() {
 		Bus.$on('toggle-channel-talk', this.toggleChannelTalk);
 	},

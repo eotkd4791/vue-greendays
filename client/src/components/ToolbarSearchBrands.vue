@@ -9,10 +9,27 @@
 					<li>최근 검색어</li>
 					<router-link
 						tag="li"
-						v-for="(item, index) in getUserInfo ? getLatelySearchItems : getGuestKeywords"
+						v-for="(item, index) in getUserInfo
+							? userSearchedKeywords
+							: getGuestKeywords"
 						:key="index"
-						to="/"
-					>{{ item }}</router-link>
+						:to="{
+							path: '/products',
+							query: {
+								keyword: item,
+								gender: '',
+								category: '',
+								brand: '',
+								product_id: '',
+								deal_id: '',
+								page: 1,
+								orderby: 'desc',
+								order_std: 'popularity',
+							},
+						}"
+					>
+						{{ item }}
+					</router-link>
 				</ol>
 				<ul class="search-brand__hot">
 					<li>인기 검색어</li>
@@ -22,22 +39,37 @@
 							? getRecommendKeywordsList
 							: getHotSearchItems"
 						:key="index"
-						to="/"
+						:to="{
+							path: '/products',
+							query: {
+								keyword: item,
+								gender: '',
+								category: '',
+								brand: '',
+								product_id: '',
+								deal_id: '',
+								page: 1,
+								orderby: 'desc',
+								order_std: 'popularity',
+							},
+						}"
 						v-html="isShownRecommendKeywords ? keywordsHighlighter(item) : item"
-					></router-link>
+					/>
 				</ul>
 			</section>
 			<button
 				v-show="!isShownRecommendKeywords"
-				@click="Bus.$emit('deleteAllKeywords')"
+				@click="DELETE_ALL_SEARCH_KEYWORDS"
 				class="search-brand__btn"
-			>검색 기록 삭제</button>
+			>
+				검색 기록 삭제
+			</button>
 		</div>
 	</div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import Bus from '@/utils/bus.js';
 
 export default {
@@ -47,7 +79,12 @@ export default {
 			searchKeyword: '',
 		};
 	},
+
 	computed: {
+		...mapState({
+			userSearchedKeywords: state => state.auth.userInfo.searchedKeywords,
+		}),
+
 		...mapGetters({
 			getUserInfo: 'auth/getUserInfo',
 			getLatelySearchItems: 'auth/getLatelySearchItems',
@@ -56,10 +93,11 @@ export default {
 			getGuestKeywords: 'shopping/getGuestKeywords',
 		}),
 	},
+
 	methods: {
 		...mapActions({
 			FETCH_SEARCHED_KEYWORD: 'auth/FETCH_SEARCHED_KEYWORD',
-			DELETE_ALL_SEARCH_KEYWORD: 'auth/DELETE_ALL_SEARCH_KEYWORD',
+			DELETE_ALL_SEARCH_KEYWORDS: 'auth/DELETE_ALL_SEARCH_KEYWORDS',
 			FETCH_RECOMMEND_KEYWORDS: 'shopping/FETCH_RECOMMEND_KEYWORDS',
 			SET_EXPECTED_KEYWORDS: 'shopping/SET_EXPECTED_KEYWORDS',
 		}),
@@ -92,13 +130,16 @@ export default {
 			);
 		},
 	},
+
 	created() {
 		this.FETCH_SEARCHED_KEYWORD();
 	},
+
 	mounted() {
 		Bus.$on('onRecommendKeywords', this.getRecommendKeywords);
 		Bus.$on('offRecommendKeywords', this.offRecommendKeywordsView);
 	},
+
 	beforeDestroy() {
 		Bus.$off('onRecommendKeywords', this.getRecommendKeywords);
 		Bus.$off('offRecommendKeywords', this.offRecommendKeywordsView);
@@ -174,6 +215,7 @@ export default {
 	font-size: 13px;
 	text-align: left;
 	color: #787878;
+	background-color: #fff;
 }
 
 .search-brand__lately > li:first-child {

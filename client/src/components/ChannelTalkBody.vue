@@ -17,15 +17,8 @@
 					:key="index"
 				>
 					<ol class="channel-talk__info">
-						<li
-							class="channel-talk__info-list"
-							v-if="item.sender === 'GreenDays'"
-						>
-							<img
-								src="@/assets/img/green-present.png"
-								alt="Greendays"
-								class="channel-talk__info-img"
-							/>
+						<li class="channel-talk__info-list" v-if="item.sender === 'GreenDays'">
+							<img src="@/assets/img/green-present.png" alt="Greendays" class="channel-talk__info-img" />
 						</li>
 						<li class="channel-talk__info-list">
 							<h2 class="channel-talk__sender">{{ item.sender }}</h2>
@@ -39,9 +32,7 @@
 						:class="{
 							'channel-talk__content--fromMe': item.sender !== 'GreenDays',
 						}"
-					>
-						{{ item.content }}
-					</article>
+					>{{ item.content }}</article>
 				</li>
 			</ol>
 			<footer class="channel-talk__footer">
@@ -71,65 +62,11 @@ export default {
 			newMessage: '',
 			messages: [
 				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content:
-						'호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'Daesang',
-					sentedTime: '18:27',
-					content: '호롤똘끼 하랄똘끼',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
-				},
-				{
-					sender: 'GreenDays',
-					sentedTime: '18:27',
-					content: '할랄랄롤랄랄',
+					sender: 'Me',
+					sentedTime: `${this.addZero(new Date.getHours())} : ${this.addZero(
+						new Date.getMinutes(),
+					)}`,
+					content: '그린데이즈에 오신 것을 환영합니다 :)',
 				},
 			],
 		};
@@ -145,7 +82,7 @@ export default {
 			const currentHour = new Date().getHours();
 			const currentMinute = new Date().getMinutes();
 			this.messages.push({
-				sender: 'GreenDays',
+				sender: 'Me',
 				sentedTime: `${this.addZero(currentHour)}:${this.addZero(
 					currentMinute,
 				)}`,

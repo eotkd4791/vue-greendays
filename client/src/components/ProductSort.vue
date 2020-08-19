@@ -32,10 +32,7 @@
 						>
 							카테고리
 							<i class="fas fa-chevron-down" />
-							<sort-category
-								v-if="showModal && sortByCategory"
-								@pickedCategory="createChips"
-							/>
+							<sort-category v-if="showModal && sortByCategory" @pickedCategory="createChips" />
 						</li>
 						<li
 							class="sort__bar-keyword-pick"
@@ -52,13 +49,7 @@
 						:sortindex="index"
 						@remove-chips="removeChips"
 					/>
-					<div
-						class="sort__bar-chips-clear"
-						@click="removeAll"
-						v-if="sortChips.length > 0"
-					>
-						초기화
-					</div>
+					<div class="sort__bar-chips-clear" @click="removeAll" v-if="sortChips.length > 0">초기화</div>
 				</section>
 				<aside
 					class="sort__bar-row-right"
@@ -76,10 +67,7 @@
 					</div>
 				</aside>
 			</div>
-			<sort-brands
-				v-if="showModal && sortByBrand"
-				@closeBrandSearchModal="sortModalClose"
-			/>
+			<sort-brands v-if="showModal && sortByBrand" @closeBrandSearchModal="sortModalClose" />
 		</div>
 	</transition>
 </template>
@@ -245,7 +233,7 @@ export default {
 	},
 
 	watch: {
-		copyChips: debounce(function(newVal) {
+		copyChips: debounce(function (newVal) {
 			this.$router
 				.push({
 					path: '/products',
@@ -259,7 +247,7 @@ export default {
 				.catch(() => {});
 		}, 500),
 
-		orderByIndex: debounce(function(newVal) {
+		orderByIndex: debounce(function (newVal) {
 			let orderStd, orderBy;
 			switch (newVal) {
 				case 0:
@@ -294,6 +282,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../style/transitionFade.css';
+
 .sort__bar {
 	max-width: 1100px;
 	width: 100%;
@@ -366,19 +356,5 @@ export default {
 
 .fas {
 	margin-left: 10px;
-}
-
-.slide-fade-enter-active {
-	transition: all 0.3s ease;
-}
-
-.slide-fade-leave-active {
-	transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter,
-.slide-fade-leave-to {
-	transform: translateX(10px);
-	opacity: 0;
 }
 </style>

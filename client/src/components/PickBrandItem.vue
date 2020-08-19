@@ -1,32 +1,68 @@
 <template>
 	<li class="brand-item">
-		<input type="checkbox" class="brand-item__checkbox" v-model="isChecked" />
+		<input
+			type="checkbox"
+			class="brand-item__checkbox"
+			:value="categoryPair[0]"
+			v-model="$parent.checkedBrandsToDelete"
+		/>
 		<ul class="brand-item__categories">
 			<router-link
-				class="brand-item__title"
+				class="brand-item__list brand-item__title"
 				tag="li"
-				:to="`/product/${categoryPair[0]}`"
+				:to="{
+					path: '/products',
+					query: {
+						keyword: '',
+						gender: '',
+						category: '',
+						brand: categoryPair[0],
+						product_id: '',
+						deal_id: '',
+						page: 1,
+						orderby: 'desc',
+						order_std: 'popularity',
+					},
+				}"
+				>{{ categoryPair[0] }}</router-link
 			>
-				{{ categoryPair[0] }}
-			</router-link>
-			<li
-				class="brand-item__list"
+			<router-link
+				tag="li"
 				v-for="(category, index) in Object.keys(categories)"
 				:key="category"
+				:to="{
+					path: '/products',
+					query: {
+						keyword: '',
+						gender: '',
+						category,
+						brand: categoryPair[0],
+						product_id: '',
+						deal_id: '',
+						page: 1,
+						orderby: 'desc',
+						order_std: 'popularity',
+					},
+				}"
+				class="brand-item__list"
 			>
 				<i
 					class="fas fa-heart"
 					:class="{ 'fa-heart--picked': Object.values(categories)[index] }"
+					@click="updatePickedBrands(categoryPair[0], category)"
 				/>
 				{{ category }}
-			</li>
+			</router-link>
 		</ul>
 	</li>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import brandPicking from '@/mixins/brandPicking.js';
+
 export default {
+	mixins: [brandPicking],
+
 	props: {
 		categoryPair: Array,
 	},
@@ -34,18 +70,7 @@ export default {
 	data() {
 		return {
 			isChecked: false,
-			categories: {
-				Bags: false,
-				Clothes: false,
-				Shoes: false,
-				Accessories: false,
-				Wallets: false,
-			},
 		};
-	},
-
-	methods: {
-		// ...mapActions('auth',[]),
 	},
 
 	created() {
@@ -55,10 +80,12 @@ export default {
 </script>
 
 <style scoped>
+@import '../style/pick.css';
+
 .brand-item {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: flex-start;
 	width: 230px;
 	margin: 0 30px 40px 0;
@@ -85,9 +112,10 @@ export default {
 	border-top: 1px solid #ebebeb;
 	font-size: 12px;
 	height: 45px;
+	cursor: pointer;
 }
 
-.brand-item__title {
+.brand-item__list.brand-item__title {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -96,28 +124,6 @@ export default {
 	height: 80px;
 	font-size: 18px;
 	font-weight: 700;
-}
-
-.fa-heart {
-	margin: 0 18px;
-	color: #d9d9d9;
 	cursor: pointer;
-}
-
-.fa-heart.fa-heart--picked {
-	animation-name: rotating;
-	animation-iteration-count: 2;
-	animation-direction: alternate;
-	animation-duration: 0.5s;
-	color: #42b850;
-}
-
-@keyframes rotating {
-	from {
-		transform: rotateY(0turn);
-	}
-	to {
-		transform: rotateY(0.5turn);
-	}
 }
 </style>

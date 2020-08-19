@@ -1,12 +1,12 @@
 const getters = {
-	getUserInfo({ userInfo }) {
-		return userInfo;
+	getUserInfo(state) {
+		return state.userInfo;
 	},
-	getShippingAddressList({ userInfo }) {
-		return userInfo.shippingAddressList;
+	getShippingAddressList(state) {
+		return state.userInfo.shippingAddressList;
 	},
-	getLatelySearchItems({ userInfo }) {
-		return userInfo.searchedKeyword;
+	getLatelySearchItems(state) {
+		return state.userInfo.searchedKeywords;
 	},
 };
 

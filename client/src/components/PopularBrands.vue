@@ -18,7 +18,7 @@
 						keyword: '',
 						gender: '',
 						category: '',
-						brand: brand,
+						brand,
 						product_id: '',
 						deal_id: '',
 						page: 1,
@@ -26,9 +26,8 @@
 						order_std: 'popularity',
 					},
 				}"
+				>{{ brand }}</router-link
 			>
-				{{ brand }}
-			</router-link>
 		</li>
 	</ol>
 </template>
@@ -110,7 +109,7 @@ export default {
 }
 
 .popular-brands__list {
-	padding: 15px 0;
+	padding: 13px 0;
 	font-size: 11px;
 	border-bottom: 1px solid #ededed;
 }
