@@ -3,13 +3,11 @@
 	"version": "1.0.0",
 	"private": true,
 	"description": "E-commerce",
-	"homepage": "http://eotkd4791.github.io/docs/vue-greendays",
+	"homepage": "http://eotkd4791.github.io/vue-greendays",
 	"scripts": {
 		"serve": "vue-cli-service serve --mode development",
 		"build": "vue-cli-service build",
-		"lint": "vue-cli-service lint",
-		"predeploy": "npm run build",
-		"deploy": "gh-pages -d dist"
+		"lint": "vue-cli-service lint"
 	},
 	"author": "stef",
 	"license": "ISC",
