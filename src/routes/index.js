@@ -11,7 +11,6 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
 	mode: 'history',
-	// scrollBehavior,
 	routes: [
 		userRoutes,
 		customerServiceRoutes,

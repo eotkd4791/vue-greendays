@@ -21,7 +21,7 @@ const actions = {
 	},
 
 	//이메일 중복확인
-	CHECK_EMAIL({ state, commit }, payload) {
+	CHECK_EMAIL({ state }, payload) {
 		try {
 			const existSameEmail = state.userList.find(
 				user => user.email === payload,

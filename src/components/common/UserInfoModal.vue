@@ -3,11 +3,27 @@
 		<div class="userinfo__modal-wrapper">
 			<section class="userinfo_section">
 				<ul @click="routingPage">
-					<router-link tag="li" :to="`/user/edit/${getUserInfo.id}`">{{ getUserInfo.name }}</router-link>
+					<router-link
+						tag="li"
+						:to="`/vue-greendays/user/edit/${getUserInfo.id}`"
+						>{{ getUserInfo.name }}</router-link
+					>
 					<li>{{ `내 추천 코드 ${getUserInfo.promotionCode}` }}</li>
-					<router-link tag="li" :to="`/user/edit/${getUserInfo.id}`">내 정보 관리</router-link>
-					<router-link tag="li" :to="`/user/total_order_refund/${getUserInfo.id}`">주문 및 반품 내역</router-link>
-					<router-link tag="li" :to="`/user/point/${getUserInfo.id}`">포인트</router-link>
+					<router-link
+						tag="li"
+						:to="`/vue-greendays/user/edit/${getUserInfo.id}`"
+						>내 정보 관리</router-link
+					>
+					<router-link
+						tag="li"
+						:to="`/vue-greendays/user/total_order_refund/${getUserInfo.id}`"
+						>주문 및 반품 내역</router-link
+					>
+					<router-link
+						tag="li"
+						:to="`/vue-greendays/user/point/${getUserInfo.id}`"
+						>포인트</router-link
+					>
 					<li @click.stop="userLogOut">로그아웃</li>
 				</ul>
 			</section>
@@ -27,7 +43,11 @@
 						<strong>{{ getUserInfo.changeOrRefund.length }}</strong>
 					</li>
 				</ul>
-				<router-link tag="button" :to="`/user/total_order_refund/${getUserInfo.id}`">주문 및 반품 내역</router-link>
+				<router-link
+					tag="button"
+					:to="`/vue-greendays/user/total_order_refund/${getUserInfo.id}`"
+					>주문 및 반품 내역</router-link
+				>
 			</aside>
 		</div>
 	</div>
@@ -53,11 +73,11 @@ export default {
 			const confirmLogOut = confirm('로그아웃 하시겠습니까?');
 			if (confirmLogOut) {
 				this.closeUserInfo();
-				this.$router.push('/logout');
+				this.$router.push('/vue-greendays/logout');
 				this.LOG_OUT()
 					.then(() => {
 						alert('로그아웃 되었습니다.');
-						this.$router.replace('/');
+						this.$router.replace('/vue-greendays');
 					})
 					.catch(console.error);
 			}

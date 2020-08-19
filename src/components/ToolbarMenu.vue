@@ -9,7 +9,7 @@
 				>
 					<router-link
 						:to="{
-							path: '/products',
+							path: '/vue-greendays/products',
 							query: {
 								keyword: '',
 								gender: '',
@@ -37,7 +37,7 @@
 				>
 					<router-link
 						:to="{
-							path: '/products',
+							path: '/vue-greendays/products',
 							query: {
 								keyword: '',
 								gender: '',
@@ -120,7 +120,9 @@ export default {
 		searchKeyword: debounce(function() {
 			const trimmedKeyword = this.keyword.replace(/ /g, '').toUpperCase();
 			Bus.$emit(
-				trimmedKeyword.length === 0 ? 'offRecommendKeywords' : 'onRecommendKeywords',
+				trimmedKeyword.length === 0
+					? 'offRecommendKeywords'
+					: 'onRecommendKeywords',
 				trimmedKeyword,
 			);
 		}, 800),
@@ -136,7 +138,7 @@ export default {
 						this.mouseLeaveFromMenu();
 						this.$router
 							.push({
-								path: '/products',
+								path: '/vue-greendays/products',
 								query: {
 									keyword: trimmedKeyword,
 									gender: '',

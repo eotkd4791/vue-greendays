@@ -46,7 +46,7 @@ export default {
 				this.$store
 					.dispatch('auth/QUIT_MEMBERSHIP')
 					.then(() => {
-						this.$router.replace('/');
+						this.$router.replace('/vue-greendays');
 					})
 					.catch(error => {
 						console.error(error);

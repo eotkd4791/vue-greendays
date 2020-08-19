@@ -32,7 +32,10 @@
 						>
 							카테고리
 							<i class="fas fa-chevron-down" />
-							<sort-category v-if="showModal && sortByCategory" @pickedCategory="createChips" />
+							<sort-category
+								v-if="showModal && sortByCategory"
+								@pickedCategory="createChips"
+							/>
 						</li>
 						<li
 							class="sort__bar-keyword-pick"
@@ -49,7 +52,13 @@
 						:sortindex="index"
 						@remove-chips="removeChips"
 					/>
-					<div class="sort__bar-chips-clear" @click="removeAll" v-if="sortChips.length > 0">초기화</div>
+					<div
+						class="sort__bar-chips-clear"
+						@click="removeAll"
+						v-if="sortChips.length > 0"
+					>
+						초기화
+					</div>
 				</section>
 				<aside
 					class="sort__bar-row-right"
@@ -67,7 +76,10 @@
 					</div>
 				</aside>
 			</div>
-			<sort-brands v-if="showModal && sortByBrand" @closeBrandSearchModal="sortModalClose" />
+			<sort-brands
+				v-if="showModal && sortByBrand"
+				@closeBrandSearchModal="sortModalClose"
+			/>
 		</div>
 	</transition>
 </template>
@@ -233,10 +245,10 @@ export default {
 	},
 
 	watch: {
-		copyChips: debounce(function (newVal) {
+		copyChips: debounce(function(newVal) {
 			this.$router
 				.push({
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						...this.$route.query,
 						gender: newVal[0] ? newVal[0] : '',
@@ -247,7 +259,7 @@ export default {
 				.catch(() => {});
 		}, 500),
 
-		orderByIndex: debounce(function (newVal) {
+		orderByIndex: debounce(function(newVal) {
 			let orderStd, orderBy;
 			switch (newVal) {
 				case 0:
@@ -268,7 +280,7 @@ export default {
 			}
 			this.$router
 				.push({
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						...this.$route.query,
 						orderby: orderBy ? orderBy : 'desc',

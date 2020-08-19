@@ -5,19 +5,19 @@
 		</header>
 
 		<ol class="quick-menu__btn">
-			<li @click="movePage('/')">
+			<li @click="movePage('/vue-greendays')">
 				<i class="fas fa-truck" />
 				<p>Free delivery</p>
 				<p>배송가이드</p>
 			</li>
 
-			<li @click="movePage('/')">
+			<li @click="movePage('/vue-greendays')">
 				<i class="far fa-comments" />
 				<p>FAQ</p>
 				<p>자주 묻는 질문</p>
 			</li>
 
-			<li @click="movePage('/')">
+			<li @click="movePage('/vue-greendays')">
 				<i class="fas fa-phone-alt" />
 				<p>Need help?</p>
 				<p>고객 센터</p>
@@ -32,16 +32,10 @@
 </template>
 
 <script>
+import utilMethod from '@/mixins/utilMethods.js';
+
 export default {
-	methods: {
-		movePage(to) {
-			if (to === '#') return;
-			if (this.$route.path !== to) {
-				const nextPage = { path: to };
-				this.$router.push(nextPage);
-			}
-		},
-	},
+	mixins: [utilMethod],
 };
 </script>
 

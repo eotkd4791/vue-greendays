@@ -8,7 +8,7 @@
 		/>
 
 		<router-link
-			:to="`/products/show/${productInfo.id}`"
+			:to="`/vue-greendays/products/show/${productInfo.id}`"
 			tag="li"
 			class="wish-item"
 		>

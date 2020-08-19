@@ -1,35 +1,35 @@
 const customerServiceRoutes = {
-	path: '/customerservice',
+	path: '/vue-greendays/customerservice',
 	redirect: '/customerservice/main',
 	component: () => import('@/views/CustomerService.vue'),
 	children: [
 		{
-			path: '/customerservice/main',
+			path: '/vue-greendays/customerservice/main',
 			name: 'customerService',
 			component: () => import('@/views/CustomerServiceMain.vue'),
 		},
 		{
-			path: '/customerservice/logi_guide',
+			path: '/vue-greendays/customerservice/logi_guide',
 			name: 'logiGuide',
 			component: () => import('@/views/LogiGuide.vue'),
 		},
 		{
-			path: '/customerservice/notice',
+			path: '/vue-greendays/customerservice/notice',
 			name: 'notice',
 			component: () => import('@/views/NoticeView.vue'),
 		},
 		{
-			path: '/customerservice/faq',
+			path: '/vue-greendays/customerservice/faq',
 			name: 'faqList',
 			component: () => import('@/views/FaqList.vue'),
 		},
 		{
-			path: '/customerservice/terms',
+			path: '/vue-greendays/customerservice/terms',
 			name: 'terms',
 			component: () => import('@/views/Terms.vue'),
 		},
 		{
-			path: '/customerservice/private_info_policy',
+			path: '/vue-greendays/customerservice/private_info_policy',
 			name: 'privateInfoPolicy',
 			component: () => import('@/views/PrivateInfoPolicy.vue'),
 		},

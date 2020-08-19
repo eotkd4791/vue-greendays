@@ -7,11 +7,17 @@
 				:key="index"
 				@click="pickAlphabet(letter, index)"
 				:class="{ 'alphabet-brands__btn--passive': !alphabetSet.has(letter) }"
-			>{{ letter }}</li>
+			>
+				{{ letter }}
+			</li>
 		</ol>
 
 		<ul class="alphabet-brands__ul">
-			<li class="alphabet-brands__li" v-for="(brand, index) in getRelatedBrands" :key="index">
+			<li
+				class="alphabet-brands__li"
+				v-for="(brand, index) in getRelatedBrands"
+				:key="index"
+			>
 				<i
 					class="fas fa-heart"
 					:class="{
@@ -21,7 +27,7 @@
 				/>
 				<router-link
 					:to="{
-						path: '/products',
+						path: '/vue-greendays/products',
 						query: {
 							keyword: '',
 							gender: '',
@@ -34,7 +40,8 @@
 							order_std: 'popularity',
 						},
 					}"
-				>{{ brand }}</router-link>
+					>{{ brand }}</router-link
+				>
 			</li>
 		</ul>
 	</aside>

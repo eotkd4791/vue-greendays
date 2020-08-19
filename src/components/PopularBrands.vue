@@ -1,6 +1,10 @@
 <template>
 	<ol class="popular-brands">
-		<li class="popular-brands__list" v-for="(brand, index) in brandsList" :key="index">
+		<li
+			class="popular-brands__list"
+			v-for="(brand, index) in brandsList"
+			:key="index"
+		>
 			<span class="popular-brands__rank">{{ index + 1 }}</span>
 			<i
 				class="fas fa-heart"
@@ -9,7 +13,7 @@
 			/>
 			<router-link
 				:to="{
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						keyword: '',
 						gender: '',
@@ -22,7 +26,8 @@
 						order_std: 'popularity',
 					},
 				}"
-			>{{ brand }}</router-link>
+				>{{ brand }}</router-link
+			>
 		</li>
 	</ol>
 </template>

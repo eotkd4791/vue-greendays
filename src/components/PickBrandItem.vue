@@ -11,7 +11,7 @@
 				class="brand-item__list brand-item__title"
 				tag="li"
 				:to="{
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						keyword: '',
 						gender: '',
@@ -31,7 +31,7 @@
 				v-for="(category, index) in Object.keys(categories)"
 				:key="category"
 				:to="{
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						keyword: '',
 						gender: '',

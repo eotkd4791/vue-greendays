@@ -14,7 +14,7 @@
 							: getGuestKeywords"
 						:key="index"
 						:to="{
-							path: '/products',
+							path: '/vue-greendays/products',
 							query: {
 								keyword: item,
 								gender: '',
@@ -40,7 +40,7 @@
 							: getHotSearchItems"
 						:key="index"
 						:to="{
-							path: '/products',
+							path: '/vue-greendays/products',
 							query: {
 								keyword: item,
 								gender: '',

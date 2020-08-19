@@ -5,117 +5,141 @@
 			<div class="reserve-container__category__link" ref="tabs">
 				<router-link
 					tag="span"
-					to="/product"
+					:to="{
+						path: '/vue-greendays/products',
+						query: {
+							category: '',
+							keyword: '',
+							gender: '',
+							category: '',
+							brand: '',
+							product_id: '',
+							deal_id: 'reserve-purchase',
+							page: 1,
+							orderby: 'desc',
+							order_std: 'popularity',
+						},
+					}"
 					class="active"
 					@mouseover="activatingTab"
-				>All Categories ({{ products.length }})</router-link>
+					>All Categories ({{ products.length }})</router-link
+				>
 
 				<router-link
 					tag="span"
-					:to="{ 
-            path: '/products', 
-            query: { 
-              category: 'Bags',
-              keyword: '',
-              gender: '',
-              category: '',
-              brand: '',
-              product_id: '',
-              deal_id: 'reserve-purchase',
-              page: 1,
-              orderby: 'desc',
-              order_std: 'popularity',
-            } 
-          }"
+					:to="{
+						path: '/vue-greendays/products',
+						query: {
+							category: 'Bags',
+							keyword: '',
+							gender: '',
+							category: '',
+							brand: '',
+							product_id: '',
+							deal_id: 'reserve-purchase',
+							page: 1,
+							orderby: 'desc',
+							order_std: 'popularity',
+						},
+					}"
 					@mouseover="activatingTab"
-				>Bags ({{ getItem('Bags') }})</router-link>
+					>Bags ({{ getItem('Bags') }})</router-link
+				>
 
 				<router-link
 					tag="span"
-					:to="{ 
-            path: '/products', 
-            query: { 
-              category: 'Wallets',
-              keyword: '',
-              gender: '',
-              category: '',
-              brand: '',
-              product_id: '',
-              deal_id: 'reserve-purchase',
-              page: 1,
-              orderby: 'desc',
-              order_std: 'popularity',
-            } 
-          }"
+					:to="{
+						path: '/vue-greendays/products',
+						query: {
+							category: 'Wallets',
+							keyword: '',
+							gender: '',
+							category: '',
+							brand: '',
+							product_id: '',
+							deal_id: 'reserve-purchase',
+							page: 1,
+							orderby: 'desc',
+							order_std: 'popularity',
+						},
+					}"
 					@mouseover="activatingTab"
-				>Wallets ({{ getItem('Wallets') }})</router-link>
+					>Wallets ({{ getItem('Wallets') }})</router-link
+				>
 
 				<router-link
 					tag="span"
-					:to="{ 
-            path: '/products', 
-            query: { 
-              category: 'Clothes',
-              keyword: '',
-              gender: '',
-              category: '',
-              brand: '',
-              product_id: '',
-              deal_id: 'reserve-purchase',
-              page: 1,
-              orderby: 'desc',
-              order_std: 'popularity',
-            } 
-          }"
+					:to="{
+						path: '/vue-greendays/products',
+						query: {
+							category: 'Clothes',
+							keyword: '',
+							gender: '',
+							category: '',
+							brand: '',
+							product_id: '',
+							deal_id: 'reserve-purchase',
+							page: 1,
+							orderby: 'desc',
+							order_std: 'popularity',
+						},
+					}"
 					@mouseover="activatingTab"
-				>Clothes ({{ getItem('Clothes') }})</router-link>
+					>Clothes ({{ getItem('Clothes') }})</router-link
+				>
 
 				<router-link
 					tag="span"
-					:to="{ 
-            path: '/products', 
-            query: { 
-              category: 'Shoes',
-              keyword: '',
-              gender: '',
-              category: '',
-              brand: '',
-              product_id: '',
-              deal_id: 'reserve-purchase',
-              page: 1,
-              orderby: 'desc',
-              order_std: 'popularity',
-            } 
-          }"
+					:to="{
+						path: '/vue-greendays/products',
+						query: {
+							category: 'Shoes',
+							keyword: '',
+							gender: '',
+							category: '',
+							brand: '',
+							product_id: '',
+							deal_id: 'reserve-purchase',
+							page: 1,
+							orderby: 'desc',
+							order_std: 'popularity',
+						},
+					}"
 					@mouseover="activatingTab"
-				>Shoes ({{ getItem('Shoes') }})</router-link>
+					>Shoes ({{ getItem('Shoes') }})</router-link
+				>
 
 				<router-link
 					tag="span"
-					:to="{ 
-            path: '/products', 
-            query: { 
-              category: 'Accessories',
-              keyword: '',
-              gender: '',
-              category: '',
-              brand: '',
-              product_id: '',
-              deal_id: 'reserve-purchase',
-              page: 1,
-              orderby: 'desc',
-              order_std: 'popularity',
-            } 
-          }"
+					:to="{
+						path: '/vue-greendays/products',
+						query: {
+							category: 'Accessories',
+							keyword: '',
+							gender: '',
+							category: '',
+							brand: '',
+							product_id: '',
+							deal_id: 'reserve-purchase',
+							page: 1,
+							orderby: 'desc',
+							order_std: 'popularity',
+						},
+					}"
 					@mouseover="activatingTab"
-				>Accessories ({{ getItem('Accessories') }})</router-link>
+					>Accessories ({{ getItem('Accessories') }})</router-link
+				>
 			</div>
 		</section>
 		<section class="reserve-container__promotion">
 			<div class="reserve-container__promotion__img" />
 			<div class="reserve-container__promotion__text">
-				<h3 class="reserve-container__promotion__title">스마트한 구매의 시작 PICK</h3>
-				<p class="reserve-container__promotion__subtitle">그린데이즈가 제안하는 현명하게 하이패션을 즐기는 방법!</p>
+				<h3 class="reserve-container__promotion__title">
+					스마트한 구매의 시작 PICK
+				</h3>
+				<p class="reserve-container__promotion__subtitle">
+					그린데이즈가 제안하는 현명하게 하이패션을 즐기는 방법!
+				</p>
 			</div>
 		</section>
 	</div>
