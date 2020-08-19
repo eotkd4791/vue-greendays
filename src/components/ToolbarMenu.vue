@@ -56,8 +56,10 @@
 				</li>
 			</ul>
 			<ul class="toolbar-menu__passive" @mouseover="mouseLeaveFromMenu">
-				<router-link tag="li" to="/reviews">리뷰</router-link>
-				<router-link tag="li" to="/customerservice">고객센터</router-link>
+				<router-link tag="li" to="/vue-greendays/reviews">리뷰</router-link>
+				<router-link tag="li" to="/vue-greendays/customerservice"
+					>고객센터</router-link
+				>
 			</ul>
 		</div>
 		<ul class="toolbar-menu__right">
