@@ -24,12 +24,14 @@
 									color="#000"
 									@click="checkEmailRedundancy"
 									:disabled="!isProperEmail"
-									>이메일 중복확인</v-btn
 								>
+									이메일 중복확인
+								</v-btn>
 							</v-form>
 						</v-col>
 						<v-col cols="5">
 							<v-text-field
+								type="number"
 								label="휴대폰 번호를 입력하세요."
 								v-model="userInfo.phoneNum"
 								color="#000"
@@ -94,8 +96,9 @@
 									class="sign-up__btn"
 									color="#000"
 									@click="openAddressSearch"
-									>우편번호 찾기</v-btn
 								>
+									우편번호 찾기
+								</v-btn>
 							</v-form>
 						</v-col>
 					</v-row>
@@ -197,12 +200,12 @@
 											@click="checkOneArticles"
 											required
 										/>
-										<span class="sign-up__label"
-											>[필수] 개인 정보의 수집 및 이용에 대한 동의</span
-										>
-										<router-link to="/vue-greendays/terms" tag="span"
-											>자세히 보기</router-link
-										>
+										<span class="sign-up__label">
+											[필수] 개인 정보의 수집 및 이용에 대한 동의
+										</span>
+										<router-link to="/vue-greendays/terms" tag="span">
+											자세히 보기
+										</router-link>
 									</v-list-item-subtitle>
 
 									<v-list-item-subtitle>
@@ -231,19 +234,19 @@
 										placeholder="추천 코드 입력"
 										v-model="gotPromotionCode"
 									/>
-									<span class="sign-up__recommend-code--red"
-										>* 추천 코드를 입력하면 2,000포인트 즉시 지급!</span
-									>
+									<span class="sign-up__recommend-code--red">
+										* 추천 코드를 입력하면 2,000포인트 즉시 지급!
+									</span>
 								</v-form>
 							</v-container>
 							<v-container>
 								<v-btn
-									type="submit"
 									class="sign-up__btn signup-membership"
 									color="#000"
 									@click.prevent="signUpMembership"
-									>멤버십 가입하기</v-btn
 								>
+									멤버십 가입하기
+								</v-btn>
 							</v-container>
 						</v-container>
 					</v-row>
@@ -289,7 +292,7 @@ export default {
 			formValid: false,
 			gotPromotionCode: '',
 			passwordCheckRules: [
-				v => v || '패스워드를 한번 더 입력하세요',
+				v => !!v || '패스워드를 한번 더 입력하세요',
 				v => v === this.userInfo.password || '패스워드가 일치하지 않습니다.',
 			],
 		};
@@ -499,5 +502,9 @@ export default {
 .sign-up__btn.signup-membership {
 	width: 430px;
 	padding: 10px;
+}
+
+.theme--light.v-btn {
+	color: #fff;
 }
 </style>
