@@ -75,7 +75,7 @@ export default {
 	},
 
 	methods: {
-		...mapActions(['UPDATE_CHAT']),
+		...mapActions(['UPDATE_CHAT', 'FETCH_CHAT']),
 
 		async onSubmitMessage() {
 			try {
@@ -94,7 +94,7 @@ export default {
 				};
 				this.messages.push(newMessageObj);
 
-				await this.UPDATE_CHAT(this.messages);
+				await this.UPDATE_CHAT(newMessageObj);
 
 				this.newMessage = null;
 				this.$refs.input.focus();
@@ -110,6 +110,7 @@ export default {
 	},
 
 	created() {
+		this.FETCH_CHAT();
 		this.messages = this.isLoggedIn ? this.userChat : this.guestChat;
 	},
 
