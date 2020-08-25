@@ -108,8 +108,7 @@
 						order_std: 'popularity',
 					},
 				}"
-				>{{ getProductDetail.categoryDetail }}</router-link
-			>
+			>{{ getProductDetail.categoryDetail }}</router-link>
 		</li>
 		<li class="info__brand">
 			<h1 class="info__brand__text">
@@ -127,20 +126,12 @@
 		</li>
 		<li class="info__name">{{ getProductDetail.name }}</li>
 		<li class="info__price">
-			<h2 class="info__price-after">
-				{{ (getProductDetail.priceAfter * 1000).toLocaleString() }}
-			</h2>
-			<span class="info__price-before">
-				{{ (getProductDetail.priceBefore * 1000).toLocaleString() }}
-			</span>
+			<h2 class="info__price-after">{{ (getProductDetail.priceAfter * 1000).toLocaleString() }}</h2>
+			<span class="info__price-before">{{ (getProductDetail.priceBefore * 1000).toLocaleString() }}</span>
 			|
-			<span class="info__price-discount"
-				>{{ Math.ceil(getProductDetail.discountRate * 100) }}% 할인</span
-			>
+			<span class="info__price-discount">{{ Math.ceil(getProductDetail.discountRate * 100) }}% 할인</span>
 		</li>
-		<li class="info__describe-price">
-			해외/국내 배송비 및 관부가세가 모두 포함된 금액입니다.
-		</li>
+		<li class="info__describe-price">해외/국내 배송비 및 관부가세가 모두 포함된 금액입니다.</li>
 		<li class="info__btn">
 			<div
 				class="info__btn__pick-product"
@@ -160,15 +151,15 @@
 			<template #title>구매 안내</template>
 			<template #body>
 				{{
-					getProductDetail.productSendToday
-						? purchaseInfo.quickDeliveryGuide
-						: purchaseInfo.preorderGuide
+				getProductDetail.productSendToday
+				? purchaseInfo.quickDeliveryGuide
+				: purchaseInfo.preorderGuide
 				}}
 			</template>
 		</product-detail-list>
 		<product-detail-list>
 			<template #title>상품 상세정보</template>
-			<template #body>{{ getProductDetail.material }}</template>
+			<template #body>{{ `재질: ${getProductDetail.material}` }}</template>
 		</product-detail-list>
 		<product-detail-list>
 			<template #title>배송가이드</template>
@@ -176,10 +167,8 @@
 			<template #additional-element>
 				<button
 					class="info__guide__btn"
-					@click="$router.push('/customerservice/logi_guide')"
-				>
-					그린데이즈 배송가이드
-				</button>
+					@click="$router.push('/vue-greendays/customerservice/logi_guide')"
+				>그린데이즈 배송가이드</button>
 			</template>
 		</product-detail-list>
 	</ol>
@@ -223,6 +212,10 @@ export default {
 		},
 
 		async toggleThisToWishList() {
+			if (!this.userInfo) {
+				this.$router.push('/vue-greendays/login');
+				return alert('로그인이 필요합니다.');
+			}
 			if (this.pickedProduct) {
 				const removeConfirm = confirm(
 					'위시리스트에서 아이템을 삭제하시겠습니까?',
@@ -239,9 +232,11 @@ export default {
 	},
 
 	created() {
-		this.pickedProduct = this.userInfo.wishList.find(
-			v => v.id === parseInt(this.$route.params.productId),
-		);
+		if (this.userInfo) {
+			this.pickedProduct = this.userInfo.wishList.find(
+				v => v.id === parseInt(this.$route.params.productId),
+			);
+		}
 	},
 };
 </script>

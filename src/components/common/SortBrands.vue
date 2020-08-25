@@ -61,7 +61,7 @@ import PickBrand from '@/components/common/PickBrandModal.vue';
 import orderBy from '@/static/orderby.js';
 import { mapState, mapMutations } from 'vuex';
 import { debounce } from 'lodash';
-import Bus from '@/utils/bus';
+import Bus from '@/utils/bus.js';
 
 export default {
 	components: {
