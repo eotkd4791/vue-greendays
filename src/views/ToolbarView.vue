@@ -24,10 +24,7 @@
 			/>
 		</li>
 		<li>
-			<brand-modal
-				v-if="showModal && SearchBrandsModal"
-				@closeBrands="closeSearchBrands"
-			/>
+			<brand-modal v-if="showModal && SearchBrandsModal" @closeBrands="closeSearchBrands" />
 		</li>
 	</ol>
 </template>
@@ -99,6 +96,7 @@ export default {
 
 	mounted() {
 		Bus.$on('showUserInfo', this.toggleUserInfo);
+		Bus.$on('off:toolbar-modal', this.closeToolbarModal);
 	},
 };
 </script>

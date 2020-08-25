@@ -27,9 +27,7 @@
 								order_std: 'popularity',
 							},
 						}"
-					>
-						{{ item }}
-					</router-link>
+					>{{ item }}</router-link>
 				</ol>
 				<ul class="search-brand__hot">
 					<li>인기 검색어</li>
@@ -61,9 +59,7 @@
 				v-show="!isShownRecommendKeywords"
 				@click="DELETE_ALL_SEARCH_KEYWORDS"
 				class="search-brand__btn"
-			>
-				검색 기록 삭제
-			</button>
+			>검색 기록 삭제</button>
 		</div>
 	</div>
 </template>
@@ -129,6 +125,10 @@ export default {
 				`<span style="color: #42b850">${targetKeyword}</span>`,
 			);
 		},
+
+		closeToolbarModal() {
+			Bus.$emit('off:toolbar-modal');
+		},
 	},
 
 	created() {
@@ -143,6 +143,12 @@ export default {
 	beforeDestroy() {
 		Bus.$off('onRecommendKeywords', this.getRecommendKeywords);
 		Bus.$off('offRecommendKeywords', this.offRecommendKeywordsView);
+	},
+
+	watch: {
+		'$route.query': function () {
+			Bus.$emit('off:toolbar-modal');
+		},
 	},
 };
 </script>

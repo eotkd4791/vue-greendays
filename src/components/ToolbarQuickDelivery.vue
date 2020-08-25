@@ -7,6 +7,7 @@
 				:sendToday="product.productSendToday"
 				:ableToBuy="product.productAbleToBuy"
 				:callFrom="callFrom"
+				:productId="product.id"
 			>
 				<template #productInfo-photo>
 					<img :src="product.photoUrl" class="item-container__photo" :class="callFrom" />
@@ -35,6 +36,7 @@
 <script>
 import DisplayItems from '@/components/common/DisplayItems.vue';
 import { mapState } from 'vuex';
+import Bus from '@/utils/bus.js';
 
 export default {
 	components: {
@@ -56,6 +58,28 @@ export default {
 
 		getRepresentImgs() {
 			return this.getProducts.filter(v => v.productSendToday).slice(0, 3);
+		},
+	},
+
+	methods: {
+		moveToAbout() {
+			this.$router
+				.push({
+					path: '/vue-greendays/products',
+					query: {
+						keyword: '',
+						gender: '',
+						category: '',
+						brand: '',
+						product_id: '',
+						deal_id: 'quick-delivery',
+						page: 1,
+						orderby: 'desc',
+						order_std: 'popularity',
+					},
+				})
+				.catch();
+			Bus.$emit('off:toolbar-modal');
 		},
 	},
 
