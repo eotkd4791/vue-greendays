@@ -1,7 +1,13 @@
 <template>
 	<div class="log-out" />
 </template>
-
+<script>
+export default {
+	mounted() {
+		this.$router.replace('/vue-greendays');
+	},
+};
+</script>
 <style scoped>
 .log-out {
 	position: fixed;

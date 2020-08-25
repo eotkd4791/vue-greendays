@@ -37,9 +37,11 @@
 
 <script>
 import { mapState } from 'vuex';
-import Bus from '@/utils/bus.js';
+import busToolbarClose from '@/mixins/busToolbarClose.js';
 
 export default {
+	mixins: [busToolbarClose],
+
 	data() {
 		return {
 			activatedTabIndex: 0,
@@ -71,12 +73,6 @@ export default {
 				0,
 			),
 		});
-	},
-
-	watch: {
-		'$route.query': function () {
-			Bus.$emit('off:toolbar-modal');
-		},
 	},
 };
 </script>

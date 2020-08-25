@@ -55,6 +55,8 @@
 
 <script>
 import Bus from '@/utils/bus.js';
+import addZero from '@/utils/setTwoDigit.js';
+import { mapState, mapActions } from 'vuex';
 
 export default {
 	data() {
@@ -63,29 +65,43 @@ export default {
 			messages: [],
 		};
 	},
+
+	computed: {
+		...mapState({
+			userChat: state => state.userChat,
+			guestChat: state => state.guestChat,
+			isLoggedIn: state => Boolean(state.auth.userInfo),
+		}),
+	},
+
 	methods: {
-		onSubmitMessage() {
-			const messageRemovedSpace =
-				this.newMessage !== null ? this.newMessage.replace(/ /g, '') : '';
-			if (messageRemovedSpace.length === 0 || !this.newMessage) {
-				this.newMessage = '';
-				return;
+		...mapActions(['UPDATE_CHAT']),
+
+		async onSubmitMessage() {
+			try {
+				const messageRemovedSpace =
+					this.newMessage !== null ? this.newMessage.replace(/ /g, '') : '';
+				if (messageRemovedSpace.length === 0 || !this.newMessage) {
+					this.newMessage = '';
+					return;
+				}
+				const currentHour = new Date().getHours();
+				const currentMinute = new Date().getMinutes();
+				const newMessageObj = {
+					sender: 'Me',
+					sentTime: `${addZero(currentHour)}:${addZero(currentMinute)}`,
+					content: this.newMessage,
+				};
+				this.messages.push(newMessageObj);
+
+				await this.UPDATE_CHAT(this.messages);
+
+				this.newMessage = null;
+				this.$refs.input.focus();
+			} catch (error) {
+				console.error(error);
+				alert(error.message);
 			}
-			const currentHour = new Date().getHours();
-			const currentMinute = new Date().getMinutes();
-			this.messages.push({
-				sender: 'Me',
-				sentTime: `${this.addZero(currentHour)}:${this.addZero(currentMinute)}`,
-				content: this.newMessage,
-			});
-			this.newMessage = null;
-
-			this.$refs.input.focus();
-		},
-
-		addZero(number) {
-			const numberToString = number.toString();
-			return numberToString.length < 2 ? '0' + numberToString : numberToString;
 		},
 
 		closeChannelTalk() {
@@ -94,13 +110,7 @@ export default {
 	},
 
 	created() {
-		this.messages.push({
-			sender: 'GreenDays',
-			sentTime: `${this.addZero(new Date().getHours())}:${this.addZero(
-				new Date().getMinutes(),
-			)}`,
-			content: '그린데이즈에 오신 것을 환영합니다 :)',
-		});
+		this.messages = this.isLoggedIn ? this.userChat : this.guestChat;
 	},
 
 	mounted() {
@@ -169,8 +179,9 @@ export default {
 }
 
 .channel-talk__content {
+	word-break: break-all;
 	max-width: 250px;
-	padding: 10px;
+	padding: 15px;
 	border-radius: 20px;
 	background-color: #dedede;
 	color: #000;

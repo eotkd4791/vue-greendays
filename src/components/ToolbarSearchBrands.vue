@@ -67,8 +67,11 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex';
 import Bus from '@/utils/bus.js';
+import busToolbarClose from '@/mixins/busToolbarClose.js';
 
 export default {
+	mixins: [busToolbarClose],
+
 	data() {
 		return {
 			isShownRecommendKeywords: false,
@@ -143,12 +146,6 @@ export default {
 	beforeDestroy() {
 		Bus.$off('onRecommendKeywords', this.getRecommendKeywords);
 		Bus.$off('offRecommendKeywords', this.offRecommendKeywordsView);
-	},
-
-	watch: {
-		'$route.query': function () {
-			Bus.$emit('off:toolbar-modal');
-		},
 	},
 };
 </script>

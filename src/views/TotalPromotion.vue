@@ -12,11 +12,10 @@
 				</template>
 				<template #promoInfo-timer>
 					<p class="promo__info-container-timer">TIMER</p>
-					<p class="promo__info-container-timer clock" ref="timer">
-						{{ promotion.expiredHour < 10 ? `0${promotion.expiredHour}` : promotion.expiredHour }} :
-						{{promotion.expiredMin < 10 ? `1${promotion.expiredMin}` : promotion.expiredMin}} :
-						{{promotion.expiredSec < 10 ? `1${promotion.expiredSec}` : promotion.expiredSec}}
-					</p>
+					<p
+						class="promo__info-container-timer clock"
+						ref="timer"
+					>{{ `${addZero(promotion.expiredHour)} : ${addZero(promotion.expiredMin)} : ${addZero(promotion.expiredSec)}`}}</p>
 				</template>
 				<template #promoInfo-overview>
 					<div class="promo__info-container-overview-sub">
@@ -33,6 +32,7 @@
 <script>
 import SummaryPromotion from '@/components/SummaryPromotion.vue';
 import { mapState } from 'vuex';
+import addZero from '@/utils/setTwoDigit.js';
 
 export default {
 	components: {
@@ -53,6 +53,10 @@ export default {
 		}),
 	},
 
+	methods: {
+		addZero,
+	},
+
 	created() {
 		this.promotions = this.preorders;
 	},
@@ -67,23 +71,17 @@ export default {
 				if (p.expiredSec === 0) {
 					if (p.expiredMin > 0) {
 						p.expiredSec = 59;
-					}
-					if (p.expiredMin === 0) {
-						if (p.expiredHour > 0) {
-							p.expiredMin = 59;
-						}
+						p.expiredMin--;
 					} else {
-						p.expiredMin -= 1;
+						p.expiredSec = 59;
+						p.expiredMin = 59;
+						p.expiredHour--;
 					}
 				} else {
-					p.expiredSec -= 1;
+					p.expiredSec--;
 				}
 			}, 1000);
-			this.Timers.push(Timer);
 		});
-	},
-	beforeDestroy() {
-		this.Timers.forEach(t => clearInterval(t));
 	},
 };
 </script>

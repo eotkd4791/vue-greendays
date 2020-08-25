@@ -37,11 +37,14 @@
 import DisplayItems from '@/components/common/DisplayItems.vue';
 import { mapState } from 'vuex';
 import Bus from '@/utils/bus.js';
+import busToolbarClose from '@/mixins/busToolbarClose.js';
 
 export default {
 	components: {
 		DisplayItems,
 	},
+
+	mixins: [busToolbarClose],
 
 	data() {
 		return {

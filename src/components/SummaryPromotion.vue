@@ -31,7 +31,7 @@
 					<template #productInfo-brand>{{ product[i-1].brand }}</template>
 					<template #productInfo-name>{{ product[i-1].name }}</template>
 					<template #productInfo-beforePrice>{{ (product[i-1].priceBefore * 1000).toLocaleString() }}</template>
-					<template #productInfo-discountRate>{{ product[i-1].discountRate * 100 }}% 할인</template>
+					<template #productInfo-discountRate>{{ Math.ceil(product[i-1].discountRate) * 100 }}% 할인</template>
 					<template #productInfo-afterPrice>{{ (product[i-1].priceAfter * 1000).toLocaleString() }}</template>
 				</display-items>
 			</section>
