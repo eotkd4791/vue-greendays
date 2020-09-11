@@ -5,7 +5,7 @@
 				<div class="brand-modal">
 					<section class="brand-modal__section">
 						<header class="brand-modal__header">브랜드 검색</header>
-						<button class="brand-modal__btn" @click="$emit('closeBrands')">
+						<button class="brand-modal__btn" @click="$emit('close-brands')">
 							<i class="fas fa-times" />
 						</button>
 					</section>
@@ -21,13 +21,13 @@
 						<pick-brand
 							v-if="showModal"
 							:propsBrand="pickedBrand"
-							@closePickedBrands="closePickBrand"
+							@close-picked-prands="closePickBrand"
 						/>
 						<popular-brands
 							v-if="isShownPopularBrand"
-							@openAlarmModal="openPickBrand"
+							@open-alarm-modal="openPickBrand"
 						/>
-						<alphabet-brands v-else @openAlarmModal="openPickBrand" />
+						<alphabet-brands v-else @open-alarm-modal="openPickBrand" />
 					</aside>
 				</div>
 			</div>
@@ -58,9 +58,8 @@ export default {
 
 	methods: {
 		onClickOutside(e) {
-			if (e.target.className === 'brand-modal__background') {
-				this.$emit('closeBrands');
-			}
+			if (e.target.className === 'brand-modal__background')
+				this.$emit('close-brands');
 		},
 
 		changeTab() {
@@ -79,18 +78,18 @@ export default {
 			this.showModal = false;
 		},
 
-		setScrollLock(e) {
+		setScrollLock() {
 			scrollTo(0, 0);
 		},
 	},
 
 	mounted() {
-		Bus.$on('off:picked-brands', this.closePickBrand);
+		Bus.$on('off-picked-brands', this.closePickBrand);
 		window.addEventListener('scroll', this.setScrollLock);
 	},
 
 	beforeDestroy() {
-		Bus.$off('off:picked-brands', this.closePickBrand);
+		Bus.$off('off-picked-brands', this.closePickBrand);
 		window.removeEventListener('scroll', this.setScrollLock);
 	},
 };

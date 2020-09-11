@@ -66,6 +66,7 @@ export default {
 	data() {
 		return {
 			productsToShow: [],
+			paramsWatcher: null,
 		};
 	},
 
@@ -102,7 +103,7 @@ export default {
 
 		setOrderedProducts(query) {
 			const { page, order_std, orderby } = query;
-			Bus.$emit('on:spinner');
+			Bus.$emit('on-spinner');
 			Bus.$emit('set-pagination', parseInt(page));
 
 			this.FETCH_ORDERED_PRODUCTS(query)
@@ -111,7 +112,7 @@ export default {
 						this.sortProducts(this.orderedProducts, order_std, orderby),
 						page,
 					);
-					Bus.$emit('off:spinner');
+					Bus.$emit('off-spinner');
 				})
 				.catch(console.error);
 		},
@@ -123,10 +124,22 @@ export default {
 				? this.$route.query
 				: { page: 1, order_std: 'popularity', orderby: 'desc' },
 		);
+
+		this.paramsWatcher = this.$watch('$route.params', function() {
+			this.setOrderedProducts({
+				page: 1,
+				order_std: 'popularity',
+				orderby: 'desc',
+			});
+		});
+	},
+
+	beforeDestroy() {
+		this.paramsWatcher();
 	},
 
 	watch: {
-		'$route.query': function(newVal, oldVal) {
+		'$route.query': function(newVal) {
 			this.setOrderedProducts(newVal);
 		},
 	},

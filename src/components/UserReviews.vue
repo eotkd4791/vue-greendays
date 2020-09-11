@@ -65,14 +65,18 @@ export default {
 	},
 
 	methods: {
-		scrollEventHandler(e) {
-			// console.dir(e);
+		scrollEventHandler() {
 			if (
 				window.scrollY + document.documentElement.clientHeight >
-				document.documentElement.scrollHeight - 300
+				document.documentElement.scrollHeight - 1500
 			) {
 				if (this.dataStore.length - this.reviewList.length > 0) {
-					this.dataStore.slice(this.reviewIndex, (this.reviewIndex += 5));
+					const newReviews = this.dataStore.slice(
+						this.reviewIndex,
+						(this.reviewIndex += 3),
+					);
+
+					this.reviewList.push(...newReviews);
 				}
 			}
 		},

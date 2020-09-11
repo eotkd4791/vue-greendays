@@ -27,7 +27,9 @@
 								order_std: 'popularity',
 							},
 						}"
-					>{{ item }}</router-link>
+					>
+						{{ item }}
+					</router-link>
 				</ol>
 				<ul class="search-brand__hot">
 					<li>인기 검색어</li>
@@ -59,7 +61,9 @@
 				v-show="!isShownRecommendKeywords"
 				@click="DELETE_ALL_SEARCH_KEYWORDS"
 				class="search-brand__btn"
-			>검색 기록 삭제</button>
+			>
+				검색 기록 삭제
+			</button>
 		</div>
 	</div>
 </template>
@@ -110,12 +114,12 @@ export default {
 		},
 
 		getRecommendKeywords(payload) {
-			Bus.$emit('on:spinner');
+			Bus.$emit('on-spinner');
 			this.searchKeyword = payload;
 			this.FETCH_RECOMMEND_KEYWORDS(payload)
 				.then(() => {
 					this.onRecommendKeywordsView();
-					Bus.$emit('off:spinner');
+					Bus.$emit('off-spinner');
 				})
 				.catch(console.error);
 		},
@@ -130,7 +134,7 @@ export default {
 		},
 
 		closeToolbarModal() {
-			Bus.$emit('off:toolbar-modal');
+			Bus.$emit('off-toolbar-modal');
 		},
 	},
 
@@ -139,13 +143,13 @@ export default {
 	},
 
 	mounted() {
-		Bus.$on('onRecommendKeywords', this.getRecommendKeywords);
-		Bus.$on('offRecommendKeywords', this.offRecommendKeywordsView);
+		Bus.$on('on-recommend-keywords', this.getRecommendKeywords);
+		Bus.$on('off-recommend-keywords', this.offRecommendKeywordsView);
 	},
 
 	beforeDestroy() {
-		Bus.$off('onRecommendKeywords', this.getRecommendKeywords);
-		Bus.$off('offRecommendKeywords', this.offRecommendKeywordsView);
+		Bus.$off('on-recommend-keywords', this.getRecommendKeywords);
+		Bus.$off('off-recommend-keywords', this.offRecommendKeywordsView);
 	},
 };
 </script>

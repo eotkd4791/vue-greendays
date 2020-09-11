@@ -31,7 +31,7 @@ import Bus from '@/utils/bus.js';
 export default {
 	methods: {
 		offModal() {
-			Bus.$emit('off:picked-brands');
+			Bus.$emit('off-picked-brands');
 		},
 	},
 

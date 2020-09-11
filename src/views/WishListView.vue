@@ -66,6 +66,7 @@ export default {
 		PickBrandItem,
 		EmptyWishList,
 	},
+
 	data() {
 		return {
 			onProductTab: true,
@@ -73,11 +74,13 @@ export default {
 			checkedProductsToDelete: [],
 		};
 	},
+
 	computed: {
 		...mapState('auth', {
 			userInfo: state => state.userInfo,
 		}),
 	},
+
 	methods: {
 		...mapActions('auth', ['DELETE_WISHLIST', 'DELETE_PICKED_BRANDS']),
 
@@ -87,7 +90,6 @@ export default {
 				: this.DELETE_PICKED_BRANDS(this.checkedBrandsToDelete);
 		},
 	},
-	created() {},
 
 	watch: {
 		onProductTab() {

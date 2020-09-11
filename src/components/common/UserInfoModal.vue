@@ -66,7 +66,7 @@ export default {
 		...mapActions('auth', ['LOG_OUT']),
 
 		closeUserInfo() {
-			Bus.$emit('userInfoToggle');
+			Bus.$emit('user-info-toggle');
 		},
 
 		userLogOut() {
@@ -83,14 +83,14 @@ export default {
 			}
 		},
 		routingPage() {
-			Bus.$emit('off:user-info-modal');
+			Bus.$emit('off-user-info-modal');
 		},
 	},
 	mounted() {
-		Bus.$on('off:user-info-modal', this.closeUserInfo);
+		Bus.$on('off-user-info-modal', this.closeUserInfo);
 	},
 	beforeDestroy() {
-		Bus.$off('off:user-info-modal', this.closeUserInfo);
+		Bus.$off('off-user-info-modal', this.closeUserInfo);
 	},
 };
 </script>

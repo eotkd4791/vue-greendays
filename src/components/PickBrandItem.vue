@@ -24,8 +24,9 @@
 						order_std: 'popularity',
 					},
 				}"
-				>{{ categoryPair[0] }}</router-link
 			>
+				{{ categoryPair[0] }}
+			</router-link>
 			<router-link
 				tag="li"
 				v-for="(category, index) in Object.keys(categories)"

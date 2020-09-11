@@ -27,11 +27,11 @@ export default {
 		pickedOrderBy(value) {
 			if (this.whichModal.length === 4) {
 				if (this.whichModal.indexOf(value) === 0) {
-					return this.$emit('pickedFirst');
+					return this.$emit('picked-first');
 				}
-				this.$emit('pickedGender', value);
+				this.$emit('picked-gender', value);
 			} else {
-				this.$emit('pickedOrderBy', value.value);
+				this.$emit('picked-order-by', value.value);
 			}
 		},
 

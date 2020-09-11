@@ -9,7 +9,7 @@
 				<p class="review-list__writer">{{ eachOfReview.writer }}</p>
 			</div>
 			<p class="review-list__date">
-				{{ croppedDate }}
+				{{ eachOfReview.postedTime }}
 			</p>
 		</section>
 		<aside class="review-list__aside">
@@ -39,20 +39,12 @@ export default {
 		StarPoint: () => import('@/components/common/StarPoint.vue'),
 	},
 
-	data() {
-		return {};
-	},
-
 	computed: {
 		isShownReviewList() {
 			return (
 				this.$parent.$data.reviewList.indexOf(this.eachOfReview) ===
 				this.$parent.$data.showDetail
 			);
-		},
-
-		croppedDate() {
-			return this.eachOfReview.postedTime.substr(0, 10);
 		},
 	},
 

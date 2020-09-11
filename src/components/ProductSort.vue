@@ -20,8 +20,8 @@
 							<sort-modal
 								v-if="showModal && sortByGender"
 								:whichModal="getGenders"
-								@pickedGender="createChips"
-								@pickedFirst="sortModalClose"
+								@picked-gender="createChips"
+								@picked-first="sortModalClose"
 							/>
 						</li>
 
@@ -34,7 +34,7 @@
 							<i class="fas fa-chevron-down" />
 							<sort-category
 								v-if="showModal && sortByCategory"
-								@pickedCategory="createChips"
+								@picked-category="createChips"
 							/>
 						</li>
 						<li
@@ -71,14 +71,14 @@
 						<sort-modal
 							v-if="showModal && rulesOrderBy"
 							:whichModal="getOrderBy"
-							@pickedOrderBy="setOrderBy"
+							@picked-order-by="setOrderBy"
 						/>
 					</div>
 				</aside>
 			</div>
 			<sort-brands
 				v-if="showModal && sortByBrand"
-				@closeBrandSearchModal="sortModalClose"
+				@close-brand-search-modal="sortModalClose"
 			/>
 		</div>
 	</transition>
@@ -162,12 +162,8 @@ export default {
 		},
 
 		onScroll(e) {
-			if (e.deltaY < 0) {
-				return (this.active = true);
-			}
-			if (e.pageY > 1460) {
-				return (this.active = false);
-			}
+			if (e.deltaY < 0) return (this.active = true);
+			if (e.pageY > 1460) return (this.active = false);
 		},
 
 		createChips(payload) {
@@ -184,11 +180,8 @@ export default {
 
 			if (categoryIndex !== -1) {
 				this.sortChips[1] = payload.value;
-				if (payload.detail) {
-					this.sortChips[2] = payload.detail;
-				} else {
-					this.sortChips[2] = '';
-				}
+				if (payload.detail) this.sortChips[2] = payload.detail;
+				else this.sortChips[2] = '';
 			}
 			this.copyChips = [...this.sortChips];
 			this.sortChips = this.sortChips.filter(v => v);
@@ -209,9 +202,7 @@ export default {
 			const sortChipIndex = this.sortChips.indexOf(payload);
 			const copyChipIndex = this.copyChips.indexOf(payload);
 
-			if (this.sortChips.length === 1) {
-				return this.removeAll();
-			}
+			if (this.sortChips.length === 1) return this.removeAll();
 
 			if (copyChipIndex === 1) {
 				this.sortChips.splice(sortChipIndex, 2);
@@ -236,12 +227,12 @@ export default {
 
 	mounted() {
 		window.addEventListener('wheel', this.onScroll);
-		Bus.$on('showUserInfo', this.toggleUserInfo);
+		Bus.$on('show-user-info', this.toggleUserInfo);
 	},
 
 	beforeDestroy() {
 		window.removeEventListener('wheel', this.onScroll);
-		Bus.$off('showUserInfo', this.toggleUserInfo);
+		Bus.$off('show-user-info', this.toggleUserInfo);
 	},
 
 	watch: {

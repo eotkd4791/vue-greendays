@@ -9,7 +9,13 @@
 								<v-container>저는 이미 그린데이즈 멤버입니다.</v-container>
 								<v-subheader>본인 확인을 위해 이메일을 입력하세요.</v-subheader>
 								<v-form ref="loginForm" @submit.prevent="userLogin">
-									<v-text-field label="이메일" :rules="emailRules" v-model.lazy="userEmail" autofocus required />
+									<v-text-field
+										label="이메일"
+										:rules="emailRules"
+										v-model.lazy="userEmail"
+										autofocus
+										required
+									/>
 									<v-text-field
 										v-if="isValidEmail"
 										v-model="userPassword"
@@ -18,7 +24,9 @@
 										:rules="passwordRules"
 										required
 									/>
-									<v-btn type="submit" style="color:#fff" color="#000" block>로그인</v-btn>
+									<v-btn type="submit" style="color:#fff" color="#000" block
+										>로그인</v-btn
+									>
 								</v-form>
 							</v-container>
 						</v-card>
@@ -27,7 +35,10 @@
 						<v-card>
 							<v-container>
 								<v-container>그린데이즈 멤버가 되고 싶습니다.</v-container>
-								<v-subheader>그린데이즈 멤버십에 가입하시면 많은 혜택을 받을 수 있습니다.</v-subheader>
+								<v-subheader
+									>그린데이즈 멤버십에 가입하시면 많은 혜택을 받을 수
+									있습니다.</v-subheader
+								>
 								<v-subheader>
 									아직 그린데이즈 멤버가 아니라면 연락처로 간편하게 가입하실 수
 									있습니다.
@@ -39,7 +50,8 @@
 									color="#000"
 									block
 									@click="movePage('/vue-greendays/signup')"
-								>그린데이즈 멤버십 가입</v-btn>
+									>그린데이즈 멤버십 가입</v-btn
+								>
 							</v-container>
 						</v-card>
 					</v-col>
@@ -82,15 +94,13 @@ export default {
 						email: this.userEmail,
 						password: this.userPassword,
 					});
-					if (response) {
+					if (response)
 						throw Error('올바르지 않은 이메일 또는 비밀번호 입니다.');
-					} else {
+					else {
 						this.$refs.loginForm.reset();
 						this.$router.replace('/vue-greendays');
 					}
-				} else {
-					throw new Error('로그인 양식을 확인해주십시오.');
-				}
+				} else throw new Error('로그인 양식을 확인해주십시오.');
 			} catch (error) {
 				return alert(error.message);
 			}

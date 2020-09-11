@@ -22,7 +22,7 @@ export default {
 			this.lazyUpdateStore(brandName);
 		},
 
-		lazyUpdateStore: debounce(function (brandName) {
+		lazyUpdateStore: debounce(function(brandName) {
 			this.UPDATE_PICKED_BRANDS({
 				key: brandName,
 				value: this.categories,
@@ -31,7 +31,7 @@ export default {
 
 		openAlarmBrand(e) {
 			const { text } = e.target.nextElementSibling;
-			this.$emit('openAlarmModal', text);
+			this.$emit('open-alarm-modal', text);
 		},
 	},
 };

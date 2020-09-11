@@ -66,26 +66,30 @@
 					tag="li"
 					class="about__router-li"
 					to="/vue-greendays/customerservice"
-					>무엇을 도와드릴까요?</router-link
 				>
+					무엇을 도와드릴까요?
+				</router-link>
 				<router-link
 					tag="li"
 					class="about__router-li"
 					to="/vue-greendays/customerservice/logi_guide"
-					>주문 & 배송</router-link
 				>
+					주문 & 배송
+				</router-link>
 				<router-link
 					tag="li"
 					class="about__router-li"
 					to="/vue-greendays/customerservice/faq"
-					>결제 & 가격</router-link
 				>
+					결제 & 가격
+				</router-link>
 				<router-link
 					tag="li"
 					class="about__router-li"
 					to="/vue-greendays/customerservice/faq"
-					>반품 & 환불</router-link
 				>
+					반품 & 환불
+				</router-link>
 			</ul>
 			<ul class="about__ul">
 				<li class="about__li about__li--title">ABOUT GREENDAYS</li>
@@ -93,8 +97,9 @@
 					tag="li"
 					class="about__router-li"
 					to="/vue-greendays/introduction"
-					>그린데이즈 소개</router-link
 				>
+					그린데이즈 소개
+				</router-link>
 			</ul>
 		</aside>
 	</footer>

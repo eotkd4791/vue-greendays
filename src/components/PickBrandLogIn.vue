@@ -50,7 +50,7 @@ export default {
 
 	methods: {
 		offModal() {
-			Bus.$emit('off:picked-brands');
+			Bus.$emit('off-picked-brands');
 		},
 	},
 

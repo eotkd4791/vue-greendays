@@ -3,7 +3,7 @@
 		<div
 			class="toolbar-modal__mask"
 			v-if="onToolbar"
-			@mouseenter="$emit('mouseEsc')"
+			@mouseenter="$emit('mouse-esc')"
 		/>
 		<transition appear name="rolling">
 			<div
@@ -39,7 +39,6 @@ import ToolbarReservePurchase from '@/components/ToolbarReservePurchase.vue';
 import ToolbarPreorder from '@/components/ToolbarPreorder.vue';
 import ToolbarQuickDelivery from '@/components/ToolbarQuickDelivery.vue';
 import ToolbarSearchBrands from '@/components/ToolbarSearchBrands.vue';
-import Bus from '@/utils/bus.js';
 
 export default {
 	components: {

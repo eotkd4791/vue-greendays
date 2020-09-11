@@ -17,8 +17,15 @@
 					:key="index"
 				>
 					<ol class="channel-talk__info">
-						<li class="channel-talk__info-list" v-if="item.sender === 'GreenDays'">
-							<img src="@/assets/img/green-present.png" alt="Greendays" class="channel-talk__info-img" />
+						<li
+							class="channel-talk__info-list"
+							v-if="item.sender === 'GreenDays'"
+						>
+							<img
+								src="@/assets/img/green-present.png"
+								alt="Greendays"
+								class="channel-talk__info-img"
+							/>
 						</li>
 						<li class="channel-talk__info-list">
 							<h2 class="channel-talk__sender">{{ item.sender }}</h2>
@@ -32,7 +39,9 @@
 						:class="{
 							'channel-talk__content--fromMe': item.sender !== 'GreenDays',
 						}"
-					>{{ item.content }}</article>
+					>
+						{{ item.content }}
+					</article>
 				</li>
 			</ol>
 			<footer class="channel-talk__footer">
@@ -81,10 +90,12 @@ export default {
 			try {
 				const messageRemovedSpace =
 					this.newMessage !== null ? this.newMessage.replace(/ /g, '') : '';
+
 				if (messageRemovedSpace.length === 0 || !this.newMessage) {
 					this.newMessage = '';
 					return;
 				}
+
 				const currentHour = new Date().getHours();
 				const currentMinute = new Date().getMinutes();
 				const newMessageObj = {
@@ -92,6 +103,7 @@ export default {
 					sentTime: `${addZero(currentHour)}:${addZero(currentMinute)}`,
 					content: this.newMessage,
 				};
+
 				this.messages.push(newMessageObj);
 
 				await this.UPDATE_CHAT(newMessageObj);

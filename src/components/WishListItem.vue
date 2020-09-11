@@ -57,19 +57,11 @@ export default {
 		productInfo: Object,
 	},
 
-	data() {
-		return {};
-	},
-
 	computed: {
 		...mapState('auth', {
 			userInfo: state => state.userInfo,
 		}),
 	},
-
-	methods: {},
-
-	created() {},
 };
 </script>
 

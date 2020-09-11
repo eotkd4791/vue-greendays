@@ -8,9 +8,9 @@
 					</transition>
 					<toolbar-user-info />
 					<toolbar-menu
-						@onToolbarModal="openToolbarModal"
-						@onSearchBrands="openSearchBrands"
-						@offToolbarModal="closeToolbarModal"
+						@on-toolbar-modal="openToolbarModal"
+						@on-search-brands="openSearchBrands"
+						@off-toolbar-modal="closeToolbarModal"
 					/>
 				</div>
 			</header>
@@ -20,11 +20,14 @@
 				:onToolbar="showToolbarModal"
 				:toolbarToOpen="toolbarToOpen"
 				:activeUserInfo="showUserInfo"
-				@mouseEsc="closeToolbarModal"
+				@mouse-esc="closeToolbarModal"
 			/>
 		</li>
 		<li>
-			<brand-modal v-if="showModal && SearchBrandsModal" @closeBrands="closeSearchBrands" />
+			<brand-modal
+				v-if="showModal && SearchBrandsModal"
+				@close-brands="closeSearchBrands"
+			/>
 		</li>
 	</ol>
 </template>
@@ -95,8 +98,8 @@ export default {
 	},
 
 	mounted() {
-		Bus.$on('showUserInfo', this.toggleUserInfo);
-		Bus.$on('off:toolbar-modal', this.closeToolbarModal);
+		Bus.$on('show-user-info', this.toggleUserInfo);
+		Bus.$on('off-toolbar-modal', this.closeToolbarModal);
 	},
 };
 </script>

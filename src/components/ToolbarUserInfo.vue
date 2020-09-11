@@ -72,7 +72,7 @@ export default {
 		toggleUserInfo() {
 			this.$refs.userInfo.classList.toggle('active');
 			this.showUserInfo = !this.showUserInfo;
-			Bus.$emit('showUserInfo', this.showUserInfo);
+			Bus.$emit('show-user-info', this.showUserInfo);
 		},
 	},
 
@@ -81,11 +81,11 @@ export default {
 	},
 
 	mounted() {
-		Bus.$on('userInfoToggle', this.toggleUserInfo);
+		Bus.$on('user-info-toggle', this.toggleUserInfo);
 	},
 
 	beforeDestroy() {
-		Bus.$off('userInfoToggle', this.toggleUserInfo);
+		Bus.$off('user-info-toggle', this.toggleUserInfo);
 	},
 };
 </script>

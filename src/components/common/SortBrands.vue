@@ -9,7 +9,9 @@
 						'brand__search-btn--active': currentPickedAlphabet === 0,
 					}"
 					@click="onClickAlphabetBtn(0)"
-				>전체</div>
+				>
+					전체
+				</div>
 				<div class="brand__search-mid">
 					<div
 						v-for="(letter, index) in letters"
@@ -22,19 +24,35 @@
 							),
 						}"
 						@click="onClickAlphabetBtn(index + 1)"
-					>{{ letter }}</div>
+					>
+						{{ letter }}
+					</div>
 					<div class="brand__search-form">
 						<form @submit.prevent>
-							<input type="text" placeholder="브랜드 검색하기" v-model="searchBrands" @input="onTypeKeyword" />
+							<input
+								type="text"
+								placeholder="브랜드 검색하기"
+								v-model="searchBrands"
+								@input="onTypeKeyword"
+							/>
 							<i class="fas fa-search" />
 						</form>
 					</div>
 				</div>
-				<button class="brand__search-close" @click="$emit('closeBrandSearchModal')">창닫기</button>
+				<button
+					class="brand__search-close"
+					@click="$emit('close-brand-search-modal')"
+				>
+					창닫기
+				</button>
 			</section>
 			<section class="brand__search-result">
 				<div class="brand__search-wrapper">
-					<span class="brand__search-brand" v-for="brand in brandsList" :key="brand">
+					<span
+						class="brand__search-brand"
+						v-for="brand in brandsList"
+						:key="brand"
+					>
 						<i
 							class="fas fa-heart"
 							:class="{
@@ -47,8 +65,8 @@
 					<pick-brand
 						v-if="showModal"
 						:propsBrand="brandInModal"
-						@closePickedBrands="closeModal"
-						@closeBrandsPickingModal="closeModal"
+						@close-picked-brands="closeModal"
+						@close-brands-picking-modal="closeModal"
 					></pick-brand>
 				</div>
 			</section>
@@ -128,7 +146,7 @@ export default {
 			}
 		},
 
-		onTypeKeyword: debounce(function () {
+		onTypeKeyword: debounce(function() {
 			const regExp = new RegExp(this.searchBrands, 'ig');
 			this.brandsList = this.getTotalBrands().filter(v => regExp.test(v));
 		}, 300),
@@ -143,7 +161,7 @@ export default {
 	},
 
 	mounted() {
-		Bus.$on('off:picked-brands', this.closeModal);
+		Bus.$on('off-picked-brands', this.closeModal);
 		window.addEventListener('scroll', this.setScrollLock);
 	},
 

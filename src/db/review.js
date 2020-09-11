@@ -7,12 +7,14 @@ let reviewList = [];
 function makeReviewData() {
 	for (let i = 0; i < 400; i++) {
 		const { id, name, photoUrl, brand } = dbProduct[getRandomNumber(400)];
+		const recentDate = Faker.date.recent();
 		reviewList.push({
 			id,
 			brand,
 			writer: Faker.name.findName(),
 			nameOfProduct: name,
-			postedTime: Faker.date.recent(),
+			postedTime: `${recentDate.getFullYear()}-${recentDate.getMonth() +
+				1}-${recentDate.getDate()}`,
 			content: Faker.lorem.paragraphs(10),
 			path: photoUrl,
 			satisfaction: Math.floor(Math.random() * 5) + 1,

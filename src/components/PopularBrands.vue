@@ -26,8 +26,9 @@
 						order_std: 'popularity',
 					},
 				}"
-				>{{ brand }}</router-link
 			>
+				{{ brand }}
+			</router-link>
 		</li>
 	</ol>
 </template>
@@ -59,7 +60,7 @@ export default {
 
 		openAlarmBrand(e) {
 			const { text } = e.target.nextElementSibling;
-			this.$emit('openAlarmModal', text);
+			this.$emit('open-alarm-modal', text);
 		},
 
 		// 브랜드별 제품 인기도의 총합으로 브랜드의 인기 순위 나열하는 메소드.

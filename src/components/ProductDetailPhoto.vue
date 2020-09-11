@@ -5,7 +5,12 @@
 			:whichImage="{ photoUrls, index: photoUrls.indexOf(mainPhotoUrl) }"
 		/>
 		<section class="photo__main">
-			<img :src="mainPhotoUrl" alt="사진이 로딩중입니다." class="photo__img" @click="toggleModal" />
+			<img
+				:src="mainPhotoUrl"
+				alt="사진이 로딩중입니다."
+				class="photo__img"
+				@click="toggleModal"
+			/>
 		</section>
 		<ol class="photo__ol">
 			<li
@@ -24,6 +29,7 @@
 <script>
 import ProductPhotoZoom from '@/components/common/ProductPhotoZoom.vue';
 import Bus from '@/utils/bus.js';
+import { mapGetters } from 'vuex';
 
 export default {
 	components: {
@@ -39,9 +45,9 @@ export default {
 	},
 
 	computed: {
-		getProductDetail() {
-			return this.$store.state.shopping.productDetail;
-		},
+		...mapGetters({
+			getProductDetail: 'shopping/getProductDetail',
+		}),
 	},
 
 	methods: {
@@ -52,25 +58,33 @@ export default {
 		toggleModal() {
 			this.showModal = !this.showModal;
 		},
+
+		setPhotos() {
+			const {
+				photoUrl,
+				secondImgUrl,
+				thirdImgUrl,
+				fourthImgUrl,
+			} = this.getProductDetail;
+
+			this.photoUrls = [
+				...new Set([photoUrl, secondImgUrl, thirdImgUrl, fourthImgUrl]),
+			];
+			this.mainPhotoUrl = this.photoUrls[0];
+		},
 	},
 
 	created() {
-		const {
-			photoUrl,
-			secondImgUrl,
-			thirdImgUrl,
-			fourthImgUrl,
-		} = this.getProductDetail;
-
-		this.photoUrls = [
-			...new Set([photoUrl, secondImgUrl, thirdImgUrl, fourthImgUrl]),
-		];
-
-		this.mainPhotoUrl = this.photoUrls[0];
+		this.setPhotos();
 	},
 
 	mounted() {
-		this.$on('off:zoom-modal', this.toggleModal);
+		this.$on('off-zoom-modal', this.toggleModal);
+		Bus.$on('change-product', this.setPhotos);
+	},
+
+	beforeDestroy() {
+		Bus.$off('change-product', this.setPhotos);
 	},
 };
 </script>

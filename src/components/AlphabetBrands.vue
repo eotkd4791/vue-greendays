@@ -40,8 +40,9 @@
 							order_std: 'popularity',
 						},
 					}"
-					>{{ brand }}</router-link
 				>
+					{{ brand }}
+				</router-link>
 			</li>
 		</ul>
 	</aside>

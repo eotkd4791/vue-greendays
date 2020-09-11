@@ -1,6 +1,7 @@
 <template>
 	<div class="log-out" />
 </template>
+
 <script>
 export default {
 	mounted() {
@@ -8,6 +9,7 @@ export default {
 	},
 };
 </script>
+
 <style scoped>
 .log-out {
 	position: fixed;

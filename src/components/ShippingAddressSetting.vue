@@ -1,13 +1,22 @@
 <template>
 	<div class="shipping-address">
 		<ol class="shipping-address__ol">
-			<li class="shipping-address__li" v-for="(item, index) in getShippingAddressList" :key="index">
+			<li
+				class="shipping-address__li"
+				v-for="(item, index) in getShippingAddressList"
+				:key="index"
+			>
 				<ul class="shipping-address__ul">
 					<li class="shipping-address__ul__li">{{ item.recipientName }}</li>
 					<li class="shipping-address__ul__li">{{ item.recipientPhoneNum }}</li>
 					<li class="shipping-address__ul__li">{{ item.recipientAddress }}</li>
 				</ul>
-				<button class="shipping-address__btn" @click="deleteShippingAddress(index)">배송지 삭제</button>
+				<button
+					class="shipping-address__btn"
+					@click="deleteShippingAddress(index)"
+				>
+					배송지 삭제
+				</button>
 			</li>
 		</ol>
 		<section class="shipping-address__add">
@@ -58,14 +67,24 @@
 							배송 메시지
 							<i class="fas fa-sort" />
 						</h3>
-						<select class="shipping-address__add__select" v-model="selectedShippingMessage">
-							<option value class="shipping-address__add__option" disabled selected>배송메시지를 선택해주세요.</option>
+						<select
+							class="shipping-address__add__select"
+							v-model="selectedShippingMessage"
+						>
+							<option
+								value
+								class="shipping-address__add__option"
+								disabled
+								selected
+								>배송메시지를 선택해주세요.</option
+							>
 							<option
 								class="shipping-address__add__option"
 								:value="message"
 								v-for="message in shippingMessages"
 								:key="message"
-							>{{ message }}</option>
+								>{{ message }}</option
+							>
 						</select>
 						<input
 							type="text"
@@ -78,7 +97,12 @@
 				</ul>
 			</form>
 			<div class="shipping-address__add__div">
-				<button @click="toggleAddShippingAddress" class="shipping-address__add__btn">배송지 추가 +</button>
+				<button
+					@click="toggleAddShippingAddress"
+					class="shipping-address__add__btn"
+				>
+					배송지 추가 +
+				</button>
 			</div>
 		</section>
 	</div>
@@ -110,12 +134,14 @@ export default {
 			isShownNewAddress: false,
 		};
 	},
+
 	computed: {
 		...mapGetters('auth', ['getShippingAddressList']),
 		isTypingInPerson() {
 			return this.shippingMessages.indexOf(this.selectedShippingMessage) === 4;
 		},
 	},
+
 	methods: {
 		...mapActions('auth', [
 			'ADD_NEW_SHIPPING_ADDRESS',
@@ -127,7 +153,7 @@ export default {
 			return isUndefined && this.selectedShippingMessage.length > 0;
 		},
 
-		isOnlyNumber: debounce(function () {
+		isOnlyNumber: debounce(function() {
 			this.$set(
 				this.newShippingAddress,
 				'recipientPhoneNum',
@@ -165,10 +191,12 @@ export default {
 			}
 			this.isShownNewAddress = !this.isShownNewAddress;
 		},
+
 		deleteShippingAddress(index) {
 			this.DELETE_SHIPPING_ADDRESS(index);
 		},
 	},
+
 	created() {
 		this.shippingMessages = userInfo.shippingMessage;
 	},
@@ -206,6 +234,7 @@ export default {
 	height: 70px;
 	color: #848484;
 	text-decoration: underline;
+	background-color: #fff;
 }
 
 .shipping-address__add__h1 {

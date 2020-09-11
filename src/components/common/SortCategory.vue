@@ -59,7 +59,7 @@ export default {
 		},
 
 		pickedCategory(payload) {
-			this.$emit('pickedCategory', payload);
+			this.$emit('picked-category', payload);
 		},
 	},
 

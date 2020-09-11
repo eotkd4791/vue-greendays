@@ -34,21 +34,14 @@ export default {
 
 	methods: {
 		closeZoomModal() {
-			this.$emit('off:zoom-modal');
+			this.$emit('off-zoom-modal');
 		},
 
 		prevPhoto() {},
 
 		nextPhoto() {},
 	},
-
-	created() {
-		// const { photosUrl, currentIndex } = { ...this.imgObj };
-		// this.photo;
-	},
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

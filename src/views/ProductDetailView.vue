@@ -3,13 +3,13 @@
 		<div class="product-detail">
 			<pick-brand
 				v-if="showModal"
-				@closePickedBrands="closeModal"
+				@close-picked-brands="closeModal"
 				:propsBrand="pickedBrand"
 			/>
 
 			<section class="product-detail__info">
 				<product-detail-photo />
-				<product-detail-info @openAlarmModal="openModal" />
+				<product-detail-info @open-alarm-modal="openModal" />
 			</section>
 			<aside class="product-detail__related-items">
 				<product-view :isProductView="false" />
@@ -23,7 +23,7 @@ import ProductDetailPhoto from '@/components/ProductDetailPhoto.vue';
 import ProductDetailInfo from '@/components/ProductDetailInfo.vue';
 import PickBrand from '@/components/common/PickBrandModal.vue';
 import ProductView from '@/views/ProductView.vue';
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import Bus from '@/utils/bus.js';
 
 export default {
@@ -41,13 +41,14 @@ export default {
 				type: String,
 				default: () => this.getProductDetail.brand,
 			},
+			paramsWatcher: null,
 		};
 	},
 
 	computed: {
-		getProductDetail() {
-			return this.$store.state.shopping.productDetail;
-		},
+		...mapGetters({
+			getProductDetail: 'shopping/getProductDetail',
+		}),
 	},
 
 	methods: {
@@ -57,10 +58,9 @@ export default {
 
 		async getProductInfo(productId) {
 			try {
-				Bus.$emit('on:spinner');
-				const res = await this.FETCH_PRODUCT_INFO(parseInt(productId));
-				Bus.$emit('off:spinner');
-				return res;
+				Bus.$emit('on-spinner');
+				await this.FETCH_PRODUCT_INFO(parseInt(productId));
+				Bus.$emit('off-spinner');
 			} catch (error) {
 				console.error(error);
 			}
@@ -78,14 +78,19 @@ export default {
 
 	created() {
 		this.getProductInfo(this.$route.params.productId);
+		this.paramsWatcher = this.$watch('$route.params', function({ productId }) {
+			this.getProductInfo(productId);
+			Bus.$emit('change-product');
+		});
 	},
 
 	mounted() {
-		Bus.$on('off:picked-brands', this.closeModal);
+		Bus.$on('off-picked-brands', this.closeModal);
 	},
 
 	beforeDestroy() {
-		Bus.$off('off:picked-brands', this.closeModal);
+		Bus.$off('off-picked-brands', this.closeModal);
+		this.paramsWatcher();
 	},
 };
 </script>

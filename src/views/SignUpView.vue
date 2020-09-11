@@ -24,7 +24,8 @@
 									color="#000"
 									@click="checkEmailRedundancy"
 									:disabled="!isProperEmail"
-								>이메일 중복확인</v-btn>
+									>이메일 중복확인</v-btn
+								>
 							</v-form>
 						</v-col>
 						<v-col cols="5">
@@ -69,7 +70,13 @@
 				<v-container>
 					<v-row class="sign-up__article">
 						<v-col cols="5">
-							<v-text-field type="string" label="이름" color="#000" v-model="userInfo.name" required />
+							<v-text-field
+								type="string"
+								label="이름"
+								color="#000"
+								v-model="userInfo.name"
+								required
+							/>
 						</v-col>
 						<v-col cols="5">
 							<v-form class="sign-up__form">
@@ -84,7 +91,12 @@
 									readonly
 									required
 								/>
-								<v-btn class="sign-up__btn" color="#000" @click="openAddressSearch">우편번호 찾기</v-btn>
+								<v-btn
+									class="sign-up__btn"
+									color="#000"
+									@click="openAddressSearch"
+									>우편번호 찾기</v-btn
+								>
 							</v-form>
 						</v-col>
 					</v-row>
@@ -180,14 +192,29 @@
 									</v-list-item-subtitle>
 
 									<v-list-item-subtitle>
-										<input type="checkbox" class="sign-up__checkbox" @click="checkOneArticles" required />
-										<span class="sign-up__label">[필수] 개인 정보의 수집 및 이용에 대한 동의</span>
-										<router-link to="/vue-greendays/terms" tag="span">자세히 보기</router-link>
+										<input
+											type="checkbox"
+											class="sign-up__checkbox"
+											@click="checkOneArticles"
+											required
+										/>
+										<span class="sign-up__label"
+											>[필수] 개인 정보의 수집 및 이용에 대한 동의</span
+										>
+										<router-link to="/vue-greendays/terms" tag="span"
+											>자세히 보기</router-link
+										>
 									</v-list-item-subtitle>
 
 									<v-list-item-subtitle>
-										<input type="checkbox" class="sign-up__checkbox" @click="checkOneArticles" />
-										<span class="sign-up__label">[선택] 공지사항 / 이벤트 알림</span>
+										<input
+											type="checkbox"
+											class="sign-up__checkbox"
+											@click="checkOneArticles"
+										/>
+										<span class="sign-up__label"
+											>[선택] 공지사항 / 이벤트 알림</span
+										>
 									</v-list-item-subtitle>
 
 									<v-list-item-subtitle>
@@ -201,8 +228,13 @@
 
 							<v-container>
 								<v-form class="sign-up__recommend-code">
-									<input placeholder="추천 코드 입력" v-model="gotPromotionCode" />
-									<span class="sign-up__recommend-code--red">* 추천 코드를 입력하면 2,000포인트 즉시 지급!</span>
+									<input
+										placeholder="추천 코드 입력"
+										v-model="gotPromotionCode"
+									/>
+									<span class="sign-up__recommend-code--red"
+										>* 추천 코드를 입력하면 2,000포인트 즉시 지급!</span
+									>
 								</v-form>
 							</v-container>
 							<v-container>
@@ -210,7 +242,8 @@
 									class="sign-up__btn signup-membership"
 									color="#000"
 									@click.prevent="signUpMembership"
-								>멤버십 가입하기</v-btn>
+									>멤버십 가입하기</v-btn
+								>
 							</v-container>
 						</v-container>
 					</v-row>
@@ -263,12 +296,14 @@ export default {
 			],
 		};
 	},
+
 	computed: {
 		overFourteen() {
 			const currentYear = new Date().getFullYear();
 			return this.userInfo.selectedBirthYear > currentYear - 14 ? false : true;
 		},
 	},
+
 	methods: {
 		...mapActions('auth', [
 			'FETCH_USER_LIST',
@@ -279,7 +314,7 @@ export default {
 
 		createPromotionCode,
 
-		checkEmailRules: debounce(function () {
+		checkEmailRules: debounce(function() {
 			this.isProperEmail = this.$refs.email.validate();
 		}, 300),
 
@@ -289,11 +324,11 @@ export default {
 				.catch(err => console.error(err));
 		},
 
-		checkPasswordRules: debounce(function () {
+		checkPasswordRules: debounce(function() {
 			this.isProperPassword = this.$refs.password.validate();
 		}, 300),
 
-		AllowOnlyEnglish: debounce(function (value) {
+		AllowOnlyEnglish: debounce(function(value) {
 			this.userInfo.password = value.replace(/[ㄱ-힣]/gi, '');
 		}, 250),
 
@@ -395,13 +430,16 @@ export default {
 					throw Error('회원가입 양식을 확인하여 주십시오.');
 				}
 			} catch (error) {
+				console.error(error);
 				alert(error.message);
 			}
 		},
 	},
+
 	created() {
 		this.FETCH_USER_LIST();
 	},
+
 	mounted() {
 		this.checkAll = document.querySelectorAll('.sign-up__checkbox');
 	},

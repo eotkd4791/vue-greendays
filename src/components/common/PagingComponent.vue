@@ -4,13 +4,18 @@
 			class="pagination__list"
 			v-show="!isInRangeOfBeginning(currentPage)"
 			@click="onClickPageNumber(1)"
-		>1</li>
+		>
+			1
+		</li>
 		<li
 			class="pagination__prev"
 			:class="{ 'pagination__btn--disabled': currentPage === 1 }"
 			@click="prevPageRange"
 		>
-			<i class="fas fa-caret-left" :class="{ 'fas--not-allowed': currentPage === 1 }" />
+			<i
+				class="fas fa-caret-left"
+				:class="{ 'fas--not-allowed': currentPage === 1 }"
+			/>
 		</li>
 		<li
 			v-for="(pageNumber, index) in paginationList"
@@ -18,20 +23,27 @@
 			@click="onClickPageNumber(pageNumber)"
 			class="pagination__list"
 			:class="{ 'pagination__list--active': isActivatedPage(pageNumber) }"
-		>{{ pageNumber }}</li>
+		>
+			{{ pageNumber }}
+		</li>
 		<li
 			class="pagination__next"
 			:class="{ 'pagination__btn--disabled': currentPage === totalPage }"
 			@click="nextPageRange"
 		>
-			<i class="fas fa-caret-right" :class="{ 'fas--not-allowed': currentPage === totalPage }" />
+			<i
+				class="fas fa-caret-right"
+				:class="{ 'fas--not-allowed': currentPage === totalPage }"
+			/>
 		</li>
 		<li
 			class="pagination__list"
 			:class="{ 'pagination__list--active': isActivatedPage(currentPage) }"
 			v-show="!isInRangeOfBeginning(totalPage)"
 			@click="onClickPageNumber(totalPage)"
-		>{{ totalPage }}</li>
+		>
+			{{ totalPage }}
+		</li>
 	</ol>
 </template>
 
@@ -119,7 +131,7 @@ export default {
 			this.paginationList = tempPaginationList;
 		},
 
-		onClickPageNumber: debounce(function (pageNumber) {
+		onClickPageNumber: debounce(function(pageNumber) {
 			if (this.currentPage === pageNumber) return;
 
 			this.currentPage = pageNumber;
@@ -136,9 +148,7 @@ export default {
 		}, 500),
 
 		prevPageRange() {
-			if (this.currentPage === 1) {
-				return;
-			}
+			if (this.currentPage === 1) return;
 			if (
 				this.isInMiddleOfBeginningRange(this.currentPage - 1) &&
 				this.isInMiddleOfEndRange(this.currentPage)
