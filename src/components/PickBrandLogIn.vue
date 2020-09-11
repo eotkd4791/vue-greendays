@@ -21,10 +21,7 @@
 					:key="index"
 					@click="updatePickedBrands(pickedBrand, category)"
 				>
-					<i
-						class="fas fa-heart"
-						:class="{ 'fa-heart--picked': Object.values(categories)[index] }"
-					/>
+					<i class="fas fa-heart" :class="{ 'fa-heart--picked': Object.values(categories)[index] }" />
 					{{ category }}
 				</li>
 			</ul>
@@ -41,6 +38,18 @@ export default {
 	mixins: [brandPicking],
 
 	props: ['pickedBrand'],
+
+	data() {
+		return {
+			categories: {
+				Bags: false,
+				Clothes: false,
+				Shoes: false,
+				Accessories: false,
+				Wallets: false,
+			},
+		};
+	},
 
 	computed: {
 		...mapState({

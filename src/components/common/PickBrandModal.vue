@@ -2,7 +2,7 @@
 	<transition name="modal">
 		<div class="modal-mask">
 			<div class="modal-wrapper" @click.stop="onClickOutside">
-				<pick-brand-log-in v-if="userInfo" :pickedBrand="propsBrand" />
+				<pick-brand-log-in v-if="userInfo" :pickedBrand="propsBrand.trim()" />
 				<pick-brand-log-out v-else />
 			</div>
 		</div>
