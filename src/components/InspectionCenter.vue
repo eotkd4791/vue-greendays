@@ -13,11 +13,11 @@
 			<p class="inspection__p">연락주셔야 확인 후 빠른 처리가 가능합니다. 참고 부탁드립니다. :)</p>
 		</article>
 		<div class="inspection__carousel">
-			<button class="inspection__prev">
+			<button class="inspection__prev" @click="getPrevious">
 				<i class="fas fa-chevron-left" />
 			</button>
-			<ul class="inspection__ul">
-				<li v-for="(item, index) in inspectedItems" :key="item.id" class="inspection__li">
+			<ul class="inspection__ul" ref="listContainer">
+				<li v-for="(item, index) in photoList" :key="item.id" class="inspection__li">
 					<div class="inspection__wrapper">
 						<div class="inspection__mask" />
 						<img :src="item.path" :alt="`InspectionImage${index + 1}`" class="inspection__img" />
@@ -25,7 +25,7 @@
 					<h3 class="inspection__h3">상품 아이디: {{ item.id }}</h3>
 				</li>
 			</ul>
-			<button class="inspection__next">
+			<button class="inspection__next" @click="getNext">
 				<i class="fas fa-chevron-right" />
 			</button>
 		</div>
@@ -33,12 +33,14 @@
 </template>
 
 <script>
-import reviewData from '@/static/reviews.js';
+import carousel from '@/mixins/carouselBtn.js';
 
 export default {
+	mixins: [carousel],
+
 	data() {
 		return {
-			inspectedItems: reviewData.inspectedItems,
+			componentName: 'inspectionCenter',
 		};
 	},
 };
@@ -81,15 +83,19 @@ export default {
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
+	overflow: hidden;
 }
 
 .inspection__ul {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 	height: 244px;
 	position: relative;
+}
+
+.inspection__li {
+	margin-right: 20px;
 }
 
 .inspection__wrapper {
@@ -132,6 +138,7 @@ export default {
 	opacity: 0.7;
 	border-radius: 50%;
 	z-index: 1000;
+	cursor: pointer;
 }
 
 .inspection__prev {

@@ -4,18 +4,13 @@
 			class="pagination__list"
 			v-show="!isInRangeOfBeginning(currentPage)"
 			@click="onClickPageNumber(1)"
-		>
-			1
-		</li>
+		>1</li>
 		<li
 			class="pagination__prev"
 			:class="{ 'pagination__btn--disabled': currentPage === 1 }"
 			@click="prevPageRange"
 		>
-			<i
-				class="fas fa-caret-left"
-				:class="{ 'fas--not-allowed': currentPage === 1 }"
-			/>
+			<i class="fas fa-caret-left" :class="{ 'fas--not-allowed': currentPage === 1 }" />
 		</li>
 		<li
 			v-for="(pageNumber, index) in paginationList"
@@ -23,27 +18,20 @@
 			@click="onClickPageNumber(pageNumber)"
 			class="pagination__list"
 			:class="{ 'pagination__list--active': isActivatedPage(pageNumber) }"
-		>
-			{{ pageNumber }}
-		</li>
+		>{{ pageNumber }}</li>
 		<li
 			class="pagination__next"
 			:class="{ 'pagination__btn--disabled': currentPage === totalPage }"
 			@click="nextPageRange"
 		>
-			<i
-				class="fas fa-caret-right"
-				:class="{ 'fas--not-allowed': currentPage === totalPage }"
-			/>
+			<i class="fas fa-caret-right" :class="{ 'fas--not-allowed': currentPage === totalPage }" />
 		</li>
 		<li
 			class="pagination__list"
 			:class="{ 'pagination__list--active': isActivatedPage(currentPage) }"
 			v-show="!isInRangeOfBeginning(totalPage)"
 			@click="onClickPageNumber(totalPage)"
-		>
-			{{ totalPage }}
-		</li>
+		>{{ totalPage }}</li>
 	</ol>
 </template>
 
@@ -93,58 +81,54 @@ export default {
 			if (this.isInMiddleOfBeginningRange(this.currentPage)) {
 				if (this.isInMiddleOfEndRange(this.currentPage)) {
 					//true true
-					for (let i = this.currentPage - 4; i <= this.currentPage + 4; i++) {
+					for (let i = this.currentPage - 4; i <= this.currentPage + 4; i++)
 						tempPaginationList.push(i);
-					}
 				} else {
 					//true false
-					for (let i = this.currentPage; i <= this.totalPage; i++) {
+					for (let i = this.currentPage; i <= this.totalPage; i++)
 						tempPaginationList.push(i);
-					}
+
 					for (
 						let i = this.currentPage - 1;
 						tempPaginationList.length < 9 && i >= 1;
 						i--
-					) {
+					)
 						tempPaginationList.unshift(i);
-					}
 				}
 			} else {
 				if (this.isInMiddleOfEndRange(this.currentPage)) {
 					//false true
-					for (let i = this.currentPage; i >= 1; i--) {
+					for (let i = this.currentPage; i >= 1; i--)
 						tempPaginationList.unshift(i);
-					}
+
 					for (
 						let i = this.currentPage + 1;
 						tempPaginationList.length < 9 && i <= this.totalPage;
 						i++
-					) {
+					)
 						tempPaginationList.push(i);
-					}
 				} else {
 					//false false
-					for (let i = this.currentPage; i <= this.totalPage; i++) {
+					for (let i = this.currentPage; i <= this.totalPage; i++)
 						tempPaginationList.push(i);
-					}
-					for (let i = this.currentPage - 1; i >= 1; i--) {
+
+					for (let i = this.currentPage - 1; i >= 1; i--)
 						tempPaginationList.unshift(i);
-					}
 				}
 			}
 			this.paginationList = tempPaginationList;
 		},
 
-		onClickPageNumber: debounce(function(pageNumber) {
-			if (this.currentPage === pageNumber) {
-				return;
-			}
+		onClickPageNumber: debounce(function (pageNumber) {
+			if (this.currentPage === pageNumber) return;
+
 			this.currentPage = pageNumber;
 			this.fillPaginationList();
 			const currentQuery = this.$route.query;
+
 			this.$router
 				.push({
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: { ...currentQuery, page: pageNumber },
 				})
 				.catch(() => {});
@@ -166,9 +150,8 @@ export default {
 		},
 
 		nextPageRange() {
-			if (this.currentPage === this.totalPage) {
-				return;
-			}
+			if (this.currentPage === this.totalPage) return;
+
 			if (
 				this.isInMiddleOfBeginningRange(this.currentPage) &&
 				this.isInMiddleOfEndRange(this.currentPage + 1)
@@ -176,6 +159,7 @@ export default {
 				this.paginationList.shift();
 				this.paginationList.push(this.currentPage + 1);
 			}
+
 			this.currentPage++;
 		},
 	},
@@ -191,7 +175,7 @@ export default {
 	},
 
 	beforeDestroy() {
-		Bus.$off('setPagination', this.onClickPageNumber);
+		Bus.$off('set-pagination', this.onClickPageNumber);
 	},
 };
 </script>
