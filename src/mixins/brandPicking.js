@@ -19,7 +19,7 @@ export default {
 
 		updatePickedBrands(brandName, category) {
 			this.categories[category] = !this.categories[category];
-			this.lazyUpdateStore(brandName);
+			this.lazyUpdateStore(brandName.trim());
 		},
 
 		lazyUpdateStore: debounce(function(brandName) {

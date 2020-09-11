@@ -12,21 +12,11 @@
 
 					<aside class="brand-modal__aside">
 						<ul class="brand-modal__ul" ref="brands">
-							<li class="brand-modal__menu--active" @click="changeTab">
-								인기브랜드
-							</li>
-							|
+							<li class="brand-modal__menu--active" @click="changeTab">인기브랜드</li>|
 							<li @click="changeTab">전체브랜드</li>
 						</ul>
-						<pick-brand
-							v-if="showModal"
-							:propsBrand="pickedBrand"
-							@close-picked-prands="closePickBrand"
-						/>
-						<popular-brands
-							v-if="isShownPopularBrand"
-							@open-alarm-modal="openPickBrand"
-						/>
+						<pick-brand v-if="showModal" :propsBrand="pickedBrand" @close-picked-brands="closePickBrand" />
+						<popular-brands v-if="isShownPopularBrand" @open-alarm-modal="openPickBrand" />
 						<alphabet-brands v-else @open-alarm-modal="openPickBrand" />
 					</aside>
 				</div>
