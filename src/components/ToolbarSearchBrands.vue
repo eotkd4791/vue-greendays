@@ -27,9 +27,8 @@
 								order_std: 'popularity',
 							},
 						}"
-					>
-						{{ item }}
-					</router-link>
+						@click="closeToolbarModal"
+					>{{ item }}</router-link>
 				</ol>
 				<ul class="search-brand__hot">
 					<li>인기 검색어</li>
@@ -53,6 +52,7 @@
 								order_std: 'popularity',
 							},
 						}"
+						@click="closeToolbarModal"
 						v-html="isShownRecommendKeywords ? keywordsHighlighter(item) : item"
 					/>
 				</ul>
@@ -61,9 +61,7 @@
 				v-show="!isShownRecommendKeywords"
 				@click="DELETE_ALL_SEARCH_KEYWORDS"
 				class="search-brand__btn"
-			>
-				검색 기록 삭제
-			</button>
+			>검색 기록 삭제</button>
 		</div>
 	</div>
 </template>

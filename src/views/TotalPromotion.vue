@@ -43,7 +43,7 @@ export default {
 		return {
 			promotions: [],
 			quickDelivery: {},
-			Timers: [],
+			timers: [],
 		};
 	},
 
@@ -63,10 +63,10 @@ export default {
 
 	mounted() {
 		this.promotions.forEach(p => {
-			const Timer = setInterval(() => {
+			const timer = setInterval(() => {
 				if (p.expiredHour === 0 && p.expiredMin === 0 && p.expiredSec === 0) {
 					p.activated = false;
-					clearInterval(Timer);
+					clearInterval(timer);
 				}
 				if (p.expiredSec === 0) {
 					if (p.expiredMin > 0) {
@@ -81,6 +81,13 @@ export default {
 					p.expiredSec--;
 				}
 			}, 1000);
+			this.timers.push(timer);
+		});
+	},
+
+	beforeDestroy() {
+		this.timers.forEach(timer => {
+			clearInterval(timer);
 		});
 	},
 };
