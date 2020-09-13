@@ -8,10 +8,5 @@ export const createPromotionCode = () => {
 	const maximumHex = 16777216; //0xFFFFFF + 1
 	const minimumHex = 1048576; //0x100000
 	const sixRandomDigit = getRandomNumber(maximumHex) + minimumHex;
-	return (sixRandomDigit <= maximumHex
-		? sixRandomDigit
-		: sixRandomDigit - minimumHex
-	)
-		.toString(16)
-		.toUpperCase();
+	return (sixRandomDigit <= maximumHex ? sixRandomDigit : sixRandomDigit - minimumHex).toString(16).toUpperCase();
 };

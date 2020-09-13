@@ -9,7 +9,9 @@
 						'brand__search-btn--active': currentPickedAlphabet === 0,
 					}"
 					@click="onClickAlphabetBtn(0)"
-				>전체</div>
+				>
+					전체
+				</div>
 				<div class="brand__search-mid">
 					<div
 						v-for="(letter, index) in letters"
@@ -17,12 +19,12 @@
 						class="brand__search-btn"
 						:class="{
 							'brand__search-btn--active': currentPickedAlphabet === index + 1,
-							'brand__search-btn--passive': !initialLetterOfBrands.includes(
-								letter,
-							),
+							'brand__search-btn--passive': !initialLetterOfBrands.includes(letter),
 						}"
 						@click="onClickAlphabetBtn(index + 1)"
-					>{{ letter }}</div>
+					>
+						{{ letter }}
+					</div>
 					<div class="brand__search-form">
 						<form @submit.prevent>
 							<input type="text" placeholder="브랜드 검색하기" v-model="searchBrands" @input="onTypeKeyword" />
@@ -44,12 +46,7 @@
 						/>
 						{{ brand }}
 					</span>
-					<pick-brand
-						v-if="showModal"
-						:propsBrand="brandInModal"
-						@close-picked-brands="closeModal"
-						@close-brands-picking-modal="closeModal"
-					></pick-brand>
+					<pick-brand v-if="showModal" :propsBrand="brandInModal" @close-picked-brands="closeModal" @close-brands-picking-modal="closeModal"></pick-brand>
 				</div>
 			</section>
 		</div>
@@ -106,31 +103,25 @@ export default {
 		},
 
 		isPickedBrand(brand) {
-			return this.getUserInfo
-				? Boolean(this.getUserInfo.pickedBrands[brand])
-				: false;
+			return this.getUserInfo ? Boolean(this.getUserInfo.pickedBrands[brand]) : false;
 		},
 
 		getTotalBrands() {
-			return this.getBrandList.length
-				? this.getBrandList
-				: [...new Set(this.getProducts.map(v => v.brand))];
+			return this.getBrandList.length ? this.getBrandList : [...new Set(this.getProducts.map(v => v.brand))];
 		},
 
 		onClickAlphabetBtn(index) {
 			const pickedLetter = this.letters[index - 1];
 			if (this.initialLetterOfBrands.includes(pickedLetter)) {
 				this.currentPickedAlphabet = index;
-				this.brandsList = this.getTotalBrands().filter(
-					v => v[0] === this.letters[this.currentPickedAlphabet - 1],
-				);
+				this.brandsList = this.getTotalBrands().filter(v => v[0] === this.letters[this.currentPickedAlphabet - 1]);
 			} else if (index === 0) {
 				this.currentPickedAlphabet = index;
 				this.brandsList = this.getTotalBrands();
 			}
 		},
 
-		onTypeKeyword: debounce(function () {
+		onTypeKeyword: debounce(function() {
 			const regExp = new RegExp(this.searchBrands, 'ig');
 			this.brandsList = this.getTotalBrands().filter(v => regExp.test(v));
 		}, 300),
@@ -139,9 +130,7 @@ export default {
 	created() {
 		this.brandsList = this.getTotalBrands();
 
-		this.initialLetterOfBrands = [
-			...new Set(this.brandsList.map(v => v[0].toUpperCase()).sort()),
-		];
+		this.initialLetterOfBrands = [...new Set(this.brandsList.map(v => v[0].toUpperCase()).sort())];
 	},
 
 	mounted() {

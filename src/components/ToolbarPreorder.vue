@@ -41,9 +41,7 @@ export default {
 	methods: {
 		activatingTab() {
 			if (!this.$refs.tabs) return;
-			this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove(
-				'active',
-			);
+			this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('active');
 		},
 	},
 };

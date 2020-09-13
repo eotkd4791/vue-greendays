@@ -22,7 +22,8 @@
 							order_std: 'popularity',
 						},
 					}"
-				>{{`${category.name} (${category.productAmount})`}}</router-link>
+					>{{ `${category.name} (${category.productAmount})` }}</router-link
+				>
 			</div>
 		</section>
 		<section class="reserve-container__promotion">
@@ -68,10 +69,7 @@ export default {
 
 		this.categories.unshift({
 			name: 'All Categories',
-			productAmount: this.categories.reduce(
-				(acc, cur) => acc + cur.productAmount,
-				0,
-			),
+			productAmount: this.categories.reduce((acc, cur) => acc + cur.productAmount, 0),
 		});
 	},
 };

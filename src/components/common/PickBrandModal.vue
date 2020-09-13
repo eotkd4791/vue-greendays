@@ -30,8 +30,7 @@ export default {
 
 	methods: {
 		onClickOutside(e) {
-			if (e.target.className === 'modal-wrapper')
-				this.$emit('close-picked-brands');
+			if (e.target.className === 'modal-wrapper') this.$emit('close-picked-brands');
 		},
 	},
 };

@@ -1,17 +1,12 @@
 <template>
 	<div class="search-brand">
 		<div class="search-brand__wrapper">
-			<section
-				class="search-brand__list"
-				:class="{ 'search-brand__list--viewer': isShownRecommendKeywords }"
-			>
+			<section class="search-brand__list" :class="{ 'search-brand__list--viewer': isShownRecommendKeywords }">
 				<ol v-show="!isShownRecommendKeywords" class="search-brand__lately">
 					<li>최근 검색어</li>
 					<router-link
 						tag="li"
-						v-for="(item, index) in getUserInfo
-							? userSearchedKeywords
-							: getGuestKeywords"
+						v-for="(item, index) in getUserInfo ? userSearchedKeywords : getGuestKeywords"
 						:key="index"
 						:to="{
 							path: '/vue-greendays/products',
@@ -28,15 +23,14 @@
 							},
 						}"
 						@click="closeToolbarModal"
-					>{{ item }}</router-link>
+						>{{ item }}</router-link
+					>
 				</ol>
 				<ul class="search-brand__hot">
 					<li>인기 검색어</li>
 					<router-link
 						tag="li"
-						v-for="(item, index) in isShownRecommendKeywords
-							? getRecommendKeywordsList
-							: getHotSearchItems"
+						v-for="(item, index) in isShownRecommendKeywords ? getRecommendKeywordsList : getHotSearchItems"
 						:key="index"
 						:to="{
 							path: '/vue-greendays/products',
@@ -57,11 +51,7 @@
 					/>
 				</ul>
 			</section>
-			<button
-				v-show="!isShownRecommendKeywords"
-				@click="DELETE_ALL_SEARCH_KEYWORDS"
-				class="search-brand__btn"
-			>검색 기록 삭제</button>
+			<button v-show="!isShownRecommendKeywords" @click="DELETE_ALL_SEARCH_KEYWORDS" class="search-brand__btn">검색 기록 삭제</button>
 		</div>
 	</div>
 </template>
@@ -125,10 +115,7 @@ export default {
 		keywordsHighlighter(keyword) {
 			const targetKeyword = this.searchKeyword;
 			const regex = new RegExp(targetKeyword, 'gi');
-			return keyword.replace(
-				regex,
-				`<span style="color: #42b850">${targetKeyword}</span>`,
-			);
+			return keyword.replace(regex, `<span style="color: #42b850">${targetKeyword}</span>`);
 		},
 
 		closeToolbarModal() {

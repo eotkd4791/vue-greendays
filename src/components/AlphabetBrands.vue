@@ -1,23 +1,13 @@
 <template>
 	<aside class="alphabet-brands">
 		<ol class="alphabet-brands__letters" ref="btnLetter">
-			<li
-				class="alphabet-brands__btn"
-				v-for="(letter, index) in alphabetBtn"
-				:key="index"
-				@click="pickAlphabet(letter, index)"
-				:class="{ 'alphabet-brands__btn--passive': !alphabetSet.has(letter) }"
-			>
+			<li class="alphabet-brands__btn" v-for="(letter, index) in alphabetBtn" :key="index" @click="pickAlphabet(letter, index)" :class="{ 'alphabet-brands__btn--passive': !alphabetSet.has(letter) }">
 				{{ letter }}
 			</li>
 		</ol>
 
 		<ul class="alphabet-brands__ul">
-			<li
-				class="alphabet-brands__li"
-				v-for="(brand, index) in getRelatedBrands"
-				:key="index"
-			>
+			<li class="alphabet-brands__li" v-for="(brand, index) in getRelatedBrands" :key="index">
 				<i
 					class="fas fa-heart"
 					:class="{
@@ -71,13 +61,8 @@ export default {
 		}),
 
 		getRelatedBrands() {
-			const initialRegExp = new RegExp(
-				`[${this.alphabetBtn[this.currentAlphabetIndex]}]`,
-				'i',
-			);
-			return this.brandsInitialAlphabet
-				.filter(v => initialRegExp.test(v[0]))
-				.sort();
+			const initialRegExp = new RegExp(`[${this.alphabetBtn[this.currentAlphabetIndex]}]`, 'i');
+			return this.brandsInitialAlphabet.filter(v => initialRegExp.test(v[0])).sort();
 		},
 	},
 

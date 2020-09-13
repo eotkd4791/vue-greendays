@@ -6,10 +6,7 @@
 					<router-link tag="li" :to="`/vue-greendays/user/edit/${getUserInfo.id}`">{{ getUserInfo.name }}</router-link>
 					<li>{{ `내 추천 코드 ${getUserInfo.promotionCode}` }}</li>
 					<router-link tag="li" :to="`/vue-greendays/user/edit/${getUserInfo.id}`">내 정보 관리</router-link>
-					<router-link
-						tag="li"
-						:to="`/vue-greendays/user/total_order_refund/${getUserInfo.id}`"
-					>주문 및 반품 내역</router-link>
+					<router-link tag="li" :to="`/vue-greendays/user/total_order_refund/${getUserInfo.id}`">주문 및 반품 내역</router-link>
 					<router-link tag="li" :to="`/vue-greendays/user/point/${getUserInfo.id}`">포인트</router-link>
 					<li @click.stop="userLogOut">로그아웃</li>
 				</ul>
@@ -30,10 +27,7 @@
 						<strong>{{ getUserInfo.changeOrRefund.length }}</strong>
 					</li>
 				</ul>
-				<router-link
-					tag="button"
-					:to="`/vue-greendays/user/total_order_refund/${getUserInfo.id}`"
-				>주문 및 반품 내역</router-link>
+				<router-link tag="button" :to="`/vue-greendays/user/total_order_refund/${getUserInfo.id}`">주문 및 반품 내역</router-link>
 			</aside>
 		</div>
 	</div>

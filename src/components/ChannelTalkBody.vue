@@ -5,27 +5,11 @@
 				<h1 class="channel-talk__h1">그린데이즈</h1>
 				<i class="fas fa-times" @click="closeChannelTalk" />
 			</header>
-			<ol
-				class="channel-talk__message"
-				ref="message"
-				v-chat-scroll="{ smooth: true, notSmoothOnInit: true }"
-			>
-				<li
-					class="channel-talk__list"
-					:class="{ 'channel-talk__list--fromMe': item.sender !== 'GreenDays' }"
-					v-for="(item, index) in messages"
-					:key="index"
-				>
+			<ol class="channel-talk__message" ref="message" v-chat-scroll="{ smooth: true, notSmoothOnInit: true }">
+				<li class="channel-talk__list" :class="{ 'channel-talk__list--fromMe': item.sender !== 'GreenDays' }" v-for="(item, index) in messages" :key="index">
 					<ol class="channel-talk__info">
-						<li
-							class="channel-talk__info-list"
-							v-if="item.sender === 'GreenDays'"
-						>
-							<img
-								src="@/assets/img/green-present.png"
-								alt="Greendays"
-								class="channel-talk__info-img"
-							/>
+						<li class="channel-talk__info-list" v-if="item.sender === 'GreenDays'">
+							<img src="@/assets/img/green-present.png" alt="Greendays" class="channel-talk__info-img" />
 						</li>
 						<li class="channel-talk__info-list">
 							<h2 class="channel-talk__sender">{{ item.sender }}</h2>
@@ -45,15 +29,7 @@
 				</li>
 			</ol>
 			<footer class="channel-talk__footer">
-				<input
-					type="text"
-					v-model.trim="newMessage"
-					ref="input"
-					class="channel-talk__input"
-					placeholder="메시지를 입력해주세요."
-					required
-					@keyup.enter="onSubmitMessage"
-				/>
+				<input type="text" v-model.trim="newMessage" ref="input" class="channel-talk__input" placeholder="메시지를 입력해주세요." required @keyup.enter="onSubmitMessage" />
 				<button class="channel-talk__btn" @click="onSubmitMessage">
 					<i class="far fa-paper-plane" />
 				</button>
@@ -88,8 +64,7 @@ export default {
 
 		async onSubmitMessage() {
 			try {
-				const messageRemovedSpace =
-					this.newMessage !== null ? this.newMessage.replace(/ /g, '') : '';
+				const messageRemovedSpace = this.newMessage !== null ? this.newMessage.replace(/ /g, '') : '';
 
 				if (messageRemovedSpace.length === 0 || !this.newMessage) {
 					this.newMessage = '';

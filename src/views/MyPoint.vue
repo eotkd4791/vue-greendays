@@ -1,7 +1,6 @@
 <template>
 	<div>
-		내 포인트 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-		Necessitatibus voluptatum ducimus similique.
+		내 포인트 Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
 	</div>
 </template>
 

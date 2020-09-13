@@ -3,12 +3,10 @@
 		<header class="inspection__header">검수센터</header>
 		<article class="inspection__article">
 			<p class="inspection__p">
-				그린데이즈 검수센터는 상품포장 및 검수 전 과정을 CCTV로 촬영하고
-				있습니다.
+				그린데이즈 검수센터는 상품포장 및 검수 전 과정을 CCTV로 촬영하고 있습니다.
 			</p>
 			<p class="inspection__p">
-				배송 시 오배송, 누락이 발생하지 않도록 노력하고 있으며, 부득이하게
-				문제가 생긴다면 수령 직후 바로 고객센터를 통해
+				배송 시 오배송, 누락이 발생하지 않도록 노력하고 있으며, 부득이하게 문제가 생긴다면 수령 직후 바로 고객센터를 통해
 			</p>
 			<p class="inspection__p">연락주셔야 확인 후 빠른 처리가 가능합니다. 참고 부탁드립니다. :)</p>
 		</article>

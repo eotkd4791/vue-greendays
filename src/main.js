@@ -9,8 +9,6 @@ import VueChatScroll from 'vue-chat-scroll';
 
 Vue.use(VueChatScroll);
 
-Vue.config.productionTip = false;
-
 new Vue({
 	el: '#app',
 	router,

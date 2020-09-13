@@ -38,15 +38,12 @@ export default {
 			this.$refs.listContainer.style.transition = `300ms`;
 			this.$refs.listContainer.style.transform = `translate3d(${this.transformWidth}px, 0, 0)`;
 
-			if (this.end === this.maxEnd)
-				this.photoList.push(this.dataStore[this.end - 1]);
+			if (this.end === this.maxEnd) this.photoList.push(this.dataStore[this.end - 1]);
 		},
 	},
 
 	created() {
-		this.componentName === 'inspectionCenter'
-			? (this.dataStore = inspectedItems)
-			: (this.dataStore = userReviews);
+		this.componentName === 'inspectionCenter' ? (this.dataStore = inspectedItems) : (this.dataStore = userReviews);
 		this.photoList = this.dataStore.slice(0, 5);
 	},
 };

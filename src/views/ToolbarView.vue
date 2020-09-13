@@ -7,27 +7,15 @@
 						<user-info-modal v-if="showUserInfo" />
 					</transition>
 					<toolbar-user-info />
-					<toolbar-menu
-						@on-toolbar-modal="openToolbarModal"
-						@on-search-brands="openSearchBrands"
-						@off-toolbar-modal="closeToolbarModal"
-					/>
+					<toolbar-menu @on-toolbar-modal="openToolbarModal" @on-search-brands="openSearchBrands" @off-toolbar-modal="closeToolbarModal" />
 				</div>
 			</header>
 		</li>
 		<li>
-			<toolbar-modal
-				:onToolbar="showToolbarModal"
-				:toolbarToOpen="toolbarToOpen"
-				:activeUserInfo="showUserInfo"
-				@mouse-esc="closeToolbarModal"
-			/>
+			<toolbar-modal :onToolbar="showToolbarModal" :toolbarToOpen="toolbarToOpen" :activeUserInfo="showUserInfo" @mouse-esc="closeToolbarModal" />
 		</li>
 		<li>
-			<brand-modal
-				v-if="showModal && SearchBrandsModal"
-				@close-brands="closeSearchBrands"
-			/>
+			<brand-modal v-if="showModal && SearchBrandsModal" @close-brands="closeSearchBrands" />
 		</li>
 	</ol>
 </template>
@@ -89,9 +77,7 @@ export default {
 		},
 
 		toggleUserInfo() {
-			!this.showUserInfo
-				? this.$refs.header.style.setProperty('top', '280px')
-				: this.$refs.header.style.setProperty('top', '0');
+			!this.showUserInfo ? this.$refs.header.style.setProperty('top', '280px') : this.$refs.header.style.setProperty('top', '0');
 
 			this.showUserInfo = !this.showUserInfo;
 		},

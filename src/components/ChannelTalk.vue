@@ -1,13 +1,7 @@
 <template>
 	<div class="channel-talk">
 		<transition name="zoom-in">
-			<img
-				src="@/assets/img/green-present.png"
-				alt="Greendays"
-				class="channel-talk__off"
-				v-if="!onChannelTalk"
-				@click="onChannelTalk = true"
-			/>
+			<img src="@/assets/img/green-present.png" alt="Greendays" class="channel-talk__off" v-if="!onChannelTalk" @click="onChannelTalk = true" />
 		</transition>
 		<channel-talk-body v-if="onChannelTalk" />
 	</div>
@@ -33,7 +27,7 @@ export default {
 			this.onChannelTalk = !this.onChannelTalk;
 		},
 	},
-	
+
 	mounted() {
 		Bus.$on('toggle-channel-talk', this.toggleChannelTalk);
 	},

@@ -59,6 +59,7 @@ export default {
 			console.error(error);
 		}
 	},
+
 	mounted() {
 		Bus.$on('show-user-info', this.toggleSpace);
 		Bus.$on('on-spinner', this.onSpinner);

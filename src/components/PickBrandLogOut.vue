@@ -12,12 +12,7 @@
 			</span>
 			<form ref="phoneNum">
 				<input type="text" placeholder="휴대폰 번호" class="phone-num-input" />
-				<button
-					@submit.prevent="
-						alert('관련 상품 입고 시 해당 번호로 알림이 전송됩니다.')
-					"
-					class="phone-num-btn"
-				>
+				<button @submit.prevent="alert('관련 상품 입고 시 해당 번호로 알림이 전송됩니다.')" class="phone-num-btn">
 					확인
 				</button>
 			</form>

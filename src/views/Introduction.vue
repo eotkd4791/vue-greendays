@@ -4,9 +4,7 @@
 			<img src="@/assets/img/green-present.png" alt="green-present" class="introduction__img" />
 		</li>
 		<li class="introduction__li">신입 웹 프론트엔드 개발자 포트폴리오</li>
-		<li class="introduction__li">
-			<a href="https://www.reddays.kr/" class="introduction__a">레드데이즈</a> 웹사이트를 클론코딩하였습니다.
-		</li>
+		<li class="introduction__li"><a href="https://www.reddays.kr/" class="introduction__a">레드데이즈</a> 웹사이트를 클론코딩하였습니다.</li>
 	</ul>
 </template>
 

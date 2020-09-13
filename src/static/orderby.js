@@ -2,32 +2,11 @@ const genders = ['All', 'Men', 'Women', 'Kids'];
 
 const genderForSignUp = ['남', '여', '해당없음'];
 
-const orderBy = [
-	'인기순',
-	'최신순',
-	'높은 가격순',
-	'낮은 가격순',
-	'높은 할인율순',
-	'낮은 할인율순',
-];
+const orderBy = ['인기순', '최신순', '높은 가격순', '낮은 가격순', '높은 할인율순', '낮은 할인율순'];
 
 const categories = {
-	Bags: [
-		'Shoulder Bags',
-		'Clutch Bags',
-		'Tote Bags',
-		'Backpacks',
-		'Belt Bags',
-		'Cross Bags',
-		'Travel Bags',
-	],
-	Wallets: [
-		'Wallets',
-		'Small Wallets',
-		'Strap Wallets',
-		'Card Cases',
-		'Pouches',
-	],
+	Bags: ['Shoulder Bags', 'Clutch Bags', 'Tote Bags', 'Backpacks', 'Belt Bags', 'Cross Bags', 'Travel Bags'],
+	Wallets: ['Wallets', 'Small Wallets', 'Strap Wallets', 'Card Cases', 'Pouches'],
 	Clothes: [
 		'Cardigans',
 		'Shirts',
@@ -49,65 +28,11 @@ const categories = {
 		'Vests',
 		'Jump Suit',
 	],
-	Shoes: [
-		'Sandals',
-		'Espadrilles',
-		'Sneackers',
-		'Slippers',
-		'Moccasins',
-		'Pumps',
-		'Boots',
-		'Flats',
-		'Wedges',
-		'Mules',
-		'Loafers',
-	],
-	Accessories: [
-		'Jewelry',
-		'Belts',
-		'Scarfs',
-		'Hats',
-		'Keyrings',
-		'Eyewear',
-		'Socks',
-		'Ties',
-		'Gloves',
-		'Keycases',
-		'Tights',
-		'Fancy',
-		'Bag Straps',
-	],
+	Shoes: ['Sandals', 'Espadrilles', 'Sneackers', 'Slippers', 'Moccasins', 'Pumps', 'Boots', 'Flats', 'Wedges', 'Mules', 'Loafers'],
+	Accessories: ['Jewelry', 'Belts', 'Scarfs', 'Hats', 'Keyrings', 'Eyewear', 'Socks', 'Ties', 'Gloves', 'Keycases', 'Tights', 'Fancy', 'Bag Straps'],
 };
 
-const alphabets = [
-	'0-9',
-	'A',
-	'B',
-	'C',
-	'D',
-	'E',
-	'F',
-	'G',
-	'H',
-	'I',
-	'J',
-	'K',
-	'L',
-	'M',
-	'N',
-	'O',
-	'P',
-	'Q',
-	'R',
-	'S',
-	'T',
-	'U',
-	'V',
-	'W',
-	'X',
-	'Y',
-	'Z',
-];
+const alphabets = ['0-9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 export default {
 	genders,

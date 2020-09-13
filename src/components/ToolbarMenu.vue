@@ -2,11 +2,7 @@
 	<div class="toolbar-menu">
 		<div class="toolbar-menu__menus">
 			<ul class="toolbar-menu__active">
-				<li
-					class="toolbar-menu__active__li"
-					@mouseover="mouseOverOnMenu"
-					@click="$emit('off-toolbar-modal')"
-				>
+				<li class="toolbar-menu__active__li" @mouseover="mouseOverOnMenu" @click="$emit('off-toolbar-modal')">
 					<router-link
 						:to="{
 							path: '/vue-greendays/products',
@@ -30,11 +26,7 @@
 				<li class="toolbar-menu__active__li" @mouseover="mouseOverOnMenu">
 					프리오더
 				</li>
-				<li
-					class="toolbar-menu__active__li"
-					@mouseover="mouseOverOnMenu"
-					@click="$emit('off-toolbar-modal')"
-				>
+				<li class="toolbar-menu__active__li" @mouseover="mouseOverOnMenu" @click="$emit('off-toolbar-modal')">
 					<router-link
 						:to="{
 							path: '/vue-greendays/products',
@@ -57,9 +49,7 @@
 			</ul>
 			<ul class="toolbar-menu__passive" @mouseover="mouseLeaveFromMenu">
 				<router-link tag="li" to="/vue-greendays/reviews">리뷰</router-link>
-				<router-link tag="li" to="/vue-greendays/customerservice"
-					>고객센터</router-link
-				>
+				<router-link tag="li" to="/vue-greendays/customerservice">고객센터</router-link>
 			</ul>
 		</div>
 		<ul class="toolbar-menu__right">
@@ -69,14 +59,7 @@
 			</li>
 			<li class="toolbar-menu__brand-search" @click="mouseOverOnMenu">
 				<form class="toolbar-menu__form">
-					<input
-						type="text"
-						placeholder="검색어를 입력해 주세요"
-						class="toolbar-menu__input"
-						v-model="keyword"
-						@input="searchKeyword"
-						@keypress.enter.prevent="onSubmitKeyword"
-					/>
+					<input type="text" placeholder="검색어를 입력해 주세요" class="toolbar-menu__input" v-model="keyword" @input="searchKeyword" @keypress.enter.prevent="onSubmitKeyword" />
 					<i class="fas fa-search" />
 				</form>
 			</li>
@@ -121,12 +104,7 @@ export default {
 
 		searchKeyword: debounce(function() {
 			const trimmedKeyword = this.keyword.replace(/ /g, '').toUpperCase();
-			Bus.$emit(
-				trimmedKeyword.length === 0
-					? 'off-recommend-keywords'
-					: 'on-recommend-keywords',
-				trimmedKeyword,
-			);
+			Bus.$emit(trimmedKeyword.length === 0 ? 'off-recommend-keywords' : 'on-recommend-keywords', trimmedKeyword);
 		}, 800),
 
 		onSubmitKeyword() {

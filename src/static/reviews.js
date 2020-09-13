@@ -6,28 +6,23 @@ const inspectedItems = [
 	},
 	{
 		id: 1,
-		path:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSIFdQ0dNEOrGQUu25TNkyiE4Ry8IVwUHyE57o12EtYlMWZXqbz&usqp=CAU',
+		path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSIFdQ0dNEOrGQUu25TNkyiE4Ry8IVwUHyE57o12EtYlMWZXqbz&usqp=CAU',
 	},
 	{
 		id: 2,
-		path:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTe1f1uGTtWwTfj77gJxRiK1TT1kz-CgH9Fia7X7-vUlYAZ2xXn&usqp=CAU',
+		path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTe1f1uGTtWwTfj77gJxRiK1TT1kz-CgH9Fia7X7-vUlYAZ2xXn&usqp=CAU',
 	},
 	{
 		id: 3,
-		path:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT9lTyWaveOUhXI4B1mjnNmnVMYsocjYTK08AcMNOy3zpXh6ccG&usqp=CAU',
+		path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT9lTyWaveOUhXI4B1mjnNmnVMYsocjYTK08AcMNOy3zpXh6ccG&usqp=CAU',
 	},
 	{
 		id: 4,
-		path:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT4eiptIRNHZSnXYlToD13jVjB4lVXKyQqhKRv2DMnBOaTeAAsa&usqp=CAU',
+		path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT4eiptIRNHZSnXYlToD13jVjB4lVXKyQqhKRv2DMnBOaTeAAsa&usqp=CAU',
 	},
 	{
 		id: 5,
-		path:
-			'https://cdn.shopify.com/s/files/1/0757/9123/products/linjer-doctors-bag-burgundy-2-front-angle_1440x.jpg?v=1580110678',
+		path: 'https://cdn.shopify.com/s/files/1/0757/9123/products/linjer-doctors-bag-burgundy-2-front-angle_1440x.jpg?v=1580110678',
 	},
 	{
 		id: 6,
@@ -41,23 +36,19 @@ const inspectedItems = [
 	},
 	{
 		id: 8,
-		path:
-			'https://d346btfl32uj11.cloudfront.net/media/catalog/product/cache/5/small_image/9df78eab33525d08d6e5fb8d27136e95/V/5/V5E40__028000W__OC_1_1_1.jpg',
+		path: 'https://d346btfl32uj11.cloudfront.net/media/catalog/product/cache/5/small_image/9df78eab33525d08d6e5fb8d27136e95/V/5/V5E40__028000W__OC_1_1_1.jpg',
 	},
 	{
 		id: 9,
-		path:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTTHgMVQFLB3ZtLjbOjBoOFyBu7Gg8LNzUGfQ&usqp=CAU',
+		path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTTHgMVQFLB3ZtLjbOjBoOFyBu7Gg8LNzUGfQ&usqp=CAU',
 	},
 	{
 		id: 10,
-		path:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ5Y4qBQ2vKbabtGjzvNTCED6MRnSegUu3d9g&usqp=CAU',
+		path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ5Y4qBQ2vKbabtGjzvNTCED6MRnSegUu3d9g&usqp=CAU',
 	},
 	{
 		id: 11,
-		path:
-			'https://cdn.shopify.com/s/files/1/0071/8097/6173/products/ONA_Monterey_Backpack_Olive_Turn_large_fe432e50-ca45-40b5-910e-0fe8442c6b10_grande.progressive.jpg?v=1582293726',
+		path: 'https://cdn.shopify.com/s/files/1/0071/8097/6173/products/ONA_Monterey_Backpack_Olive_Turn_large_fe432e50-ca45-40b5-910e-0fe8442c6b10_grande.progressive.jpg?v=1582293726',
 	},
 ];
 

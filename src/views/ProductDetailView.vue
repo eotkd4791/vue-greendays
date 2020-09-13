@@ -1,11 +1,7 @@
 <template>
 	<transition name="fade">
 		<div class="product-detail">
-			<pick-brand
-				v-if="showModal"
-				@close-picked-brands="closeModal"
-				:propsBrand="pickedBrand"
-			/>
+			<pick-brand v-if="showModal" @close-picked-brands="closeModal" :propsBrand="pickedBrand" />
 
 			<section class="product-detail__info">
 				<product-detail-photo />

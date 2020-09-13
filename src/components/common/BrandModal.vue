@@ -12,7 +12,8 @@
 
 					<aside class="brand-modal__aside">
 						<ul class="brand-modal__ul" ref="brands">
-							<li class="brand-modal__menu--active" @click="changeTab">인기브랜드</li>|
+							<li class="brand-modal__menu--active" @click="changeTab">인기브랜드</li>
+							|
 							<li @click="changeTab">전체브랜드</li>
 						</ul>
 						<pick-brand v-if="showModal" :propsBrand="pickedBrand" @close-picked-brands="closePickBrand" />
@@ -48,8 +49,7 @@ export default {
 
 	methods: {
 		onClickOutside(e) {
-			if (e.target.className === 'brand-modal__background')
-				this.$emit('close-brands');
+			if (e.target.className === 'brand-modal__background') this.$emit('close-brands');
 		},
 
 		changeTab() {

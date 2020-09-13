@@ -13,8 +13,7 @@ function makeReviewData() {
 			brand,
 			writer: Faker.name.findName(),
 			nameOfProduct: name,
-			postedTime: `${recentDate.getFullYear()}-${recentDate.getMonth() +
-				1}-${recentDate.getDate()}`,
+			postedTime: `${recentDate.getFullYear()}-${recentDate.getMonth() + 1}-${recentDate.getDate()}`,
 			content: Faker.lorem.paragraphs(10),
 			path: photoUrl,
 			satisfaction: Math.floor(Math.random() * 5) + 1,

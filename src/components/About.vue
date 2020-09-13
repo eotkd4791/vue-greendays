@@ -2,40 +2,15 @@
 	<footer class="about">
 		<section class="about__section">
 			<ul class="about__ul about__ul--title">
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/customerservice/notice"
-					>공지사항</router-link
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/customerservice/notice">공지사항</router-link>
 				<span class="about__divider">|</span>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/customerservice/faq"
-					>자주묻는질문</router-link
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/customerservice/faq">자주묻는질문</router-link>
 				<span class="about__divider">|</span>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/customerservice/terms"
-					>이용약관</router-link
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/customerservice/terms">이용약관</router-link>
 				<span class="about__divider">|</span>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/customerservice/private_info_policy"
-					>개인정보취급방침</router-link
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/customerservice/private_info_policy">개인정보취급방침</router-link>
 				<span class="about__divider">|</span>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/introduction"
-					>사업자정보확인</router-link
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/introduction">사업자정보확인</router-link>
 			</ul>
 			<ul class="about__ul about__ul--mid">
 				<li class="about__li">(주)그린데이즈</li>
@@ -62,42 +37,22 @@
 		<aside class="about__aside">
 			<ul class="about__ul about__ul--left">
 				<li class="about__li about__li--title">CUSTOMER SERVICE</li>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/customerservice"
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/customerservice">
 					무엇을 도와드릴까요?
 				</router-link>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/customerservice/logi_guide"
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/customerservice/logi_guide">
 					주문 & 배송
 				</router-link>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/customerservice/faq"
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/customerservice/faq">
 					결제 & 가격
 				</router-link>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/customerservice/faq"
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/customerservice/faq">
 					반품 & 환불
 				</router-link>
 			</ul>
 			<ul class="about__ul">
 				<li class="about__li about__li--title">ABOUT GREENDAYS</li>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/vue-greendays/introduction"
-				>
+				<router-link tag="li" class="about__router-li" to="/vue-greendays/introduction">
 					그린데이즈 소개
 				</router-link>
 			</ul>

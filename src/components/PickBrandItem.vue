@@ -1,11 +1,6 @@
 <template>
 	<li class="brand-item">
-		<input
-			type="checkbox"
-			class="brand-item__checkbox"
-			:value="categoryPair[0]"
-			v-model="$parent.checkedBrandsToDelete"
-		/>
+		<input type="checkbox" class="brand-item__checkbox" :value="categoryPair[0]" v-model="$parent.checkedBrandsToDelete" />
 		<ul class="brand-item__categories">
 			<router-link
 				class="brand-item__list brand-item__title"
@@ -47,11 +42,7 @@
 				}"
 				class="brand-item__list"
 			>
-				<i
-					class="fas fa-heart"
-					:class="{ 'fa-heart--picked': Object.values(categories)[index] }"
-					@click="updatePickedBrands(categoryPair[0], category)"
-				/>
+				<i class="fas fa-heart" :class="{ 'fa-heart--picked': Object.values(categories)[index] }" @click="updatePickedBrands(categoryPair[0], category)" />
 				{{ category }}
 			</router-link>
 		</ul>
