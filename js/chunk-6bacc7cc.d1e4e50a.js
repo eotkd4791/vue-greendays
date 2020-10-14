@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-6bacc7cc"],{"000a":function(e,n,t){"use strict";t.r(n);var c=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",{staticClass:"log-out"})},a=[],u=(t("ac1f"),t("5319"),{mounted:function(){this.$router.replace("/vue-greendays")}}),s=u,o=(t("5880"),t("2877")),r=Object(o["a"])(s,c,a,!1,null,"2b3d35f9",null);n["default"]=r.exports},5880:function(e,n,t){"use strict";var c=t("a8e5"),a=t.n(c);a.a},a8e5:function(e,n,t){}}]);
+//# sourceMappingURL=chunk-6bacc7cc.d1e4e50a.js.map
