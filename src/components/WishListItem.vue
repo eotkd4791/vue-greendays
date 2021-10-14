@@ -88,7 +88,7 @@ export default {
 	width: 230px;
 	height: 400px;
 	margin: 20px 20px 20px 0;
-	bordor: 1px solid #ebebeb;
+	border: 1px solid #ebebeb;
 	border-radius: 10px;
 	box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
