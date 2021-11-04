@@ -9,7 +9,9 @@
 						'brand__search-btn--active': currentPickedAlphabet === 0,
 					}"
 					@click="onClickAlphabetBtn(0)"
-				>전체</div>
+				>
+					전체
+				</div>
 				<div class="brand__search-mid">
 					<div
 						v-for="(letter, index) in letters"
@@ -17,12 +19,12 @@
 						class="brand__search-btn"
 						:class="{
 							'brand__search-btn--active': currentPickedAlphabet === index + 1,
-							'brand__search-btn--passive': !initialLetterOfBrands.includes(
-								letter,
-							),
+							'brand__search-btn--passive': !initialLetterOfBrands.includes(letter),
 						}"
 						@click="onClickAlphabetBtn(index + 1)"
-					>{{ letter }}</div>
+					>
+						{{ letter }}
+					</div>
 					<div class="brand__search-form">
 						<form @submit.prevent>
 							<input type="text" placeholder="브랜드 검색하기" v-model="searchBrands" @input="onTypeKeyword" />
@@ -30,7 +32,7 @@
 						</form>
 					</div>
 				</div>
-				<button class="brand__search-close" @click="$emit('closeBrandSearchModal')">창닫기</button>
+				<button class="brand__search-close" @click="$emit('close-brand-search-modal')">창닫기</button>
 			</section>
 			<section class="brand__search-result">
 				<div class="brand__search-wrapper">
@@ -44,12 +46,7 @@
 						/>
 						{{ brand }}
 					</span>
-					<pick-brand
-						v-if="showModal"
-						:propsBrand="brandInModal"
-						@closePickedBrands="closeModal"
-						@closeBrandsPickingModal="closeModal"
-					></pick-brand>
+					<pick-brand v-if="showModal" :propsBrand="brandInModal" @close-picked-brands="closeModal" @close-brands-picking-modal="closeModal"></pick-brand>
 				</div>
 			</section>
 		</div>
@@ -61,7 +58,7 @@ import PickBrand from '@/components/common/PickBrandModal.vue';
 import orderBy from '@/static/orderby.js';
 import { mapState, mapMutations } from 'vuex';
 import { debounce } from 'lodash';
-import Bus from '@/utils/bus';
+import Bus from '@/utils/bus.js';
 
 export default {
 	components: {
@@ -106,29 +103,25 @@ export default {
 		},
 
 		isPickedBrand(brand) {
-			return this.getUserInfo.pickedBrands[brand];
+			return this.getUserInfo ? Boolean(this.getUserInfo.pickedBrands[brand]) : false;
 		},
 
 		getTotalBrands() {
-			return this.getBrandList.length
-				? this.getBrandList
-				: [...new Set(this.getProducts.map(v => v.brand))];
+			return this.getBrandList.length ? this.getBrandList : [...new Set(this.getProducts.map(v => v.brand))];
 		},
 
 		onClickAlphabetBtn(index) {
 			const pickedLetter = this.letters[index - 1];
 			if (this.initialLetterOfBrands.includes(pickedLetter)) {
 				this.currentPickedAlphabet = index;
-				this.brandsList = this.getTotalBrands().filter(
-					v => v[0] === this.letters[this.currentPickedAlphabet - 1],
-				);
+				this.brandsList = this.getTotalBrands().filter(v => v[0] === this.letters[this.currentPickedAlphabet - 1]);
 			} else if (index === 0) {
 				this.currentPickedAlphabet = index;
 				this.brandsList = this.getTotalBrands();
 			}
 		},
 
-		onTypeKeyword: debounce(function () {
+		onTypeKeyword: debounce(function() {
 			const regExp = new RegExp(this.searchBrands, 'ig');
 			this.brandsList = this.getTotalBrands().filter(v => regExp.test(v));
 		}, 300),
@@ -137,13 +130,11 @@ export default {
 	created() {
 		this.brandsList = this.getTotalBrands();
 
-		this.initialLetterOfBrands = [
-			...new Set(this.brandsList.map(v => v[0].toUpperCase()).sort()),
-		];
+		this.initialLetterOfBrands = [...new Set(this.brandsList.map(v => v[0].toUpperCase()).sort())];
 	},
 
 	mounted() {
-		Bus.$on('off:picked-brands', this.closeModal);
+		Bus.$on('off-picked-brands', this.closeModal);
 		window.addEventListener('scroll', this.setScrollLock);
 	},
 

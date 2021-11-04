@@ -4,9 +4,7 @@ import dbProduct from '@/db/product.js';
 
 const preorderList = [];
 const storedProducts = getItem('product');
-const products = (storedProducts ? storedProducts : dbProduct).sort((a, b) =>
-	a.productAbleToBuy ? -1 : 1,
-);
+const products = (storedProducts ? storedProducts : dbProduct).sort((a, b) => (a.productAbleToBuy ? -1 : 1));
 
 const preorderImgPath = [
 	'https://menu.mt.co.kr/moneyweek/thumb/2019/09/27/06/2019092710298098227_1.jpg',
@@ -26,8 +24,7 @@ function createPreorders() {
 			expiredMin: 0,
 			expiredSec: 0,
 			activated: true,
-			promoName:
-				getRandomNumber(2) % 2 ? '2020 S/S COLLECTION' : '2020 F/W COLLECTION',
+			promoName: getRandomNumber(2) % 2 ? '2020 S/S COLLECTION' : '2020 F/W COLLECTION',
 			imgUrl: preorderImgPath[i],
 			products: products.slice(i * 80, (i + 1) * 80),
 		});

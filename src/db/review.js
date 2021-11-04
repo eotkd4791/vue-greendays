@@ -1,24 +1,30 @@
 import dbProduct from './product.js';
 import { Faker, getRandomNumber } from '@/utils/dummy.js';
+import { setItem, getItem } from '@/utils/storage.js';
 
 let reviewList = [];
 
 function makeReviewData() {
-	for (let i = 0; i < 100; i++) {
-		const reviewedProduct = dbProduct[getRandomNumber(400)];
+	for (let i = 0; i < 400; i++) {
+		const { id, name, photoUrl, brand } = dbProduct[getRandomNumber(400)];
+		const recentDate = Faker.date.recent();
 		reviewList.push({
+			id,
+			brand,
 			writer: Faker.name.findName(),
-			nameOfProduct: reviewedProduct.name,
-			postedTime: Faker.date.recent(),
-			content: Faker.lorem.sentences(),
-			imgPath: reviewedProduct.photoUrl,
+			nameOfProduct: name,
+			postedTime: `${recentDate.getFullYear()}-${recentDate.getMonth() + 1}-${recentDate.getDate()}`,
+			content: Faker.lorem.paragraphs(10),
+			path: photoUrl,
+			satisfaction: Math.floor(Math.random() * 5) + 1,
 		});
 	}
-	localStorage.setItem('reviews', JSON.stringify(reviewList));
+	reviewList.sort((a, b) => (a.postedTime < b.postedTime ? -1 : 1));
+	setItem('reviews', reviewList);
 }
 
-const storedReview = JSON.parse(localStorage.getItem('reviews'));
+const storedReview = getItem('reviews');
 
-storedReview ? makeReviewData() : (reviewList = storedReview);
+storedReview ? (reviewList = storedReview) : makeReviewData();
 
 export default reviewList;

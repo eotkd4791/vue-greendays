@@ -4,14 +4,16 @@
 			<header class="reserve-container__category__title">CATEGORIES</header>
 			<div class="reserve-container__category__link" ref="tabs">
 				<router-link
+					v-for="(category, index) in categories"
+					:key="index"
+					class="reserve-container__link"
 					tag="span"
 					:to="{
 						path: '/vue-greendays/products',
 						query: {
-							category: '',
 							keyword: '',
 							gender: '',
-							category: '',
+							category: index === 0 ? '' : category.name,
 							brand: '',
 							product_id: '',
 							deal_id: 'reserve-purchase',
@@ -20,126 +22,15 @@
 							order_std: 'popularity',
 						},
 					}"
-					class="active"
-					@mouseover="activatingTab"
-					>All Categories ({{ products.length }})</router-link
-				>
-
-				<router-link
-					tag="span"
-					:to="{
-						path: '/vue-greendays/products',
-						query: {
-							category: 'Bags',
-							keyword: '',
-							gender: '',
-							category: '',
-							brand: '',
-							product_id: '',
-							deal_id: 'reserve-purchase',
-							page: 1,
-							orderby: 'desc',
-							order_std: 'popularity',
-						},
-					}"
-					@mouseover="activatingTab"
-					>Bags ({{ getItem('Bags') }})</router-link
-				>
-
-				<router-link
-					tag="span"
-					:to="{
-						path: '/vue-greendays/products',
-						query: {
-							category: 'Wallets',
-							keyword: '',
-							gender: '',
-							category: '',
-							brand: '',
-							product_id: '',
-							deal_id: 'reserve-purchase',
-							page: 1,
-							orderby: 'desc',
-							order_std: 'popularity',
-						},
-					}"
-					@mouseover="activatingTab"
-					>Wallets ({{ getItem('Wallets') }})</router-link
-				>
-
-				<router-link
-					tag="span"
-					:to="{
-						path: '/vue-greendays/products',
-						query: {
-							category: 'Clothes',
-							keyword: '',
-							gender: '',
-							category: '',
-							brand: '',
-							product_id: '',
-							deal_id: 'reserve-purchase',
-							page: 1,
-							orderby: 'desc',
-							order_std: 'popularity',
-						},
-					}"
-					@mouseover="activatingTab"
-					>Clothes ({{ getItem('Clothes') }})</router-link
-				>
-
-				<router-link
-					tag="span"
-					:to="{
-						path: '/vue-greendays/products',
-						query: {
-							category: 'Shoes',
-							keyword: '',
-							gender: '',
-							category: '',
-							brand: '',
-							product_id: '',
-							deal_id: 'reserve-purchase',
-							page: 1,
-							orderby: 'desc',
-							order_std: 'popularity',
-						},
-					}"
-					@mouseover="activatingTab"
-					>Shoes ({{ getItem('Shoes') }})</router-link
-				>
-
-				<router-link
-					tag="span"
-					:to="{
-						path: '/vue-greendays/products',
-						query: {
-							category: 'Accessories',
-							keyword: '',
-							gender: '',
-							category: '',
-							brand: '',
-							product_id: '',
-							deal_id: 'reserve-purchase',
-							page: 1,
-							orderby: 'desc',
-							order_std: 'popularity',
-						},
-					}"
-					@mouseover="activatingTab"
-					>Accessories ({{ getItem('Accessories') }})</router-link
+					>{{ `${category.name} (${category.productAmount})` }}</router-link
 				>
 			</div>
 		</section>
 		<section class="reserve-container__promotion">
 			<div class="reserve-container__promotion__img" />
 			<div class="reserve-container__promotion__text">
-				<h3 class="reserve-container__promotion__title">
-					스마트한 구매의 시작 PICK
-				</h3>
-				<p class="reserve-container__promotion__subtitle">
-					그린데이즈가 제안하는 현명하게 하이패션을 즐기는 방법!
-				</p>
+				<h3 class="reserve-container__promotion__title">스마트한 구매의 시작 PICK</h3>
+				<p class="reserve-container__promotion__subtitle">그린데이즈가 제안하는 현명하게 하이패션을 즐기는 방법!</p>
 			</div>
 		</section>
 	</div>
@@ -147,11 +38,15 @@
 
 <script>
 import { mapState } from 'vuex';
+import busToolbarClose from '@/mixins/busToolbarClose.js';
 
 export default {
+	mixins: [busToolbarClose],
+
 	data() {
 		return {
 			activatedTabIndex: 0,
+			categories: ['Bags', 'Wallets', 'Clothes', 'Shoes', 'Accessories'],
 		};
 	},
 	computed: {
@@ -161,21 +56,21 @@ export default {
 	},
 
 	methods: {
-		activatingTab(e) {
-			const tabToActivate = e.target;
-			if (!this.$refs.tabs) return;
-			this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove(
-				'active',
-			);
-			tabToActivate.classList.add('active');
-
-			const tabLists = tabToActivate.parentNode.children;
-			this.activatedTabIndex = [...tabLists].indexOf(tabToActivate);
-		},
-
 		getItem(which) {
 			return this.products.filter(v => v.category === which).length;
 		},
+	},
+
+	created() {
+		this.categories = this.categories.map(v => ({
+			name: v,
+			productAmount: this.getItem(v),
+		}));
+
+		this.categories.unshift({
+			name: 'All Categories',
+			productAmount: this.categories.reduce((acc, cur) => acc + cur.productAmount, 0),
+		});
 	},
 };
 </script>
@@ -203,7 +98,7 @@ export default {
 	margin-top: 20px;
 }
 
-.reserve-container__category__link > span {
+.reserve-container__link {
 	width: 200px;
 	height: 24px;
 	display: flex;
@@ -214,7 +109,8 @@ export default {
 	cursor: pointer;
 }
 
-.active {
+.reserve-container__link.active,
+.reserve-container__link:hover {
 	font-size: 14px;
 	font-weight: 600;
 	color: #fff;

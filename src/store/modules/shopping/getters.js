@@ -14,6 +14,9 @@ const getters = {
 	getGuestKeywords(state) {
 		return state.guestKeywords;
 	},
+	getProductDetail(state) {
+		return state.productDetail;
+	},
 };
 
 export default getters;

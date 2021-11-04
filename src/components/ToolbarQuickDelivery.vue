@@ -1,13 +1,7 @@
 <template>
 	<div class="quick__delivery-container">
 		<section class="quick__delivery-wrapper__products">
-			<display-items
-				v-for="product in products"
-				:key="product.id"
-				:sendToday="product.productSendToday"
-				:ableToBuy="product.productAbleToBuy"
-				:callFrom="callFrom"
-			>
+			<display-items v-for="product in products" :key="product.id" :sendToday="product.productSendToday" :ableToBuy="product.productAbleToBuy" :callFrom="callFrom" :productId="product.id">
 				<template #productInfo-photo>
 					<img :src="product.photoUrl" class="item-container__photo" :class="callFrom" />
 				</template>
@@ -15,7 +9,7 @@
 				<template #productInfo-name>{{ product.name }}</template>
 				<template #productInfo-beforePrice>{{ (product.priceBefore * 1000).toLocaleString() }}</template>
 				<template #productInfo-discountRate>{{ Math.ceil(product.discountRate) * 100 }}% 할인</template>
-				<template #productInfo-afterPrice>{{ (product.priceAfter * 1000).toLocaleString()}}</template>
+				<template #productInfo-afterPrice>{{ (product.priceAfter * 1000).toLocaleString() }}</template>
 			</display-items>
 		</section>
 		<section class="quick__delivery-wrapper__info">
@@ -24,8 +18,7 @@
 				<h3>1년 365일 신상품 상시 할인 SALE</h3>
 				<p>바로구매와 당일배송이 가능한 그린데이즈 빠른배송 상품!</p>
 				<p>
-					그린데이즈 빠른배송은 인기 있는 상품을 저렴하고, 신속하게 만나볼 수
-					있습니다.
+					그린데이즈 빠른배송은 인기 있는 상품을 저렴하고, 신속하게 만나볼 수 있습니다.
 				</p>
 			</div>
 		</section>
@@ -35,11 +28,15 @@
 <script>
 import DisplayItems from '@/components/common/DisplayItems.vue';
 import { mapState } from 'vuex';
+import Bus from '@/utils/bus.js';
+import busToolbarClose from '@/mixins/busToolbarClose.js';
 
 export default {
 	components: {
 		DisplayItems,
 	},
+
+	mixins: [busToolbarClose],
 
 	data() {
 		return {
@@ -56,6 +53,28 @@ export default {
 
 		getRepresentImgs() {
 			return this.getProducts.filter(v => v.productSendToday).slice(0, 3);
+		},
+	},
+
+	methods: {
+		moveToAbout() {
+			this.$router
+				.push({
+					path: '/vue-greendays/products',
+					query: {
+						keyword: '',
+						gender: '',
+						category: '',
+						brand: '',
+						product_id: '',
+						deal_id: 'quick-delivery',
+						page: 1,
+						orderby: 'desc',
+						order_std: 'popularity',
+					},
+				})
+				.catch();
+			Bus.$emit('off-toolbar-modal');
 		},
 	},
 

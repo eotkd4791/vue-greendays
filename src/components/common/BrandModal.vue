@@ -5,29 +5,20 @@
 				<div class="brand-modal">
 					<section class="brand-modal__section">
 						<header class="brand-modal__header">브랜드 검색</header>
-						<button class="brand-modal__btn" @click="$emit('closeBrands')">
+						<button class="brand-modal__btn" @click="$emit('close-brands')">
 							<i class="fas fa-times" />
 						</button>
 					</section>
 
 					<aside class="brand-modal__aside">
 						<ul class="brand-modal__ul" ref="brands">
-							<li class="brand-modal__menu--active" @click="changeTab">
-								인기브랜드
-							</li>
+							<li class="brand-modal__menu--active" @click="changeTab">인기브랜드</li>
 							|
 							<li @click="changeTab">전체브랜드</li>
 						</ul>
-						<pick-brand
-							v-if="showModal"
-							:propsBrand="pickedBrand"
-							@closePickedBrands="closePickBrand"
-						/>
-						<popular-brands
-							v-if="isShownPopularBrand"
-							@openAlarmModal="openPickBrand"
-						/>
-						<alphabet-brands v-else @openAlarmModal="openPickBrand" />
+						<pick-brand v-if="showModal" :propsBrand="pickedBrand" @close-picked-brands="closePickBrand" />
+						<popular-brands v-if="isShownPopularBrand" @open-alarm-modal="openPickBrand" />
+						<alphabet-brands v-else @open-alarm-modal="openPickBrand" />
 					</aside>
 				</div>
 			</div>
@@ -58,9 +49,7 @@ export default {
 
 	methods: {
 		onClickOutside(e) {
-			if (e.target.className === 'brand-modal__background') {
-				this.$emit('closeBrands');
-			}
+			if (e.target.className === 'brand-modal__background') this.$emit('close-brands');
 		},
 
 		changeTab() {
@@ -79,18 +68,18 @@ export default {
 			this.showModal = false;
 		},
 
-		setScrollLock(e) {
+		setScrollLock() {
 			scrollTo(0, 0);
 		},
 	},
 
 	mounted() {
-		Bus.$on('off:picked-brands', this.closePickBrand);
+		Bus.$on('off-picked-brands', this.closePickBrand);
 		window.addEventListener('scroll', this.setScrollLock);
 	},
 
 	beforeDestroy() {
-		Bus.$off('off:picked-brands', this.closePickBrand);
+		Bus.$off('off-picked-brands', this.closePickBrand);
 		window.removeEventListener('scroll', this.setScrollLock);
 	},
 };

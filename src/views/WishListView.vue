@@ -2,53 +2,28 @@
 	<div class="wish">
 		<section class="wish__header">
 			<ul class="wish__menu">
-				<li
-					class="wish__list"
-					:class="{ 'wish__list--active': onProductTab }"
-					@click="onProductTab = !onProductTab"
-				>
+				<li class="wish__list" :class="{ 'wish__list--active': onProductTab }" @click="onProductTab = !onProductTab">
 					PICK! 상품
 				</li>
-				<li
-					class="wish__list"
-					:class="{ 'wish__list--active': !onProductTab }"
-					@click="onProductTab = !onProductTab"
-				>
+				<li class="wish__list" :class="{ 'wish__list--active': !onProductTab }" @click="onProductTab = !onProductTab">
 					PICK! 브랜드
 				</li>
 			</ul>
-			<button
-				class="wish__delete-btn"
-				v-if="
-					onProductTab
-						? userInfo.wishList.length > 0
-						: Object.keys(userInfo.pickedBrands).length > 0
-				"
-				@click="deleteSelectedItems"
-			>
+			<button class="wish__delete-btn" v-if="onProductTab ? userInfo.wishList.length > 0 : Object.keys(userInfo.pickedBrands).length > 0" @click="deleteSelectedItems">
 				선택삭제
 			</button>
 		</section>
 
 		<aside class="wish-content" v-if="onProductTab">
 			<ol class="wish__content__list" v-if="userInfo.wishList.length > 0">
-				<wish-list-item
-					v-for="(product, index) in userInfo.wishList"
-					:key="index"
-					:productInfo="product"
-				>
-				</wish-list-item>
+				<wish-list-item v-for="(product, index) in userInfo.wishList" :key="index" :productInfo="product"> </wish-list-item>
 			</ol>
 			<empty-wish-list v-else />
 		</aside>
 
 		<aside class="wish-content" v-else>
 			<ol class="wish__content__list">
-				<pick-brand-item
-					v-for="(array, index) in Object.entries(userInfo.pickedBrands)"
-					:key="index"
-					:categoryPair="array"
-				/>
+				<pick-brand-item v-for="(array, index) in Object.entries(userInfo.pickedBrands)" :key="index" :categoryPair="array" />
 			</ol>
 		</aside>
 	</div>
@@ -66,6 +41,7 @@ export default {
 		PickBrandItem,
 		EmptyWishList,
 	},
+
 	data() {
 		return {
 			onProductTab: true,
@@ -73,21 +49,20 @@ export default {
 			checkedProductsToDelete: [],
 		};
 	},
+
 	computed: {
 		...mapState('auth', {
 			userInfo: state => state.userInfo,
 		}),
 	},
+
 	methods: {
 		...mapActions('auth', ['DELETE_WISHLIST', 'DELETE_PICKED_BRANDS']),
 
 		deleteSelectedItems() {
-			this.onProductTab
-				? this.DELETE_WISHLIST(this.checkedProductsToDelete)
-				: this.DELETE_PICKED_BRANDS(this.checkedBrandsToDelete);
+			this.onProductTab ? this.DELETE_WISHLIST(this.checkedProductsToDelete) : this.DELETE_PICKED_BRANDS(this.checkedBrandsToDelete);
 		},
 	},
-	created() {},
 
 	watch: {
 		onProductTab() {

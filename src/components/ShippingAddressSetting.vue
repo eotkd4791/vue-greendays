@@ -7,7 +7,9 @@
 					<li class="shipping-address__ul__li">{{ item.recipientPhoneNum }}</li>
 					<li class="shipping-address__ul__li">{{ item.recipientAddress }}</li>
 				</ul>
-				<button class="shipping-address__btn" @click="deleteShippingAddress(index)">배송지 삭제</button>
+				<button class="shipping-address__btn" @click="deleteShippingAddress(index)">
+					배송지 삭제
+				</button>
 			</li>
 		</ol>
 		<section class="shipping-address__add">
@@ -16,23 +18,11 @@
 				<ul class="shipping-address__add__ul">
 					<li class="shipping-address__add__li">
 						<h3 class="shipping-address__add__subheader">받는분 이름</h3>
-						<input
-							type="text"
-							class="shipping-address__add__input"
-							required
-							v-model="newShippingAddress.recipientName"
-						/>
+						<input type="text" class="shipping-address__add__input" required v-model="newShippingAddress.recipientName" />
 					</li>
 					<li class="shipping-address__add__li">
 						<h3 class="shipping-address__add__subheader">연락처</h3>
-						<input
-							type="text"
-							class="shipping-address__add__input"
-							placeholder=" - 제외하고 숫자만 입력"
-							v-model="newShippingAddress.recipientPhoneNum"
-							@input="isOnlyNumber"
-							required
-						/>
+						<input type="text" class="shipping-address__add__input" placeholder=" - 제외하고 숫자만 입력" v-model="newShippingAddress.recipientPhoneNum" @input="isOnlyNumber" required />
 					</li>
 					<li class="shipping-address__add__li">
 						<h3 class="shipping-address__add__subheader">주소검색</h3>
@@ -45,13 +35,7 @@
 							readonly
 							required
 						/>
-						<input
-							type="text"
-							class="shipping-address__add__input"
-							placeholder=" - 상세주소 입력"
-							required
-							v-model="newShippingAddress.recipientDetailAddress"
-						/>
+						<input type="text" class="shipping-address__add__input" placeholder=" - 상세주소 입력" required v-model="newShippingAddress.recipientDetailAddress" />
 					</li>
 					<li class="shipping-address__add__li">
 						<h3 class="shipping-address__add__subheader">
@@ -60,25 +44,16 @@
 						</h3>
 						<select class="shipping-address__add__select" v-model="selectedShippingMessage">
 							<option value class="shipping-address__add__option" disabled selected>배송메시지를 선택해주세요.</option>
-							<option
-								class="shipping-address__add__option"
-								:value="message"
-								v-for="message in shippingMessages"
-								:key="message"
-							>{{ message }}</option>
+							<option class="shipping-address__add__option" :value="message" v-for="message in shippingMessages" :key="message">{{ message }}</option>
 						</select>
-						<input
-							type="text"
-							class="shipping-address__add__input"
-							placeholder="배송메시지 입력"
-							v-if="isTypingInPerson"
-							v-model="typeInPerson"
-						/>
+						<input type="text" class="shipping-address__add__input" placeholder="배송메시지 입력" v-if="isTypingInPerson" v-model="typeInPerson" />
 					</li>
 				</ul>
 			</form>
 			<div class="shipping-address__add__div">
-				<button @click="toggleAddShippingAddress" class="shipping-address__add__btn">배송지 추가 +</button>
+				<button @click="toggleAddShippingAddress" class="shipping-address__add__btn">
+					배송지 추가 +
+				</button>
 			</div>
 		</section>
 	</div>
@@ -110,29 +85,24 @@ export default {
 			isShownNewAddress: false,
 		};
 	},
+
 	computed: {
 		...mapGetters('auth', ['getShippingAddressList']),
 		isTypingInPerson() {
 			return this.shippingMessages.indexOf(this.selectedShippingMessage) === 4;
 		},
 	},
+
 	methods: {
-		...mapActions('auth', [
-			'ADD_NEW_SHIPPING_ADDRESS',
-			'DELETE_SHIPPING_ADDRESS',
-		]),
+		...mapActions('auth', ['ADD_NEW_SHIPPING_ADDRESS', 'DELETE_SHIPPING_ADDRESS']),
 
 		validateForm() {
 			const isUndefined = Object.values(this.newShippingAddress).find(v => v);
 			return isUndefined && this.selectedShippingMessage.length > 0;
 		},
 
-		isOnlyNumber: debounce(function () {
-			this.$set(
-				this.newShippingAddress,
-				'recipientPhoneNum',
-				this.newShippingAddress.recipientPhoneNum.replace(/[^0-9]/gi, ''),
-			);
+		isOnlyNumber: debounce(function() {
+			this.$set(this.newShippingAddress, 'recipientPhoneNum', this.newShippingAddress.recipientPhoneNum.replace(/[^0-9]/gi, ''));
 			alert('숫자만 입력가능합니다.');
 		}, 250),
 
@@ -145,18 +115,11 @@ export default {
 
 		async toggleAddShippingAddress() {
 			if (this.isShownNewAddress) {
-				this.$set(
-					this.newShippingAddress,
-					'recipientAddress',
-					this.userInfo.address,
-				);
+				this.$set(this.newShippingAddress, 'recipientAddress', this.userInfo.address);
 				if (this.validateForm()) {
 					await this.ADD_NEW_SHIPPING_ADDRESS({
 						...this.newShippingAddress,
-						shippingMessage:
-							this.shippingMessages.indexOf(this.selectedShippingMessage) === 4
-								? this.typeInPerson
-								: this.selectedShippingMessage,
+						shippingMessage: this.shippingMessages.indexOf(this.selectedShippingMessage) === 4 ? this.typeInPerson : this.selectedShippingMessage,
 					});
 					this.resetForm();
 				} else {
@@ -165,10 +128,12 @@ export default {
 			}
 			this.isShownNewAddress = !this.isShownNewAddress;
 		},
+
 		deleteShippingAddress(index) {
 			this.DELETE_SHIPPING_ADDRESS(index);
 		},
 	},
+
 	created() {
 		this.shippingMessages = userInfo.shippingMessage;
 	},
@@ -206,6 +171,7 @@ export default {
 	height: 70px;
 	color: #848484;
 	text-decoration: underline;
+	background-color: #fff;
 }
 
 .shipping-address__add__h1 {

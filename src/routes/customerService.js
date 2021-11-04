@@ -1,6 +1,6 @@
 const customerServiceRoutes = {
 	path: '/vue-greendays/customerservice',
-	redirect: '/customerservice/main',
+	redirect: '/vue-greendays/customerservice/main',
 	component: () => import('@/views/CustomerService.vue'),
 	children: [
 		{

@@ -4,38 +4,20 @@
 		<section class="product-nothing" v-if="productsToShow.length === 0" />
 		<aside class="product-wrapper" v-else>
 			<template v-if="isProductView">
-				<div
-					class="product__text"
-					:class="{ 'product__text--center': isProductView }"
-				>
-					총 {{ orderedProducts.length }} 개의 상품
-				</div>
+				<div class="product__text" :class="{ 'product__text--center': isProductView }">총 {{ orderedProducts.length }} 개의 상품</div>
 			</template>
 			<template v-else>
 				<div class="product__text">연관상품</div>
 			</template>
-			<display-items
-				v-for="product in productsToShow"
-				:key="product.id"
-				:productId="product.id"
-				:sendToday="product.productSendToday"
-				:ableToBuy="product.productAbleToBuy"
-				:callFrom="''"
-			>
+			<display-items v-for="product in productsToShow" :key="product.id" :productId="product.id" :sendToday="product.productSendToday" :ableToBuy="product.productAbleToBuy" :callFrom="''">
 				<template #productInfo-photo>
 					<img :src="product.photoUrl" class="item-container__photo" />
 				</template>
 				<template #productInfo-brand>{{ product.brand }}</template>
 				<template #productInfo-name>{{ product.name }}</template>
-				<template #productInfo-beforePrice>
-					{{ (product.priceBefore * 1000).toLocaleString() }}
-				</template>
-				<template #productInfo-discountRate>
-					{{ Math.ceil(product.discountRate * 100) }}% 할인
-				</template>
-				<template #productInfo-afterPrice>
-					{{ (product.priceAfter * 1000).toLocaleString() }}
-				</template>
+				<template #productInfo-beforePrice>{{ (product.priceBefore * 1000).toLocaleString() }}</template>
+				<template #productInfo-discountRate>{{ Math.ceil(product.discountRate * 100) }}% 할인</template>
+				<template #productInfo-afterPrice>{{ (product.priceAfter * 1000).toLocaleString() }}</template>
 			</display-items>
 			<paging-component v-if="isProductView" />
 		</aside>
@@ -80,53 +62,59 @@ export default {
 
 		setPage(targetToSlice, pageNumber) {
 			const productCountPerPage = this.isProductView ? 48 : 12;
-			this.productsToShow = [...targetToSlice].slice(
-				(pageNumber - 1) * productCountPerPage,
-				pageNumber * productCountPerPage,
-			);
+			this.productsToShow = [...targetToSlice].slice((pageNumber - 1) * productCountPerPage, pageNumber * productCountPerPage);
 		},
 
 		sortProducts(targetToSort, orderKey, orderKind) {
 			const target = [...targetToSort];
-			target.sort((a, b) =>
-				orderKind === 'desc'
-					? a[orderKey] > b[orderKey]
-						? -1
-						: 1
-					: a[orderKey] > b[orderKey]
-					? 1
-					: -1,
-			);
+			target.sort((a, b) => {
+				if (orderKind === 'desc') {
+					if (a[orderKey] > b[orderKey]) return -1;
+					else return 1;
+				} else {
+					if (a[orderKey] > b[orderKey]) return 1;
+					else return -1;
+				}
+			});
 			return target;
 		},
 
-		setOrderedProducts(query) {
-			const { page, order_std, orderby } = query;
-			Bus.$emit('on:spinner');
-			Bus.$emit('set-pagination', parseInt(page));
-
-			this.FETCH_ORDERED_PRODUCTS(query)
-				.then(() => {
-					this.setPage(
-						this.sortProducts(this.orderedProducts, order_std, orderby),
-						page,
-					);
-					Bus.$emit('off:spinner');
-				})
-				.catch(console.error);
+		async setOrderedProducts(query) {
+			try {
+				const { page, order_std, orderby } = query;
+				Bus.$emit('on-spinner');
+				Bus.$emit('set-pagination', parseInt(page));
+				await this.FETCH_ORDERED_PRODUCTS(query);
+				this.setPage(this.sortProducts(this.orderedProducts, order_std, orderby), page);
+				Bus.$emit('off-spinner');
+			} catch (error) {
+				console.error(error);
+			}
 		},
 	},
 
 	created() {
-		this.setOrderedProducts(
-			this.isProductView
-				? this.$route.query
-				: { page: 1, order_std: 'popularity', orderby: 'desc' },
-		);
+		if (this.isProductView) {
+			this.setOrderedProducts(this.$route.query);
+		} else {
+			this.setOrderedProducts({
+				page: 1,
+				order_std: 'popularity',
+				orderby: 'desc',
+			});
+
+			this.$watch('$route.params', function() {
+				this.setOrderedProducts({
+					page: 1,
+					order_std: 'popularity',
+					orderby: 'desc',
+				});
+			});
+		}
 	},
 
 	watch: {
-		'$route.query': function(newVal, oldVal) {
+		'$route.query': function(newVal) {
 			this.setOrderedProducts(newVal);
 		},
 	},

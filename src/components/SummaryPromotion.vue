@@ -13,26 +13,21 @@
 			</section>
 			<section class="promo__info-container-items">
 				<display-items
-					v-for="i in 4"
-					:key="product[i-1].id"
-					:sendToday="product[i-1].productSendToday"
-					:ableToBuy="product[i-1].productAbleToBuy"
+					v-for="index in 4"
+					:key="index"
+					:sendToday="product[index - 1].productSendToday"
+					:ableToBuy="product[index - 1].productAbleToBuy"
 					:callFrom="callfrom"
+					:productId="product[index - 1].id"
 				>
 					<template #productInfo-photo>
-						<img
-							:src="product[i-1].photoUrl"
-							width="220px"
-							height="220px"
-							class="item-container__photo"
-							:class="callfrom"
-						/>
+						<img :src="product[index - 1].photoUrl" width="220px" height="220px" class="item-container__photo" :class="callfrom" />
 					</template>
-					<template #productInfo-brand>{{ product[i-1].brand }}</template>
-					<template #productInfo-name>{{ product[i-1].name }}</template>
-					<template #productInfo-beforePrice>{{ (product[i-1].priceBefore * 1000).toLocaleString() }}</template>
-					<template #productInfo-discountRate>{{ product[i-1].discountRate * 100 }}% 할인</template>
-					<template #productInfo-afterPrice>{{ (product[i-1].priceAfter * 1000).toLocaleString() }}</template>
+					<template #productInfo-brand>{{ product[index - 1].brand }}</template>
+					<template #productInfo-name>{{ product[index - 1].name }}</template>
+					<template #productInfo-beforePrice>{{ (product[index - 1].priceBefore * 1000).toLocaleString() }}</template>
+					<template #productInfo-discountRate>{{ Math.ceil(product[index - 1].discountRate) * 100 }}% 할인</template>
+					<template #productInfo-afterPrice>{{ (product[index - 1].priceAfter * 1000).toLocaleString() }}</template>
 				</display-items>
 			</section>
 		</div>

@@ -50,15 +50,20 @@ export default {
 	},
 
 	async created() {
-		this.onSpinner();
-		await this.FETCH_ALL_PRODUCTS();
-		await this.FETCH_PREORDERS();
-		this.offSpinner();
+		try {
+			this.onSpinner();
+			await this.FETCH_ALL_PRODUCTS();
+			await this.FETCH_PREORDERS();
+			this.offSpinner();
+		} catch (error) {
+			console.error(error);
+		}
 	},
+
 	mounted() {
-		Bus.$on('showUserInfo', this.toggleSpace);
-		Bus.$on('on:spinner', this.onSpinner);
-		Bus.$on('off:spinner', this.offSpinner);
+		Bus.$on('show-user-info', this.toggleSpace);
+		Bus.$on('on-spinner', this.onSpinner);
+		Bus.$on('off-spinner', this.offSpinner);
 	},
 };
 </script>

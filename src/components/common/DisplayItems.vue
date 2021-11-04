@@ -1,13 +1,7 @@
 <template>
 	<intersect @enter="visible = true" @leave="visible = false">
-		<ul
-			:class="`item-container ${callFrom} ${!visible ? 'item--invisible' : ''}`"
-			@click.stop="$router.push(`/products/show/${productId}`)"
-		>
-			<li
-				class="item-container__img"
-				:class="{ callFrom: callFrom.length > 0 }"
-			>
+		<ul :class="`item-container ${callFrom} ${!visible ? 'item--invisible' : ''}`" @click.stop="$router.push(`/vue-greendays/products/show/${productId}`)">
+			<li class="item-container__img" :class="{ callFrom: callFrom.length > 0 }">
 				<slot name="productInfo-photo" />
 			</li>
 			<li :class="`item-container__info ${callFrom}`">

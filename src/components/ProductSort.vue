@@ -1,85 +1,39 @@
 <template>
 	<transition name="slide-fade">
-		<div
-			v-show="active"
-			class="sort__bar"
-			:class="{ 'active-userinfo': onUserInfo }"
-			ref="sortBar"
-			@mouseleave="sortModalClose"
-		>
+		<div v-show="active" class="sort__bar" :class="{ 'active-userinfo': onUserInfo }" ref="sortBar" @mouseleave="sortModalClose">
 			<div class="sort__bar-wrapper">
 				<section class="sort__bar-row-left">
 					<ul class="sort__bar-keyword" ref="keyword">
-						<li
-							class="sort__bar-keyword-pick"
-							:class="{ 'sort__bar-keyword-pick--active': copyChips[0] }"
-							@mouseover="sortModalOpen('gender')"
-						>
+						<li class="sort__bar-keyword-pick" :class="{ 'sort__bar-keyword-pick--active': copyChips[0] }" @mouseover="sortModalOpen('gender')">
 							성별
 							<i class="fas fa-chevron-down" />
-							<sort-modal
-								v-if="showModal && sortByGender"
-								:whichModal="getGenders"
-								@pickedGender="createChips"
-								@pickedFirst="sortModalClose"
-							/>
+							<sort-modal v-if="showModal && sortByGender" :whichModal="getGenders" @picked-gender="createChips" @picked-first="sortModalClose" />
 						</li>
 
-						<li
-							class="sort__bar-keyword-pick"
-							:class="{ 'sort__bar-keyword-pick--active': copyChips[1] }"
-							@mouseover="sortCategoryOpen"
-						>
+						<li class="sort__bar-keyword-pick" :class="{ 'sort__bar-keyword-pick--active': copyChips[1] }" @mouseover="sortCategoryOpen">
 							카테고리
 							<i class="fas fa-chevron-down" />
-							<sort-category
-								v-if="showModal && sortByCategory"
-								@pickedCategory="createChips"
-							/>
+							<sort-category v-if="showModal && sortByCategory" @picked-category="createChips" />
 						</li>
-						<li
-							class="sort__bar-keyword-pick"
-							@click="pickBrandModalOpen"
-							:class="{ 'sort__bar-keyword-pick--active': sortByBrand }"
-						>
+						<li class="sort__bar-keyword-pick" @click="pickBrandModalOpen" :class="{ 'sort__bar-keyword-pick--active': sortByBrand }">
 							브랜드
 							<i class="fas fa-chevron-down" />
 						</li>
 					</ul>
-					<sort-index-chips
-						v-for="index in sortChips"
-						:key="index"
-						:sortindex="index"
-						@remove-chips="removeChips"
-					/>
-					<div
-						class="sort__bar-chips-clear"
-						@click="removeAll"
-						v-if="sortChips.length > 0"
-					>
+					<sort-index-chips v-for="index in sortChips" :key="index" :sortindex="index" @remove-chips="removeChips" />
+					<div class="sort__bar-chips-clear" @click="removeAll" v-if="sortChips.length > 0">
 						초기화
 					</div>
 				</section>
-				<aside
-					class="sort__bar-row-right"
-					@mouseover="sortModalOpen('orderby')"
-					@mouseleave="sortModalClose"
-				>
+				<aside class="sort__bar-row-right" @mouseover="sortModalOpen('orderby')" @mouseleave="sortModalClose">
 					<div class="sort__bar-keyword-pick orderby">
 						{{ getOrderBy[orderByIndex] }}
 						<i class="fas fa-chevron-down" />
-						<sort-modal
-							v-if="showModal && rulesOrderBy"
-							:whichModal="getOrderBy"
-							@pickedOrderBy="setOrderBy"
-						/>
+						<sort-modal v-if="showModal && rulesOrderBy" :whichModal="getOrderBy" @picked-order-by="setOrderBy" />
 					</div>
 				</aside>
 			</div>
-			<sort-brands
-				v-if="showModal && sortByBrand"
-				@closeBrandSearchModal="sortModalClose"
-			/>
+			<sort-brands v-if="showModal && sortByBrand" @close-brand-search-modal="sortModalClose" />
 		</div>
 	</transition>
 </template>
@@ -162,20 +116,13 @@ export default {
 		},
 
 		onScroll(e) {
-			if (e.deltaY < 0) {
-				return (this.active = true);
-			}
-			if (e.pageY > 1460) {
-				return (this.active = false);
-			}
+			if (e.deltaY < 0) return (this.active = true);
+			if (e.pageY > 1460) return (this.active = false);
 		},
 
 		createChips(payload) {
 			const genderIndex = this.getGenders.indexOf(payload.value);
-			const categoryIndex = Array.prototype.indexOf.call(
-				Object.keys(this.getCategories),
-				payload.value,
-			);
+			const categoryIndex = Array.prototype.indexOf.call(Object.keys(this.getCategories), payload.value);
 			this.sortChips = this.copyChips;
 
 			if (genderIndex !== -1) {
@@ -184,11 +131,8 @@ export default {
 
 			if (categoryIndex !== -1) {
 				this.sortChips[1] = payload.value;
-				if (payload.detail) {
-					this.sortChips[2] = payload.detail;
-				} else {
-					this.sortChips[2] = '';
-				}
+				if (payload.detail) this.sortChips[2] = payload.detail;
+				else this.sortChips[2] = '';
 			}
 			this.copyChips = [...this.sortChips];
 			this.sortChips = this.sortChips.filter(v => v);
@@ -209,9 +153,7 @@ export default {
 			const sortChipIndex = this.sortChips.indexOf(payload);
 			const copyChipIndex = this.copyChips.indexOf(payload);
 
-			if (this.sortChips.length === 1) {
-				return this.removeAll();
-			}
+			if (this.sortChips.length === 1) return this.removeAll();
 
 			if (copyChipIndex === 1) {
 				this.sortChips.splice(sortChipIndex, 2);
@@ -236,12 +178,12 @@ export default {
 
 	mounted() {
 		window.addEventListener('wheel', this.onScroll);
-		Bus.$on('showUserInfo', this.toggleUserInfo);
+		Bus.$on('show-user-info', this.toggleUserInfo);
 	},
 
 	beforeDestroy() {
 		window.removeEventListener('wheel', this.onScroll);
-		Bus.$off('showUserInfo', this.toggleUserInfo);
+		Bus.$off('show-user-info', this.toggleUserInfo);
 	},
 
 	watch: {

@@ -11,9 +11,7 @@
 						category: '',
 						brand: '',
 						product_id: '',
-						deal_id: getProductDetail.productSendToday
-							? 'quick-delivery'
-							: 'reserve-purchase',
+						deal_id: getProductDetail.productSendToday ? 'quick-delivery' : 'reserve-purchase',
 						page: 1,
 						orderby: 'desc',
 						order_std: 'popularity',
@@ -33,9 +31,7 @@
 						category: '',
 						brand: '',
 						product_id: '',
-						deal_id: getProductDetail.productSendToday
-							? 'quick-delivery'
-							: 'reserve-purchase',
+						deal_id: getProductDetail.productSendToday ? 'quick-delivery' : 'reserve-purchase',
 						page: 1,
 						orderby: 'desc',
 						order_std: 'popularity',
@@ -55,9 +51,7 @@
 						category: '',
 						brand: getProductDetail.brand,
 						product_id: '',
-						deal_id: getProductDetail.productSendToday
-							? 'quick-delivery'
-							: 'reserve-purchase',
+						deal_id: getProductDetail.productSendToday ? 'quick-delivery' : 'reserve-purchase',
 						page: 1,
 						orderby: 'desc',
 						order_std: 'popularity',
@@ -77,9 +71,7 @@
 						category: getProductDetail.category,
 						brand: getProductDetail.brand,
 						product_id: '',
-						deal_id: getProductDetail.productSendToday
-							? 'quick-delivery'
-							: 'reserve-purchase',
+						deal_id: getProductDetail.productSendToday ? 'quick-delivery' : 'reserve-purchase',
 						page: 1,
 						orderby: 'desc',
 						order_std: 'popularity',
@@ -100,9 +92,7 @@
 						category_detail: getProductDetail.categoryDetail,
 						brand: getProductDetail.brand,
 						product_id: '',
-						deal_id: getProductDetail.productSendToday
-							? 'quick-delivery'
-							: 'reserve-purchase',
+						deal_id: getProductDetail.productSendToday ? 'quick-delivery' : 'reserve-purchase',
 						page: 1,
 						orderby: 'desc',
 						order_std: 'popularity',
@@ -117,10 +107,9 @@
 				<i
 					class="fas fa-heart"
 					:class="{
-						'fa-heart--picked':
-							userInfo && isPickedBrand(getProductDetail.brand),
+						'fa-heart--picked': userInfo && isPickedBrand(getProductDetail.brand),
 					}"
-					@click="$emit('openAlarmModal', getProductDetail.brand)"
+					@click="$emit('open-alarm-modal', getProductDetail.brand)"
 				/>
 			</h1>
 			<p class="info__id">상품아이디: {{ getProductDetail.id }}</p>
@@ -130,23 +119,15 @@
 			<h2 class="info__price-after">
 				{{ (getProductDetail.priceAfter * 1000).toLocaleString() }}
 			</h2>
-			<span class="info__price-before">
-				{{ (getProductDetail.priceBefore * 1000).toLocaleString() }}
-			</span>
+			<span class="info__price-before">{{ (getProductDetail.priceBefore * 1000).toLocaleString() }}</span>
 			|
-			<span class="info__price-discount"
-				>{{ Math.ceil(getProductDetail.discountRate * 100) }}% 할인</span
-			>
+			<span class="info__price-discount">{{ Math.ceil(getProductDetail.discountRate * 100) }}% 할인</span>
 		</li>
 		<li class="info__describe-price">
 			해외/국내 배송비 및 관부가세가 모두 포함된 금액입니다.
 		</li>
 		<li class="info__btn">
-			<div
-				class="info__btn__pick-product"
-				:class="{ 'info__btn__pick-product--picked': pickedProduct }"
-				@click="toggleThisToWishList"
-			>
+			<div class="info__btn__pick-product" :class="{ 'info__btn__pick-product--picked': pickedProduct }" @click="toggleThisToWishList">
 				<i
 					:class="{
 						'fas fa-heart': pickedProduct,
@@ -159,25 +140,18 @@
 		<product-detail-list>
 			<template #title>구매 안내</template>
 			<template #body>
-				{{
-					getProductDetail.productSendToday
-						? purchaseInfo.quickDeliveryGuide
-						: purchaseInfo.preorderGuide
-				}}
+				{{ getProductDetail.productSendToday ? purchaseInfo.quickDeliveryGuide : purchaseInfo.preorderGuide }}
 			</template>
 		</product-detail-list>
 		<product-detail-list>
 			<template #title>상품 상세정보</template>
-			<template #body>{{ getProductDetail.material }}</template>
+			<template #body>{{ `재질: ${getProductDetail.material}` }}</template>
 		</product-detail-list>
 		<product-detail-list>
 			<template #title>배송가이드</template>
 			<template #body>{{ purchaseInfo.logiGuide }}</template>
 			<template #additional-element>
-				<button
-					class="info__guide__btn"
-					@click="$router.push('/customerservice/logi_guide')"
-				>
+				<button class="info__guide__btn" @click="$router.push('/vue-greendays/customerservice/logi_guide')">
 					그린데이즈 배송가이드
 				</button>
 			</template>
@@ -189,7 +163,7 @@
 import ProductDetailList from '@/components/common/ProductDetailList.vue';
 import purchaseInfo from '@/static/purchaseInfo.js';
 import brandPicking from '@/mixins/brandPicking.js';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
 	components: {
@@ -209,10 +183,9 @@ export default {
 		...mapState({
 			userInfo: state => state.auth.userInfo,
 		}),
-
-		getProductDetail() {
-			return this.$store.state.shopping.productDetail;
-		},
+		...mapGetters({
+			getProductDetail: 'shopping/getProductDetail',
+		}),
 	},
 
 	methods: {
@@ -223,13 +196,13 @@ export default {
 		},
 
 		async toggleThisToWishList() {
+			if (!this.userInfo) {
+				this.$router.push('/vue-greendays/login');
+				return alert('로그인이 필요합니다.');
+			}
 			if (this.pickedProduct) {
-				const removeConfirm = confirm(
-					'위시리스트에서 아이템을 삭제하시겠습니까?',
-				);
-				if (removeConfirm) {
-					await this.REMOVE_WISHLIST([this.getProductDetail.id]);
-				}
+				const removeConfirm = confirm('위시리스트에서 아이템을 삭제하시겠습니까?');
+				if (removeConfirm) await this.REMOVE_WISHLIST([this.getProductDetail.id]);
 			} else {
 				await this.ADD_WISHLIST(this.getProductDetail);
 			}
@@ -239,9 +212,9 @@ export default {
 	},
 
 	created() {
-		this.pickedProduct = this.userInfo.wishList.find(
-			v => v.id === parseInt(this.$route.params.productId),
-		);
+		if (this.userInfo) {
+			this.pickedProduct = this.userInfo.wishList.find(v => v.id === parseInt(this.$route.params.productId));
+		}
 	},
 };
 </script>

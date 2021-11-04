@@ -31,6 +31,7 @@ import InfoList from '@/components/common/InfoList.vue';
 import EditUserInfoList from '@/components/EditUserInfoList.vue';
 import ShippingAddressSetting from '@/components/ShippingAddressSetting.vue';
 import UserPromotionCode from '@/components/UserPromotionCode.vue';
+import { mapActions } from 'vuex';
 
 export default {
 	components: {
@@ -39,18 +40,19 @@ export default {
 		ShippingAddressSetting,
 		UserPromotionCode,
 	},
+
 	methods: {
-		deleteMyAccount() {
-			const confirmQuitMemberShip = confirm('정말 탈퇴하시겠습니까 ?');
-			if (confirmQuitMemberShip) {
-				this.$store
-					.dispatch('auth/QUIT_MEMBERSHIP')
-					.then(() => {
-						this.$router.replace('/vue-greendays');
-					})
-					.catch(error => {
-						console.error(error);
-					});
+		...mapActions('auth', ['QUIT_MEMBERSHIP']),
+
+		async deleteMyAccount() {
+			try {
+				const confirmQuitMemberShip = confirm('정말 탈퇴하시겠습니까 ?');
+				if (confirmQuitMemberShip) {
+					await this.QUIT_MEMBERSHIP();
+					this.$router.replace('/vue-greendays');
+				}
+			} catch (error) {
+				console.error(error);
 			}
 		},
 	},

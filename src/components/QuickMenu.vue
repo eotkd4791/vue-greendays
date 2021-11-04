@@ -5,25 +5,25 @@
 		</header>
 
 		<ol class="quick-menu__btn">
-			<li @click="movePage('/vue-greendays')">
+			<li @click="movePage('/vue-greendays/customerservice/logi_guide')">
 				<i class="fas fa-truck" />
 				<p>Free delivery</p>
 				<p>배송가이드</p>
 			</li>
 
-			<li @click="movePage('/vue-greendays')">
+			<li @click="movePage('/vue-greendays/customerservice/faq')">
 				<i class="far fa-comments" />
 				<p>FAQ</p>
 				<p>자주 묻는 질문</p>
 			</li>
 
-			<li @click="movePage('/vue-greendays')">
+			<li @click="movePage('/vue-greendays/customerservice')">
 				<i class="fas fa-phone-alt" />
 				<p>Need help?</p>
 				<p>고객 센터</p>
 			</li>
 			<li>
-				<i class="far fa-comment-dots" />
+				<i class="far fa-comment-dots" @click="toggleChannelTalk" />
 				<p>Channel Talk</p>
 				<p>채널톡</p>
 			</li>
@@ -33,9 +33,16 @@
 
 <script>
 import utilMethod from '@/mixins/utilMethods.js';
+import Bus from '@/utils/bus.js';
 
 export default {
 	mixins: [utilMethod],
+
+	methods: {
+		toggleChannelTalk() {
+			Bus.$emit('toggle-channel-talk');
+		},
+	},
 };
 </script>
 

@@ -19,12 +19,7 @@ const actions = {
 			let totalKeywords = [];
 			storedProduct.map(v => {
 				const { brand, category, material, name } = v;
-				totalKeywords = totalKeywords.concat(
-					brand.toUpperCase(),
-					material.toUpperCase(),
-					category.toUpperCase().split(' '),
-					name.toUpperCase().split(' '),
-				);
+				totalKeywords = totalKeywords.concat(brand.toUpperCase(), material.toUpperCase(), category.toUpperCase().split(' '), name.toUpperCase().split(' '));
 			});
 			totalKeywords = [...new Set(totalKeywords)].sort();
 			setItem('totalKeywords', totalKeywords);
@@ -40,14 +35,10 @@ const actions = {
 		const storedKeywords = getItem('totalKeywords');
 		const storedRecentKeywords = getItem('recentKeywords');
 
-		const keywordsMap = storedRecentKeywords
-			? new Map(Object.entries(storedRecentKeywords))
-			: new Map();
+		const keywordsMap = storedRecentKeywords ? new Map(Object.entries(storedRecentKeywords)) : new Map();
 
 		if (!keywordsMap.has(payload)) {
-			const croppedKeywords = storedKeywords
-				.map(v => v.includes(payload) && v)
-				.filter(v => v);
+			const croppedKeywords = storedKeywords.map(v => v.includes(payload) && v).filter(v => v);
 
 			commit('setRecentKeywords', { key: payload, value: croppedKeywords });
 			commit('setRecommendKeywords', croppedKeywords);
@@ -78,12 +69,7 @@ const actions = {
 				case 'keyword':
 					productsAll = productsAll.filter(value => {
 						const { brand, category, material, name } = value;
-						if (
-							new RegExp(entry[1], 'ig').test(brand) ||
-							new RegExp(entry[1], 'ig').test(category) ||
-							new RegExp(entry[1], 'ig').test(material) ||
-							new RegExp(entry[1], 'ig').test(name)
-						) {
+						if (new RegExp(entry[1], 'ig').test(brand) || new RegExp(entry[1], 'ig').test(category) || new RegExp(entry[1], 'ig').test(material) || new RegExp(entry[1], 'ig').test(name)) {
 							return value;
 						}
 					});

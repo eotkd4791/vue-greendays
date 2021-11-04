@@ -1,31 +1,12 @@
 <template>
 	<div>
-		<input
-			type="checkbox"
-			class="wish-item__checkbox"
-			:value="productInfo.id"
-			v-model="$parent.checkedProductsToDelete"
-		/>
+		<input type="checkbox" class="wish-item__checkbox" :value="productInfo.id" v-model="$parent.checkedProductsToDelete" />
 
-		<router-link
-			:to="`/vue-greendays/products/show/${productInfo.id}`"
-			tag="li"
-			class="wish-item"
-		>
+		<router-link :to="`/vue-greendays/products/show/${productInfo.id}`" tag="li" class="wish-item">
 			<div class="space" />
-			<display-items
-				:productId="productInfo.id"
-				:sendToday="productInfo.productSendToday"
-				:ableToBuy="productInfo.productAbleToBuy"
-				:callFrom="'item-container--small'"
-			>
+			<display-items :productId="productInfo.id" :sendToday="productInfo.productSendToday" :ableToBuy="productInfo.productAbleToBuy" :callFrom="'item-container--small'">
 				<template #productInfo-photo>
-					<img
-						:src="productInfo.photoUrl"
-						width="210px"
-						height="210px"
-						class="item-container__photo"
-					/>
+					<img :src="productInfo.photoUrl" width="210px" height="210px" class="item-container__photo" />
 					<div class="space" />
 				</template>
 				<template #productInfo-brand>{{ productInfo.brand }}</template>
@@ -33,9 +14,7 @@
 				<template #productInfo-beforePrice>
 					{{ (productInfo.priceBefore * 1000).toLocaleString() }}
 				</template>
-				<template #productInfo-discountRate>
-					{{ Math.ceil(productInfo.discountRate * 100) }}% 할인
-				</template>
+				<template #productInfo-discountRate> {{ Math.ceil(productInfo.discountRate * 100) }}% 할인 </template>
 				<template #productInfo-afterPrice>
 					{{ (productInfo.priceAfter * 1000).toLocaleString() }}
 				</template>
@@ -57,19 +36,11 @@ export default {
 		productInfo: Object,
 	},
 
-	data() {
-		return {};
-	},
-
 	computed: {
 		...mapState('auth', {
 			userInfo: state => state.userInfo,
 		}),
 	},
-
-	methods: {},
-
-	created() {},
 };
 </script>
 

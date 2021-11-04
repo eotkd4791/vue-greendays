@@ -1,16 +1,8 @@
 <template>
 	<ol class="popular-brands">
-		<li
-			class="popular-brands__list"
-			v-for="(brand, index) in brandsList"
-			:key="index"
-		>
+		<li class="popular-brands__list" v-for="(brand, index) in brandsList" :key="index">
 			<span class="popular-brands__rank">{{ index + 1 }}</span>
-			<i
-				class="fas fa-heart"
-				:class="{ 'fa-heart--picked': userInfo && isPickedBrand(brand) }"
-				@click="openAlarmBrand"
-			/>
+			<i class="fas fa-heart" :class="{ 'fa-heart--picked': userInfo && isPickedBrand(brand) }" @click="openAlarmBrand" />
 			<router-link
 				:to="{
 					path: '/vue-greendays/products',
@@ -26,8 +18,9 @@
 						order_std: 'popularity',
 					},
 				}"
-				>{{ brand }}</router-link
 			>
+				{{ brand }}
+			</router-link>
 		</li>
 	</ol>
 </template>
@@ -59,7 +52,7 @@ export default {
 
 		openAlarmBrand(e) {
 			const { text } = e.target.nextElementSibling;
-			this.$emit('openAlarmModal', text);
+			this.$emit('open-alarm-modal', text);
 		},
 
 		// 브랜드별 제품 인기도의 총합으로 브랜드의 인기 순위 나열하는 메소드.
@@ -67,15 +60,10 @@ export default {
 			const map = new Map();
 			this.products.map(v => {
 				const { brand, popularity } = v;
-				map.set(
-					brand,
-					map.has(brand) ? popularity + map.get(brand) : popularity,
-				);
+				map.set(brand, map.has(brand) ? popularity + map.get(brand) : popularity);
 			}); //브랜드별 제품의 인기도 총합
 
-			this.brandsList = [...map.entries()]
-				.sort((a, b) => (a[1] > b[1] ? -1 : 1))
-				.map(v => v[0]);
+			this.brandsList = [...map.entries()].sort((a, b) => (a[1] > b[1] ? -1 : 1)).map(v => v[0]);
 			// 브랜드 인기도 내림차순으로 정렬하여 brandsList 배열에 삽입
 
 			this.setBrandList(this.brandsList);
@@ -91,9 +79,7 @@ export default {
 	},
 
 	created() {
-		this.popularBrands.length
-			? (this.brandsList = this.popularBrands)
-			: this.setPopularBrands();
+		this.popularBrands.length ? (this.brandsList = this.popularBrands) : this.setPopularBrands();
 	},
 };
 </script>

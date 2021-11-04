@@ -2,7 +2,7 @@
 	<transition name="modal">
 		<div class="modal-mask">
 			<div class="modal-wrapper" @click.stop="onClickOutside">
-				<pick-brand-log-in v-if="userInfo" :pickedBrand="propsBrand" />
+				<pick-brand-log-in v-if="userInfo" :pickedBrand="propsBrand.trim()" />
 				<pick-brand-log-out v-else />
 			</div>
 		</div>
@@ -30,9 +30,7 @@ export default {
 
 	methods: {
 		onClickOutside(e) {
-			if (e.target.className === 'modal-wrapper') {
-				this.$emit('closePickedBrands');
-			}
+			if (e.target.className === 'modal-wrapper') this.$emit('close-picked-brands');
 		},
 	},
 };

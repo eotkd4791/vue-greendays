@@ -5,17 +5,8 @@
 				<h1 class="channel-talk__h1">그린데이즈</h1>
 				<i class="fas fa-times" @click="closeChannelTalk" />
 			</header>
-			<ol
-				class="channel-talk__message"
-				ref="message"
-				v-chat-scroll="{ smooth: true, notSmoothOnInit: true }"
-			>
-				<li
-					class="channel-talk__list"
-					:class="{ 'channel-talk__list--fromMe': item.sender !== 'GreenDays' }"
-					v-for="(item, index) in messages"
-					:key="index"
-				>
+			<ol class="channel-talk__message" ref="message" v-chat-scroll="{ smooth: true, notSmoothOnInit: true }">
+				<li class="channel-talk__list" :class="{ 'channel-talk__list--fromMe': item.sender !== 'GreenDays' }" v-for="(item, index) in messages" :key="index">
 					<ol class="channel-talk__info">
 						<li class="channel-talk__info-list" v-if="item.sender === 'GreenDays'">
 							<img src="@/assets/img/green-present.png" alt="Greendays" class="channel-talk__info-img" />
@@ -32,19 +23,13 @@
 						:class="{
 							'channel-talk__content--fromMe': item.sender !== 'GreenDays',
 						}"
-					>{{ item.content }}</article>
+					>
+						{{ item.content }}
+					</article>
 				</li>
 			</ol>
 			<footer class="channel-talk__footer">
-				<input
-					type="text"
-					v-model.trim="newMessage"
-					ref="input"
-					class="channel-talk__input"
-					placeholder="메시지를 입력해주세요."
-					required
-					@keyup.enter="onSubmitMessage"
-				/>
+				<input type="text" v-model.trim="newMessage" ref="input" class="channel-talk__input" placeholder="메시지를 입력해주세요." required @keyup.enter="onSubmitMessage" />
 				<button class="channel-talk__btn" @click="onSubmitMessage">
 					<i class="far fa-paper-plane" />
 				</button>
@@ -55,6 +40,8 @@
 
 <script>
 import Bus from '@/utils/bus.js';
+import addZero from '@/utils/setTwoDigit.js';
+import { mapState, mapActions } from 'vuex';
 
 export default {
 	data() {
@@ -63,29 +50,45 @@ export default {
 			messages: [],
 		};
 	},
+
+	computed: {
+		...mapState({
+			userChat: state => state.userChat,
+			guestChat: state => state.guestChat,
+			isLoggedIn: state => Boolean(state.auth.userInfo),
+		}),
+	},
+
 	methods: {
-		onSubmitMessage() {
-			const messageRemovedSpace =
-				this.newMessage !== null ? this.newMessage.replace(/ /g, '') : '';
-			if (messageRemovedSpace.length === 0 || !this.newMessage) {
-				this.newMessage = '';
-				return;
+		...mapActions(['UPDATE_CHAT', 'FETCH_CHAT']),
+
+		async onSubmitMessage() {
+			try {
+				const messageRemovedSpace = this.newMessage !== null ? this.newMessage.replace(/ /g, '') : '';
+
+				if (messageRemovedSpace.length === 0 || !this.newMessage) {
+					this.newMessage = '';
+					return;
+				}
+
+				const currentHour = new Date().getHours();
+				const currentMinute = new Date().getMinutes();
+				const newMessageObj = {
+					sender: 'Me',
+					sentTime: `${addZero(currentHour)}:${addZero(currentMinute)}`,
+					content: this.newMessage,
+				};
+
+				this.messages.push(newMessageObj);
+
+				await this.UPDATE_CHAT(newMessageObj);
+
+				this.newMessage = null;
+				this.$refs.input.focus();
+			} catch (error) {
+				console.error(error);
+				alert(error.message);
 			}
-			const currentHour = new Date().getHours();
-			const currentMinute = new Date().getMinutes();
-			this.messages.push({
-				sender: 'Me',
-				sentTime: `${this.addZero(currentHour)}:${this.addZero(currentMinute)}`,
-				content: this.newMessage,
-			});
-			this.newMessage = null;
-
-			this.$refs.input.focus();
-		},
-
-		addZero(number) {
-			const numberToString = number.toString();
-			return numberToString.length < 2 ? '0' + numberToString : numberToString;
 		},
 
 		closeChannelTalk() {
@@ -94,13 +97,8 @@ export default {
 	},
 
 	created() {
-		this.messages.push({
-			sender: 'GreenDays',
-			sentTime: `${this.addZero(new Date().getHours())}:${this.addZero(
-				new Date().getMinutes(),
-			)}`,
-			content: '그린데이즈에 오신 것을 환영합니다 :)',
-		});
+		this.FETCH_CHAT();
+		this.messages = this.isLoggedIn ? this.userChat : this.guestChat;
 	},
 
 	mounted() {
@@ -169,8 +167,9 @@ export default {
 }
 
 .channel-talk__content {
+	word-break: break-all;
 	max-width: 250px;
-	padding: 10px;
+	padding: 15px;
 	border-radius: 20px;
 	background-color: #dedede;
 	color: #000;

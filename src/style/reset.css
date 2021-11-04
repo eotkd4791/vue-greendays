@@ -24,4 +24,5 @@ ol {
 input,
 button {
 	outline-style: none;
+	background-color: #fff;
 }

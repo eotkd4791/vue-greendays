@@ -1,22 +1,13 @@
 <template>
 	<div class="promotion">
 		<section class="promotion__wrapper">
-			<summary-promotion
-				v-for="promotion in promotions"
-				:key="promotion.title"
-				:imgUrl="promotion.imgUrl"
-				:productOfPreorder="promotion.products"
-			>
+			<summary-promotion v-for="promotion in promotions" :key="promotion.title" :imgUrl="promotion.imgUrl" :productOfPreorder="promotion.products">
 				<template #promoInfo-name>
 					<p class="promo__info-container-title">{{ promotion.promoName }}</p>
 				</template>
 				<template #promoInfo-timer>
 					<p class="promo__info-container-timer">TIMER</p>
-					<p class="promo__info-container-timer clock" ref="timer">
-						{{ promotion.expiredHour < 10 ? `0${promotion.expiredHour}` : promotion.expiredHour }} :
-						{{promotion.expiredMin < 10 ? `1${promotion.expiredMin}` : promotion.expiredMin}} :
-						{{promotion.expiredSec < 10 ? `1${promotion.expiredSec}` : promotion.expiredSec}}
-					</p>
+					<p class="promo__info-container-timer clock" ref="timer">{{ `${addZero(promotion.expiredHour)} : ${addZero(promotion.expiredMin)} : ${addZero(promotion.expiredSec)}` }}</p>
 				</template>
 				<template #promoInfo-overview>
 					<div class="promo__info-container-overview-sub">
@@ -33,6 +24,7 @@
 <script>
 import SummaryPromotion from '@/components/SummaryPromotion.vue';
 import { mapState } from 'vuex';
+import addZero from '@/utils/setTwoDigit.js';
 
 export default {
 	components: {
@@ -43,7 +35,7 @@ export default {
 		return {
 			promotions: [],
 			quickDelivery: {},
-			Timers: [],
+			timers: [],
 		};
 	},
 
@@ -53,37 +45,42 @@ export default {
 		}),
 	},
 
+	methods: {
+		addZero,
+	},
+
 	created() {
 		this.promotions = this.preorders;
 	},
 
 	mounted() {
 		this.promotions.forEach(p => {
-			const Timer = setInterval(() => {
+			const timer = setInterval(() => {
 				if (p.expiredHour === 0 && p.expiredMin === 0 && p.expiredSec === 0) {
 					p.activated = false;
-					clearInterval(Timer);
+					clearInterval(timer);
 				}
 				if (p.expiredSec === 0) {
 					if (p.expiredMin > 0) {
 						p.expiredSec = 59;
-					}
-					if (p.expiredMin === 0) {
-						if (p.expiredHour > 0) {
-							p.expiredMin = 59;
-						}
+						p.expiredMin--;
 					} else {
-						p.expiredMin -= 1;
+						p.expiredSec = 59;
+						p.expiredMin = 59;
+						p.expiredHour--;
 					}
 				} else {
-					p.expiredSec -= 1;
+					p.expiredSec--;
 				}
 			}, 1000);
-			this.Timers.push(Timer);
+			this.timers.push(timer);
 		});
 	},
+
 	beforeDestroy() {
-		this.Timers.forEach(t => clearInterval(t));
+		this.timers.forEach(timer => {
+			clearInterval(timer);
+		});
 	},
 };
 </script>

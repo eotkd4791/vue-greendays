@@ -16,15 +16,8 @@
 		<aside class="pick-brand-login__aside">
 			<div class="pick-brand-login__brand-name">{{ pickedBrand }}</div>
 			<ul>
-				<li
-					v-for="(category, index) in Object.keys(categories)"
-					:key="index"
-					@click="updatePickedBrands(pickedBrand, category)"
-				>
-					<i
-						class="fas fa-heart"
-						:class="{ 'fa-heart--picked': Object.values(categories)[index] }"
-					/>
+				<li v-for="(category, index) in Object.keys(categories)" :key="index" @click="updatePickedBrands(pickedBrand, category)">
+					<i class="fas fa-heart" :class="{ 'fa-heart--picked': Object.values(categories)[index] }" />
 					{{ category }}
 				</li>
 			</ul>
@@ -42,6 +35,18 @@ export default {
 
 	props: ['pickedBrand'],
 
+	data() {
+		return {
+			categories: {
+				Bags: false,
+				Clothes: false,
+				Shoes: false,
+				Accessories: false,
+				Wallets: false,
+			},
+		};
+	},
+
 	computed: {
 		...mapState({
 			userInfo: state => state.auth.userInfo,
@@ -50,15 +55,13 @@ export default {
 
 	methods: {
 		offModal() {
-			Bus.$emit('off:picked-brands');
+			Bus.$emit('off-picked-brands');
 		},
 	},
 
 	created() {
 		const pickedBrandsEntries = Object.entries(this.userInfo.pickedBrands);
-		const pickedBrandPair = pickedBrandsEntries.find(v =>
-			v[0] === this.pickedBrand ? v : null,
-		);
+		const pickedBrandPair = pickedBrandsEntries.find(v => (v[0] === this.pickedBrand ? v : null));
 		if (pickedBrandPair) {
 			this.categories = pickedBrandPair[1];
 		}
