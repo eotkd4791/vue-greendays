@@ -6,7 +6,7 @@
 				<div
 					class="brand__search-btn"
 					:class="{
-						'brand__search-btn--active': currentPickedAlphabet === 0,
+						'brand__search-btn--active': currentPickedAlphabet === 0
 					}"
 					@click="onClickAlphabetBtn(0)"
 				>
@@ -19,7 +19,9 @@
 						class="brand__search-btn"
 						:class="{
 							'brand__search-btn--active': currentPickedAlphabet === index + 1,
-							'brand__search-btn--passive': !initialLetterOfBrands.includes(letter),
+							'brand__search-btn--passive': !initialLetterOfBrands.includes(
+								letter
+							)
 						}"
 						@click="onClickAlphabetBtn(index + 1)"
 					>
@@ -27,26 +29,45 @@
 					</div>
 					<div class="brand__search-form">
 						<form @submit.prevent>
-							<input type="text" placeholder="브랜드 검색하기" v-model="searchBrands" @input="onTypeKeyword" />
+							<input
+								type="text"
+								placeholder="브랜드 검색하기"
+								v-model="searchBrands"
+								@input="onTypeKeyword"
+							/>
 							<i class="fas fa-search" />
 						</form>
 					</div>
 				</div>
-				<button class="brand__search-close" @click="$emit('close-brand-search-modal')">창닫기</button>
+				<button
+					class="brand__search-close"
+					@click="$emit('close-brand-search-modal')"
+				>
+					창닫기
+				</button>
 			</section>
 			<section class="brand__search-result">
 				<div class="brand__search-wrapper">
-					<span class="brand__search-brand" v-for="brand in brandsList" :key="brand">
+					<span
+						class="brand__search-brand"
+						v-for="brand in brandsList"
+						:key="brand"
+					>
 						<i
 							class="fas fa-heart"
 							:class="{
-								'fa-heart--picked': isPickedBrand(brand),
+								'fa-heart--picked': isPickedBrand(brand)
 							}"
 							@click="openModal(brand)"
 						/>
 						{{ brand }}
 					</span>
-					<pick-brand v-if="showModal" :propsBrand="brandInModal" @close-picked-brands="closeModal" @close-brands-picking-modal="closeModal"></pick-brand>
+					<pick-brand
+						v-if="showModal"
+						:propsBrand="brandInModal"
+						@close-picked-brands="closeModal"
+						@close-brands-picking-modal="closeModal"
+					></pick-brand>
 				</div>
 			</section>
 		</div>
@@ -62,7 +83,7 @@ import Bus from '@/utils/bus.js';
 
 export default {
 	components: {
-		PickBrand,
+		PickBrand
 	},
 
 	data() {
@@ -74,7 +95,7 @@ export default {
 			searchBrands: '',
 			showModal: false,
 			brandInModal: '',
-			currentPickedAlphabet: 0,
+			currentPickedAlphabet: 0
 		};
 	},
 
@@ -82,8 +103,8 @@ export default {
 		...mapState({
 			getUserInfo: state => state.auth.userInfo,
 			getBrandList: state => state.shopping.brandList,
-			getProducts: state => state.shopping.products,
-		}),
+			getProducts: state => state.shopping.products
+		})
 	},
 
 	methods: {
@@ -103,18 +124,24 @@ export default {
 		},
 
 		isPickedBrand(brand) {
-			return this.getUserInfo ? Boolean(this.getUserInfo.pickedBrands[brand]) : false;
+			return this.getUserInfo
+				? Boolean(this.getUserInfo.pickedBrands[brand])
+				: false;
 		},
 
 		getTotalBrands() {
-			return this.getBrandList.length ? this.getBrandList : [...new Set(this.getProducts.map(v => v.brand))];
+			return this.getBrandList.length
+				? this.getBrandList
+				: [...new Set(this.getProducts.map(v => v.brand))];
 		},
 
 		onClickAlphabetBtn(index) {
 			const pickedLetter = this.letters[index - 1];
 			if (this.initialLetterOfBrands.includes(pickedLetter)) {
 				this.currentPickedAlphabet = index;
-				this.brandsList = this.getTotalBrands().filter(v => v[0] === this.letters[this.currentPickedAlphabet - 1]);
+				this.brandsList = this.getTotalBrands().filter(
+					v => v[0] === this.letters[this.currentPickedAlphabet - 1]
+				);
 			} else if (index === 0) {
 				this.currentPickedAlphabet = index;
 				this.brandsList = this.getTotalBrands();
@@ -124,13 +151,15 @@ export default {
 		onTypeKeyword: debounce(function() {
 			const regExp = new RegExp(this.searchBrands, 'ig');
 			this.brandsList = this.getTotalBrands().filter(v => regExp.test(v));
-		}, 300),
+		}, 300)
 	},
 
 	created() {
 		this.brandsList = this.getTotalBrands();
 
-		this.initialLetterOfBrands = [...new Set(this.brandsList.map(v => v[0].toUpperCase()).sort())];
+		this.initialLetterOfBrands = [
+			...new Set(this.brandsList.map(v => v[0].toUpperCase()).sort())
+		];
 	},
 
 	mounted() {
@@ -140,7 +169,7 @@ export default {
 
 	beforeDestroy() {
 		window.removeEventListener('scroll', this.setScrollLock);
-	},
+	}
 };
 </script>
 

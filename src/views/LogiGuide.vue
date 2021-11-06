@@ -2,7 +2,11 @@
 	<section class="logi-guide" v-once>
 		<header class="logi-guide__header">배송가이드</header>
 		<ul class="logi-guide__ul">
-			<info-list v-for="item in listItems" :key="item.title" :eachOfListItems="item" />
+			<info-list
+				v-for="item in listItems"
+				:key="item.title"
+				:eachOfListItems="item"
+			/>
 		</ul>
 	</section>
 </template>
@@ -13,9 +17,9 @@ import customerServiceList from '@/mixins/customerServiceList.js';
 
 export default {
 	components: {
-		InfoList,
+		InfoList
 	},
-	mixins: [customerServiceList],
+	mixins: [customerServiceList]
 };
 </script>
 

@@ -58,7 +58,7 @@ const mutations = {
 
 	setProductDetail(state, payload) {
 		state.productDetail = payload;
-	},
+	}
 };
 
 export default mutations;

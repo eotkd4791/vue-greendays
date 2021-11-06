@@ -1,7 +1,13 @@
 <template>
 	<aside class="left-link">
 		<ul class="left-link__ul" ref="lists" @click="activatedRouterLink">
-			<router-link tag="li" :to="link.routePath" v-for="link in linkList" :key="link.name" class="left-link__li">
+			<router-link
+				tag="li"
+				:to="link.routePath"
+				v-for="link in linkList"
+				:key="link.name"
+				class="left-link__li"
+			>
 				{{ link.name }}
 			</router-link>
 		</ul>
@@ -14,13 +20,13 @@ import getLinkList from '@/static/links.js';
 export default {
 	data() {
 		return {
-			linkList: [],
+			linkList: []
 		};
 	},
 
 	computed: {
 		getCustomerLinks: getLinkList.getCustomerLinks,
-		getUserInfoLinks: getLinkList.getUserInfoLinks,
+		getUserInfoLinks: getLinkList.getUserInfoLinks
 	},
 
 	methods: {
@@ -30,20 +36,24 @@ export default {
 			const includes = Array.prototype.includes;
 
 			if (firstList === e.target) {
-				if (!includes.call(classList, 'router-link-exact-active')) classList.add('router-link-exact-active');
+				if (!includes.call(classList, 'router-link-exact-active'))
+					classList.add('router-link-exact-active');
 			} else {
-				if (includes.call(classList, 'router-link-exact-active')) classList.remove('router-link-exact-active');
+				if (includes.call(classList, 'router-link-exact-active'))
+					classList.remove('router-link-exact-active');
 			}
-		},
+		}
 	},
 
 	created() {
-		this.linkList = this.$route.path.includes('customerservice') ? this.getCustomerLinks : this.getUserInfoLinks;
+		this.linkList = this.$route.path.includes('customerservice')
+			? this.getCustomerLinks
+			: this.getUserInfoLinks;
 	},
 
 	mounted() {
 		this.$refs.lists.firstChild.classList.add('router-link-exact-active');
-	},
+	}
 };
 </script>
 

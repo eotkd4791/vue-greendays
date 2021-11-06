@@ -12,12 +12,21 @@
 
 					<aside class="brand-modal__aside">
 						<ul class="brand-modal__ul" ref="brands">
-							<li class="brand-modal__menu--active" @click="changeTab">인기브랜드</li>
+							<li class="brand-modal__menu--active" @click="changeTab">
+								인기브랜드
+							</li>
 							|
 							<li @click="changeTab">전체브랜드</li>
 						</ul>
-						<pick-brand v-if="showModal" :propsBrand="pickedBrand" @close-picked-brands="closePickBrand" />
-						<popular-brands v-if="isShownPopularBrand" @open-alarm-modal="openPickBrand" />
+						<pick-brand
+							v-if="showModal"
+							:propsBrand="pickedBrand"
+							@close-picked-brands="closePickBrand"
+						/>
+						<popular-brands
+							v-if="isShownPopularBrand"
+							@open-alarm-modal="openPickBrand"
+						/>
 						<alphabet-brands v-else @open-alarm-modal="openPickBrand" />
 					</aside>
 				</div>
@@ -36,20 +45,21 @@ export default {
 	components: {
 		PickBrand,
 		AlphabetBrands,
-		PopularBrands,
+		PopularBrands
 	},
 
 	data() {
 		return {
 			isShownPopularBrand: true,
 			showModal: false,
-			pickedBrand: '',
+			pickedBrand: ''
 		};
 	},
 
 	methods: {
 		onClickOutside(e) {
-			if (e.target.className === 'brand-modal__background') this.$emit('close-brands');
+			if (e.target.className === 'brand-modal__background')
+				this.$emit('close-brands');
 		},
 
 		changeTab() {
@@ -70,7 +80,7 @@ export default {
 
 		setScrollLock() {
 			scrollTo(0, 0);
-		},
+		}
 	},
 
 	mounted() {
@@ -81,7 +91,7 @@ export default {
 	beforeDestroy() {
 		Bus.$off('off-picked-brands', this.closePickBrand);
 		window.removeEventListener('scroll', this.setScrollLock);
-	},
+	}
 };
 </script>
 

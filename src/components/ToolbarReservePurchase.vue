@@ -9,7 +9,7 @@
 					class="reserve-container__link"
 					tag="span"
 					:to="{
-						path: '/vue-greendays/products',
+						path: '/products',
 						query: {
 							keyword: '',
 							gender: '',
@@ -19,8 +19,8 @@
 							deal_id: 'reserve-purchase',
 							page: 1,
 							orderby: 'desc',
-							order_std: 'popularity',
-						},
+							order_std: 'popularity'
+						}
 					}"
 					>{{ `${category.name} (${category.productAmount})` }}</router-link
 				>
@@ -29,8 +29,12 @@
 		<section class="reserve-container__promotion">
 			<div class="reserve-container__promotion__img" />
 			<div class="reserve-container__promotion__text">
-				<h3 class="reserve-container__promotion__title">스마트한 구매의 시작 PICK</h3>
-				<p class="reserve-container__promotion__subtitle">그린데이즈가 제안하는 현명하게 하이패션을 즐기는 방법!</p>
+				<h3 class="reserve-container__promotion__title">
+					스마트한 구매의 시작 PICK
+				</h3>
+				<p class="reserve-container__promotion__subtitle">
+					그린데이즈가 제안하는 현명하게 하이패션을 즐기는 방법!
+				</p>
 			</div>
 		</section>
 	</div>
@@ -46,32 +50,35 @@ export default {
 	data() {
 		return {
 			activatedTabIndex: 0,
-			categories: ['Bags', 'Wallets', 'Clothes', 'Shoes', 'Accessories'],
+			categories: ['Bags', 'Wallets', 'Clothes', 'Shoes', 'Accessories']
 		};
 	},
 	computed: {
 		...mapState('shopping', {
-			products: state => state.products.filter(v => v.productAbleToBuy),
-		}),
+			products: state => state.products.filter(v => v.productAbleToBuy)
+		})
 	},
 
 	methods: {
 		getItem(which) {
 			return this.products.filter(v => v.category === which).length;
-		},
+		}
 	},
 
 	created() {
 		this.categories = this.categories.map(v => ({
 			name: v,
-			productAmount: this.getItem(v),
+			productAmount: this.getItem(v)
 		}));
 
 		this.categories.unshift({
 			name: 'All Categories',
-			productAmount: this.categories.reduce((acc, cur) => acc + cur.productAmount, 0),
+			productAmount: this.categories.reduce(
+				(acc, cur) => acc + cur.productAmount,
+				0
+			)
 		});
-	},
+	}
 };
 </script>
 

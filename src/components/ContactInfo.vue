@@ -5,7 +5,11 @@
 				<div class="info-container__contact__title">무엇이든 물어보세요!</div>
 				<span class="info-container__contact__ask">
 					<i class="fas fa-info" />
-					<span class="info-container__contact__ask__text" @click="onChannelTalk">1 : 1 실시간 문의</span>
+					<span
+						class="info-container__contact__ask__text"
+						@click="onChannelTalk"
+						>1 : 1 실시간 문의</span
+					>
 					<i class="fas fa-chevron-right" />
 				</span>
 				<ul class="info-container__contact__subtitle">
@@ -42,8 +46,8 @@ export default {
 	methods: {
 		onChannelTalk() {
 			Bus.$emit('toggle-channel-talk');
-		},
-	},
+		}
+	}
 };
 </script>
 

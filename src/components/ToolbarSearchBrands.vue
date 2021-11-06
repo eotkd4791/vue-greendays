@@ -1,15 +1,20 @@
 <template>
 	<div class="search-brand">
 		<div class="search-brand__wrapper">
-			<section class="search-brand__list" :class="{ 'search-brand__list--viewer': isShownRecommendKeywords }">
+			<section
+				class="search-brand__list"
+				:class="{ 'search-brand__list--viewer': isShownRecommendKeywords }"
+			>
 				<ol v-show="!isShownRecommendKeywords" class="search-brand__lately">
 					<li>최근 검색어</li>
 					<router-link
 						tag="li"
-						v-for="(item, index) in getUserInfo ? userSearchedKeywords : getGuestKeywords"
+						v-for="(item, index) in getUserInfo
+							? userSearchedKeywords
+							: getGuestKeywords"
 						:key="index"
 						:to="{
-							path: '/vue-greendays/products',
+							path: '/products',
 							query: {
 								keyword: item,
 								gender: '',
@@ -19,8 +24,8 @@
 								deal_id: '',
 								page: 1,
 								orderby: 'desc',
-								order_std: 'popularity',
-							},
+								order_std: 'popularity'
+							}
 						}"
 						@click="closeToolbarModal"
 						>{{ item }}</router-link
@@ -30,10 +35,12 @@
 					<li>인기 검색어</li>
 					<router-link
 						tag="li"
-						v-for="(item, index) in isShownRecommendKeywords ? getRecommendKeywordsList : getHotSearchItems"
+						v-for="(item, index) in isShownRecommendKeywords
+							? getRecommendKeywordsList
+							: getHotSearchItems"
 						:key="index"
 						:to="{
-							path: '/vue-greendays/products',
+							path: '/products',
 							query: {
 								keyword: item,
 								gender: '',
@@ -43,15 +50,21 @@
 								deal_id: '',
 								page: 1,
 								orderby: 'desc',
-								order_std: 'popularity',
-							},
+								order_std: 'popularity'
+							}
 						}"
 						@click="closeToolbarModal"
 						v-html="isShownRecommendKeywords ? keywordsHighlighter(item) : item"
 					/>
 				</ul>
 			</section>
-			<button v-show="!isShownRecommendKeywords" @click="DELETE_ALL_SEARCH_KEYWORDS" class="search-brand__btn">검색 기록 삭제</button>
+			<button
+				v-show="!isShownRecommendKeywords"
+				@click="DELETE_ALL_SEARCH_KEYWORDS"
+				class="search-brand__btn"
+			>
+				검색 기록 삭제
+			</button>
 		</div>
 	</div>
 </template>
@@ -67,13 +80,13 @@ export default {
 	data() {
 		return {
 			isShownRecommendKeywords: false,
-			searchKeyword: '',
+			searchKeyword: ''
 		};
 	},
 
 	computed: {
 		...mapState({
-			userSearchedKeywords: state => state.auth.userInfo.searchedKeywords,
+			userSearchedKeywords: state => state.auth.userInfo.searchedKeywords
 		}),
 
 		...mapGetters({
@@ -81,8 +94,8 @@ export default {
 			getLatelySearchItems: 'auth/getLatelySearchItems',
 			getHotSearchItems: 'shopping/getHotSearchItems',
 			getRecommendKeywordsList: 'shopping/getRecommendKeywords',
-			getGuestKeywords: 'shopping/getGuestKeywords',
-		}),
+			getGuestKeywords: 'shopping/getGuestKeywords'
+		})
 	},
 
 	methods: {
@@ -90,7 +103,7 @@ export default {
 			FETCH_SEARCHED_KEYWORD: 'auth/FETCH_SEARCHED_KEYWORD',
 			DELETE_ALL_SEARCH_KEYWORDS: 'auth/DELETE_ALL_SEARCH_KEYWORDS',
 			FETCH_RECOMMEND_KEYWORDS: 'shopping/FETCH_RECOMMEND_KEYWORDS',
-			SET_EXPECTED_KEYWORDS: 'shopping/SET_EXPECTED_KEYWORDS',
+			SET_EXPECTED_KEYWORDS: 'shopping/SET_EXPECTED_KEYWORDS'
 		}),
 
 		onRecommendKeywordsView() {
@@ -115,12 +128,15 @@ export default {
 		keywordsHighlighter(keyword) {
 			const targetKeyword = this.searchKeyword;
 			const regex = new RegExp(targetKeyword, 'gi');
-			return keyword.replace(regex, `<span style="color: #42b850">${targetKeyword}</span>`);
+			return keyword.replace(
+				regex,
+				`<span style="color: #42b850">${targetKeyword}</span>`
+			);
 		},
 
 		closeToolbarModal() {
 			Bus.$emit('off-toolbar-modal');
-		},
+		}
 	},
 
 	created() {
@@ -135,7 +151,7 @@ export default {
 	beforeDestroy() {
 		Bus.$off('on-recommend-keywords', this.getRecommendKeywords);
 		Bus.$off('off-recommend-keywords', this.offRecommendKeywordsView);
-	},
+	}
 };
 </script>
 

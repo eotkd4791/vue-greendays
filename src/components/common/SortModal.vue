@@ -1,6 +1,13 @@
 <template>
 	<ol class="modal-container" ref="modal">
-		<li v-for="value in whichModal" :key="value" tag="li" class="modal-list" @click="pickedOrderBy({ value, detail: null })" @mouseover="activatingTab">
+		<li
+			v-for="value in whichModal"
+			:key="value"
+			tag="li"
+			class="modal-list"
+			@click="pickedOrderBy({ value, detail: null })"
+			@mouseover="activatingTab"
+		>
 			<span class="modal-text" v-text="value" />
 		</li>
 	</ol>
@@ -12,7 +19,7 @@ export default {
 
 	data() {
 		return {
-			activatedTabIndex: 0,
+			activatedTabIndex: 0
 		};
 	},
 
@@ -30,7 +37,9 @@ export default {
 
 		activatingTab() {
 			if (!this.$refs.modal) return;
-			this.$refs.modal.childNodes[this.activatedTabIndex].classList.remove('active');
+			this.$refs.modal.childNodes[this.activatedTabIndex].classList.remove(
+				'active'
+			);
 		},
 
 		initializingTab() {
@@ -40,12 +49,12 @@ export default {
 			} else {
 				this.$refs.modal.setAttribute('style', 'width: 72px');
 			}
-		},
+		}
 	},
 
 	mounted() {
 		this.initializingTab();
-	},
+	}
 };
 </script>
 

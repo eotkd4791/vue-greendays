@@ -18,8 +18,8 @@ export default {
 		QuickMenu,
 		ContactInfo,
 		AboutGreendays,
-		ChannelTalk,
-	},
+		ChannelTalk
+	}
 };
 </script>
 

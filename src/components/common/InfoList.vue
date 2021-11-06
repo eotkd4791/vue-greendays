@@ -1,12 +1,19 @@
 <template>
 	<li class="info-list__li">
 		<section class="info-list__section" @click="toggleShowDetail">
-			<h1 class="info-list__title" :class="{ 'info-list__title--modifier': isShownDetail }">
+			<h1
+				class="info-list__title"
+				:class="{ 'info-list__title--modifier': isShownDetail }"
+			>
 				{{ eachOfListItems.title }}
 			</h1>
 			<i class="info-list__btn" v-text="isShownDetail ? '-' : '+'" />
 		</section>
-		<aside class="info-list__aside" v-if="isShownDetail && !isUserInfoView" v-html="eachOfListItems.detail" />
+		<aside
+			class="info-list__aside"
+			v-if="isShownDetail && !isUserInfoView"
+			v-html="eachOfListItems.detail"
+		/>
 		<aside class="info-list__aside" v-else-if="isShownDetail && isUserInfoView">
 			<slot name="edit-user-info" />
 			<slot name="shipping-address-setting" />
@@ -21,17 +28,17 @@ export default {
 	data() {
 		return {
 			isShownDetail: false,
-			isUserInfoView: false,
+			isUserInfoView: false
 		};
 	},
 	methods: {
 		toggleShowDetail() {
 			this.isShownDetail = !this.isShownDetail;
-		},
+		}
 	},
 	created() {
 		this.isUserInfoView = this.$route.path.includes('user');
-	},
+	}
 };
 </script>
 

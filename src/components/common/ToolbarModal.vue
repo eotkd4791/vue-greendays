@@ -1,13 +1,25 @@
 <template>
 	<div class="toolbar-modal">
-		<div class="toolbar-modal__mask" v-if="onToolbar" @mouseenter="$emit('mouse-esc')" />
+		<div
+			class="toolbar-modal__mask"
+			v-if="onToolbar"
+			@mouseenter="$emit('mouse-esc')"
+		/>
 		<transition appear name="rolling">
-			<div v-if="onToolbar" class="toolbar-modal__container" :class="{ 'active-userinfo': activeUserInfo }" ref="modalContainer">
+			<div
+				v-if="onToolbar"
+				class="toolbar-modal__container"
+				:class="{ 'active-userinfo': activeUserInfo }"
+				ref="modalContainer"
+			>
 				<ol class="toolbar-modal__wrapper">
 					<li class="toolbar-modal__list" v-if="toolbarToOpen === '프리오더'">
 						<toolbar-preorder />
 					</li>
-					<li class="toolbar-modal__list" v-else-if="toolbarToOpen === '빠른배송'">
+					<li
+						class="toolbar-modal__list"
+						v-else-if="toolbarToOpen === '빠른배송'"
+					>
 						<toolbar-quick-delivery />
 					</li>
 					<li class="toolbar-modal__list" v-else-if="toolbarToOpen === ''">
@@ -33,10 +45,10 @@ export default {
 		ToolbarReservePurchase,
 		ToolbarPreorder,
 		ToolbarQuickDelivery,
-		ToolbarSearchBrands,
+		ToolbarSearchBrands
 	},
 
-	props: ['toolbarToOpen', 'onToolbar', 'activeUserInfo'],
+	props: ['toolbarToOpen', 'onToolbar', 'activeUserInfo']
 };
 </script>
 

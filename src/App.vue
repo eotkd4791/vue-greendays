@@ -21,19 +21,19 @@ export default {
 	components: {
 		ToolbarView,
 		SyncLoader,
-		FooterView,
+		FooterView
 	},
 	data() {
 		return {
 			onSpace: false,
-			isShownSpinner: false,
+			isShownSpinner: false
 		};
 	},
 	methods: {
 		...mapActions({
 			IS_LOGGED_IN: 'auth/IS_LOGGED_IN',
 			FETCH_ALL_PRODUCTS: 'shopping/FETCH_ALL_PRODUCTS',
-			FETCH_PREORDERS: 'shopping/FETCH_PREORDERS',
+			FETCH_PREORDERS: 'shopping/FETCH_PREORDERS'
 		}),
 
 		toggleSpace() {
@@ -46,7 +46,7 @@ export default {
 
 		offSpinner() {
 			this.isShownSpinner = false;
-		},
+		}
 	},
 
 	async created() {
@@ -64,7 +64,7 @@ export default {
 		Bus.$on('show-user-info', this.toggleSpace);
 		Bus.$on('on-spinner', this.onSpinner);
 		Bus.$on('off-spinner', this.offSpinner);
-	},
+	}
 };
 </script>
 

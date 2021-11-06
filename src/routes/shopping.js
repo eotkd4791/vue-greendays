@@ -1,24 +1,24 @@
 const shoppingRoutes = [
 	{
-		path: '/vue-greendays/products',
+		path: '/products',
 		name: 'products',
-		component: () => import('@/views/ProductView.vue'),
+		component: () => import('@/views/ProductView.vue')
 	},
 	{
-		path: '/vue-greendays/products/show/:productId',
+		path: '/products/show/:productId',
 		name: 'productDetail',
-		component: () => import('@/views/ProductDetailView.vue'),
+		component: () => import('@/views/ProductDetailView.vue')
 	},
 	{
-		path: '/vue-greendays/wishlist/:userId',
+		path: '/wishlist/:userId',
 		name: 'wishList',
-		component: () => import('@/views/WishListView.vue'),
+		component: () => import('@/views/WishListView.vue')
 	},
 	{
-		path: '/vue-greendays/cartitems/:userId',
+		path: '/cartitems/:userId',
 		name: 'cartItems',
-		component: () => import('@/views/CartItems.vue'),
-	},
+		component: () => import('@/views/CartItems.vue')
+	}
 ];
 
 export default shoppingRoutes;

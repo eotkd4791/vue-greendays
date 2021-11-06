@@ -9,8 +9,8 @@ export default {
 				Clothes: false,
 				Shoes: false,
 				Accessories: false,
-				Wallets: false,
-			},
+				Wallets: false
+			}
 		};
 	},
 
@@ -25,13 +25,13 @@ export default {
 		lazyUpdateStore: debounce(function(brandName) {
 			this.UPDATE_PICKED_BRANDS({
 				key: brandName,
-				value: this.categories,
+				value: this.categories
 			});
 		}, 800),
 
 		openAlarmBrand(e) {
 			const { text } = e.target.nextElementSibling;
 			this.$emit('open-alarm-modal', text);
-		},
-	},
+		}
+	}
 };

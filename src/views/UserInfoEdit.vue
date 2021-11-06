@@ -38,7 +38,7 @@ export default {
 		InfoList,
 		EditUserInfoList,
 		ShippingAddressSetting,
-		UserPromotionCode,
+		UserPromotionCode
 	},
 
 	methods: {
@@ -49,13 +49,13 @@ export default {
 				const confirmQuitMemberShip = confirm('정말 탈퇴하시겠습니까 ?');
 				if (confirmQuitMemberShip) {
 					await this.QUIT_MEMBERSHIP();
-					this.$router.replace('/vue-greendays');
+					this.$router.replace('/');
 				}
 			} catch (error) {
 				console.error(error);
 			}
-		},
-	},
+		}
+	}
 };
 </script>
 

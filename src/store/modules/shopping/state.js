@@ -8,7 +8,7 @@ const state = () => ({
 	guestKeywords: [],
 	brandList: [],
 	preorders: [],
-	productDetail: {},
+	productDetail: {}
 });
 
 export default state;

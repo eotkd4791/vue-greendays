@@ -1,11 +1,25 @@
 <template>
 	<div class="photo">
-		<product-photo-zoom v-if="showModal" :whichImage="{ photoUrls, index: photoUrls.indexOf(mainPhotoUrl) }" />
+		<product-photo-zoom
+			v-if="showModal"
+			:whichImage="{ photoUrls, index: photoUrls.indexOf(mainPhotoUrl) }"
+		/>
 		<section class="photo__main">
-			<img :src="mainPhotoUrl" alt="사진이 로딩중입니다." class="photo__img" @click="toggleModal" />
+			<img
+				:src="mainPhotoUrl"
+				alt="사진이 로딩중입니다."
+				class="photo__img"
+				@click="toggleModal"
+			/>
 		</section>
 		<ol class="photo__ol">
-			<li v-for="(photoUrl, index) in photoUrls" :key="index" class="photo__sub" :class="{ 'photo__sub--picked': mainPhotoUrl === photoUrl }" @click="swapMainPhoto(index)">
+			<li
+				v-for="(photoUrl, index) in photoUrls"
+				:key="index"
+				class="photo__sub"
+				:class="{ 'photo__sub--picked': mainPhotoUrl === photoUrl }"
+				@click="swapMainPhoto(index)"
+			>
 				<img :src="photoUrl" alt="사진이 로딩중입니다." class="photo__img" />
 			</li>
 		</ol>
@@ -19,21 +33,21 @@ import { mapGetters } from 'vuex';
 
 export default {
 	components: {
-		ProductPhotoZoom,
+		ProductPhotoZoom
 	},
 
 	data() {
 		return {
 			showModal: false,
 			mainPhotoUrl: '',
-			photoUrls: [],
+			photoUrls: []
 		};
 	},
 
 	computed: {
 		...mapGetters({
-			getProductDetail: 'shopping/getProductDetail',
-		}),
+			getProductDetail: 'shopping/getProductDetail'
+		})
 	},
 
 	methods: {
@@ -46,11 +60,18 @@ export default {
 		},
 
 		setPhotos() {
-			const { photoUrl, secondImgUrl, thirdImgUrl, fourthImgUrl } = this.getProductDetail;
+			const {
+				photoUrl,
+				secondImgUrl,
+				thirdImgUrl,
+				fourthImgUrl
+			} = this.getProductDetail;
 
-			this.photoUrls = [...new Set([photoUrl, secondImgUrl, thirdImgUrl, fourthImgUrl])];
+			this.photoUrls = [
+				...new Set([photoUrl, secondImgUrl, thirdImgUrl, fourthImgUrl])
+			];
 			this.mainPhotoUrl = this.photoUrls[0];
-		},
+		}
 	},
 
 	created() {
@@ -64,7 +85,7 @@ export default {
 
 	beforeDestroy() {
 		Bus.$off('change-product', this.setPhotos);
-	},
+	}
 };
 </script>
 

@@ -1,24 +1,46 @@
 <template>
 	<div class="quick__delivery-container">
 		<section class="quick__delivery-wrapper__products">
-			<display-items v-for="product in products" :key="product.id" :sendToday="product.productSendToday" :ableToBuy="product.productAbleToBuy" :callFrom="callFrom" :productId="product.id">
+			<display-items
+				v-for="product in products"
+				:key="product.id"
+				:sendToday="product.productSendToday"
+				:ableToBuy="product.productAbleToBuy"
+				:callFrom="callFrom"
+				:productId="product.id"
+			>
 				<template #productInfo-photo>
-					<img :src="product.photoUrl" class="item-container__photo" :class="callFrom" />
+					<img
+						:src="product.photoUrl"
+						class="item-container__photo"
+						:class="callFrom"
+					/>
 				</template>
 				<template #productInfo-brand>{{ product.brand }}</template>
 				<template #productInfo-name>{{ product.name }}</template>
-				<template #productInfo-beforePrice>{{ (product.priceBefore * 1000).toLocaleString() }}</template>
-				<template #productInfo-discountRate>{{ Math.ceil(product.discountRate) * 100 }}% 할인</template>
-				<template #productInfo-afterPrice>{{ (product.priceAfter * 1000).toLocaleString() }}</template>
+				<template #productInfo-beforePrice>{{
+					(product.priceBefore * 1000).toLocaleString()
+				}}</template>
+				<template #productInfo-discountRate
+					>{{ Math.ceil(product.discountRate) * 100 }}% 할인</template
+				>
+				<template #productInfo-afterPrice>{{
+					(product.priceAfter * 1000).toLocaleString()
+				}}</template>
 			</display-items>
 		</section>
 		<section class="quick__delivery-wrapper__info">
-			<div class="quick__delivery-wrapper__info-pic" ref="quickDelivery" @click="moveToAbout" />
+			<div
+				class="quick__delivery-wrapper__info-pic"
+				ref="quickDelivery"
+				@click="moveToAbout"
+			/>
 			<div class="quick__delivery-wrapper__info-text">
 				<h3>1년 365일 신상품 상시 할인 SALE</h3>
 				<p>바로구매와 당일배송이 가능한 그린데이즈 빠른배송 상품!</p>
 				<p>
-					그린데이즈 빠른배송은 인기 있는 상품을 저렴하고, 신속하게 만나볼 수 있습니다.
+					그린데이즈 빠른배송은 인기 있는 상품을 저렴하고, 신속하게 만나볼 수
+					있습니다.
 				</p>
 			</div>
 		</section>
@@ -33,7 +55,7 @@ import busToolbarClose from '@/mixins/busToolbarClose.js';
 
 export default {
 	components: {
-		DisplayItems,
+		DisplayItems
 	},
 
 	mixins: [busToolbarClose],
@@ -42,25 +64,25 @@ export default {
 		return {
 			products: [],
 			callFrom: 'item-container--small',
-			imgUrl: 'https://www.dailypop.kr/news/photo/201903/38321_68210_535.png',
+			imgUrl: 'https://www.dailypop.kr/news/photo/201903/38321_68210_535.png'
 		};
 	},
 
 	computed: {
 		...mapState('shopping', {
-			getProducts: state => state.products,
+			getProducts: state => state.products
 		}),
 
 		getRepresentImgs() {
 			return this.getProducts.filter(v => v.productSendToday).slice(0, 3);
-		},
+		}
 	},
 
 	methods: {
 		moveToAbout() {
 			this.$router
 				.push({
-					path: '/vue-greendays/products',
+					path: '/products',
 					query: {
 						keyword: '',
 						gender: '',
@@ -70,12 +92,12 @@ export default {
 						deal_id: 'quick-delivery',
 						page: 1,
 						orderby: 'desc',
-						order_std: 'popularity',
-					},
+						order_std: 'popularity'
+					}
 				})
 				.catch();
 			Bus.$emit('off-toolbar-modal');
-		},
+		}
 	},
 
 	created() {
@@ -88,7 +110,7 @@ export default {
 		quickDeliveryStyle.setProperty('background-repeat', 'no-repeat');
 		quickDeliveryStyle.setProperty('background-position', 'center');
 		quickDeliveryStyle.setProperty('background-size', 'contain');
-	},
+	}
 };
 </script>
 

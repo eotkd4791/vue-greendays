@@ -12,8 +12,8 @@ import TotalPromotion from '@/views/TotalPromotion.vue';
 export default {
 	components: {
 		PreorderNeon,
-		TotalPromotion,
-	},
+		TotalPromotion
+	}
 };
 </script>
 

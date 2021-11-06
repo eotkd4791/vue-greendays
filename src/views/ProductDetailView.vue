@@ -1,7 +1,11 @@
 <template>
 	<transition name="fade">
 		<div class="product-detail">
-			<pick-brand v-if="showModal" @close-picked-brands="closeModal" :propsBrand="pickedBrand" />
+			<pick-brand
+				v-if="showModal"
+				@close-picked-brands="closeModal"
+				:propsBrand="pickedBrand"
+			/>
 
 			<section class="product-detail__info">
 				<product-detail-photo />
@@ -27,7 +31,7 @@ export default {
 		ProductDetailPhoto,
 		ProductDetailInfo,
 		ProductView,
-		PickBrand,
+		PickBrand
 	},
 
 	data() {
@@ -35,21 +39,21 @@ export default {
 			showModal: false,
 			pickedBrand: {
 				type: String,
-				default: () => this.getProductDetail.brand,
+				default: () => this.getProductDetail.brand
 			},
-			paramsWatcher: null,
+			paramsWatcher: null
 		};
 	},
 
 	computed: {
 		...mapGetters({
-			getProductDetail: 'shopping/getProductDetail',
-		}),
+			getProductDetail: 'shopping/getProductDetail'
+		})
 	},
 
 	methods: {
 		...mapActions({
-			FETCH_PRODUCT_INFO: 'shopping/FETCH_PRODUCT_INFO',
+			FETCH_PRODUCT_INFO: 'shopping/FETCH_PRODUCT_INFO'
 		}),
 
 		async getProductInfo(productId) {
@@ -69,7 +73,7 @@ export default {
 
 		closeModal() {
 			this.showModal = false;
-		},
+		}
 	},
 
 	created() {
@@ -87,7 +91,7 @@ export default {
 	beforeDestroy() {
 		Bus.$off('off-picked-brands', this.closeModal);
 		this.paramsWatcher();
-	},
+	}
 };
 </script>
 

@@ -1,6 +1,7 @@
 <template>
 	<div>
-		카트 아이템 뷰 Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
+		카트 아이템 뷰 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+		Necessitatibus voluptatum ducimus similique.
 	</div>
 </template>
 
@@ -8,7 +9,7 @@
 export default {
 	data() {
 		return {};
-	},
+	}
 };
 </script>
 

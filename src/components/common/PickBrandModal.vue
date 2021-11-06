@@ -17,22 +17,23 @@ import { mapState } from 'vuex';
 export default {
 	components: {
 		PickBrandLogIn,
-		PickBrandLogOut,
+		PickBrandLogOut
 	},
 
 	props: ['propsBrand'],
 
 	computed: {
 		...mapState('auth', {
-			userInfo: state => state.userInfo,
-		}),
+			userInfo: state => state.userInfo
+		})
 	},
 
 	methods: {
 		onClickOutside(e) {
-			if (e.target.className === 'modal-wrapper') this.$emit('close-picked-brands');
-		},
-	},
+			if (e.target.className === 'modal-wrapper')
+				this.$emit('close-picked-brands');
+		}
+	}
 };
 </script>
 
