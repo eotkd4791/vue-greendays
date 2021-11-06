@@ -11,8 +11,8 @@ export default {
 	methods: {
 		removeOne(payload) {
 			this.$emit('remove-chips', payload);
-		},
-	},
+		}
+	}
 };
 </script>
 

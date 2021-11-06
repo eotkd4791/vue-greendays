@@ -7,15 +7,27 @@
 						<user-info-modal v-if="showUserInfo" />
 					</transition>
 					<toolbar-user-info />
-					<toolbar-menu @on-toolbar-modal="openToolbarModal" @on-search-brands="openSearchBrands" @off-toolbar-modal="closeToolbarModal" />
+					<toolbar-menu
+						@on-toolbar-modal="openToolbarModal"
+						@on-search-brands="openSearchBrands"
+						@off-toolbar-modal="closeToolbarModal"
+					/>
 				</div>
 			</header>
 		</li>
 		<li>
-			<toolbar-modal :onToolbar="showToolbarModal" :toolbarToOpen="toolbarToOpen" :activeUserInfo="showUserInfo" @mouse-esc="closeToolbarModal" />
+			<toolbar-modal
+				:onToolbar="showToolbarModal"
+				:toolbarToOpen="toolbarToOpen"
+				:activeUserInfo="showUserInfo"
+				@mouse-esc="closeToolbarModal"
+			/>
 		</li>
 		<li>
-			<brand-modal v-if="showModal && SearchBrandsModal" @close-brands="closeSearchBrands" />
+			<brand-modal
+				v-if="showModal && SearchBrandsModal"
+				@close-brands="closeSearchBrands"
+			/>
 		</li>
 	</ol>
 </template>
@@ -34,7 +46,7 @@ export default {
 		BrandModal,
 		ToolbarMenu,
 		ToolbarUserInfo,
-		UserInfoModal,
+		UserInfoModal
 	},
 
 	data() {
@@ -44,14 +56,14 @@ export default {
 			showToolbarModal: false,
 			SearchBrandsModal: false,
 			toolbarToOpen: '',
-			showUserInfo: false,
+			showUserInfo: false
 		};
 	},
 
 	computed: {
 		getUserInfo() {
 			return this.$store.state.auth.userInfo;
-		},
+		}
 	},
 
 	methods: {
@@ -77,16 +89,18 @@ export default {
 		},
 
 		toggleUserInfo() {
-			!this.showUserInfo ? this.$refs.header.style.setProperty('top', '280px') : this.$refs.header.style.setProperty('top', '0');
+			!this.showUserInfo
+				? this.$refs.header.style.setProperty('top', '280px')
+				: this.$refs.header.style.setProperty('top', '0');
 
 			this.showUserInfo = !this.showUserInfo;
-		},
+		}
 	},
 
 	mounted() {
 		Bus.$on('show-user-info', this.toggleUserInfo);
 		Bus.$on('off-toolbar-modal', this.closeToolbarModal);
-	},
+	}
 };
 </script>
 

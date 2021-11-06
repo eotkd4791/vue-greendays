@@ -18,7 +18,11 @@
 				<i class="fas fa-chevron-left" />
 			</button>
 			<ul class="user-reviews__ul" ref="listContainer">
-				<li v-for="(item, index) in photoList" :key="index" class="user-reviews__li">
+				<li
+					v-for="(item, index) in photoList"
+					:key="index"
+					class="user-reviews__li"
+				>
 					<div class="user-reviews__wrapper">
 						<div class="user-reviews__mask" />
 						<img :src="item.path" class="user-reviews__img" />
@@ -30,7 +34,12 @@
 			</button>
 		</div>
 		<ol class="user-reviews__ol">
-			<review-list v-for="(review, index) in reviewList" :key="index" :eachOfReview="review" @set-review-index="onShowDetailHandler" />
+			<review-list
+				v-for="(review, index) in reviewList"
+				:key="index"
+				:eachOfReview="review"
+				@set-review-index="onShowDetailHandler"
+			/>
 		</ol>
 	</aside>
 </template>
@@ -43,7 +52,7 @@ export default {
 
 	components: {
 		ReviewList: () => import('@/components/ReviewList.vue'),
-		StarPoint: () => import('@/components/common/StarPoint.vue'),
+		StarPoint: () => import('@/components/common/StarPoint.vue')
 	},
 
 	data() {
@@ -51,15 +60,21 @@ export default {
 			componentName: 'userReviews',
 			reviewIndex: 0,
 			reviewList: [],
-			showDetail: false,
+			showDetail: false
 		};
 	},
 
 	methods: {
 		scrollEventHandler() {
-			if (window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 1500) {
+			if (
+				window.scrollY + document.documentElement.clientHeight >
+				document.documentElement.scrollHeight - 1500
+			) {
 				if (this.dataStore.length - this.reviewList.length > 0) {
-					const newReviews = this.dataStore.slice(this.reviewIndex, (this.reviewIndex += 3));
+					const newReviews = this.dataStore.slice(
+						this.reviewIndex,
+						(this.reviewIndex += 3)
+					);
 
 					this.reviewList.push(...newReviews);
 				}
@@ -69,12 +84,17 @@ export default {
 		onShowDetailHandler(value) {
 			const reviewIndex = this.reviewList.indexOf(value);
 
-			reviewIndex === this.showDetail ? (this.showDetail = false) : (this.showDetail = reviewIndex);
-		},
+			reviewIndex === this.showDetail
+				? (this.showDetail = false)
+				: (this.showDetail = reviewIndex);
+		}
 	},
 
 	created() {
-		this.reviewList = this.dataStore.slice(this.reviewIndex, (this.reviewIndex += 20));
+		this.reviewList = this.dataStore.slice(
+			this.reviewIndex,
+			(this.reviewIndex += 20)
+		);
 	},
 
 	mounted() {
@@ -83,7 +103,7 @@ export default {
 
 	beforeDestroy() {
 		window.removeEventListener('scroll', this.scrollEventHandler);
-	},
+	}
 };
 </script>
 

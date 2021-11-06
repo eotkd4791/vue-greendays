@@ -1,13 +1,24 @@
 <template>
 	<ol class="modal-container">
 		<li class="modal-row-left" ref="tabs">
-			<p v-for="value in Object.keys(getCategories)" :key="value" class="modal-categories" @mouseover="activatingMenu(value)" @click="pickedCategory({ value, detail: null })">
+			<p
+				v-for="value in Object.keys(getCategories)"
+				:key="value"
+				class="modal-categories"
+				@mouseover="activatingMenu(value)"
+				@click="pickedCategory({ value, detail: null })"
+			>
 				{{ value }}
 			</p>
 		</li>
 		<li class="modal-row-right">
 			<ul>
-				<li class="category__detail" v-for="kind in kinds" :key="kind" @click="pickedCategory({ value: tempCategory, detail: kind })">
+				<li
+					class="category__detail"
+					v-for="kind in kinds"
+					:key="kind"
+					@click="pickedCategory({ value: tempCategory, detail: kind })"
+				>
 					{{ kind }}
 				</li>
 			</ul>
@@ -23,14 +34,14 @@ export default {
 		return {
 			kinds: [],
 			tempCategory: '',
-			activatedTabIndex: 0,
+			activatedTabIndex: 0
 		};
 	},
 
 	computed: {
 		getCategories() {
 			return searchOrderBy.categories;
-		},
+		}
 	},
 
 	methods: {
@@ -38,20 +49,24 @@ export default {
 			this.tempCategory = menu;
 			this.kinds = this.getCategories[menu];
 			if (!this.$refs.tabs) return;
-			this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('left-active');
+			this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove(
+				'left-active'
+			);
 			this.activatedTabIndex = Object.keys(this.getCategories).indexOf(menu);
-			this.$refs.tabs.childNodes[this.activatedTabIndex].classList.add('left-active');
+			this.$refs.tabs.childNodes[this.activatedTabIndex].classList.add(
+				'left-active'
+			);
 		},
 
 		pickedCategory(payload) {
 			this.$emit('picked-category', payload);
-		},
+		}
 	},
 
 	mounted() {
 		this.kinds = this.getCategories.Bags;
 		this.$refs.tabs.firstChild.classList.add('left-active');
-	},
+	}
 };
 </script>
 

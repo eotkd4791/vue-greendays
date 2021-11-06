@@ -3,9 +3,15 @@
 		<section class="preorder-container__category">
 			<header class="preorder-container__category__title">PRE ORDER</header>
 			<div class="preorder-container__category__link" ref="tabs">
-				<router-link class="active" to="/vue-greendays/about" tag="span">#프리오더가 뭐에요?</router-link>
+				<router-link class="active" to="/about" tag="span"
+					>#프리오더가 뭐에요?</router-link
+				>
 
-				<span v-for="preorder in preorders" :key="preorder.title" @mouseover="activatingTab">
+				<span
+					v-for="preorder in preorders"
+					:key="preorder.title"
+					@mouseover="activatingTab"
+				>
 					{{ preorder.title }}
 					<i>></i>
 				</span>
@@ -14,9 +20,15 @@
 		<section class="preorder-container__promotion">
 			<div class="preorder-container__promotion__img" />
 			<div class="preorder-container__promotion__text">
-				<h3 class="preorder-container__promotion__title">한정된 기간동안만 열리는 특별한 타임세일!</h3>
-				<p class="preorder-container__promotion__subtitle">프리오더를 통해 낮은 금액으로 명품을 즉시 구매해보세요!</p>
-				<p class="preorder-container__promotion__subtitle">단, 한정된 시간 동안만 구매할 수 있으니 서둘러주세요</p>
+				<h3 class="preorder-container__promotion__title">
+					한정된 기간동안만 열리는 특별한 타임세일!
+				</h3>
+				<p class="preorder-container__promotion__subtitle">
+					프리오더를 통해 낮은 금액으로 명품을 즉시 구매해보세요!
+				</p>
+				<p class="preorder-container__promotion__subtitle">
+					단, 한정된 시간 동안만 구매할 수 있으니 서둘러주세요
+				</p>
 			</div>
 		</section>
 	</div>
@@ -28,22 +40,24 @@ import { mapState } from 'vuex';
 export default {
 	data() {
 		return {
-			activatedTabIndex: 0,
+			activatedTabIndex: 0
 		};
 	},
 
 	computed: {
 		...mapState('shopping', {
-			preorders: state => state.preorders,
-		}),
+			preorders: state => state.preorders
+		})
 	},
 
 	methods: {
 		activatingTab() {
 			if (!this.$refs.tabs) return;
-			this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove('active');
-		},
-	},
+			this.$refs.tabs.childNodes[this.activatedTabIndex].classList.remove(
+				'active'
+			);
+		}
+	}
 };
 </script>
 

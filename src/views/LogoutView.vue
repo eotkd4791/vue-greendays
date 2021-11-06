@@ -5,8 +5,8 @@
 <script>
 export default {
 	mounted() {
-		this.$router.replace('/vue-greendays');
-	},
+		this.$router.replace('/');
+	}
 };
 </script>
 

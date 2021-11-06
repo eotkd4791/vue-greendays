@@ -29,8 +29,8 @@ import { mapGetters } from 'vuex';
 
 export default {
 	computed: {
-		...mapGetters('auth', ['getUserInfo']),
-	},
+		...mapGetters('auth', ['getUserInfo'])
+	}
 };
 </script>
 

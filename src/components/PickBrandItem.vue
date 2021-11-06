@@ -1,12 +1,17 @@
 <template>
 	<li class="brand-item">
-		<input type="checkbox" class="brand-item__checkbox" :value="categoryPair[0]" v-model="$parent.checkedBrandsToDelete" />
+		<input
+			type="checkbox"
+			class="brand-item__checkbox"
+			:value="categoryPair[0]"
+			v-model="$parent.checkedBrandsToDelete"
+		/>
 		<ul class="brand-item__categories">
 			<router-link
 				class="brand-item__list brand-item__title"
 				tag="li"
 				:to="{
-					path: '/vue-greendays/products',
+					path: '/products',
 					query: {
 						keyword: '',
 						gender: '',
@@ -16,8 +21,8 @@
 						deal_id: '',
 						page: 1,
 						orderby: 'desc',
-						order_std: 'popularity',
-					},
+						order_std: 'popularity'
+					}
 				}"
 			>
 				{{ categoryPair[0] }}
@@ -27,7 +32,7 @@
 				v-for="(category, index) in Object.keys(categories)"
 				:key="category"
 				:to="{
-					path: '/vue-greendays/products',
+					path: '/products',
 					query: {
 						keyword: '',
 						gender: '',
@@ -37,12 +42,16 @@
 						deal_id: '',
 						page: 1,
 						orderby: 'desc',
-						order_std: 'popularity',
-					},
+						order_std: 'popularity'
+					}
 				}"
 				class="brand-item__list"
 			>
-				<i class="fas fa-heart" :class="{ 'fa-heart--picked': Object.values(categories)[index] }" @click="updatePickedBrands(categoryPair[0], category)" />
+				<i
+					class="fas fa-heart"
+					:class="{ 'fa-heart--picked': Object.values(categories)[index] }"
+					@click="updatePickedBrands(categoryPair[0], category)"
+				/>
 				{{ category }}
 			</router-link>
 		</ul>
@@ -56,18 +65,18 @@ export default {
 	mixins: [brandPicking],
 
 	props: {
-		categoryPair: Array,
+		categoryPair: Array
 	},
 
 	data() {
 		return {
-			isChecked: false,
+			isChecked: false
 		};
 	},
 
 	created() {
 		this.categories = this.categoryPair[1];
-	},
+	}
 };
 </script>
 

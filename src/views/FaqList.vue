@@ -2,7 +2,11 @@
 	<section class="faq-list" v-once>
 		<header class="faq-list__header">자주묻는질문</header>
 		<ul class="faq-list__ul">
-			<info-list v-for="item in listItems" :key="item.title" :eachOfListItems="item" />
+			<info-list
+				v-for="item in listItems"
+				:key="item.title"
+				:eachOfListItems="item"
+			/>
 		</ul>
 	</section>
 </template>
@@ -13,9 +17,9 @@ import customerServiceList from '@/mixins/customerServiceList.js';
 
 export default {
 	components: {
-		InfoList,
+		InfoList
 	},
-	mixins: [customerServiceList],
+	mixins: [customerServiceList]
 };
 </script>
 

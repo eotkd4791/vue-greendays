@@ -14,15 +14,15 @@ export default new Vuex.Store({
 	modules: {
 		auth: {
 			namespaced: true,
-			...auth,
+			...auth
 		},
 		shopping: {
 			namespaced: true,
-			...shopping,
-		},
+			...shopping
+		}
 	},
 	state,
 	mutations,
 	getters,
-	actions,
+	actions
 });

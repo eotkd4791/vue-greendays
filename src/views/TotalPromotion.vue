@@ -1,19 +1,36 @@
 <template>
 	<div class="promotion">
 		<section class="promotion__wrapper">
-			<summary-promotion v-for="promotion in promotions" :key="promotion.title" :imgUrl="promotion.imgUrl" :productOfPreorder="promotion.products">
+			<summary-promotion
+				v-for="promotion in promotions"
+				:key="promotion.title"
+				:imgUrl="promotion.imgUrl"
+				:productOfPreorder="promotion.products"
+			>
 				<template #promoInfo-name>
 					<p class="promo__info-container-title">{{ promotion.promoName }}</p>
 				</template>
 				<template #promoInfo-timer>
 					<p class="promo__info-container-timer">TIMER</p>
-					<p class="promo__info-container-timer clock" ref="timer">{{ `${addZero(promotion.expiredHour)} : ${addZero(promotion.expiredMin)} : ${addZero(promotion.expiredSec)}` }}</p>
+					<p class="promo__info-container-timer clock" ref="timer">
+						{{
+							`${addZero(promotion.expiredHour)} : ${addZero(
+								promotion.expiredMin
+							)} : ${addZero(promotion.expiredSec)}`
+						}}
+					</p>
 				</template>
 				<template #promoInfo-overview>
 					<div class="promo__info-container-overview-sub">
-						<p class="promo__info-container-overview-title">{{ promotion.title }}</p>
-						<p class="promo__info-container-overview-subtitle">{{ promotion.subtitle }}</p>
-						<p class="promo__info-container-overview-description">{{ promotion.description }}</p>
+						<p class="promo__info-container-overview-title">
+							{{ promotion.title }}
+						</p>
+						<p class="promo__info-container-overview-subtitle">
+							{{ promotion.subtitle }}
+						</p>
+						<p class="promo__info-container-overview-description">
+							{{ promotion.description }}
+						</p>
 					</div>
 				</template>
 			</summary-promotion>
@@ -28,25 +45,25 @@ import addZero from '@/utils/setTwoDigit.js';
 
 export default {
 	components: {
-		SummaryPromotion,
+		SummaryPromotion
 	},
 
 	data() {
 		return {
 			promotions: [],
 			quickDelivery: {},
-			timers: [],
+			timers: []
 		};
 	},
 
 	computed: {
 		...mapState('shopping', {
-			preorders: state => state.preorders,
-		}),
+			preorders: state => state.preorders
+		})
 	},
 
 	methods: {
-		addZero,
+		addZero
 	},
 
 	created() {
@@ -81,7 +98,7 @@ export default {
 		this.timers.forEach(timer => {
 			clearInterval(timer);
 		});
-	},
+	}
 };
 </script>
 

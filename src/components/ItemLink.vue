@@ -19,9 +19,9 @@ export default {
 
 	methods: {
 		goToProductInfo() {
-			this.$router.push(`/vue-greendays/products/show/${this.productInfo.id}`);
-		},
-	},
+			this.$router.push(`/products/show/${this.productInfo.id}`);
+		}
+	}
 };
 </script>
 

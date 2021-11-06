@@ -7,7 +7,7 @@ const getters = {
 	},
 	getLatelySearchItems(state) {
 		return state.userInfo.searchedKeywords;
-	},
+	}
 };
 
 export default getters;

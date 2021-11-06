@@ -23,7 +23,9 @@ const actions = {
 	//이메일 중복확인
 	CHECK_EMAIL({ state }, payload) {
 		try {
-			const existSameEmail = state.userList.find(user => user.email === payload);
+			const existSameEmail = state.userList.find(
+				user => user.email === payload
+			);
 			if (existSameEmail) {
 				throw new Error('이미 가입된 이메일입니다.');
 			} else {
@@ -42,7 +44,9 @@ const actions = {
 		try {
 			const additionalPoint = 2000;
 			const payloadToCompare = payload.toUpperCase();
-			const existSamePromotionCode = state.userList.find(user => user.promotionCode === payloadToCompare);
+			const existSamePromotionCode = state.userList.find(
+				user => user.promotionCode === payloadToCompare
+			);
 			if (existSamePromotionCode) {
 				alert(`${additionalPoint} 포인트를 성공적으로 지급하였습니다.`);
 				return additionalPoint;
@@ -74,7 +78,10 @@ const actions = {
 	//로그인
 	LOG_IN({ state, commit }, payload) {
 		try {
-			const existUser = state.userList.find(user => user.email === payload.email && user.password === payload.password);
+			const existUser = state.userList.find(
+				user =>
+					user.email === payload.email && user.password === payload.password
+			);
 			if (existUser) {
 				setItem('userInfo', existUser);
 				commit('setUser', existUser);
@@ -159,7 +166,9 @@ const actions = {
 			const { userInfo } = state;
 			const { shopping } = rootState;
 			const isLoggedIn = !isEmpty(userInfo);
-			const isUnique = isLoggedIn ? userInfo.searchedKeywords.find(v => v === payload) : shopping.guestKeywords.find(v => v === payload);
+			const isUnique = isLoggedIn
+				? userInfo.searchedKeywords.find(v => v === payload)
+				: shopping.guestKeywords.find(v => v === payload);
 
 			if (!isUnique) {
 				if (isLoggedIn) {
@@ -193,9 +202,12 @@ const actions = {
 
 	UPDATE_PICKED_BRANDS({ commit }, { key, value }) {
 		const storedUserInfo = getItem('userInfo');
-		const existPickedCategory = Object.values(value).filter(v => v).length > 0 ? true : false;
+		const existPickedCategory =
+			Object.values(value).filter(v => v).length > 0 ? true : false;
 
-		existPickedCategory ? (storedUserInfo.pickedBrands[key] = value) : delete storedUserInfo.pickedBrands[key];
+		existPickedCategory
+			? (storedUserInfo.pickedBrands[key] = value)
+			: delete storedUserInfo.pickedBrands[key];
 
 		setItem('userInfo', storedUserInfo);
 		commit('setUser', storedUserInfo);
@@ -227,7 +239,7 @@ const actions = {
 		});
 		setItem('userInfo', storedUserInfo);
 		commit('setUser', storedUserInfo);
-	},
+	}
 };
 
 export default actions;

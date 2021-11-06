@@ -1,23 +1,33 @@
 <template>
 	<aside class="alphabet-brands">
 		<ol class="alphabet-brands__letters" ref="btnLetter">
-			<li class="alphabet-brands__btn" v-for="(letter, index) in alphabetBtn" :key="index" @click="pickAlphabet(letter, index)" :class="{ 'alphabet-brands__btn--passive': !alphabetSet.has(letter) }">
+			<li
+				class="alphabet-brands__btn"
+				v-for="(letter, index) in alphabetBtn"
+				:key="index"
+				@click="pickAlphabet(letter, index)"
+				:class="{ 'alphabet-brands__btn--passive': !alphabetSet.has(letter) }"
+			>
 				{{ letter }}
 			</li>
 		</ol>
 
 		<ul class="alphabet-brands__ul">
-			<li class="alphabet-brands__li" v-for="(brand, index) in getRelatedBrands" :key="index">
+			<li
+				class="alphabet-brands__li"
+				v-for="(brand, index) in getRelatedBrands"
+				:key="index"
+			>
 				<i
 					class="fas fa-heart"
 					:class="{
-						'fa-heart--picked': userInfo && isPickedBrand(brand),
+						'fa-heart--picked': userInfo && isPickedBrand(brand)
 					}"
 					@click="openAlarmBrand"
 				/>
 				<router-link
 					:to="{
-						path: '/vue-greendays/products',
+						path: '/products',
 						query: {
 							keyword: '',
 							gender: '',
@@ -27,8 +37,8 @@
 							deal_id: '',
 							page: 1,
 							orderby: 'desc',
-							order_std: 'popularity',
-						},
+							order_std: 'popularity'
+						}
 					}"
 				>
 					{{ brand }}
@@ -50,20 +60,25 @@ export default {
 		return {
 			currentAlphabetIndex: null,
 			alphabetBtn: orderBy.alphabets,
-			alphabetSet: Object,
+			alphabetSet: Object
 		};
 	},
 
 	computed: {
 		...mapState({
 			brandsInitialAlphabet: state => state.shopping.brandList,
-			userInfo: state => state.auth.userInfo,
+			userInfo: state => state.auth.userInfo
 		}),
 
 		getRelatedBrands() {
-			const initialRegExp = new RegExp(`[${this.alphabetBtn[this.currentAlphabetIndex]}]`, 'i');
-			return this.brandsInitialAlphabet.filter(v => initialRegExp.test(v[0])).sort();
-		},
+			const initialRegExp = new RegExp(
+				`[${this.alphabetBtn[this.currentAlphabetIndex]}]`,
+				'i'
+			);
+			return this.brandsInitialAlphabet
+				.filter(v => initialRegExp.test(v[0]))
+				.sort();
+		}
 	},
 
 	methods: {
@@ -83,7 +98,7 @@ export default {
 
 		isPickedBrand(brand) {
 			return this.userInfo.pickedBrands[brand];
-		},
+		}
 	},
 
 	created() {
@@ -103,8 +118,8 @@ export default {
 		currentAlphabetIndex(newVal, oldVal) {
 			this.toggleAlphabet(oldVal);
 			this.toggleAlphabet(newVal);
-		},
-	},
+		}
+	}
 };
 </script>
 

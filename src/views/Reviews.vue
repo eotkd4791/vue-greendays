@@ -12,8 +12,8 @@ import UserReviews from '@/components/UserReviews.vue';
 export default {
 	components: {
 		InspectionCenter,
-		UserReviews,
-	},
+		UserReviews
+	}
 };
 </script>
 

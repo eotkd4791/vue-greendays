@@ -1,16 +1,9 @@
 <template>
 	<div>
-		공지사항 Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum ducimus similique.
+		공지사항 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+		Necessitatibus voluptatum ducimus similique.
 	</div>
 </template>
-
-<script>
-export default {
-	data() {
-		return {};
-	},
-};
-</script>
 
 <style scoped>
 div {

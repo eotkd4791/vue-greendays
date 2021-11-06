@@ -4,6 +4,6 @@ export default {
 	watch: {
 		'$route.query': function() {
 			Bus.$emit('off-toolbar-modal');
-		},
-	},
+		}
+	}
 };

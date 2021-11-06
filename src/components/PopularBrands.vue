@@ -1,11 +1,19 @@
 <template>
 	<ol class="popular-brands">
-		<li class="popular-brands__list" v-for="(brand, index) in brandsList" :key="index">
+		<li
+			class="popular-brands__list"
+			v-for="(brand, index) in brandsList"
+			:key="index"
+		>
 			<span class="popular-brands__rank">{{ index + 1 }}</span>
-			<i class="fas fa-heart" :class="{ 'fa-heart--picked': userInfo && isPickedBrand(brand) }" @click="openAlarmBrand" />
+			<i
+				class="fas fa-heart"
+				:class="{ 'fa-heart--picked': userInfo && isPickedBrand(brand) }"
+				@click="openAlarmBrand"
+			/>
 			<router-link
 				:to="{
-					path: '/vue-greendays/products',
+					path: '/products',
 					query: {
 						keyword: '',
 						gender: '',
@@ -15,8 +23,8 @@
 						deal_id: '',
 						page: 1,
 						orderby: 'desc',
-						order_std: 'popularity',
-					},
+						order_std: 'popularity'
+					}
 				}"
 			>
 				{{ brand }}
@@ -31,7 +39,7 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
 	data() {
 		return {
-			brandsList: [],
+			brandsList: []
 		};
 	},
 
@@ -39,15 +47,15 @@ export default {
 		...mapState({
 			userInfo: state => state.auth.userInfo,
 			products: state => state.shopping.products,
-			popularBrands: state => state.shopping.brandList,
-		}),
+			popularBrands: state => state.shopping.brandList
+		})
 	},
 
 	methods: {
 		...mapMutations('shopping', ['setBrandList']),
 
 		...mapActions({
-			IS_LOGGED_IN: 'auth/IS_LOGGED_IN',
+			IS_LOGGED_IN: 'auth/IS_LOGGED_IN'
 		}),
 
 		openAlarmBrand(e) {
@@ -60,10 +68,15 @@ export default {
 			const map = new Map();
 			this.products.map(v => {
 				const { brand, popularity } = v;
-				map.set(brand, map.has(brand) ? popularity + map.get(brand) : popularity);
+				map.set(
+					brand,
+					map.has(brand) ? popularity + map.get(brand) : popularity
+				);
 			}); //브랜드별 제품의 인기도 총합
 
-			this.brandsList = [...map.entries()].sort((a, b) => (a[1] > b[1] ? -1 : 1)).map(v => v[0]);
+			this.brandsList = [...map.entries()]
+				.sort((a, b) => (a[1] > b[1] ? -1 : 1))
+				.map(v => v[0]);
 			// 브랜드 인기도 내림차순으로 정렬하여 brandsList 배열에 삽입
 
 			this.setBrandList(this.brandsList);
@@ -75,12 +88,14 @@ export default {
 
 		isPickedBrand(brand) {
 			return this.userInfo.pickedBrands[brand];
-		},
+		}
 	},
 
 	created() {
-		this.popularBrands.length ? (this.brandsList = this.popularBrands) : this.setPopularBrands();
-	},
+		this.popularBrands.length
+			? (this.brandsList = this.popularBrands)
+			: this.setPopularBrands();
+	}
 };
 </script>
 
