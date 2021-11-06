@@ -20,9 +20,9 @@ import { mapState } from 'vuex';
 export default {
 	computed: {
 		...mapState('auth', {
-			promotionCode: state => state.userInfo.promotionCode,
-		}),
-	},
+			promotionCode: state => state.userInfo.promotionCode
+		})
+	}
 };
 </script>
 

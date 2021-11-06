@@ -21,13 +21,26 @@
 					:productId="product[index - 1].id"
 				>
 					<template #productInfo-photo>
-						<img :src="product[index - 1].photoUrl" width="220px" height="220px" class="item-container__photo" :class="callfrom" />
+						<img
+							:src="product[index - 1].photoUrl"
+							width="220px"
+							height="220px"
+							class="item-container__photo"
+							:class="callfrom"
+						/>
 					</template>
 					<template #productInfo-brand>{{ product[index - 1].brand }}</template>
 					<template #productInfo-name>{{ product[index - 1].name }}</template>
-					<template #productInfo-beforePrice>{{ (product[index - 1].priceBefore * 1000).toLocaleString() }}</template>
-					<template #productInfo-discountRate>{{ Math.ceil(product[index - 1].discountRate) * 100 }}% 할인</template>
-					<template #productInfo-afterPrice>{{ (product[index - 1].priceAfter * 1000).toLocaleString() }}</template>
+					<template #productInfo-beforePrice>{{
+						(product[index - 1].priceBefore * 1000).toLocaleString()
+					}}</template>
+					<template #productInfo-discountRate
+						>{{ Math.ceil(product[index - 1].discountRate) * 100 }}%
+						할인</template
+					>
+					<template #productInfo-afterPrice>{{
+						(product[index - 1].priceAfter * 1000).toLocaleString()
+					}}</template>
 				</display-items>
 			</section>
 		</div>
@@ -39,7 +52,7 @@ import DisplayItems from '@/components/common/DisplayItems.vue';
 
 export default {
 	components: {
-		DisplayItems,
+		DisplayItems
 	},
 	props: ['imgUrl', 'productOfPreorder'],
 	data() {
@@ -47,8 +60,8 @@ export default {
 			product: [],
 			callfrom: 'main__view',
 			intervalTimer: {
-				type: Object,
-			},
+				type: Object
+			}
 		};
 	},
 
@@ -62,7 +75,7 @@ export default {
 		promoStyle.setProperty('background-repeat', 'no-repeat');
 		promoStyle.setProperty('background-position', 'center');
 		promoStyle.setProperty('background-size', 'cover');
-	},
+	}
 };
 </script>
 

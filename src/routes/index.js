@@ -11,11 +11,17 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
 	mode: 'history',
-	routes: [userRoutes, customerServiceRoutes, ...authRoutes, ...shoppingRoutes, ...publicRoutes],
+	routes: [
+		userRoutes,
+		customerServiceRoutes,
+		...authRoutes,
+		...shoppingRoutes,
+		...publicRoutes
+	],
 
 	scrollBehavior() {
 		return { x: 0, y: 0 };
-	},
+	}
 });
 
 export default router;

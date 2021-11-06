@@ -7,7 +7,7 @@
 		<li class="wish__empty__picture">
 			<span class="wish__empty__text">Pick!</span>
 		</li>
-		<router-link to="/vue-greendays/products" tag="li" class="wish__empty__link">
+		<router-link to="/products" tag="li" class="wish__empty__link">
 			원하는 상품 PICK! 하러 가기 >
 		</router-link>
 	</ul>

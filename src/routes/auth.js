@@ -1,19 +1,19 @@
 const authRoutes = [
 	{
-		path: '/vue-greendays/login',
+		path: '/login',
 		name: 'login',
-		component: () => import('@/views/LoginView.vue'),
+		component: () => import('@/views/LoginView.vue')
 	},
 	{
-		path: '/vue-greendays/logout',
+		path: '/logout',
 		name: 'logout',
-		component: () => import('@/views/LogoutView.vue'),
+		component: () => import('@/views/LogoutView.vue')
 	},
 	{
-		path: '/vue-greendays/signup',
+		path: '/signup',
 		name: 'signup',
-		component: () => import('@/views/SignUpView.vue'),
-	},
+		component: () => import('@/views/SignUpView.vue')
+	}
 ];
 
 export default authRoutes;

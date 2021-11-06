@@ -10,8 +10,8 @@ import LeftLink from '@/components/common/LeftLink.vue';
 
 export default {
 	components: {
-		LeftLink,
-	},
+		LeftLink
+	}
 };
 </script>
 

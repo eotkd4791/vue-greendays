@@ -1,6 +1,6 @@
 const state = () => ({
 	userInfo: null,
-	userList: [],
+	userList: []
 });
 
 export default state;

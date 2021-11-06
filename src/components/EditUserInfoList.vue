@@ -8,34 +8,63 @@
 				</li>
 				<li class="edit-list__ol__li">
 					<span class="edit-list__subheader">연락처</span>
-					<input type="text" class="edit-list__input edit-list__input--inline" :value="userInfo.phoneNum" />
-					<button class="edit-list__btn edit-list__btn--inline" @click="updatePhoneNumber">
+					<input
+						type="text"
+						class="edit-list__input edit-list__input--inline"
+						:value="userInfo.phoneNum"
+					/>
+					<button
+						class="edit-list__btn edit-list__btn--inline"
+						@click="updatePhoneNumber"
+					>
 						수정하기
 					</button>
 				</li>
 			</ol>
 		</li>
 		<li class="edit-list__ul__li">
-			<button class="edit-list__btn" :class="{ 'edit-list__btn--modifier': !isShownPasswordUpdate }" @click="toggleUpdatePassword">
+			<button
+				class="edit-list__btn"
+				:class="{ 'edit-list__btn--modifier': !isShownPasswordUpdate }"
+				@click="toggleUpdatePassword"
+			>
 				비밀번호 변경
 			</button>
 			<ol class="edit-list__ol" v-if="isShownPasswordUpdate">
 				<li class="edit-list__ol__li">
 					<span class="edit-list__subheader">기존 비밀번호</span>
-					<input type="text" class="edit-list__input" v-model="originPassword" placeholder="기존 비밀번호를 입력하세요." />
+					<input
+						type="text"
+						class="edit-list__input"
+						v-model="originPassword"
+						placeholder="기존 비밀번호를 입력하세요."
+					/>
 				</li>
 				<li class="edit-list__ol__li">
 					<span class="edit-list__subheader">새로운 비밀번호</span>
-					<input type="text" class="edit-list__input" v-model="newPassword" placeholder="새로운 비밀번호를 입력하세요." />
+					<input
+						type="text"
+						class="edit-list__input"
+						v-model="newPassword"
+						placeholder="새로운 비밀번호를 입력하세요."
+					/>
 				</li>
 				<li class="edit-list__ol__li">
 					<span class="edit-list__subheader">비밀번호 확인</span>
-					<input type="text" class="edit-list__input" v-model="newPasswordConfirm" placeholder="비밀번호를 한번 더 입력해 주세요" />
+					<input
+						type="text"
+						class="edit-list__input"
+						v-model="newPasswordConfirm"
+						placeholder="비밀번호를 한번 더 입력해 주세요"
+					/>
 				</li>
 			</ol>
 		</li>
 		<li class="edit-list__ul__li">
-			<button class="edit-list__btn edit-list__btn--bold" @click.prevent="onSubmitNewUserInfo">
+			<button
+				class="edit-list__btn edit-list__btn--bold"
+				@click.prevent="onSubmitNewUserInfo"
+			>
 				정보 변경
 			</button>
 		</li>
@@ -52,7 +81,7 @@ export default {
 			isShownPasswordUpdate: false,
 			originPassword: '',
 			newPassword: '',
-			newPasswordConfirm: '',
+			newPasswordConfirm: ''
 		};
 	},
 
@@ -63,16 +92,16 @@ export default {
 
 		onSubmitNewUserInfo() {},
 
-		updatePhoneNumber() {},
+		updatePhoneNumber() {}
 	},
 
 	computed: {
 		...mapState({
-			userInfo: state => state.auth.userInfo,
-		}),
+			userInfo: state => state.auth.userInfo
+		})
 	},
 
-	mixins: [fillBirthYear],
+	mixins: [fillBirthYear]
 };
 </script>
 

@@ -6,7 +6,7 @@
 			class="fas fa-star"
 			:class="{
 				'star-point--active': satisfaction >= index,
-				'star-point--small': starSize === 'small',
+				'star-point--small': starSize === 'small'
 			}"
 		/>
 	</div>

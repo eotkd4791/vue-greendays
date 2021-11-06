@@ -1,19 +1,19 @@
 const publicRoutes = [
 	{
-		path: '/vue-greendays/',
+		path: '/',
 		name: 'main',
-		component: () => import('@/views/MainView.vue'),
+		component: () => import('@/views/MainView.vue')
 	},
 	{
-		path: '/vue-greendays/introduction',
+		path: '/introduction',
 		name: 'introduction',
-		component: () => import('@/views/Introduction.vue'),
+		component: () => import('@/views/Introduction.vue')
 	},
 	{
-		path: '/vue-greendays/reviews',
+		path: '/reviews',
 		name: 'reviews',
-		component: () => import('@/views/Reviews.vue'),
-	},
+		component: () => import('@/views/Reviews.vue')
+	}
 ];
 
 export default publicRoutes;

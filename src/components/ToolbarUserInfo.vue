@@ -1,24 +1,43 @@
 <template>
-	<ul class="user-info" @click="movePage('/vue-greendays')">
-		<li class="user-info__point" v-if="getUserInfo" @click.stop="movePage(`/vue-greendays/user/mypoint/${getUserInfo.id}`)">
+	<ul class="user-info" @click="movePage('/')">
+		<li
+			class="user-info__point"
+			v-if="getUserInfo"
+			@click.stop="movePage(`/user/mypoint/${getUserInfo.id}`)"
+		>
 			<span class="user-info__text" v-if="getUserInfo">
 				{{ getUserInfo ? getUserInfo.point : '' }}
 			</span>
 			<span class="fas fa-coins" v-show="getUserInfo" />
 		</li>
-		<li class="user-info__list fas fa-user" ref="userInfo" @click.stop="getUserInfo ? toggleUserInfo() : movePage('/vue-greendays/login')" />
+		<li
+			class="user-info__list fas fa-user"
+			ref="userInfo"
+			@click.stop="getUserInfo ? toggleUserInfo() : movePage('/login')"
+		/>
 		<li
 			class="user-info__list fa-heart"
 			:class="{
 				fas: getUserInfo && getUserInfo.wishList.length > 0,
-				far: !getUserInfo || !getUserInfo.wishList.length,
+				far: !getUserInfo || !getUserInfo.wishList.length
 			}"
-			@click.stop="getUserInfo ? movePage(`/vue-greendays/wishlist/${getUserInfo.id}`) : movePage('/vue-greendays/login')"
+			@click.stop="
+				getUserInfo
+					? movePage(`/wishlist/${getUserInfo.id}`)
+					: movePage('/login')
+			"
 		/>
 		<li v-show="getUserInfo" class="user-info__text">
 			{{ getUserInfo ? getUserInfo.wishList.length : '' }}
 		</li>
-		<li class="user-info__list fas fa-shopping-basket" @click.stop="getUserInfo ? movePage(`/vue-greendays/cartitems/${getUserInfo.id}`) : movePage('/vue-greendays/login')" />
+		<li
+			class="user-info__list fas fa-shopping-basket"
+			@click.stop="
+				getUserInfo
+					? movePage(`/cartitems/${getUserInfo.id}`)
+					: movePage('/login')
+			"
+		/>
 		<li class="user-info__text">
 			{{ getUserInfo ? getUserInfo.cartItems.length : 0 }}
 		</li>
@@ -35,14 +54,14 @@ export default {
 
 	data() {
 		return {
-			showUserInfo: false,
+			showUserInfo: false
 		};
 	},
 
 	computed: {
 		getUserInfo() {
 			return this.$store.state.auth.userInfo;
-		},
+		}
 	},
 
 	methods: {
@@ -52,7 +71,7 @@ export default {
 			this.$refs.userInfo.classList.toggle('active');
 			this.showUserInfo = !this.showUserInfo;
 			Bus.$emit('show-user-info', this.showUserInfo);
-		},
+		}
 	},
 
 	created() {
@@ -65,7 +84,7 @@ export default {
 
 	beforeDestroy() {
 		Bus.$off('user-info-toggle', this.toggleUserInfo);
-	},
+	}
 };
 </script>
 

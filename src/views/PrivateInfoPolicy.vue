@@ -1,7 +1,10 @@
 <template>
 	<section class="private-info-policy" v-once>
 		<header class="private-info-policy__header">개인정보취급방침</header>
-		<blockquote class="private-info-policy__blockquote" v-html="customerService.privateInfoPolicy" />
+		<blockquote
+			class="private-info-policy__blockquote"
+			v-html="customerService.privateInfoPolicy"
+		/>
 	</section>
 </template>
 
@@ -11,9 +14,9 @@ import customerService from '@/static/customerService.js';
 export default {
 	data() {
 		return {
-			customerService,
+			customerService
 		};
-	},
+	}
 };
 </script>
 

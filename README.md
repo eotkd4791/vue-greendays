@@ -10,11 +10,9 @@ E-Commerce greendays
 
 ### ⚡️ 프로젝트 개요
 
-> 온라인 쇼핑몰 레드데이즈([https://www.reddays.kr/](https://www.reddays.kr/))를 클론코딩하였습니다.
-
 - 저장소👇
 
-[eotkd4791/vue-greendays](https://github.com/eotkd4791/vue-greendays)
+[eotkd4791/vue-greendays](https://github.com/eotkd/greendays)
 
 - 결과물 👇
 

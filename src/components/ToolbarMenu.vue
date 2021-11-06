@@ -2,10 +2,14 @@
 	<div class="toolbar-menu">
 		<div class="toolbar-menu__menus">
 			<ul class="toolbar-menu__active">
-				<li class="toolbar-menu__active__li" @mouseover="mouseOverOnMenu" @click="$emit('off-toolbar-modal')">
+				<li
+					class="toolbar-menu__active__li"
+					@mouseover="mouseOverOnMenu"
+					@click="$emit('off-toolbar-modal')"
+				>
 					<router-link
 						:to="{
-							path: '/vue-greendays/products',
+							path: '/products',
 							query: {
 								keyword: '',
 								gender: '',
@@ -15,8 +19,8 @@
 								deal_id: 'reserve-purchase',
 								page: 1,
 								orderby: 'desc',
-								order_std: 'popularity',
-							},
+								order_std: 'popularity'
+							}
 						}"
 					>
 						예약구매
@@ -26,10 +30,14 @@
 				<li class="toolbar-menu__active__li" @mouseover="mouseOverOnMenu">
 					프리오더
 				</li>
-				<li class="toolbar-menu__active__li" @mouseover="mouseOverOnMenu" @click="$emit('off-toolbar-modal')">
+				<li
+					class="toolbar-menu__active__li"
+					@mouseover="mouseOverOnMenu"
+					@click="$emit('off-toolbar-modal')"
+				>
 					<router-link
 						:to="{
-							path: '/vue-greendays/products',
+							path: '/products',
 							query: {
 								keyword: '',
 								gender: '',
@@ -39,8 +47,8 @@
 								deal_id: 'quick-delivery',
 								page: 1,
 								orderby: 'desc',
-								order_std: 'popularity',
-							},
+								order_std: 'popularity'
+							}
 						}"
 					>
 						빠른배송
@@ -48,8 +56,8 @@
 				</li>
 			</ul>
 			<ul class="toolbar-menu__passive" @mouseover="mouseLeaveFromMenu">
-				<router-link tag="li" to="/vue-greendays/reviews">리뷰</router-link>
-				<router-link tag="li" to="/vue-greendays/customerservice">고객센터</router-link>
+				<router-link tag="li" to="/reviews">리뷰</router-link>
+				<router-link tag="li" to="/customerservice">고객센터</router-link>
 			</ul>
 		</div>
 		<ul class="toolbar-menu__right">
@@ -59,7 +67,14 @@
 			</li>
 			<li class="toolbar-menu__brand-search" @click="mouseOverOnMenu">
 				<form class="toolbar-menu__form">
-					<input type="text" placeholder="검색어를 입력해 주세요" class="toolbar-menu__input" v-model="keyword" @input="searchKeyword" @keypress.enter.prevent="onSubmitKeyword" />
+					<input
+						type="text"
+						placeholder="검색어를 입력해 주세요"
+						class="toolbar-menu__input"
+						v-model="keyword"
+						@input="searchKeyword"
+						@keypress.enter.prevent="onSubmitKeyword"
+					/>
 					<i class="fas fa-search" />
 				</form>
 			</li>
@@ -78,7 +93,7 @@ export default {
 
 	data() {
 		return {
-			keyword: '',
+			keyword: ''
 		};
 	},
 
@@ -86,7 +101,7 @@ export default {
 		...mapActions({
 			ADD_SEARCH_KEYWORD: 'auth/ADD_SEARCH_KEYWORD',
 			IS_LOGGED_IN: 'auth/IS_LOGGED_IN',
-			SET_EXPECTED_KEYWORDS: 'shopping/SET_EXPECTED_KEYWORDS',
+			SET_EXPECTED_KEYWORDS: 'shopping/SET_EXPECTED_KEYWORDS'
 		}),
 
 		mouseLeaveFromMenu() {
@@ -104,7 +119,12 @@ export default {
 
 		searchKeyword: debounce(function() {
 			const trimmedKeyword = this.keyword.replace(/ /g, '').toUpperCase();
-			Bus.$emit(trimmedKeyword.length === 0 ? 'off-recommend-keywords' : 'on-recommend-keywords', trimmedKeyword);
+			Bus.$emit(
+				trimmedKeyword.length === 0
+					? 'off-recommend-keywords'
+					: 'on-recommend-keywords',
+				trimmedKeyword
+			);
 		}, 800),
 
 		onSubmitKeyword() {
@@ -118,7 +138,7 @@ export default {
 						this.mouseLeaveFromMenu();
 						this.$router
 							.push({
-								path: '/vue-greendays/products',
+								path: '/products',
 								query: {
 									keyword: trimmedKeyword,
 									gender: '',
@@ -128,20 +148,20 @@ export default {
 									deal_id: '',
 									page: 1,
 									order_std: 'popularity',
-									orderby: 'desc',
-								},
+									orderby: 'desc'
+								}
 							})
 							.catch(() => {});
 						this.keyword = '';
 					})
 					.catch(console.error);
 			}
-		},
+		}
 	},
 
 	created() {
 		this.SET_EXPECTED_KEYWORDS();
-	},
+	}
 };
 </script>
 

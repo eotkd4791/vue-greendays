@@ -11,9 +11,9 @@ import customerService from '@/static/customerService.js';
 export default {
 	data() {
 		return {
-			customerService,
+			customerService
 		};
-	},
+	}
 };
 </script>
 

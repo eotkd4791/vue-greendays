@@ -16,7 +16,7 @@ const getters = {
 	},
 	getProductDetail(state) {
 		return state.productDetail;
-	},
+	}
 };
 
 export default getters;

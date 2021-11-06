@@ -14,22 +14,22 @@ const userInfo = {
 			Clothes: false,
 			Shoes: false,
 			Accessories: false,
-			Wallets: false,
-		},
+			Wallets: false
+		}
 	],
 	shippingAddressList: [
 		{
 			recipientName: '유대상',
 			recipientPhoneNum: '01012345678',
-			recipientAddress: '호주 웨스턴 오스트레일리아주 퍼스',
+			recipientAddress: '호주 웨스턴 오스트레일리아주 퍼스'
 		},
 		{
 			recipientName: '대상',
 			recipientPhoneNum: '01023456789',
-			recipientAddress: '미국 샌프란시스코 실리콘 밸리',
-		},
+			recipientAddress: '미국 샌프란시스코 실리콘 밸리'
+		}
 	],
-	searchedKeyword: [],
+	searchedKeyword: []
 };
 
 export default userInfo;

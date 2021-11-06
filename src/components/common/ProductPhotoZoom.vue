@@ -26,7 +26,7 @@ export default {
 	data() {
 		return {
 			photosUrl: [],
-			currentIndex: 1,
+			currentIndex: 1
 		};
 	},
 
@@ -39,8 +39,8 @@ export default {
 
 		prevPhoto() {},
 
-		nextPhoto() {},
-	},
+		nextPhoto() {}
+	}
 };
 </script>
 

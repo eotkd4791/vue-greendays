@@ -13,7 +13,13 @@ const fakerFunctions = Object.values(Faker.image);
 function createRandomPhotoUrl() {
 	const index = getRandomNumber(6);
 	const [abstract, city, nature, nightlife, sports, food] = fakerFunctions;
-	return [abstract, city, nature, nightlife, sports, food][index](260, 260, undefined, true, true);
+	return [abstract, city, nature, nightlife, sports, food][index](
+		260,
+		260,
+		undefined,
+		true,
+		true
+	);
 }
 
 function makeProductData() {
@@ -21,7 +27,8 @@ function makeProductData() {
 		const randomNumber = getRandomNumber(5);
 		const category = categoryIndex[randomNumber];
 
-		const categoryDetail = categoryObj[category][getRandomNumber(categoryObj[category].length)];
+		const categoryDetail =
+			categoryObj[category][getRandomNumber(categoryObj[category].length)];
 		const priceBefore = Math.floor(Faker.commerce.price());
 		const discountRate = parseFloat(Math.random().toFixed(2));
 
@@ -40,12 +47,14 @@ function makeProductData() {
 			gender: gender[getRandomNumber(3) + 1],
 			priceBefore,
 			discountRate,
-			priceAfter: Math.floor(priceBefore - priceBefore * discountRate).toLocaleString(),
+			priceAfter: Math.floor(
+				priceBefore - priceBefore * discountRate
+			).toLocaleString(),
 			material: Faker.commerce.productMaterial(),
 			popularity: getRandomNumber(100),
 			productSendToday: isReservedToBuy,
 			productAbleToBuy: !isReservedToBuy,
-			registeredTime: Faker.date.recent(),
+			registeredTime: Faker.date.recent()
 		});
 	}
 }

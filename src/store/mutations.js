@@ -5,7 +5,7 @@ const mutations = {
 
 	setGuestChat(state, payload) {
 		state.guestChat = payload;
-	},
+	}
 };
 
 export default mutations;

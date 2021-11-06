@@ -1,6 +1,6 @@
 const state = () => ({
 	userChat: [],
-	guestChat: [],
+	guestChat: []
 });
 
 export default state;

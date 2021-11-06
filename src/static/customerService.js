@@ -16,7 +16,7 @@ const logiGuide = [
         <li style="margin-bottom: 5px;">제조국(원산지)은 브랜드 제품에 따라 상이합니다.</li>
         <li style="margin-bottom: 5px;">상품별로 제조 공장이 여러 나라에 분포되어 있으며 제조국이 중국, 베트남, 태국, 이탈리아, 영국, 프랑스 등으로 명시되어 있습니다.</li>
         <li style="margin-bottom: 5px;">모든 상품은 제조과정을 거쳐 본사에서 꼼꼼한 상품검수 후 입고되는 100% 정품입니다.</li>
-      </ul>`,
+      </ul>`
 	},
 	{
 		title: '취급 시 주의사항',
@@ -25,7 +25,7 @@ const logiGuide = [
         <li style="margin-bottom: 5px;">가죽(애나멜 가죽 포함)의 경우 마찰 등에 의해 테두리나 표면의 갈라짐이 발생할 수 있으므로 주의가 필요합니다.</li>
         <li style="margin-bottom: 5px;">금속의 경우 주위의 환경에 따라 변색이 있을 수 있습니다.</li>
         <li style="margin-bottom: 5px;">모든 소재의 가방은 미사용 시 건냉한 실내에서 더스트백에 보관하여 주시기 바랍니다.</li>
-      </ul>`,
+      </ul>`
 	},
 	{
 		title: '배송비 관부가세 안내',
@@ -33,7 +33,7 @@ const logiGuide = [
         <li style="margin-bottom: 5px;">모든 상품은 유럽에서 직접 배송됩니다.</li>
         <li style="margin-bottom: 5px;">본 상품 가격은 배송비, 관부가세가 포함된 가격입니다.</li>
         <li style="margin-bottom: 5px;">따라서 상품 통관 시 관부가세를 따로 지불하지 않아도 됩니다.</li>
-      </ul>`,
+      </ul>`
 	},
 	{
 		title: '배송 안내',
@@ -44,7 +44,7 @@ const logiGuide = [
         <li style="margin-bottom: 5px;">국내배송은 CJ대한통운(1588-1255)을 통해 이루어 지고 있습니다.</li>
         <li style="margin-bottom: 5px;">현지 상황 및 항공사정, 세관통관절차에 따라 결제 완료 휴 영업일 기준 7일(토, 일, 공휴일 제외) 정도 지연될 수 있습니다.</li>
         <li style="margin-bottom: 5px;">해외 현지 거래처의 규정상 택 또는 바코드 등이 일부 제거되거나, 구성품이 일부 포함되지 않은 상태로 수입되는 경우가 있으며, 이는 상품의 하자가 아니오니 참고하여 주시기 바랍니다.</li>
-      </ul>`,
+      </ul>`
 	},
 	{
 		title: '취소/반품 안내',
@@ -65,7 +65,7 @@ const logiGuide = [
         <li style="margin-bottom: 5px;">(상품라벨, 박스 등의 구성품 분리, 제거, 훼손, 오배송도 해당)</li>
         <li style="margin-bottom: 5px;">복제가 가능한 재화 등의 포장을 훼손한 경우</li>
         <li style="margin-bottom: 5px;">찾기 쉬운 생활 법령 정보 - <a href='https://www.reddays.kr/data/pdf/shop_law.pdf'>인터넷 쇼핑편</a></li>
-      </ul>`,
+      </ul>`
 	},
 	{
 		title: 'A/S 안내',
@@ -75,7 +75,7 @@ const logiGuide = [
         <li style="margin-bottom: 5px;">해외 구매 상품은 국내 매장에서 A/S가 불가합니다. 수선이 필요한 경우 명품 수선 업체를 이용해야 합니다.</li>
         <li style="margin-bottom: 5px;">보증기간 이내 제품의 하자로 인한 A/S는 무상으로 진행되며, 사용상의 부주의로 인한 부분은 유상으로 처리됩니다.</li>
         <li style="margin-bottom: 5px;">모든 제품의 A/S 진행 시 부속품의 파손으로 인한 교체가 필요한 경우, 유사한 부속품으로 대체될 수 있으며 일부 제품의 경우 A/S가 어려울 수 있으니 유의하여 주시기 바랍니다.</li>
-      </ul>`,
+      </ul>`
 	},
 	{
 		title: '품질보증 안내',
@@ -83,8 +83,8 @@ const logiGuide = [
         <li style="margin-bottom: 5px;">제품에 대한 품질보증은 구입일로부터 12개월간 유지됩니다.</li>
         <li style="margin-bottom: 5px;">기타 사항은 소비자기본법에 따른 소비자 분쟁해결 기준에 따라 피해를 보상 받을 수 있습니다.</li>
         <li style="margin-bottom: 5px;">더 궁금하신 사항은 고객센터로 문의주시면 친절히 안내해드리겠습니다.</li>
-      </ul>`,
-	},
+      </ul>`
+	}
 ];
 const faqList = [
 	{
@@ -94,7 +94,7 @@ const faqList = [
         <li style="margin-bottom: 5px;">PICK은 구매가 아닌 예약입니다.</li>
         <li style="margin-bottom: 5px;">그린데이즈에서는 이런 방식 때문에 명품을 가장 합리적인 가격에 구매할 수 있습니다.</li>
         <li style="margin-bottom: 5px;">상품은 매일 업데이트되니, 구경해보시고 마음에 드는 상품을 PICK(예약) 해보세요.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: 'PICK 상품을 바로 살 수 있나요?',
@@ -102,7 +102,7 @@ const faqList = [
         <li style="margin-bottom: 5px;">PICK은 상품을 즉시 구매할 수 없습니다.</li>
         <li style="margin-bottom: 5px;">원하는 상품을 PICK(예약)하고, 해당 상품이 입고되면 구매할 수 있는 시스템입니다.</li>
         <li style="margin-bottom: 5px;">PICK한 상품이 입고되면 알림이 발송되니 참고해주세요.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: 'PICK한 상품은 언제 입고되나요?',
@@ -111,21 +111,21 @@ const faqList = [
         <li style="margin-bottom: 5px;">시즌이 지난 상품 혹은 인기 신상품의 경우 품절 될 확률이 높기 때문에 재입고가 지연될 수 있습니다.</li>
         <li style="margin-bottom: 5px;">상품이 한번이라도 입고된다면, 그린데이즈에 상품이 등록됩니다.</li>
         <li style="margin-bottom: 5px;">고객님이 PICK(예약)하신 모든 상품이 재입고되지는 않는다는 점 참고 부탁드립니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '제품이 왜 이렇게 저렴한가요?',
 		detail: `<ol style="margin-bottom: 5px;">
         <li style="margin-bottom: 5px;">그린데이즈는 상품을 예약받고, 국내 사전 입고물량과 함께 대량으로 수입하는 병행수입 기업입니다.</li>
         <li style="margin-bottom: 5px;">소매가 아닌 도매를 하기 때문에 상대적으로 가격이 저렴합니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '프리오더는 무엇인가요?',
 		detail: `<ol style="margin-bottom: 5px;">
         <li style="margin-bottom: 5px;">프리오더는 한정된 시간동안 명품을 세일하는 서비스입니다.</li>
         <li style="margin-bottom: 5px;">프리오더는 비정기적으로 오픈되며, PICK한 상품 또는 브랜드가 프리오더에 포함되면 메시지를 발송해 소식을 알려드립니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '정품 맞나요?',
@@ -134,14 +134,14 @@ const faqList = [
         <li style="margin-bottom: 5px;">또한 그린데이즈에서는 별도의 셀러가 판매하는 방식이 아닌,</li>
         <li style="margin-bottom: 5px;">그린데이즈가 직접 구매해 판매하기 때문에 가품은 존재할 수 없습니다.</li>
         <li style="margin-bottom: 5px;">국내 면세점 및 편집샵에 입고되는 상품과 동일한 상품이니 참고해주세요.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '통관 비용은 따로 없나요?',
 		detail: `<ol style="margin-bottom: 5px;">
         <li style="margin-bottom: 5px;">모든 상품가격은 대행 수수료, 국제 운송료, 통관 수수료, 관세 및 부가세가 전부 포함된 가격입니다.</li>
         <li style="margin-bottom: 5px;">따라서 상품 통관 시 관세 및 부가세를 따로 지불하지 않으셔도 됩니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '구성품과 포장상태는 어떻게 되나요?',
@@ -149,7 +149,7 @@ const faqList = [
         <li style="margin-bottom: 5px;">기본적인 구성품은 현지에서 브랜드사에게 공급받는 그대로입니다.</li>
         <li style="margin-bottom: 5px;">통관 후 검수/포장 과정에서 초기 구성품과 그린데이즈 워런티카드가 포함됩니다.</li>
         <li style="margin-bottom: 5px;">브랜드 쇼핑백은 포함되지 않습니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '주문했는데 상품은 언제 받을 수 있나요?',
@@ -161,7 +161,7 @@ const faqList = [
         <li style="margin-bottom: 5px;">빠른배송: 영업일 기준 7일 이내 발송</li>
         <li style="margin-bottom: 5px;">당일발송: 영업일 기준 2일 이내 발송</li>
         <li style="margin-bottom: 5px;">[마이페이지 - 주문 및 반품 내역]에서 실시간 배송현황을 확인할 수 있습니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '명품의 워런티 카드(보증서)가 모든 제품마다 다 들어가 있나요?',
@@ -170,20 +170,20 @@ const faqList = [
         <li style="margin-bottom: 5px;">대부분의 브랜드에는 구성품으로 포함되어 있지 않습니다.</li>
         <li style="margin-bottom: 5px;">백화점의 경우 국내 수입원이 각 회사에 맞게 보증서를 제작해 구성품으로 포함합니다.</li>
         <li style="margin-bottom: 5px;">그린데이즈에서는 워런티카드를 제작해 구성품으로 포함하니 참고해주세요.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '제조국(원산지)은 어떻게 되나요?',
 		detail: `<ol>
         <li style="margin-bottom: 5px;">제조국(원산지)은 브랜드 제품에 따라 상이합니다.</li>
         <li style="margin-bottom: 5px;">상품별로 제조 공장이 여러 나라에 분포되어 있으며 제조국이 중국, 베트남, 태국, 이탈리아, 영국, 프랑스 등으로 명시되어 있습니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '알림설정은 어떻게 하나요?',
 		detail: `<ol>
       <li style="margin-bottom: 5px;">로그인 하신 후 [마이페이지 - 알림설정] 에서 알림을 [ON/OFF] 하실 수 있습니다.</li>
-    </ol>`,
+    </ol>`
 	},
 	{
 		title: 'A/S는 어떻게 처리되나요?',
@@ -192,7 +192,7 @@ const faqList = [
         <li style="margin-bottom: 5px;">A/S는 압구정 갤러리아 백화점과 동일한 명품 전문수선 업체에서 진행하며,</li>
         <li style="margin-bottom: 5px;">수선 여부 및 비용은 수선업체에 확인 후 고객님께 안내해드리고 있습니다.</li>
         <li style="margin-bottom: 5px;">상품별로 A/S 진행 범위, 방법, 기간은 상이할 수 있으니 참고 부탁드립니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '명품인데 가죽에 미세한 스크래치나 얼룩이 있어요. 불량 아닌가요?',
@@ -201,7 +201,7 @@ const faqList = [
         <li style="margin-bottom: 5px;">제작 상태가 공산품처럼 기계로 찍어내듯 동일하지 않을 수 있습니다.</li>
         <li style="margin-bottom: 5px;">최상의 가죽을 사용하더라도 천연가죽 고유의 결이나 스크래치, 얼룩, 점 등이 남아있을 수 있습니다.</li>
         <li style="margin-bottom: 5px;">이는 제품의 불량이 아닙니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '취소/교환/반품은 어떻게 되나요?',
@@ -211,7 +211,7 @@ const faqList = [
         <li style="margin-bottom: 5px;">프리오더 상품을 반드시 취소/반품 하기를 원한다면, 상품가액의 10%에 해당하는 위약금(수입관세 약 10% + 통관 수수료 + 창고료),</li>
         <li style="margin-bottom: 5px;">현지 배송비, 항공 배송비, 국내 배송비, 포장비, 검수비에 해당하는 10만 원을 소비자가 부담해야 합니다.</li>
         <li style="margin-bottom: 5px;">빠른배송 상품의 경우 검수비, 포장비, 최초 배송비와 반품 배송비에 해당하는 3만 원만을 소비자가 부담해야 합니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '반품 비용이 왜 이렇게 비싼가요?',
@@ -219,7 +219,7 @@ const faqList = [
         <li style="margin-bottom: 5px;">프리오더 상품은 해외배송 상품으로 대행 수수료에 해당하는 상품가액의 10%에 해당하는 위약금(수입관세 약 10% + 통관 수수료 + 창고료),</li>
         <li style="margin-bottom: 5px;">현지 배송비, 항공 배송비, 국내 배송비, 포장비, 검수비를 고려해야 하기 때문에 반품 비용이 높게 책정됩니다.</li>
         <li style="margin-bottom: 5px;">빠른배송 상품의 경우 검수비 + 포장비 + 최초/반품 배송비를 고려해야 하기 때문에 반품 비용이 높게 책정됩니다.</li>
-      </ol>`,
+      </ol>`
 	},
 	{
 		title: '상품가격이 변동될 수 있나요?',
@@ -227,8 +227,8 @@ const faqList = [
     <ol>
       <li style="margin-bottom: 5px;">이탈리아에서 입고되는 상품의 공급가 및 환율이 매번 변동되기 때문입니다.</li>
       <li style="margin-bottom: 5px;">시장가격을 기준으로 상품가격이 상시 조정되기 때문입니다.</li>
-    </ol>`,
-	},
+    </ol>`
+	}
 ];
 const terms = `
   <h1 style="line-height: 150%; margin-bottom: 10px;">이용약관</h1>
@@ -803,7 +803,7 @@ const privateInfoPolicy = `
       </article>
       <ul style="margin: 10px 0">
         <li style="margin: 5px 0">
-          이　　 름 : 유대상
+          이    름 : 유대상
         </li>
         <li style="margin: 5px 0">
           소속 / 직위 : 대표이사
@@ -848,5 +848,5 @@ export default {
 	logiGuide,
 	faqList,
 	terms,
-	privateInfoPolicy,
+	privateInfoPolicy
 };

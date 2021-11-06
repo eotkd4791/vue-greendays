@@ -40,7 +40,7 @@ const mutations = {
 	//검색 내역 모두 삭제
 	deleteAllSearchKeywords(state) {
 		state.userInfo.searchedKeywords = [];
-	},
+	}
 };
 
 export default mutations;
