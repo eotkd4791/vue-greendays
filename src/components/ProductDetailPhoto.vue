@@ -93,6 +93,11 @@ export default {
 	background-repeat: no-repeat;
 }
 
+.photo__main img {
+	width: 100%;
+	height: 100%;
+}
+
 .photo__ol {
 	width: 580px;
 }
