@@ -7,9 +7,9 @@
 		<section class="photo__main">
 			<img
 				:src="mainPhotoUrl"
-				alt="사진이 로딩중입니다."
 				class="photo__img"
 				@click="toggleModal"
+				@error="() => (this.src = '../assets/img/green-present.png')"
 			/>
 		</section>
 		<ol class="photo__ol">
@@ -18,9 +18,13 @@
 				:key="index"
 				class="photo__sub"
 				:class="{ 'photo__sub--picked': mainPhotoUrl === photoUrl }"
-				@click="swapMainPhoto(index)"
+				@click="() => swapMainPhoto(index)"
 			>
-				<img :src="photoUrl" alt="사진이 로딩중입니다." class="photo__img" />
+				<img
+					:src="photoUrl"
+					class="photo__img"
+					@error="() => (this.src = '../assets/img/green-present.png')"
+				/>
 			</li>
 		</ol>
 	</div>
@@ -74,11 +78,8 @@ export default {
 		}
 	},
 
-	created() {
-		this.setPhotos();
-	},
-
 	mounted() {
+		this.setPhotos();
 		this.$on('off-zoom-modal', this.toggleModal);
 		Bus.$on('change-product', this.setPhotos);
 	},
@@ -95,6 +96,10 @@ export default {
 	height: 580px;
 	margin-bottom: 30px;
 	cursor: pointer;
+	background-image: url('../assets/img/vans-slipon.jpeg');
+	background-size: 580px;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .photo__ol {
@@ -107,6 +112,10 @@ export default {
 	width: 70px;
 	height: 70px;
 	cursor: pointer;
+	background-image: url('../assets/img/vans-slipon.jpeg');
+	background-size: 70px;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .photo__sub.photo__sub--picked {

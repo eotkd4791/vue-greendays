@@ -79,11 +79,19 @@ export default {
 	width: 260px;
 	height: 260px;
 	outline-style: none;
+	background-image: url('../../assets/img/vans-slipon.jpeg');
+	background-size: 260px;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .item-container__photo.main__view {
 	width: 220px;
 	height: 220px;
+	background-image: url('../../assets/img/vans-slipon.jpeg');
+	background-size: 220px;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .item-container__space {

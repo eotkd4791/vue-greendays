@@ -168,8 +168,7 @@ export default {
 
 		createChips(payload) {
 			const genderIndex = this.getGenders.indexOf(payload.value);
-			const categoryIndex = Array.prototype.indexOf.call(
-				Object.keys(this.getCategories),
+			const categoryIndex = Object.keys(this.getCategories).indexOf(
 				payload.value
 			);
 			this.sortChips = this.copyChips;

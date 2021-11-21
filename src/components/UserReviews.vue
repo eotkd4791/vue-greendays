@@ -25,7 +25,11 @@
 				>
 					<div class="user-reviews__wrapper">
 						<div class="user-reviews__mask" />
-						<img :src="item.path" class="user-reviews__img" />
+						<img
+							:src="item.path"
+							class="user-reviews__img"
+							@error="this.src = '../assets/img/green-present.png'"
+						/>
 					</div>
 				</li>
 			</ul>
@@ -71,12 +75,14 @@ export default {
 				document.documentElement.scrollHeight - 1500
 			) {
 				if (this.dataStore.length - this.reviewList.length > 0) {
-					const newReviews = this.dataStore.slice(
-						this.reviewIndex,
-						(this.reviewIndex += 3)
-					);
+					if (this.reviewList.length < 50) {
+						const newReviews = this.dataStore.slice(
+							this.reviewIndex,
+							(this.reviewIndex += 3)
+						);
 
-					this.reviewList.push(...newReviews);
+						this.reviewList.push(...newReviews);
+					}
 				}
 			}
 		},
@@ -175,6 +181,10 @@ export default {
 	border: 1px solid #d9d9d9;
 	cursor: pointer;
 	position: relative;
+	background-image: url('../assets/img/vans-slipon.jpeg');
+	background-size: 180px;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .user-reviews__mask {

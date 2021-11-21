@@ -35,7 +35,7 @@ function makeProductData() {
 		const isReservedToBuy = getRandomNumber(100) % 2 ? true : false;
 
 		productList.push({
-			id: getRandomNumber(20200707),
+			id: getRandomNumber(100),
 			name: `${Faker.commerce.productName() + i}`,
 			brand: Faker.commerce.productAdjective(),
 			photoUrl: createRandomPhotoUrl(),
