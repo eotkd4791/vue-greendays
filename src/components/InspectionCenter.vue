@@ -30,7 +30,6 @@
 							:src="item.path"
 							:alt="`InspectionImage${index + 1}`"
 							class="inspection__img"
-							@error="() => (this.src = '../assets/img/green-present.png')"
 						/>
 					</div>
 					<h3 class="inspection__h3">상품 아이디: {{ item.id }}</h3>

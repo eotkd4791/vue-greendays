@@ -5,11 +5,7 @@
 			:whichImage="{ photoUrls, index: photoUrls.indexOf(mainPhotoUrl) }"
 		/>
 		<section class="photo__main">
-			<img
-				:src="mainPhotoUrl"
-				@click="toggleModal"
-				@error="() => (this.src = '../assets/img/green-present.png')"
-			/>
+			<img :src="mainPhotoUrl" @click="toggleModal" />
 		</section>
 		<ol class="photo__ol">
 			<li

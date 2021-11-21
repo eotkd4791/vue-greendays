@@ -23,11 +23,7 @@
 				:callFrom="''"
 			>
 				<template #productInfo-photo>
-					<img
-						:src="product.photoUrl"
-						class="item-container__photo"
-						@error="() => (this.src = '../assets/img/green-present.png')"
-					/>
+					<img :src="product.photoUrl" class="item-container__photo" />
 				</template>
 				<template #productInfo-brand>{{ product.brand }}</template>
 				<template #productInfo-name>{{ product.name }}</template>
