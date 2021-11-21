@@ -163,6 +163,7 @@ export default {
 	width: 100%;
 	height: 500px;
 	padding: 0 20px;
+	overflow-x: hidden;
 	overflow-y: scroll;
 }
 

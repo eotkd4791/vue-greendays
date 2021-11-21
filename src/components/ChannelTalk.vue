@@ -85,13 +85,6 @@ export default {
 	cursor: pointer;
 }
 
-.channel-talk__message {
-	width: 100%;
-	height: 500px;
-	padding: 0 20px;
-	overflow-y: scroll;
-}
-
 .channel-talk__list {
 	width: 130px;
 	padding: 10px;
