@@ -140,7 +140,7 @@ export default {
 
 			this.$router
 				.push({
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: { ...currentQuery, page: pageNumber }
 				})
 				.catch(() => {});

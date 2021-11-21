@@ -3,25 +3,31 @@
 		<section class="about__section">
 			<ul class="about__ul about__ul--title">
 				<span class="about__divider">|</span>
-				<RouterLink tag="li" class="about__router-li" to="/customerservice/faq"
+				<RouterLink
+					tag="li"
+					class="about__router-li"
+					to="/vue-greendays/customerservice/faq"
 					>자주묻는질문</RouterLink
 				>
 				<span class="about__divider">|</span>
 				<RouterLink
 					tag="li"
 					class="about__router-li"
-					to="/customerservice/terms"
+					to="/vue-greendays/customerservice/terms"
 					>이용약관</RouterLink
 				>
 				<span class="about__divider">|</span>
 				<RouterLink
 					tag="li"
 					class="about__router-li"
-					to="/customerservice/private_info_policy"
+					to="/vue-greendays/customerservice/private_info_policy"
 					>개인정보취급방침</RouterLink
 				>
 				<span class="about__divider">|</span>
-				<RouterLink tag="li" class="about__router-li" to="/introduction"
+				<RouterLink
+					tag="li"
+					class="about__router-li"
+					to="/vue-greendays/introduction"
 					>사업자정보확인</RouterLink
 				>
 			</ul>
@@ -50,26 +56,42 @@
 		<aside class="about__aside">
 			<ul class="about__ul about__ul--left">
 				<li class="about__li about__li--title">CUSTOMER SERVICE</li>
-				<RouterLink tag="li" class="about__router-li" to="/customerservice">
+				<RouterLink
+					tag="li"
+					class="about__router-li"
+					to="/vue-greendays/customerservice"
+				>
 					무엇을 도와드릴까요?
 				</RouterLink>
 				<RouterLink
 					tag="li"
 					class="about__router-li"
-					to="/customerservice/logi_guide"
+					to="/vue-greendays/customerservice/logi_guide"
 				>
 					주문 & 배송
 				</RouterLink>
-				<RouterLink tag="li" class="about__router-li" to="/customerservice/faq">
+				<RouterLink
+					tag="li"
+					class="about__router-li"
+					to="/vue-greendays/customerservice/faq"
+				>
 					결제 & 가격
 				</RouterLink>
-				<RouterLink tag="li" class="about__router-li" to="/customerservice/faq">
+				<RouterLink
+					tag="li"
+					class="about__router-li"
+					to="/vue-greendays/customerservice/faq"
+				>
 					반품 & 환불
 				</RouterLink>
 			</ul>
 			<ul class="about__ul">
 				<li class="about__li about__li--title">ABOUT GREENDAYS</li>
-				<RouterLink tag="li" class="about__router-li" to="/introduction">
+				<RouterLink
+					tag="li"
+					class="about__router-li"
+					to="/vue-greendays/introduction"
+				>
 					그린데이즈 소개
 				</RouterLink>
 			</ul>

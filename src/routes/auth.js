@@ -1,16 +1,16 @@
 const authRoutes = [
 	{
-		path: '/login',
+		path: '/vue-greendays/login',
 		name: 'login',
 		component: () => import('@/views/LoginView.vue')
 	},
 	{
-		path: '/logout',
+		path: '/vue-greendays/logout',
 		name: 'logout',
 		component: () => import('@/views/LogoutView.vue')
 	},
 	{
-		path: '/signup',
+		path: '/vue-greendays/signup',
 		name: 'signup',
 		component: () => import('@/views/SignUpView.vue')
 	}

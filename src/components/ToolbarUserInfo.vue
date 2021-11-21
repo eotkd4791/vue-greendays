@@ -1,9 +1,9 @@
 <template>
-	<ul class="user-info" @click="movePage('/')">
+	<ul class="user-info" @click="movePage('/vue-greendays')">
 		<li
 			class="user-info__point"
 			v-if="getUserInfo"
-			@click.stop="movePage(`/user/mypoint/${getUserInfo.id}`)"
+			@click.stop="movePage(`/vue-greendays/user/mypoint/${getUserInfo.id}`)"
 		>
 			<span class="user-info__text" v-if="getUserInfo">
 				{{ getUserInfo ? getUserInfo.point : '' }}
@@ -13,7 +13,9 @@
 		<li
 			class="user-info__list fas fa-user"
 			ref="userInfo"
-			@click.stop="getUserInfo ? toggleUserInfo() : movePage('/login')"
+			@click.stop="
+				getUserInfo ? toggleUserInfo() : movePage('/vue-greendays/login')
+			"
 		/>
 		<li
 			class="user-info__list fa-heart"
@@ -23,8 +25,8 @@
 			}"
 			@click.stop="
 				getUserInfo
-					? movePage(`/wishlist/${getUserInfo.id}`)
-					: movePage('/login')
+					? movePage(`/vue-greendays/wishlist/${getUserInfo.id}`)
+					: movePage('/vue-greendays/login')
 			"
 		/>
 		<li v-show="getUserInfo" class="user-info__text">
@@ -34,8 +36,8 @@
 			class="user-info__list fas fa-shopping-basket"
 			@click.stop="
 				getUserInfo
-					? movePage(`/cartitems/${getUserInfo.id}`)
-					: movePage('/login')
+					? movePage(`/vue-greendays/cartitems/${getUserInfo.id}`)
+					: movePage('/vue-greendays/login')
 			"
 		/>
 		<li class="user-info__text">

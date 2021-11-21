@@ -9,7 +9,7 @@
 				>
 					<RouterLink
 						:to="{
-							path: '/products',
+							path: '/vue-greendays/products',
 							query: {
 								keyword: '',
 								gender: '',
@@ -37,7 +37,7 @@
 				>
 					<RouterLink
 						:to="{
-							path: '/products',
+							path: '/vue-greendays/products',
 							query: {
 								keyword: '',
 								gender: '',
@@ -56,8 +56,10 @@
 				</li>
 			</ul>
 			<ul class="toolbar-menu__passive" @mouseover="mouseLeaveFromMenu">
-				<RouterLink tag="li" to="/reviews">리뷰</RouterLink>
-				<RouterLink tag="li" to="/customerservice">고객센터</RouterLink>
+				<RouterLink tag="li" to="/vue-greendays/reviews">리뷰</RouterLink>
+				<RouterLink tag="li" to="/vue-greendays/customerservice"
+					>고객센터</RouterLink
+				>
 			</ul>
 		</div>
 		<ul class="toolbar-menu__right">
@@ -138,7 +140,7 @@ export default {
 						this.mouseLeaveFromMenu();
 						this.$router
 							.push({
-								path: '/products',
+								path: '/vue-greendays/products',
 								query: {
 									keyword: trimmedKeyword,
 									gender: '',

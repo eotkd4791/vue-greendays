@@ -201,7 +201,9 @@
 										<span class="sign-up__label"
 											>[필수] 개인 정보의 수집 및 이용에 대한 동의</span
 										>
-										<RouterLink to="/terms" tag="span">자세히 보기</RouterLink>
+										<RouterLink to="/vue-greendays/terms" tag="span"
+											>자세히 보기</RouterLink
+										>
 									</v-list-item-subtitle>
 
 									<v-list-item-subtitle>
@@ -423,7 +425,7 @@ export default {
 							}
 						]
 					});
-					this.$router.replace('/');
+					this.$router.replace('/vue-greendays');
 				} else {
 					throw Error('회원가입 양식을 확인하여 주십시오.');
 				}

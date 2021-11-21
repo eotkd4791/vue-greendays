@@ -4,7 +4,7 @@
 			<RouterLink
 				tag="span"
 				:to="{
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						keyword: '',
 						gender: '',
@@ -26,7 +26,7 @@
 			<RouterLink
 				tag="span"
 				:to="{
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						keyword: '',
 						gender: getProductDetail.gender,
@@ -48,7 +48,7 @@
 			<RouterLink
 				tag="span"
 				:to="{
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						keyword: '',
 						gender: getProductDetail.gender,
@@ -70,7 +70,7 @@
 			<RouterLink
 				tag="span"
 				:to="{
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						keyword: '',
 						gender: getProductDetail.gender,
@@ -92,7 +92,7 @@
 			<RouterLink
 				tag="span"
 				:to="{
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						keyword: '',
 						gender: getProductDetail.gender,
@@ -176,7 +176,7 @@
 			<template #additional-element>
 				<button
 					class="info__guide__btn"
-					@click="$router.push('/customerservice/logi_guide')"
+					@click="$router.push('/vue-greendays/customerservice/logi_guide')"
 				>
 					그린데이즈 배송가이드
 				</button>
@@ -223,7 +223,7 @@ export default {
 
 		async toggleThisToWishList() {
 			if (!this.userInfo) {
-				this.$router.push('/login');
+				this.$router.push('/vue-greendays/login');
 				return alert('로그인이 필요합니다.');
 			}
 			if (this.pickedProduct) {

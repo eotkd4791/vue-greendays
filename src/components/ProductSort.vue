@@ -238,7 +238,7 @@ export default {
 		copyChips: debounce(function(newVal) {
 			this.$router
 				.push({
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						...this.$route.query,
 						gender: newVal[0] ? newVal[0] : '',
@@ -270,7 +270,7 @@ export default {
 			}
 			this.$router
 				.push({
-					path: '/products',
+					path: '/vue-greendays/products',
 					query: {
 						...this.$route.query,
 						orderby: orderBy ? orderBy : 'desc',

@@ -9,7 +9,7 @@
 					class="reserve-container__link"
 					tag="span"
 					:to="{
-						path: '/products',
+						path: '/vue-greendays/products',
 						query: {
 							keyword: '',
 							gender: '',

@@ -49,7 +49,7 @@
 									style="color:#fff"
 									color="#000"
 									block
-									@click="movePage('/signup')"
+									@click="movePage('/vue-greendays/signup')"
 									>그린데이즈 멤버십 가입</v-btn
 								>
 							</v-container>
@@ -98,7 +98,7 @@ export default {
 						throw Error('올바르지 않은 이메일 또는 비밀번호 입니다.');
 					else {
 						this.$refs.loginForm.reset();
-						this.$router.replace('/');
+						this.$router.replace('/vue-greendays');
 					}
 				} else throw new Error('로그인 양식을 확인해주십시오.');
 			} catch (error) {

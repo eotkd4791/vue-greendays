@@ -16,7 +16,7 @@
 			</li>
 			<RouterLink
 				tag="li"
-				to="/customerservice/logi_guide"
+				to="/vue-greendays/customerservice/logi_guide"
 				class="customer-service__li"
 			>
 				<div class="customer-service__div">
@@ -30,7 +30,7 @@
 			</RouterLink>
 			<RouterLink
 				tag="li"
-				to="/customerservice/notice"
+				to="/vue-greendays/customerservice/notice"
 				class="customer-service__li"
 			>
 				<div class="customer-service__div">
@@ -44,7 +44,7 @@
 			</RouterLink>
 			<RouterLink
 				tag="li"
-				to="/customerservice/faq"
+				to="/vue-greendays/customerservice/faq"
 				class="customer-service__li"
 			>
 				<div class="customer-service__div">
@@ -58,7 +58,7 @@
 			</RouterLink>
 			<RouterLink
 				tag="li"
-				to="/customerservice/terms"
+				to="/vue-greendays/customerservice/terms"
 				class="customer-service__li"
 			>
 				<div class="customer-service__div">
@@ -72,7 +72,7 @@
 			</RouterLink>
 			<RouterLink
 				tag="li"
-				to="/customerservice/private_info_policy"
+				to="/vue-greendays/customerservice/private_info_policy"
 				class="customer-service__li"
 			>
 				<div class="customer-service__div">

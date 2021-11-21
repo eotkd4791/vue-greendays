@@ -27,7 +27,7 @@
 				/>
 				<RouterLink
 					:to="{
-						path: '/products',
+						path: '/vue-greendays/products',
 						query: {
 							keyword: '',
 							gender: '',

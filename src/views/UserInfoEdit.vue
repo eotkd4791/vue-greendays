@@ -49,7 +49,7 @@ export default {
 				const confirmQuitMemberShip = confirm('정말 탈퇴하시겠습니까 ?');
 				if (confirmQuitMemberShip) {
 					await this.QUIT_MEMBERSHIP();
-					this.$router.replace('/');
+					this.$router.replace('/vue-greendays');
 				}
 			} catch (error) {
 				console.error(error);

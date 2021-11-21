@@ -68,10 +68,10 @@ export default {
 				const confirmLogOut = confirm('로그아웃 하시겠습니까?');
 				if (confirmLogOut) {
 					this.closeUserInfo();
-					this.$router.push('/logout');
+					this.$router.push('/vue-greendays/logout');
 					await this.LOG_OUT();
 					alert('로그아웃 되었습니다.');
-					this.$router.replace('/').catch(() => {});
+					this.$router.replace('/vue-greendays').catch(() => {});
 				}
 			} catch (error) {
 				console.error(error);
