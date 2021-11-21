@@ -2,12 +2,6 @@
 	<footer class="about">
 		<section class="about__section">
 			<ul class="about__ul about__ul--title">
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/customerservice/notice"
-					>공지사항</router-link
-				>
 				<span class="about__divider">|</span>
 				<router-link tag="li" class="about__router-li" to="/customerservice/faq"
 					>자주묻는질문</router-link
