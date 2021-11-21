@@ -42,16 +42,9 @@
 
 <script>
 import util from '@/mixins/utilMethods.js';
-import Intersect from 'vue-intersect';
 export default {
-	components: {
-		Intersect
-	},
-
 	mixins: [util],
-
 	props: ['imgPath', 'productId', 'sendToday', 'ableToBuy', 'callFrom'],
-
 	data() {
 		return {
 			visible: true
