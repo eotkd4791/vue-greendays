@@ -1,18 +1,18 @@
 <template>
 	<transition name="fade">
 		<div class="product-detail">
-			<pick-brand
+			<PickBrand
 				v-if="showModal"
 				@close-picked-brands="closeModal"
 				:propsBrand="pickedBrand"
 			/>
 
 			<section class="product-detail__info">
-				<product-detail-photo />
-				<product-detail-info @open-alarm-modal="openModal" />
+				<ProductDetailPhoto />
+				<ProductDetailInfo @open-alarm-modal="openModal" />
 			</section>
 			<aside class="product-detail__related-items">
-				<product-view :isProductView="false" />
+				<ProductView :isProductView="false" />
 			</aside>
 		</div>
 	</transition>
