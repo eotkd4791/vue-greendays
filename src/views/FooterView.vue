@@ -1,9 +1,9 @@
 <template>
 	<div class="footer">
-		<quick-menu />
-		<contact-info />
-		<about-greendays />
-		<channel-talk />
+		<QuickMenu />
+		<ContactInfo />
+		<AboutGreendays />
+		<ChannelTalk />
 	</div>
 </template>
 

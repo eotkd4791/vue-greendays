@@ -1,7 +1,7 @@
 <template>
 	<div class="reviews">
-		<inspection-center />
-		<user-reviews />
+		<InspectionCenter />
+		<UserReviews />
 	</div>
 </template>
 

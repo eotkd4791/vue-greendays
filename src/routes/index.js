@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
 import userRoutes from '@/routes/user.js';
 import authRoutes from '@/routes/auth.js';
 import shoppingRoutes from '@/routes/shopping.js';
@@ -18,7 +17,6 @@ const router = new VueRouter({
 		...shoppingRoutes,
 		...publicRoutes
 	],
-
 	scrollBehavior() {
 		return { x: 0, y: 0 };
 	}

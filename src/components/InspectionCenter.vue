@@ -30,6 +30,7 @@
 							:src="item.path"
 							:alt="`InspectionImage${index + 1}`"
 							class="inspection__img"
+							@error="() => (this.src = '../assets/img/green-present.png')"
 						/>
 					</div>
 					<h3 class="inspection__h3">상품 아이디: {{ item.id }}</h3>
@@ -114,6 +115,10 @@ export default {
 	border: 1px solid #d9d9d9;
 	cursor: pointer;
 	position: relative;
+	background-image: url('../assets/img/vans-slipon.jpeg');
+	background-size: 180px;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .inspection__mask {

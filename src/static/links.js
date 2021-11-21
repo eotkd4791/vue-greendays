@@ -10,10 +10,6 @@ export default {
 				name: '배송가이드'
 			},
 			{
-				routePath: '/customerservice/notice',
-				name: '공지사항'
-			},
-			{
 				routePath: '/customerservice/faq',
 				name: '자주묻는질문'
 			},

@@ -1,6 +1,6 @@
 <template>
 	<div class="product">
-		<product-sort v-if="isProductView" />
+		<ProductSort v-if="isProductView" />
 		<section class="product-nothing" v-if="productsToShow.length === 0" />
 		<aside class="product-wrapper" v-else>
 			<template v-if="isProductView">
@@ -14,7 +14,7 @@
 			<template v-else>
 				<div class="product__text">연관상품</div>
 			</template>
-			<display-items
+			<DisplayItems
 				v-for="product in productsToShow"
 				:key="product.id"
 				:productId="product.id"
@@ -23,7 +23,11 @@
 				:callFrom="''"
 			>
 				<template #productInfo-photo>
-					<img :src="product.photoUrl" class="item-container__photo" />
+					<img
+						:src="product.photoUrl"
+						class="item-container__photo"
+						@error="() => (this.src = '../assets/img/green-present.png')"
+					/>
 				</template>
 				<template #productInfo-brand>{{ product.brand }}</template>
 				<template #productInfo-name>{{ product.name }}</template>
@@ -36,8 +40,8 @@
 				<template #productInfo-afterPrice>{{
 					(product.priceAfter * 1000).toLocaleString()
 				}}</template>
-			</display-items>
-			<paging-component v-if="isProductView" />
+			</DisplayItems>
+			<PagingComponent v-if="isProductView" />
 		</aside>
 	</div>
 </template>
