@@ -19,7 +19,7 @@
 				:class="{ 'photo__sub--picked': mainPhotoUrl === photoUrl }"
 				@click="swapMainPhoto(index)"
 			>
-				<img :src="photoUrl" alt="사진이 로딩중입니다." class="photo__img" />
+				<img :src="photoUrl" class="photo__img" />
 			</li>
 		</ol>
 	</div>
