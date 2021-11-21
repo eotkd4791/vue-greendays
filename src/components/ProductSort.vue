@@ -17,7 +17,7 @@
 						>
 							성별
 							<i class="fas fa-chevron-down" />
-							<sort-modal
+							<SortModal
 								v-if="showModal && sortByGender"
 								:whichModal="getGenders"
 								@picked-gender="createChips"
@@ -32,7 +32,7 @@
 						>
 							카테고리
 							<i class="fas fa-chevron-down" />
-							<sort-category
+							<SortCategory
 								v-if="showModal && sortByCategory"
 								@picked-category="createChips"
 							/>
@@ -46,7 +46,7 @@
 							<i class="fas fa-chevron-down" />
 						</li>
 					</ul>
-					<sort-index-chips
+					<SortIndexChips
 						v-for="index in sortChips"
 						:key="index"
 						:sortindex="index"
@@ -68,7 +68,7 @@
 					<div class="sort__bar-keyword-pick orderby">
 						{{ getOrderBy[orderByIndex] }}
 						<i class="fas fa-chevron-down" />
-						<sort-modal
+						<SortModal
 							v-if="showModal && rulesOrderBy"
 							:whichModal="getOrderBy"
 							@picked-order-by="setOrderBy"
@@ -76,7 +76,7 @@
 					</div>
 				</aside>
 			</div>
-			<sort-brands
+			<SortBrands
 				v-if="showModal && sortByBrand"
 				@close-brand-search-modal="sortModalClose"
 			/>

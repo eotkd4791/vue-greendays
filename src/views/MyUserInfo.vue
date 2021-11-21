@@ -1,6 +1,6 @@
 <template>
 	<div class="user-info">
-		<left-link />
+		<lLeftLink />
 		<router-view />
 	</div>
 </template>

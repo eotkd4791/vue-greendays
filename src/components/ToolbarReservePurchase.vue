@@ -3,7 +3,7 @@
 		<section class="reserve-container__category">
 			<header class="reserve-container__category__title">CATEGORIES</header>
 			<div class="reserve-container__category__link" ref="tabs">
-				<router-link
+				<RouterLink
 					v-for="(category, index) in categories"
 					:key="index"
 					class="reserve-container__link"
@@ -22,7 +22,7 @@
 							order_std: 'popularity'
 						}
 					}"
-					>{{ `${category.name} (${category.productAmount})` }}</router-link
+					>{{ `${category.name} (${category.productAmount})` }}</RouterLink
 				>
 			</div>
 		</section>

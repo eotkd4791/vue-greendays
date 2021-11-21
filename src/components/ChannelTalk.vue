@@ -9,7 +9,7 @@
 				@click="onChannelTalk = true"
 			/>
 		</transition>
-		<channel-talk-body v-if="onChannelTalk" />
+		<ChannelTalkBody v-if="onChannelTalk" />
 	</div>
 </template>
 

@@ -14,7 +14,7 @@
 					</article>
 				</a>
 			</li>
-			<router-link
+			<RouterLink
 				tag="li"
 				to="/customerservice/logi_guide"
 				class="customer-service__li"
@@ -27,8 +27,8 @@
 					<h3 class="customer-service-h3">[배송가이드] 페이지에서 배송관련</h3>
 					<h3 class="customer-service-h3">주의사항을 참고하세요.</h3>
 				</article>
-			</router-link>
-			<router-link
+			</RouterLink>
+			<RouterLink
 				tag="li"
 				to="/customerservice/notice"
 				class="customer-service__li"
@@ -41,8 +41,8 @@
 					<h3 class="customer-service-h3">[공지사항] 페이지에서</h3>
 					<h3 class="customer-service-h3">그린데이즈 소식을 확인하세요.</h3>
 				</article>
-			</router-link>
-			<router-link
+			</RouterLink>
+			<RouterLink
 				tag="li"
 				to="/customerservice/faq"
 				class="customer-service__li"
@@ -55,8 +55,8 @@
 					<h3 class="customer-service-h3">[자주묻는질문] 페이지에서 원하는</h3>
 					<h3 class="customer-service-h3">질문에 대한 답을 찾아보세요.</h3>
 				</article>
-			</router-link>
-			<router-link
+			</RouterLink>
+			<RouterLink
 				tag="li"
 				to="/customerservice/terms"
 				class="customer-service__li"
@@ -69,8 +69,8 @@
 					<h3 class="customer-service-h3">서비스 이용의 조건 및 절차 등을</h3>
 					<h3 class="customer-service-h3">확인하세요.</h3>
 				</article>
-			</router-link>
-			<router-link
+			</RouterLink>
+			<RouterLink
 				tag="li"
 				to="/customerservice/private_info_policy"
 				class="customer-service__li"
@@ -85,7 +85,7 @@
 					</h3>
 					<h3 class="customer-service-h3">확인하세요.</h3>
 				</article>
-			</router-link>
+			</RouterLink>
 		</ul>
 	</section>
 </template>

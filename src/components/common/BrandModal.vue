@@ -18,16 +18,16 @@
 							|
 							<li @click="changeTab">전체브랜드</li>
 						</ul>
-						<pick-brand
+						<PickBrand
 							v-if="showModal"
 							:propsBrand="pickedBrand"
 							@close-picked-brands="closePickBrand"
 						/>
-						<popular-brands
+						<PopularBrands
 							v-if="isShownPopularBrand"
 							@open-alarm-modal="openPickBrand"
 						/>
-						<alphabet-brands v-else @open-alarm-modal="openPickBrand" />
+						<AlphabetBrands v-else @open-alarm-modal="openPickBrand" />
 					</aside>
 				</div>
 			</div>

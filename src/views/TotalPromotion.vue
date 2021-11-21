@@ -1,7 +1,7 @@
 <template>
 	<div class="promotion">
 		<section class="promotion__wrapper">
-			<summary-promotion
+			<SummaryPromotion
 				v-for="promotion in promotions"
 				:key="promotion.title"
 				:imgUrl="promotion.imgUrl"
@@ -33,7 +33,7 @@
 						</p>
 					</div>
 				</template>
-			</summary-promotion>
+			</SummaryPromotion>
 		</section>
 	</div>
 </template>

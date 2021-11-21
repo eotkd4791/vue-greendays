@@ -1,6 +1,6 @@
 <template>
 	<div class="photo">
-		<product-photo-zoom
+		<ProductPhotoZoom
 			v-if="showModal"
 			:whichImage="{ photoUrls, index: photoUrls.indexOf(mainPhotoUrl) }"
 		/>

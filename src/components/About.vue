@@ -3,26 +3,26 @@
 		<section class="about__section">
 			<ul class="about__ul about__ul--title">
 				<span class="about__divider">|</span>
-				<router-link tag="li" class="about__router-li" to="/customerservice/faq"
-					>자주묻는질문</router-link
+				<RouterLink tag="li" class="about__router-li" to="/customerservice/faq"
+					>자주묻는질문</RouterLink
 				>
 				<span class="about__divider">|</span>
-				<router-link
+				<RouterLink
 					tag="li"
 					class="about__router-li"
 					to="/customerservice/terms"
-					>이용약관</router-link
+					>이용약관</RouterLink
 				>
 				<span class="about__divider">|</span>
-				<router-link
+				<RouterLink
 					tag="li"
 					class="about__router-li"
 					to="/customerservice/private_info_policy"
-					>개인정보취급방침</router-link
+					>개인정보취급방침</RouterLink
 				>
 				<span class="about__divider">|</span>
-				<router-link tag="li" class="about__router-li" to="/introduction"
-					>사업자정보확인</router-link
+				<RouterLink tag="li" class="about__router-li" to="/introduction"
+					>사업자정보확인</RouterLink
 				>
 			</ul>
 			<ul class="about__ul about__ul--mid">
@@ -50,36 +50,28 @@
 		<aside class="about__aside">
 			<ul class="about__ul about__ul--left">
 				<li class="about__li about__li--title">CUSTOMER SERVICE</li>
-				<router-link tag="li" class="about__router-li" to="/customerservice">
+				<RouterLink tag="li" class="about__router-li" to="/customerservice">
 					무엇을 도와드릴까요?
-				</router-link>
-				<router-link
+				</RouterLink>
+				<RouterLink
 					tag="li"
 					class="about__router-li"
 					to="/customerservice/logi_guide"
 				>
 					주문 & 배송
-				</router-link>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/customerservice/faq"
-				>
+				</RouterLink>
+				<RouterLink tag="li" class="about__router-li" to="/customerservice/faq">
 					결제 & 가격
-				</router-link>
-				<router-link
-					tag="li"
-					class="about__router-li"
-					to="/customerservice/faq"
-				>
+				</RouterLink>
+				<RouterLink tag="li" class="about__router-li" to="/customerservice/faq">
 					반품 & 환불
-				</router-link>
+				</RouterLink>
 			</ul>
 			<ul class="about__ul">
 				<li class="about__li about__li--title">ABOUT GREENDAYS</li>
-				<router-link tag="li" class="about__router-li" to="/introduction">
+				<RouterLink tag="li" class="about__router-li" to="/introduction">
 					그린데이즈 소개
-				</router-link>
+				</RouterLink>
 			</ul>
 		</aside>
 	</footer>

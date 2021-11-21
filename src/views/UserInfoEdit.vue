@@ -2,21 +2,21 @@
 	<section class="user-info-edit">
 		<header class="user-info-edit__header">내 정보 관리</header>
 		<ul class="user-info-edit__ul">
-			<info-list :eachOfListItems="{ title: '내 정보 수정' }">
+			<InfoList :eachOfListItems="{ title: '내 정보 수정' }">
 				<template #edit-user-info>
-					<edit-user-info-list />
+					<EditUserInfoList />
 				</template>
-			</info-list>
-			<info-list :eachOfListItems="{ title: '배송지 관리' }">
+			</InfoList>
+			<InfoList :eachOfListItems="{ title: '배송지 관리' }">
 				<template #shipping-address-setting>
-					<shipping-address-setting />
+					<ShippingAddressSetting />
 				</template>
-			</info-list>
-			<info-list :eachOfListItems="{ title: '추천코드' }">
+			</InfoList>
+			<InfoList :eachOfListItems="{ title: '추천코드' }">
 				<template #user-promotion-code>
-					<user-promotion-code />
+					<UserPromotionCode />
 				</template>
-			</info-list>
+			</InfoList>
 			<li class="user-info-edit__li">
 				<button class="user-info-edit__btn" @click="deleteMyAccount">
 					회원탈퇴

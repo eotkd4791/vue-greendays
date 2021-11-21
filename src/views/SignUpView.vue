@@ -201,9 +201,7 @@
 										<span class="sign-up__label"
 											>[필수] 개인 정보의 수집 및 이용에 대한 동의</span
 										>
-										<router-link to="/terms" tag="span"
-											>자세히 보기</router-link
-										>
+										<RouterLink to="/terms" tag="span">자세히 보기</RouterLink>
 									</v-list-item-subtitle>
 
 									<v-list-item-subtitle>
@@ -312,7 +310,7 @@ export default {
 			'SIGN_UP'
 		]),
 
-		createPromotionCode,
+		createPromotionCode: createPromotionCode.bind(this),
 
 		checkEmailRules: debounce(function() {
 			this.isProperEmail = this.$refs.email.validate();

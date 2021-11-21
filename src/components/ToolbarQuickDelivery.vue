@@ -1,7 +1,7 @@
 <template>
 	<div class="quick__delivery-container">
 		<section class="quick__delivery-wrapper__products">
-			<display-items
+			<DisplayItems
 				v-for="product in products"
 				:key="product.id"
 				:sendToday="product.productSendToday"
@@ -27,7 +27,7 @@
 				<template #productInfo-afterPrice>{{
 					(product.priceAfter * 1000).toLocaleString()
 				}}</template>
-			</display-items>
+			</DisplayItems>
 		</section>
 		<section class="quick__delivery-wrapper__info">
 			<div

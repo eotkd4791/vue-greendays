@@ -7,9 +7,9 @@
 		<li class="wish__empty__picture">
 			<span class="wish__empty__text">Pick!</span>
 		</li>
-		<router-link to="/products" tag="li" class="wish__empty__link">
+		<RouterLink to="/products" tag="li" class="wish__empty__link">
 			원하는 상품 PICK! 하러 가기 >
-		</router-link>
+		</RouterLink>
 	</ul>
 </template>
 

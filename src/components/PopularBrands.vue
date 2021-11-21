@@ -11,7 +11,7 @@
 				:class="{ 'fa-heart--picked': userInfo && isPickedBrand(brand) }"
 				@click="openAlarmBrand"
 			/>
-			<router-link
+			<RouterLink
 				:to="{
 					path: '/products',
 					query: {
@@ -28,7 +28,7 @@
 				}"
 			>
 				{{ brand }}
-			</router-link>
+			</RouterLink>
 		</li>
 	</ol>
 </template>

@@ -7,13 +7,13 @@
 			v-model="$parent.checkedProductsToDelete"
 		/>
 
-		<router-link
+		<RouterLink
 			:to="`/products/show/${productInfo.id}`"
 			tag="li"
 			class="wish-item"
 		>
 			<div class="space" />
-			<display-items
+			<DisplayItems
 				:productId="productInfo.id"
 				:sendToday="productInfo.productSendToday"
 				:ableToBuy="productInfo.productAbleToBuy"
@@ -39,8 +39,8 @@
 				<template #productInfo-afterPrice>
 					{{ (productInfo.priceAfter * 1000).toLocaleString() }}
 				</template>
-			</display-items>
-		</router-link>
+			</DisplayItems>
+		</RouterLink>
 	</div>
 </template>
 

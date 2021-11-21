@@ -2,10 +2,7 @@
 	<li class="review-list" @click="setIndexToShowDetail">
 		<section class="review-list__section">
 			<div class="review-list__user-point">
-				<star-point
-					:satisfaction="eachOfReview.satisfaction"
-					starSize="small"
-				/>
+				<StarPoint :satisfaction="eachOfReview.satisfaction" starSize="small" />
 				<p class="review-list__writer">{{ eachOfReview.writer }}</p>
 			</div>
 			<p class="review-list__date">
@@ -26,7 +23,7 @@
 				{{ eachOfReview.content }}
 			</article>
 		</aside>
-		<item-link :productInfo="eachOfReview" v-if="isShownReviewList" />
+		<ItemLink :productInfo="eachOfReview" v-if="isShownReviewList" />
 	</li>
 </template>
 

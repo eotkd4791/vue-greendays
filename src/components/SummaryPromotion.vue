@@ -12,7 +12,7 @@
 				</div>
 			</section>
 			<section class="promo__info-container-items">
-				<display-items
+				<DisplayItems
 					v-for="index in 4"
 					:key="index"
 					:sendToday="product[index - 1].productSendToday"
@@ -41,7 +41,7 @@
 					<template #productInfo-afterPrice>{{
 						(product[index - 1].priceAfter * 1000).toLocaleString()
 					}}</template>
-				</display-items>
+				</DisplayItems>
 			</section>
 		</div>
 	</div>

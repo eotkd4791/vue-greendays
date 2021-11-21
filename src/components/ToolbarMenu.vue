@@ -7,7 +7,7 @@
 					@mouseover="mouseOverOnMenu"
 					@click="$emit('off-toolbar-modal')"
 				>
-					<router-link
+					<RouterLink
 						:to="{
 							path: '/products',
 							query: {
@@ -25,7 +25,7 @@
 					>
 						예약구매
 						<span class="toolbar-menu__green-heart">💚</span>
-					</router-link>
+					</RouterLink>
 				</li>
 				<li class="toolbar-menu__active__li" @mouseover="mouseOverOnMenu">
 					프리오더
@@ -35,7 +35,7 @@
 					@mouseover="mouseOverOnMenu"
 					@click="$emit('off-toolbar-modal')"
 				>
-					<router-link
+					<RouterLink
 						:to="{
 							path: '/products',
 							query: {
@@ -52,12 +52,12 @@
 						}"
 					>
 						빠른배송
-					</router-link>
+					</RouterLink>
 				</li>
 			</ul>
 			<ul class="toolbar-menu__passive" @mouseover="mouseLeaveFromMenu">
-				<router-link tag="li" to="/reviews">리뷰</router-link>
-				<router-link tag="li" to="/customerservice">고객센터</router-link>
+				<RouterLink tag="li" to="/reviews">리뷰</RouterLink>
+				<RouterLink tag="li" to="/customerservice">고객센터</RouterLink>
 			</ul>
 		</div>
 		<ul class="toolbar-menu__right">

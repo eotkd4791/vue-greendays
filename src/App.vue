@@ -1,12 +1,12 @@
 <template>
 	<main class="main" onselectstart="return false">
-		<toolbar-view />
+		<ToolbarView />
 		<div class="space" :class="{ 'space--active': onSpace }" />
-		<sync-loader :loading="isShownSpinner" :size="'30px'" :margin="'10px'" />
+		<SyncLoader :loading="isShownSpinner" :size="'30px'" :margin="'10px'" />
 		<transition name="fade">
 			<router-view />
 		</transition>
-		<footer-view />
+		<FooterView />
 	</main>
 </template>
 

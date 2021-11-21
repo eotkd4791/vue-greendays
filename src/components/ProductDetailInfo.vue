@@ -1,7 +1,7 @@
 <template>
 	<ol class="info">
 		<li class="info__category">
-			<router-link
+			<RouterLink
 				tag="span"
 				:to="{
 					path: '/products',
@@ -22,8 +22,8 @@
 			>
 				{{ getProductDetail.productSendToday ? '당일발송' : '예약구매' }}
 				<i class="fas fa-chevron-right" />
-			</router-link>
-			<router-link
+			</RouterLink>
+			<RouterLink
 				tag="span"
 				:to="{
 					path: '/products',
@@ -44,8 +44,8 @@
 			>
 				{{ getProductDetail.gender }}
 				<i class="fas fa-chevron-right" />
-			</router-link>
-			<router-link
+			</RouterLink>
+			<RouterLink
 				tag="span"
 				:to="{
 					path: '/products',
@@ -66,8 +66,8 @@
 			>
 				{{ getProductDetail.brand }}
 				<i class="fas fa-chevron-right" />
-			</router-link>
-			<router-link
+			</RouterLink>
+			<RouterLink
 				tag="span"
 				:to="{
 					path: '/products',
@@ -88,8 +88,8 @@
 			>
 				{{ getProductDetail.category }}
 				<i class="fas fa-chevron-right" />
-			</router-link>
-			<router-link
+			</RouterLink>
+			<RouterLink
 				tag="span"
 				:to="{
 					path: '/products',
@@ -108,7 +108,7 @@
 						order_std: 'popularity'
 					}
 				}"
-				>{{ getProductDetail.categoryDetail }}</router-link
+				>{{ getProductDetail.categoryDetail }}</RouterLink
 			>
 		</li>
 		<li class="info__brand">
@@ -156,7 +156,7 @@
 			</div>
 			<button class="info__purchase-btn">바로구매</button>
 		</li>
-		<product-detail-list>
+		<ProductDetailList>
 			<template #title>구매 안내</template>
 			<template #body>
 				{{
@@ -165,12 +165,12 @@
 						: purchaseInfo.preorderGuide
 				}}
 			</template>
-		</product-detail-list>
-		<product-detail-list>
+		</ProductDetailList>
+		<ProductDetailList>
 			<template #title>상품 상세정보</template>
 			<template #body>{{ `재질: ${getProductDetail.material}` }}</template>
-		</product-detail-list>
-		<product-detail-list>
+		</ProductDetailList>
+		<ProductDetailList>
 			<template #title>배송가이드</template>
 			<template #body>{{ purchaseInfo.logiGuide }}</template>
 			<template #additional-element>
@@ -181,7 +181,7 @@
 					그린데이즈 배송가이드
 				</button>
 			</template>
-		</product-detail-list>
+		</ProductDetailList>
 	</ol>
 </template>
 

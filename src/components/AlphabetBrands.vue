@@ -25,7 +25,7 @@
 					}"
 					@click="openAlarmBrand"
 				/>
-				<router-link
+				<RouterLink
 					:to="{
 						path: '/products',
 						query: {
@@ -42,7 +42,7 @@
 					}"
 				>
 					{{ brand }}
-				</router-link>
+				</RouterLink>
 			</li>
 		</ul>
 	</aside>

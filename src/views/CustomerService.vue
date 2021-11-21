@@ -1,6 +1,6 @@
 <template>
 	<section class="customer-service__container">
-		<left-link />
+		<LeftLink />
 		<transition name="fade" mode="out-in">
 			<router-view />
 		</transition>

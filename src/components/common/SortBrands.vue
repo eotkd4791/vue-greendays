@@ -62,12 +62,12 @@
 						/>
 						{{ brand }}
 					</span>
-					<pick-brand
+					<PickBrand
 						v-if="showModal"
 						:propsBrand="brandInModal"
 						@close-picked-brands="closeModal"
 						@close-brands-picking-modal="closeModal"
-					></pick-brand>
+					></PickBrand>
 				</div>
 			</section>
 		</div>

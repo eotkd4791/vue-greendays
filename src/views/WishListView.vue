@@ -32,19 +32,19 @@
 
 		<aside class="wish-content" v-if="onProductTab">
 			<ol class="wish__content__list" v-if="userInfo.wishList.length > 0">
-				<wish-list-item
+				<WishListItem
 					v-for="(product, index) in userInfo.wishList"
 					:key="index"
 					:productInfo="product"
 				>
-				</wish-list-item>
+				</WishListItem>
 			</ol>
-			<empty-wish-list v-else />
+			<EmptyWishList v-else />
 		</aside>
 
 		<aside class="wish-content" v-else>
 			<ol class="wish__content__list">
-				<pick-brand-item
+				<PickBrandItem
 					v-for="(array, index) in Object.entries(userInfo.pickedBrands)"
 					:key="index"
 					:categoryPair="array"

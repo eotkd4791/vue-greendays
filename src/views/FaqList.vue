@@ -2,7 +2,7 @@
 	<section class="faq-list" v-once>
 		<header class="faq-list__header">자주묻는질문</header>
 		<ul class="faq-list__ul">
-			<info-list
+			<InfoList
 				v-for="item in listItems"
 				:key="item.title"
 				:eachOfListItems="item"

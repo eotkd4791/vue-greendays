@@ -3,8 +3,8 @@
 		<section class="preorder-container__category">
 			<header class="preorder-container__category__title">PRE ORDER</header>
 			<div class="preorder-container__category__link" ref="tabs">
-				<router-link class="active" to="/about" tag="span"
-					>#프리오더가 뭐에요?</router-link
+				<RouterLink class="active" to="/about" tag="span"
+					>#프리오더가 뭐에요?</RouterLink
 				>
 
 				<span

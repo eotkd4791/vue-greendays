@@ -5,7 +5,7 @@
 				<h2 class="user-reviews__h2">REVIEW ({{ dataStore.length }})</h2>
 				<ol class="user-reviews__star">
 					<li class="user-reviews__li">
-						<star-point :satisfaction="5" />
+						<StarPoint :satisfaction="5" />
 					</li>
 				</ol>
 			</h1>
@@ -38,7 +38,7 @@
 			</button>
 		</div>
 		<ol class="user-reviews__ol">
-			<review-list
+			<ReviewList
 				v-for="(review, index) in reviewList"
 				:key="index"
 				:eachOfReview="review"

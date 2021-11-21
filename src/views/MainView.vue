@@ -1,7 +1,7 @@
 <template>
 	<div class="main-view">
-		<preorder-neon />
-		<total-promotion />
+		<PreorderNeon />
+		<TotalPromotion />
 	</div>
 </template>
 

@@ -4,10 +4,10 @@
 			<header class="toolbar__header" ref="header">
 				<div class="toolbar__container">
 					<transition name="rolling">
-						<user-info-modal v-if="showUserInfo" />
+						<UserInfoModal v-if="showUserInfo" />
 					</transition>
-					<toolbar-user-info />
-					<toolbar-menu
+					<ToolbarUserInfo />
+					<ToolbarMenu
 						@on-toolbar-modal="openToolbarModal"
 						@on-search-brands="openSearchBrands"
 						@off-toolbar-modal="closeToolbarModal"
@@ -16,7 +16,7 @@
 			</header>
 		</li>
 		<li>
-			<toolbar-modal
+			<ToolbarModal
 				:onToolbar="showToolbarModal"
 				:toolbarToOpen="toolbarToOpen"
 				:activeUserInfo="showUserInfo"
@@ -24,7 +24,7 @@
 			/>
 		</li>
 		<li>
-			<brand-modal
+			<BrandModal
 				v-if="showModal && SearchBrandsModal"
 				@close-brands="closeSearchBrands"
 			/>

@@ -7,7 +7,7 @@
 			v-model="$parent.checkedBrandsToDelete"
 		/>
 		<ul class="brand-item__categories">
-			<router-link
+			<RouterLink
 				class="brand-item__list brand-item__title"
 				tag="li"
 				:to="{
@@ -26,8 +26,8 @@
 				}"
 			>
 				{{ categoryPair[0] }}
-			</router-link>
-			<router-link
+			</RouterLink>
+			<RouterLink
 				tag="li"
 				v-for="(category, index) in Object.keys(categories)"
 				:key="category"
@@ -53,7 +53,7 @@
 					@click="updatePickedBrands(categoryPair[0], category)"
 				/>
 				{{ category }}
-			</router-link>
+			</RouterLink>
 		</ul>
 	</li>
 </template>

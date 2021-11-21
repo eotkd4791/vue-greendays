@@ -2,7 +2,7 @@
 	<section class="logi-guide" v-once>
 		<header class="logi-guide__header">배송가이드</header>
 		<ul class="logi-guide__ul">
-			<info-list
+			<InfoList
 				v-for="item in listItems"
 				:key="item.title"
 				:eachOfListItems="item"

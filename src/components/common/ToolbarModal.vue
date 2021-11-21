@@ -14,19 +14,19 @@
 			>
 				<ol class="toolbar-modal__wrapper">
 					<li class="toolbar-modal__list" v-if="toolbarToOpen === '프리오더'">
-						<toolbar-preorder />
+						<ToolbarPreorder />
 					</li>
 					<li
 						class="toolbar-modal__list"
 						v-else-if="toolbarToOpen === '빠른배송'"
 					>
-						<toolbar-quick-delivery />
+						<ToolbarQuick-delivery />
 					</li>
 					<li class="toolbar-modal__list" v-else-if="toolbarToOpen === ''">
-						<toolbar-search-brands />
+						<ToolbarSearchBrands />
 					</li>
 					<li class="toolbar-modal__list" v-else>
-						<toolbar-reserve-purchase />
+						<ToolbarReservePurchase />
 					</li>
 				</ol>
 			</div>

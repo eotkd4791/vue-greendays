@@ -3,20 +3,20 @@
 		<div class="userinfo__modal-wrapper">
 			<section class="userinfo_section">
 				<ul @click="routingPage">
-					<router-link tag="li" :to="`/user/edit/${getUserInfo.id}`">{{
+					<RouterLink tag="li" :to="`/user/edit/${getUserInfo.id}`">{{
 						getUserInfo.name
-					}}</router-link>
+					}}</RouterLink>
 					<li>{{ `내 추천 코드 ${getUserInfo.promotionCode}` }}</li>
-					<router-link tag="li" :to="`/user/edit/${getUserInfo.id}`"
-						>내 정보 관리</router-link
+					<RouterLink tag="li" :to="`/user/edit/${getUserInfo.id}`"
+						>내 정보 관리</RouterLink
 					>
-					<router-link
+					<RouterLink
 						tag="li"
 						:to="`/user/total_order_refund/${getUserInfo.id}`"
-						>주문 및 반품 내역</router-link
+						>주문 및 반품 내역</RouterLink
 					>
-					<router-link tag="li" :to="`/user/point/${getUserInfo.id}`"
-						>포인트</router-link
+					<RouterLink tag="li" :to="`/user/point/${getUserInfo.id}`"
+						>포인트</RouterLink
 					>
 					<li @click.stop="userLogOut">로그아웃</li>
 				</ul>
@@ -37,10 +37,10 @@
 						<strong>{{ getUserInfo.changeOrRefund.length }}</strong>
 					</li>
 				</ul>
-				<router-link
+				<RouterLink
 					tag="button"
 					:to="`/user/total_order_refund/${getUserInfo.id}`"
-					>주문 및 반품 내역</router-link
+					>주문 및 반품 내역</RouterLink
 				>
 			</aside>
 		</div>

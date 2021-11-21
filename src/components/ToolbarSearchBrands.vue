@@ -7,7 +7,7 @@
 			>
 				<ol v-show="!isShownRecommendKeywords" class="search-brand__lately">
 					<li>최근 검색어</li>
-					<router-link
+					<RouterLink
 						tag="li"
 						v-for="(item, index) in getUserInfo
 							? userSearchedKeywords
@@ -28,12 +28,12 @@
 							}
 						}"
 						@click="closeToolbarModal"
-						>{{ item }}</router-link
+						>{{ item }}</RouterLink
 					>
 				</ol>
 				<ul class="search-brand__hot">
 					<li>인기 검색어</li>
-					<router-link
+					<RouterLink
 						tag="li"
 						v-for="(item, index) in isShownRecommendKeywords
 							? getRecommendKeywordsList
@@ -213,7 +213,7 @@ export default {
 	cursor: pointer;
 }
 
-.search-brand__router-link {
+.search-brand__RouterLink {
 	cursor: pointer;
 }
 

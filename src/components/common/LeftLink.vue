@@ -1,7 +1,7 @@
 <template>
 	<aside class="left-link">
 		<ul class="left-link__ul" ref="lists" @click="activatedRouterLink">
-			<router-link
+			<RouterLink
 				tag="li"
 				:to="link.routePath"
 				v-for="link in linkList"
@@ -9,7 +9,7 @@
 				class="left-link__li"
 			>
 				{{ link.name }}
-			</router-link>
+			</RouterLink>
 		</ul>
 	</aside>
 </template>
@@ -36,11 +36,11 @@ export default {
 			const includes = Array.prototype.includes;
 
 			if (firstList === e.target) {
-				if (!includes.call(classList, 'router-link-exact-active'))
-					classList.add('router-link-exact-active');
+				if (!includes.call(classList, 'RouterLink-exact-active'))
+					classList.add('RouterLink-exact-active');
 			} else {
-				if (includes.call(classList, 'router-link-exact-active'))
-					classList.remove('router-link-exact-active');
+				if (includes.call(classList, 'RouterLink-exact-active'))
+					classList.remove('RouterLink-exact-active');
 			}
 		}
 	},
@@ -52,7 +52,7 @@ export default {
 	},
 
 	mounted() {
-		this.$refs.lists.firstChild.classList.add('router-link-exact-active');
+		this.$refs.lists.firstChild.classList.add('RouterLink-exact-active');
 	}
 };
 </script>
@@ -76,7 +76,7 @@ export default {
 	cursor: pointer;
 }
 
-.router-link-active.router-link-exact-active {
+.RouterLink-active.RouterLink-exact-active {
 	color: #42b850;
 	font-weight: 500;
 }

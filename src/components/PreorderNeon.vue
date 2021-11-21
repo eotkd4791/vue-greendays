@@ -1,5 +1,5 @@
 <template>
-	<keep-alive>
+	<KeepAlive>
 		<div class="neon">
 			<section class="neon__container">
 				<header class="neon__header">
@@ -28,7 +28,7 @@
 				</footer>
 			</section>
 		</div>
-	</keep-alive>
+	</KeepAlive>
 </template>
 
 <script>
