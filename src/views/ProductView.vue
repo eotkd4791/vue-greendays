@@ -97,6 +97,18 @@ export default {
 					else return -1;
 				}
 			});
+
+			if (orderKey === 'priceAfter' || orderKey === 'priceBefore') {
+				if (orderKind === 'desc') {
+					return target.sort(
+						(a, b) => parseInt(b[orderKey]) - parseInt(a[orderKey])
+					);
+				} else {
+					return target.sort(
+						(a, b) => parseInt(a[orderKey]) - parseInt(b[orderKey])
+					);
+				}
+			}
 			return target;
 		},
 
